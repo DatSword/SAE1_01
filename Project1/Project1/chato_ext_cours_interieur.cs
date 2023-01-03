@@ -146,11 +146,5 @@ namespace SAE101
                 return true;
             return false;
         }
-
-        public int tarace()
-        {
-            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            return a;
-        }
     }
 }

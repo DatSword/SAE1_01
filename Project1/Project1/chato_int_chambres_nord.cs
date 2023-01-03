@@ -34,15 +34,23 @@ namespace SAE101
         private int _sensPersoX;
         private int _sensPersoY;
         private int _vitessePerso;
+        public static int _posX;
 
         private int test;  
         public chato_int_chambres_nord(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
-            _positionPerso = new Vector2(72, 111); //x = casex * 16 + 8, y = casey * 16 + 8
+            // Lieu Spawn
+            if (chato_int_chambres_couloir._posX  >= 5*16 && chato_int_chambres_couloir._posX < 7*16)
+                _positionPerso = new Vector2(72, 111);
+            else if (chato_int_chambres_couloir._posX >= 13 * 16 && chato_int_chambres_couloir._posX < 15 * 16)
+                _positionPerso = new Vector2(12*16+8, 111);
+            else if (chato_int_chambres_couloir._posX >= 29 * 16 && chato_int_chambres_couloir._posX < 31 * 16)
+                _positionPerso = new Vector2(28*16+8, 111);
+            else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
+                _positionPerso = new Vector2(36*16+8, 111);
+            //x = casex * 16 + 8, y = casey * 16 + 8
             _sensPersoX = 0;
             _sensPersoY = 0;
 
@@ -126,13 +134,16 @@ namespace SAE101
             Console.WriteLine(a);
             //changement de map
             if (keyboardState.IsKeyDown(Keys.Down) && (a == 41))
+            {
+                _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();
+            }              
         }
 
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _tiledMapRenderer.Draw();
@@ -149,12 +160,6 @@ namespace SAE101
             if (!tile.Value.IsBlank)
                 return true;
             return false;
-        }
-
-        public int tarace()
-        {
-            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            return a;
         }
     }
 }

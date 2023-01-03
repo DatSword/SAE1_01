@@ -34,23 +34,30 @@ namespace SAE101
         private int _sensPersoX;
         private int _sensPersoY;
         private int _vitessePerso;
+        public static int _posX = 0;
 
         //'zic
         private Song _songChato;
-
-        private int test;
-
         
         public chato_int_chambres_couloir(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // Lieu Spawn
+            if (chato_int_chambres_nord._posX == 0)
+                _positionPerso = new Vector2(104, 112);
+            else if (chato_int_chambres_nord._posX >= 3 * 16 && chato_int_chambres_nord._posX < 5 * 16)
+                _positionPerso = new Vector2(104, 112);
+            else if (chato_int_chambres_nord._posX >= 11 * 16 && chato_int_chambres_nord._posX < 13 * 16)
+                _positionPerso = new Vector2(14*16+8, 112);
+            else if (chato_int_chambres_nord._posX >= 27 * 16 && chato_int_chambres_nord._posX < 29 * 16)
+                _positionPerso = new Vector2(30*16+8, 112);
+            else if (chato_int_chambres_nord._posX >= 35 * 16 && chato_int_chambres_nord._posX < 37 * 16)
+                _positionPerso = new Vector2(38*16+8, 112);
 
-            _positionPerso = new Vector2(104, 112);
             _sensPersoX = 0;
             _sensPersoY = 0;
-
+            _posX = 0;
             _vitessePerso = 100;
 
             base.Initialize();
@@ -130,8 +137,11 @@ namespace SAE101
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
             Console.WriteLine(a);
             //Changement de map          
-            if (keyboardState.IsKeyDown(Keys.Up) && (a == 26 ))
+            if (keyboardState.IsKeyDown(Keys.Up) && (a == 26))
+            {
+                _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_nord();
+            }        
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 29 || a == 30))
                 Game.LoadScreenchato_ext_cours_interieur();
         }
@@ -156,12 +166,6 @@ namespace SAE101
             if (!tile.Value.IsBlank)
                 return true;
             return false;
-        }
-
-        public int tarace()
-        {
-            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            return a;
         }
     }
 }

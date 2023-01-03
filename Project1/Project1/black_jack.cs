@@ -19,10 +19,12 @@ namespace SAE101
 {
     internal class black_jack : GameScreen
     {
+        //"map"
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        //texte
         public SpriteFont _fontTest;
         public Vector2 _textPos;
         public black_jack(Game1 game) : base(game) { }
@@ -44,11 +46,7 @@ namespace SAE101
         public override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            // TODO: Add your update logic here
-            //_tiledMapRenderer.Update(gameTime);
 
             //changements maps
 
@@ -62,9 +60,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            //_tiledMapRenderer.Draw();
             _spriteBatch.DrawString(_fontTest, "Wake the fuck up Samurai, we've got a city to burn", _textPos, Color.White);
             _spriteBatch.End();
         }

@@ -36,9 +36,6 @@ namespace SAE101
         private int _sensPersoY;
         private int _vitessePerso;
         public static int _posX;
-
-        private int test;
-
         
         public chato_ext_cours_interieur(Game1 game) : base(game) { }
 
@@ -81,7 +78,6 @@ namespace SAE101
             _sensPersoX = 0;
             _sensPersoY = 0;
 
-
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -91,8 +87,6 @@ namespace SAE101
 
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
-
-
 
             //Mouvement/animation
             if (keyboardState.IsKeyDown(Keys.Up))

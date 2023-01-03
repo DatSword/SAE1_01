@@ -38,6 +38,7 @@ namespace SAE101
 
         private AnimatedSprite _fren;
         private Vector2 _positionFren;
+        private bool frenTrue;
 
         private int test;  
         public chato_int_chambres_nord(Game1 game) : base(game) { }
@@ -59,6 +60,7 @@ namespace SAE101
 
             // Lieu Spawn objects
             _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
+            frenTrue = false;
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -140,23 +142,40 @@ namespace SAE101
             _perso.Update(deltaSeconds);
 
             //Mouvement/animation objets
-
-            String animationFren = "idle";
-            if (keyboardState.IsKeyDown(Keys.F))
+            String animationFren = null;
+            if (frenTrue == false)
+                animationFren = "idle";
+            else
                 animationFren = "hi";
 
-            _fren.Play(animationFren);
-            _fren.Update(deltaSeconds);
-
-            //debug changment de map
+            //debug map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
             Console.WriteLine(a);
+            //debug autres collisions
+            int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            Console.WriteLine(b);
+
+            //Evenements
+
             //changement de map
             if (keyboardState.IsKeyDown(Keys.Down) && (a == 41))
             {
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();
-            }              
+            }
+
+            //:)
+            if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationFren == "idle")
+            {
+                frenTrue = true;
+            }               
+            else if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationFren == "hi")
+            {
+                frenTrue = false;
+            }
+
+            _fren.Play(animationFren);
+            _fren.Update(deltaSeconds);
         }
 
         public override void Draw(GameTime gameTime)

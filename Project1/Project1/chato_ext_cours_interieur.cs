@@ -63,13 +63,19 @@ namespace SAE101
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
 
+            //Load Perso
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
+            //debug map
+            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth - 1), (ushort)(_positionPerso.Y / _tiledMap.TileHeight)).GlobalIdentifier;
+            Console.WriteLine(a);
+
             _sensPersoX = 0;
             _sensPersoY = 0;
 
@@ -122,8 +128,7 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
-            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth - 1), (ushort)(_positionPerso.Y / _tiledMap.TileHeight)).GlobalIdentifier;
-            Console.WriteLine(a);
+            
             //changements maps
 
             if (keyboardState.IsKeyDown(Keys.Left) && (a == 101))

@@ -35,6 +35,10 @@ namespace SAE101
         private int _sensPersoY;
         private int _vitessePerso;
         public static int _posX;
+        private bool stopLeft;
+        private bool stopRight;
+        private bool stopUp;
+        private bool stopDown;
 
         //'zic
         private Song _songChato;
@@ -58,6 +62,11 @@ namespace SAE101
                 _positionPerso = new Vector2(38 * 16 + 8, 112);
             else if (chato_ext_cours_interieur._posX != 0)
                 _positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);
+
+            stopLeft = false;
+            stopRight = false;
+            stopUp = true;
+            stopDown = false;
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -84,6 +93,10 @@ namespace SAE101
 
         public override void Update(GameTime gameTime)
         {
+            //Debug changement de map
+            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            Console.WriteLine(a);
+
             _sensPersoX = 0;
             _sensPersoY = 0;
 
@@ -98,14 +111,27 @@ namespace SAE101
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
 
-            
+
 
             //Mouvement/animation
+            if (stopDown == true && keyboardState.IsKeyUp(Keys.Down))
+                animation = "idle_down";
+            else if (stopUp == true && keyboardState.IsKeyUp(Keys.Up))
+                animation = "idle_up";
+            else if (stopLeft == true && keyboardState.IsKeyUp(Keys.Left))
+                animation = "idle_left";
+            else if (stopRight == true && keyboardState.IsKeyUp(Keys.Right))
+                animation = "idle_right";
+
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
                 animation = "move_up";
+                stopLeft = false;
+                stopRight = false;
+                stopUp = true;
+                stopDown = false;
                 if (!IsCollision(tx, ty))
                     _positionPerso.Y -= walkSpeed;
             }
@@ -114,6 +140,10 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
                 animation = "move_down";
+                stopLeft = false;
+                stopRight = false;
+                stopUp = false;
+                stopDown = true;
                 if (!IsCollision(tx, ty))
                     _positionPerso.Y += walkSpeed;
             }
@@ -122,6 +152,10 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_left";
+                stopLeft = true;
+                stopRight = false;
+                stopUp = false;
+                stopDown = false;
                 if (!IsCollision(tx, ty))
                     _positionPerso.X -= walkSpeed;
             }
@@ -130,15 +164,17 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_right";
+                stopLeft = false;
+                stopRight = true;
+                stopUp = false;
+                stopDown = false;
                 if (!IsCollision(tx, ty))
                     _positionPerso.X += walkSpeed;
             }
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
-            //Debug changement de map
-            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+
             //Changement de map          
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 26))
             {
@@ -161,6 +197,7 @@ namespace SAE101
             _spriteBatch.Begin();
             _tiledMapRenderer.Draw();
             _spriteBatch.Draw(_perso, _positionPerso);
+
             _spriteBatch.End();
         }
 

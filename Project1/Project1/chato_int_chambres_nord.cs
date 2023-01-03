@@ -27,7 +27,7 @@ namespace SAE101
         private TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
 
-        //sprite
+        //sprites
         private AnimatedSprite _perso;
         private Vector2 _positionPerso;        
         private KeyboardState _keyboardState;
@@ -35,12 +35,19 @@ namespace SAE101
         private int _sensPersoY;
         private int _vitessePerso;
         public static int _posX;
+        private bool stopLeft;
+        private bool stopRight;
+        private bool stopUp;
+        private bool stopDown;
 
         private AnimatedSprite _fren;
         private Vector2 _positionFren;
-        private bool frenTrue;
+        private bool _frenTrue;
 
-        private int test;  
+        private AnimatedSprite _chest1;
+        private Vector2 _positionChest1;
+        private bool _chestTrue;
+
         public chato_int_chambres_nord(Game1 game) : base(game) { }
 
         public override void Initialize()
@@ -57,10 +64,17 @@ namespace SAE101
             else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
                 _positionPerso = new Vector2(36*16+8, 111);
             //x = casex * 16 + 8, y = casey * 16 + 8
+            stopLeft = false;
+            stopRight = false;
+            stopUp = true;
+            stopDown = false;
 
-            // Lieu Spawn objects
-            _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
-            frenTrue = false;
+        // Lieu Spawn objects
+        _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
+            _frenTrue = false;
+
+            _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
+            _chestTrue = false;
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -84,13 +98,25 @@ namespace SAE101
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
 
+            //Load objects
             SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/Fren/Fren.sf", new JsonContentLoader());
             _fren = new AnimatedSprite(spriteSheet2);
+
+            SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
+            _chest1 = new AnimatedSprite(spriteSheet3);
+
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
+            //debug map
+            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
+            Console.WriteLine(a);
+            //debug autres collisions
+            int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            Console.WriteLine(b);
+
             _sensPersoX = 0;
             _sensPersoY = 0;
 
@@ -104,13 +130,26 @@ namespace SAE101
 
             //Mouvement/animation perso
             float walkSpeed = deltaSeconds * _vitessePerso;
-            String animation = "idle_down";
+            String animation = null;
+
+            if (stopDown == true && keyboardState.IsKeyUp(Keys.Down))
+                animation = "idle_down";
+            else if (stopUp == true && keyboardState.IsKeyUp(Keys.Up))
+                animation = "idle_up";
+            else if (stopLeft == true && keyboardState.IsKeyUp(Keys.Left))
+                animation = "idle_left";
+            else if (stopRight == true && keyboardState.IsKeyUp(Keys.Right))
+                animation = "idle_right";
 
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
                 animation = "move_up";
+                stopLeft = false;
+                stopRight = false;
+                stopUp = true;
+                stopDown = false;
                 if (!IsCollision(tx, ty))
                     _positionPerso.Y -= walkSpeed;
             }
@@ -119,6 +158,10 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
                 animation = "move_down";
+                stopLeft = false;
+                stopRight = false;
+                stopUp = false;
+                stopDown = true;
                 if (!IsCollision(tx, ty))
                     _positionPerso.Y += walkSpeed;
             }
@@ -127,6 +170,10 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_left";
+                stopLeft = true;
+                stopRight = false;
+                stopUp = false;
+                stopDown = false;
                 if (!IsCollision(tx, ty))
                     _positionPerso.X -= walkSpeed;
             }
@@ -135,27 +182,45 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_right";
+                stopLeft = false;
+                stopRight = true;
+                stopUp = false;
+                stopDown = false;
                 if (!IsCollision(tx, ty))
                     _positionPerso.X += walkSpeed;
             }
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
-            //Mouvement/animation objets
-            String animationFren = null;
-            if (frenTrue == false)
+                //MOUVEMENT/ANIMATION OBJETS
+
+            //:)
+            String animationFren = null;           
+            if (_frenTrue == false)
                 animationFren = "idle";
             else
                 animationFren = "hi";
+            if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationFren == "idle")
+                _frenTrue = true;
+            else if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationFren == "hi")
+                _frenTrue = false;
 
-            //debug map
-            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
-            Console.WriteLine(a);
-            //debug autres collisions
-            int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            Console.WriteLine(b);
+            _fren.Play(animationFren);
+            _fren.Update(deltaSeconds);
 
-            //Evenements
+            //Coffre(s?)
+            String animationChest = null;           
+            if (_chestTrue == false)
+                animationChest = "close";
+            else
+                animationChest = "open";
+            if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationChest == "close")
+                _chestTrue = true;
+
+            _chest1.Play(animationChest);
+            _chest1.Update(deltaSeconds);
+
+                //EVENEMENTS
 
             //changement de map
             if (keyboardState.IsKeyDown(Keys.Down) && (a == 41))
@@ -163,19 +228,6 @@ namespace SAE101
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();
             }
-
-            //:)
-            if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationFren == "idle")
-            {
-                frenTrue = true;
-            }               
-            else if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationFren == "hi")
-            {
-                frenTrue = false;
-            }
-
-            _fren.Play(animationFren);
-            _fren.Update(deltaSeconds);
         }
 
         public override void Draw(GameTime gameTime)
@@ -184,10 +236,11 @@ namespace SAE101
             
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            _tiledMapRenderer.Draw();
-
-            _spriteBatch.Draw(_perso, _positionPerso);
+            _tiledMapRenderer.Draw();          
             _spriteBatch.Draw(_fren, _positionFren);
+            _spriteBatch.Draw(_chest1, _positionChest1);
+            _spriteBatch.Draw(_perso, _positionPerso);
+
             _spriteBatch.End();
         }
 

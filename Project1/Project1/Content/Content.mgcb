@@ -72,6 +72,13 @@
 /processorParam:TextureFormat=Color
 /build:anim/objects/objects1.png
 
+#begin font/font_test.spritefont
+/importer:FontDescriptionImporter
+/processor:LocalizedFontProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font/font_test.spritefont
+
 #begin map/chato/png/Chato_int1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -194,4 +201,10 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/chato/EdgarAndSabin.mp3
+
+#begin music/title/title.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/title/title.mp3
 

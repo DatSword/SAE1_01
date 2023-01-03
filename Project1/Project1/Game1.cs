@@ -31,6 +31,7 @@ namespace SAE101
 
         //Musiques
         private Song _songChato;
+        private Song _titleTheme;
 
         public Game1()
         {
@@ -52,7 +53,7 @@ namespace SAE101
             base.Initialize();
 
             //premier écran
-            LoadScreenchato_int_chambres_couloir();
+            LoadScreenecran_de_titre();
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 640, 160);
             //_viewport = new BoxingViewportAdapter(this.Window, this.GraphicsDevice, 1024, 896); //Zoom*3
@@ -66,7 +67,7 @@ namespace SAE101
 
             //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
-            MediaPlayer.Play(_songChato);
+            _titleTheme = Content.Load<Song>("music/title/title");
         }
 
         /*private Vector2 GetMovementDirection()
@@ -118,6 +119,18 @@ namespace SAE101
             base.Draw(gameTime);
         }
 
+        public void LoadScreenecran_de_titre()
+        {
+            _screenManager.LoadScreen(new ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.BlueViolet));
+            MediaPlayer.Play(_titleTheme);
+        }
+
+        public void LoadScreenblack_jack()
+        {
+            MediaPlayer.Stop();
+            _screenManager.LoadScreen(new black_jack(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+
         public void LoadScreenchato_int_chambres_couloir()
         {
             _screenManager.LoadScreen(new chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
@@ -126,11 +139,17 @@ namespace SAE101
         public void LoadScreenchato_int_chambres_nord()
         {
             _screenManager.LoadScreen(new chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
+            MediaPlayer.Play(_songChato);
         }
 
         public void LoadScreenchato_ext_cours_interieur()
         {
             _screenManager.LoadScreen(new chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+
+        public void LoadScreenchato_combat()
+        {
+            _screenManager.LoadScreen(new chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
     }
 }

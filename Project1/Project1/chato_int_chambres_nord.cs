@@ -57,6 +57,8 @@ namespace SAE101
             // Lieu Spawn perso
             _posX = 0;
 
+            if (_posX == 0)
+                _positionPerso = new Vector2(4*16+8, 3*16+8);
             if (chato_int_chambres_couloir._posX  >= 5*16 && chato_int_chambres_couloir._posX < 7*16)
                 _positionPerso = new Vector2(72, 111);
             else if (chato_int_chambres_couloir._posX >= 13 * 16 && chato_int_chambres_couloir._posX < 15 * 16)

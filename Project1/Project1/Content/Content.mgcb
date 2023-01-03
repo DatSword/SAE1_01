@@ -1,0 +1,161 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.Content.Pipeline.dll
+/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.dll
+/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.Graphics.dll
+/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.Tiled.dll
+/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\Newtonsoft.Json.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin anim/char/base_model_m/base_model_male - Copie.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/base_model_m/base_model_male - Copie.png
+
+#begin anim/char/base_model_m/base_model_movement.sf
+/importer:SpriteFactoryContentImporter
+/processor:SpriteFactoryContentProcessor
+/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
+/build:anim/char/base_model_m/base_model_movement.sf
+
+#begin map/chato/png/Chato_int1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/chato/png/Chato_int1.png
+
+#begin map/chato/png/collisions.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/chato/png/collisions.png
+
+#begin map/chato/png/furniture1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/chato/png/furniture1.png
+
+#begin map/chato/png/objects1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/chato/png/objects1.png
+
+#begin map/chato/png/sol_ext1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/chato/png/sol_ext1.png
+
+#begin map/chato/png/vegetation1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/chato/png/vegetation1.png
+
+#begin map/chato/tmx/chato_ext_cours_interieur.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:map/chato/tmx/chato_ext_cours_interieur.tmx
+
+#begin map/chato/tmx/chato_int_chambres_couloir.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:map/chato/tmx/chato_int_chambres_couloir.tmx
+
+#begin map/chato/tmx/chato_int_chambres_nord.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:map/chato/tmx/chato_int_chambres_nord.tmx
+
+#begin map/chato/tsx/Chato_int1.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:map/chato/tsx/Chato_int1.tsx
+
+#begin map/chato/tsx/collisions.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:map/chato/tsx/collisions.tsx
+
+#begin map/chato/tsx/furniture1.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:map/chato/tsx/furniture1.tsx
+
+#begin map/chato/tsx/objects1.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:map/chato/tsx/objects1.tsx
+
+#begin map/chato/tsx/sol_ext1.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:map/chato/tsx/sol_ext1.tsx
+
+#begin map/chato/tsx/vegetation1.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:map/chato/tsx/vegetation1.tsx
+
+#begin music/chato/EdgarAndSabin.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/chato/EdgarAndSabin.mp3
+

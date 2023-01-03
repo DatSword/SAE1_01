@@ -33,6 +33,7 @@ namespace SAE101
         private int _sensPersoX;
         private int _sensPersoY;
         private int _vitessePerso;
+        public static int _posX;
 
         private int test;
 
@@ -41,8 +42,8 @@ namespace SAE101
 
         public override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            // Lieu Spawn
+            _posX = 0;
             _positionPerso = new Vector2(40, 480);
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -121,8 +122,15 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
-            //int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth - 1), (ushort)(_positionPerso.Y / _tiledMap.TileHeight)).GlobalIdentifier;
+            Console.WriteLine(a);
+            //changements maps
 
+            if (keyboardState.IsKeyDown(Keys.Left) && (a == 101))
+            {
+                _posX = (int)_positionPerso.X;
+                Game.LoadScreenchato_int_chambres_couloir();
+            }
         }
 
         public override void Draw(GameTime gameTime)

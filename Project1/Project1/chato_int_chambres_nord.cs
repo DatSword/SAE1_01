@@ -42,6 +42,8 @@ namespace SAE101
         public override void Initialize()
         {
             // Lieu Spawn
+            _posX = 0;
+
             if (chato_int_chambres_couloir._posX  >= 5*16 && chato_int_chambres_couloir._posX < 7*16)
                 _positionPerso = new Vector2(72, 111);
             else if (chato_int_chambres_couloir._posX >= 13 * 16 && chato_int_chambres_couloir._posX < 15 * 16)
@@ -51,9 +53,9 @@ namespace SAE101
             else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
                 _positionPerso = new Vector2(36*16+8, 111);
             //x = casex * 16 + 8, y = casey * 16 + 8
+
             _sensPersoX = 0;
             _sensPersoY = 0;
-
             _vitessePerso = 100;
 
             base.Initialize();

@@ -34,7 +34,7 @@ namespace SAE101
         private int _sensPersoX;
         private int _sensPersoY;
         private int _vitessePerso;
-        public static int _posX = 0;
+        public static int _posX;
 
         //'zic
         private Song _songChato;
@@ -44,20 +44,23 @@ namespace SAE101
         public override void Initialize()
         {
             // Lieu Spawn
+            _posX = 0;
+
             if (chato_int_chambres_nord._posX == 0)
                 _positionPerso = new Vector2(104, 112);
-            else if (chato_int_chambres_nord._posX >= 3 * 16 && chato_int_chambres_nord._posX < 5 * 16)
+            if (chato_int_chambres_nord._posX >= 3 * 16 && chato_int_chambres_nord._posX < 5 * 16)
                 _positionPerso = new Vector2(104, 112);
             else if (chato_int_chambres_nord._posX >= 11 * 16 && chato_int_chambres_nord._posX < 13 * 16)
-                _positionPerso = new Vector2(14*16+8, 112);
+                _positionPerso = new Vector2(14 * 16 + 8, 112);
             else if (chato_int_chambres_nord._posX >= 27 * 16 && chato_int_chambres_nord._posX < 29 * 16)
-                _positionPerso = new Vector2(30*16+8, 112);
+                _positionPerso = new Vector2(30 * 16 + 8, 112);
             else if (chato_int_chambres_nord._posX >= 35 * 16 && chato_int_chambres_nord._posX < 37 * 16)
-                _positionPerso = new Vector2(38*16+8, 112);
+                _positionPerso = new Vector2(38 * 16 + 8, 112);
+            else if (chato_ext_cours_interieur._posX != 0)
+                _positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);
 
             _sensPersoX = 0;
             _sensPersoY = 0;
-            _posX = 0;
             _vitessePerso = 100;
 
             base.Initialize();
@@ -143,7 +146,11 @@ namespace SAE101
                 Game.LoadScreenchato_int_chambres_nord();
             }        
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 29 || a == 30))
+            {
                 Game.LoadScreenchato_ext_cours_interieur();
+                chato_int_chambres_nord._posX = 0;
+            }
+                
         }
 
         public override void Draw(GameTime gameTime)

@@ -36,12 +36,15 @@ namespace SAE101
         private int _vitessePerso;
         public static int _posX;
 
+        private AnimatedSprite _fren;
+        private Vector2 _positionFren;
+
         private int test;  
         public chato_int_chambres_nord(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
-            // Lieu Spawn
+            // Lieu Spawn perso
             _posX = 0;
 
             if (chato_int_chambres_couloir._posX  >= 5*16 && chato_int_chambres_couloir._posX < 7*16)
@@ -53,6 +56,9 @@ namespace SAE101
             else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
                 _positionPerso = new Vector2(36*16+8, 111);
             //x = casex * 16 + 8, y = casey * 16 + 8
+
+            // Lieu Spawn objects
+            _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -72,8 +78,12 @@ namespace SAE101
             mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
             mapLayerIntersect = _tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
 
+            //Load persos
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+
+            SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/Fren/Fren.sf", new JsonContentLoader());
+            _fren = new AnimatedSprite(spriteSheet2);
             base.LoadContent();
         }
 
@@ -85,17 +95,15 @@ namespace SAE101
 
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
-
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float walkSpeed = deltaSeconds * _vitessePerso;
-            String animation = "idle_down";
-
+            
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
 
+            //Mouvement/animation perso
+            float walkSpeed = deltaSeconds * _vitessePerso;
+            String animation = "idle_down";
 
-
-            //Mouvement/animation
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
@@ -131,6 +139,15 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
+            //Mouvement/animation objets
+
+            String animationFren = "idle";
+            if (keyboardState.IsKeyDown(Keys.F))
+                animationFren = "hi";
+
+            _fren.Play(animationFren);
+            _fren.Update(deltaSeconds);
+
             //debug changment de map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
             Console.WriteLine(a);
@@ -149,7 +166,9 @@ namespace SAE101
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _tiledMapRenderer.Draw();
+
             _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.End();
         }
 

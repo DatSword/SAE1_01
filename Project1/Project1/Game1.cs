@@ -12,7 +12,8 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
 using System;
-
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
@@ -23,6 +24,10 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
         private KeyboardState _keyboardState;
+
+        //Camera
+        public static OrthographicCamera _camera;
+        //private BoxingViewportAdapter _viewport;
 
         //Musique
         private Song _songChato;
@@ -39,8 +44,8 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            _graphics.PreferredBackBufferWidth = 800;
-            _graphics.PreferredBackBufferHeight = 640;
+            _graphics.PreferredBackBufferWidth = 512;
+            _graphics.PreferredBackBufferHeight = 448;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
@@ -48,6 +53,10 @@ namespace SAE101
 
             //premier écran
             LoadScreenchato_int_chambres_couloir();
+
+            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 640, 160);
+            //_viewport = new BoxingViewportAdapter(this.Window, this.GraphicsDevice, 1024, 896); //Zoom*3
+            _camera = new OrthographicCamera(viewportAdapter);
         }
 
         protected override void LoadContent()
@@ -60,12 +69,38 @@ namespace SAE101
             MediaPlayer.Play(_songChato);
         }
 
+        /*private Vector2 GetMovementDirection()
+        {
+            var movementDirection = Vector2.Zero;
+            var state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.Down))
+            {
+                movementDirection += Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.Up))
+            {
+                movementDirection -= Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.Left))
+            {
+                movementDirection -= Vector2.UnitX;
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                movementDirection += Vector2.UnitX;
+            }
+            return movementDirection;
+        }*/
+
         protected override void Update(GameTime gameTime)
         {
             //Mannette?
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             _keyboardState = Keyboard.GetState();
+
+            /*const float movementSpeed = 200;
+            _camera.Move(GetMovementDirection() * movementSpeed); //* gameTime.GetElapsedSeconds());*/
 
             base.Update(gameTime);
         }
@@ -75,6 +110,10 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            /*var transformMatrix = _camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix());
+            _spriteBatch.DrawRectangle(new RectangleF(100, 100, 50, 50), Color.Red, 3f);
+            _spriteBatch.End();*/
 
             base.Draw(gameTime);
         }

@@ -11,6 +11,8 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 using System;
 
 
@@ -18,6 +20,10 @@ namespace SAE101
 {
     public class chato_int_chambres_couloir : GameScreen
     {
+        //Camera
+        //private OrthographicCamera _camera;
+        //private GameWindow Window;
+
         //map
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
@@ -42,11 +48,15 @@ namespace SAE101
 
         //'zic
         private Song _songChato;
-        
+
         public chato_int_chambres_couloir(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
+            //Camera
+            /*var viewportAdapter = new BoxingViewportAdapter(Game1.Window, GraphicsDevice, 500, 300);
+            _camera = new OrthographicCamera(viewportAdapter);*/
+
             // Lieu Spawn
             _posX = 0;
 
@@ -91,6 +101,29 @@ namespace SAE101
             base.LoadContent();
         }
 
+        /*private Vector2 GetMovementDirection()
+        {
+            var movementDirection = Vector2.Zero;
+            var state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.Down))
+            {
+                movementDirection += Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.Up))
+            {
+                movementDirection -= Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.Left))
+            {
+                movementDirection -= Vector2.UnitX;
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                movementDirection += Vector2.UnitX;
+            }
+            return movementDirection;
+        }*/
+
         public override void Update(GameTime gameTime)
         {
             //Debug changement de map
@@ -112,6 +145,9 @@ namespace SAE101
             _tiledMapRenderer.Update(gameTime);
 
 
+            //Camera
+            /*const float movementSpeed = 200;
+            _camera.Move(GetMovementDirection() * movementSpeed * gameTime.GetElapsedSeconds());*/
 
             //Mouvement/animation
             if (stopDown == true && keyboardState.IsKeyUp(Keys.Down))
@@ -194,7 +230,15 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            /*_spriteBatch.Begin();
+            //_spriteBatch.DrawRectangle(new RectangleF(100, 100, 50, 50), Color.Red, 3f);
+            _tiledMapRenderer.Draw();
+            _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.End();*/
+
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            //_spriteBatch.DrawRectangle(new RectangleF(250, 250, 50, 50), Color.Black, 1f);
             _tiledMapRenderer.Draw();
             _spriteBatch.Draw(_perso, _positionPerso);
 

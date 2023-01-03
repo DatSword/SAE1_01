@@ -10,11 +10,11 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.Content.Pipeline.dll
-/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.dll
-/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.Graphics.dll
-/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\MonoGame.Extended.Tiled.dll
-/reference:P:\S1\R1_01_Initiation_au_developpement\dllmonogame\Newtonsoft.Json.dll
+/reference:..\..\dllmonogame\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\dllmonogame\MonoGame.Extended.dll
+/reference:..\..\dllmonogame\MonoGame.Extended.Graphics.dll
+/reference:..\..\dllmonogame\MonoGame.Extended.Tiled.dll
+/reference:..\..\dllmonogame\Newtonsoft.Json.dll
 
 #---------------------------------- Content ---------------------------------#
 

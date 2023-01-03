@@ -25,6 +25,7 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
+        private Texture2D _chatoCombatDecor;
 
 
         public chato_combat(Game1 game) : base(game) { }
@@ -43,6 +44,7 @@ namespace SAE101
 
             _tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            _chatoCombatDecor = Content.Load<Texture2D>("img/chato/combat_decor");
 
             base.LoadContent();
         }
@@ -71,6 +73,7 @@ namespace SAE101
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _tiledMapRenderer.Draw();
+            _spriteBatch.Draw(_chatoCombatDecor,new Vector2(0,0),Color.White);
             _spriteBatch.End();
         }
     }

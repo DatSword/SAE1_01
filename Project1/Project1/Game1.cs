@@ -32,6 +32,10 @@ namespace SAE101
         //Musiques
         private Song _songChato;
         private Song _titleTheme;
+        private Song _songCombat;
+
+        //Combat?
+        private bool _combatTest;
 
         public Game1()
         {
@@ -49,6 +53,8 @@ namespace SAE101
             _graphics.PreferredBackBufferHeight = 448;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
+            
+            _combatTest = false;
 
             base.Initialize();
 
@@ -68,6 +74,7 @@ namespace SAE101
             //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
             _titleTheme = Content.Load<Song>("music/title/title");
+            _songCombat = Content.Load<Song>("music/chato/GUERRE");
         }
 
         /*private Vector2 GetMovementDirection()
@@ -99,6 +106,17 @@ namespace SAE101
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             _keyboardState = Keyboard.GetState();
+
+            if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false)
+            {
+                LoadScreenchato_combat();
+                _combatTest = true;
+            }
+            else if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == true)
+            {
+                LoadScreenchato_int_chambres_nord();
+                _combatTest = false;
+            }
 
             /*const float movementSpeed = 200;
             _camera.Move(GetMovementDirection() * movementSpeed); //* gameTime.GetElapsedSeconds());*/
@@ -149,7 +167,9 @@ namespace SAE101
 
         public void LoadScreenchato_combat()
         {
+            MediaPlayer.Stop();
             _screenManager.LoadScreen(new chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
+            MediaPlayer.Play(_songCombat);
         }
     }
 }

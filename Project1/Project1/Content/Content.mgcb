@@ -79,6 +79,18 @@
 /processorParam:TextureFormat=Compressed
 /build:font/font_test.spritefont
 
+#begin img/chato/combat_decor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/chato/combat_decor.png
+
 #begin map/chato/png/Chato_int1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -201,6 +213,12 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/chato/EdgarAndSabin.mp3
+
+#begin music/chato/GUERRE.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/chato/GUERRE.mp3
 
 #begin music/title/title.mp3
 /importer:Mp3Importer

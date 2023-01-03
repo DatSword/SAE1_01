@@ -75,8 +75,8 @@ namespace SAE101
 
             stopLeft = false;
             stopRight = false;
-            stopUp = true;
-            stopDown = false;
+            stopUp = false;
+            stopDown = true;
 
             _sensPersoX = 0;
             _sensPersoY = 0;

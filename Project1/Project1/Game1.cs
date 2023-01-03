@@ -29,7 +29,7 @@ namespace SAE101
         public static OrthographicCamera _camera;
         //private BoxingViewportAdapter _viewport;
 
-        //Musique
+        //Musiques
         private Song _songChato;
 
         public Game1()

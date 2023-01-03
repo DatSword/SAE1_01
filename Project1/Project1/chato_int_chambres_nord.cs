@@ -11,6 +11,8 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 using System;
 
 

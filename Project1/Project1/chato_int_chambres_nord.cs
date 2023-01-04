@@ -54,6 +54,13 @@ namespace SAE101
         private Vector2 _positionDial;
         private bool _dialTrue;
 
+        public static Vector2 _chambreCentre1;
+        public static Vector2 _chambreCentre2;
+        public static int _limiteChambre1;
+        public static int _limiteChambre2;
+
+
+
         public chato_int_chambres_nord(Game1 game) : base(game) { }
 
         public override void Initialize()
@@ -86,6 +93,11 @@ namespace SAE101
 
             _positionDial = new Vector2(0, 348);
             _dialTrue = false;
+
+            _chambreCentre1 = new Vector2(8 * 16, 4 * 16);
+            _chambreCentre2 = new Vector2(32 * 16, 4 * 16);
+            _limiteChambre1 = 16*16;
+            _limiteChambre2 = 24*16;
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -134,7 +146,6 @@ namespace SAE101
             _sensPersoY = 0;
 
             //Camera
-            //Game1.MoveCamera(gameTime);
             Game1._camera.LookAt(Game1._cameraPosition);
 
             _keyboardState = Keyboard.GetState();
@@ -208,6 +219,7 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
+
                 //MOUVEMENT/ANIMATION OBJETS
 
             //:)
@@ -224,17 +236,20 @@ namespace SAE101
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
 
+
             //Coffre(s?)
             String animationChest = null;           
             if (_chestTrue == false)
                 animationChest = "close";
             else
                 animationChest = "open";
+
             if (keyboardState.IsKeyDown(Keys.F) && (b == 70) && animationChest == "close")
                 _chestTrue = true;
 
             _chest1.Play(animationChest);
             _chest1.Update(deltaSeconds);
+
 
                 //EVENEMENTS
 

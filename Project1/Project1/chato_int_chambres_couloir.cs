@@ -100,10 +100,6 @@ namespace SAE101
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
             Console.WriteLine(a);
 
-            _sensPersoX = 0;
-            _sensPersoY = 0;
-
-
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -111,12 +107,11 @@ namespace SAE101
             float walkSpeed = deltaSeconds * _vitessePerso;
             String animation = "idle_down";
 
+            //Camera
+            Game1._camera.LookAt(Game1._cameraPosition);
+
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
-
-            //Camera
-            //Game1.MoveCamera(gameTime);
-            Game1._camera.LookAt(Game1._cameraPosition);
 
             //Mouvement/animation
             if (stopDown == true && keyboardState.IsKeyUp(Keys.Down))
@@ -191,7 +186,6 @@ namespace SAE101
                 Game.LoadScreenchato_ext_cours_interieur();
                 chato_int_chambres_nord._posX = 0;
             }
-                
         }
 
         public override void Draw(GameTime gameTime)

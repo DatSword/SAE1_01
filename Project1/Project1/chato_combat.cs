@@ -103,14 +103,14 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
-            if (_choixCursor == 1)
+            /*if (_choixCursor == 1)
                 _desc = "Attaque un ennemi conventionnellement";
             else if (_choixCursor == 2)
                 _desc = "???";
             else if (_choixCursor == 3)
                 _desc = "Permet d'utiliser un objet";
             else if (_choixCursor == 4)
-                _desc = "Fuir un le combat";
+                _desc = "Fuir un le combat";*/
         }
 
         public override void Draw(GameTime gameTime)
@@ -123,11 +123,11 @@ namespace SAE101
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
             _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix1, _posText[0], Color.White);
+            /*_spriteBatch.DrawString(_fontTest, _choix1, _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix2, _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix3, _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix4, _posText[3], Color.White);
-            _spriteBatch.DrawString(_fontTest, _desc, _posText[4], Color.White);
+            _spriteBatch.DrawString(_fontTest, _desc, _posText[4], Color.White);*/
             _spriteBatch.End();
         }
     }

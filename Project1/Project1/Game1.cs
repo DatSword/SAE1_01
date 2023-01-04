@@ -116,7 +116,7 @@ namespace SAE101
             //Camera
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambre1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
-            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambre2)
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambre2)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
             else if (_numEcran == 2)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);

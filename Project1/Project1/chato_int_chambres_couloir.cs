@@ -44,9 +44,6 @@ namespace SAE101
         public static int _limiteChambreX2;
         public static int _limiteCouloirY1;
 
-        //'zic
-        private Song _songChato;
-
         public chato_int_chambres_couloir(Game1 game) : base(game) { }
 
         public override void Initialize()
@@ -84,8 +81,6 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-
             _tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
@@ -93,6 +88,7 @@ namespace SAE101
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+
             base.LoadContent();
         }
 

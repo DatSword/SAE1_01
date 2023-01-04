@@ -132,6 +132,7 @@ namespace SAE101
             SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
             _chest1 = new AnimatedSprite(spriteSheet3);
 
+            //Load Dialogues
             _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
 
             base.LoadContent();
@@ -286,7 +287,6 @@ namespace SAE101
 
         private bool IsCollision(ushort x, ushort y)
         {
-            // définition de tile qui peut être null (?)
             TiledMapTile? tile;
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;

@@ -31,7 +31,7 @@ namespace SAE101
 
         //sprites
         private AnimatedSprite _perso;
-        private Vector2 _positionPerso;        
+        public static Vector2 _positionPerso;        
         private KeyboardState _keyboardState;
         private int _sensPersoX;
         private int _sensPersoY;
@@ -124,6 +124,9 @@ namespace SAE101
             _sensPersoX = 0;
             _sensPersoY = 0;
 
+            //Camera
+            //Game1.MoveCamera(gameTime);
+            Game1._camera.LookAt(Game1._cameraPosition);
 
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
@@ -237,10 +240,11 @@ namespace SAE101
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            
+
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            _tiledMapRenderer.Draw();          
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());          
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
             _spriteBatch.Draw(_perso, _positionPerso);

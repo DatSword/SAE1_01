@@ -27,7 +27,9 @@ namespace SAE101
 
         //Camera
         public static OrthographicCamera _camera;
-        //private BoxingViewportAdapter _viewport;
+        public static Vector2 _cameraPosition;
+        public static Vector2 _cameraPosition2;
+        //public static Vector2 _positionPerso;
 
         //Musiques
         private Song _songChato;
@@ -53,17 +55,21 @@ namespace SAE101
             _graphics.PreferredBackBufferHeight = 448;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
-            
+
+            //Camera
+            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 394, 345);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 512, 448);
+            _camera = new OrthographicCamera(viewportadapter);
+            _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+            //_cameraPosition = new Vector2(0,0);
+            //_cameraPosition2 = new Vector2(0, 0);
+
             _combatTest = false;
 
             base.Initialize();
 
             //premier écran
             LoadScreenecran_de_titre();
-
-            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 640, 160);
-            //_viewport = new BoxingViewportAdapter(this.Window, this.GraphicsDevice, 1024, 896); //Zoom*3
-            _camera = new OrthographicCamera(viewportAdapter);
         }
 
         protected override void LoadContent()
@@ -77,27 +83,35 @@ namespace SAE101
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
         }
 
-        /*private Vector2 GetMovementDirection()
+        public static Vector2 GetMovementDirection()
         {
             var movementDirection = Vector2.Zero;
             var state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Down))
-            {
                 movementDirection += Vector2.UnitY;
-            }
             if (state.IsKeyDown(Keys.Up))
-            {
                 movementDirection -= Vector2.UnitY;
-            }
             if (state.IsKeyDown(Keys.Left))
-            {
                 movementDirection -= Vector2.UnitX;
-            }
             if (state.IsKeyDown(Keys.Right))
-            {
                 movementDirection += Vector2.UnitX;
-            }
+
+            // Can't normalize the zero vector so test for it before normalizing
+            if (movementDirection != Vector2.Zero)
+                movementDirection.Normalize();
+
             return movementDirection;
+        }
+
+        /*public static void MoveCamera(GameTime gameTime)
+        {
+            var speed = chato_int_chambres_couloir._vitessePerso;
+            var seconds = gameTime.GetElapsedSeconds();
+            var movementDirection = GetMovementDirection();
+            //_cameraPosition += speed * movementDirection * seconds;
+            //_cameraPosition = _positionPerso;
+            _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+            //_cameraPosition2 = _cameraPosition;
         }*/
 
         protected override void Update(GameTime gameTime)
@@ -118,8 +132,7 @@ namespace SAE101
                 _combatTest = false;
             }
 
-            /*const float movementSpeed = 200;
-            _camera.Move(GetMovementDirection() * movementSpeed); //* gameTime.GetElapsedSeconds());*/
+            _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
             base.Update(gameTime);
         }
@@ -127,12 +140,6 @@ namespace SAE101
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            // TODO: Add your drawing code here
-            /*var transformMatrix = _camera.GetViewMatrix();
-            _spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix());
-            _spriteBatch.DrawRectangle(new RectangleF(100, 100, 50, 50), Color.Red, 3f);
-            _spriteBatch.End();*/
 
             base.Draw(gameTime);
         }
@@ -152,12 +159,14 @@ namespace SAE101
         public void LoadScreenchato_int_chambres_couloir()
         {
             _screenManager.LoadScreen(new chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
+            //_cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
         }
 
         public void LoadScreenchato_int_chambres_nord()
         {
             _screenManager.LoadScreen(new chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
             MediaPlayer.Play(_songChato);
+            //_cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_nord._positionPerso.Y);
         }
 
         public void LoadScreenchato_ext_cours_interieur()

@@ -78,6 +78,10 @@ namespace SAE101
             _sensPersoX = 0;
             _sensPersoY = 0;
 
+            //Camera
+            //Game1.MoveCamera(gameTime);
+            Game1._camera.LookAt(Game1._cameraPosition);
+
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -139,8 +143,9 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            _tiledMapRenderer.Draw();
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
         }

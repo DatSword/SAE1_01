@@ -62,7 +62,8 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, 0), Color.White);
             _spriteBatch.End();
         }

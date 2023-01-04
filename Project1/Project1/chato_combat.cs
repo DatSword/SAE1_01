@@ -62,10 +62,6 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //Camera
-            //Game1.MoveCamera(gameTime);
-            //Game1._camera.LookAt(Game1._cameraPosition);
-
             //curseur controls
 
             if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4)

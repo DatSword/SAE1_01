@@ -62,6 +62,10 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Camera
+            //Game1.MoveCamera(gameTime);
+            //Game1._camera.LookAt(Game1._cameraPosition);
+
             //curseur controls
 
             if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4)
@@ -81,8 +85,8 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = Game1._camera.GetViewMatrix();
-            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            //var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(/*transformMatrix: transformMatrix*/);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, 0), Color.White);
             _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);

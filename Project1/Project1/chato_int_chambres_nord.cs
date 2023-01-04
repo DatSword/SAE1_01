@@ -50,6 +50,10 @@ namespace SAE101
         private Vector2 _positionChest1;
         private bool _chestTrue;
 
+        private Texture2D _dialBox;
+        private Vector2 _positionDial;
+        private bool _dialTrue;
+
         public chato_int_chambres_nord(Game1 game) : base(game) { }
 
         public override void Initialize()
@@ -74,11 +78,14 @@ namespace SAE101
             stopDown = false;
 
         // Lieu Spawn objects
-        _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
+            _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
             _frenTrue = false;
 
             _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
             _chestTrue = false;
+
+            _positionDial = new Vector2(0, 348);
+            _dialTrue = false;
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -108,6 +115,8 @@ namespace SAE101
 
             SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
             _chest1 = new AnimatedSprite(spriteSheet3);
+
+            _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
 
             base.LoadContent();
         }
@@ -247,6 +256,7 @@ namespace SAE101
             _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());          
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
+            _spriteBatch.Draw(_dialBox, _positionDial, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
 
             _spriteBatch.End();

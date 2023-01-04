@@ -27,11 +27,21 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private Texture2D _chatoCombatDecor;
 
+        private Texture2D _combatBox;
+        private Vector2 _positionCombat;
+
+        private Texture2D _cursor;
+        private Vector2 _positionCursor;
+        private int _choix;
+
 
         public chato_combat(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
+            _positionCombat = new Vector2(0, 248);
+            _positionCursor = new Vector2(16,300);
+            _choix = 1;
 
             base.Initialize();
         }
@@ -40,6 +50,9 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _chatoCombatDecor = Content.Load<Texture2D>("img/chato/combat_decor");
+            _combatBox = Content.Load<Texture2D>("img/dialogue/combat_box");
+            _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
+
 
             base.LoadContent();
         }
@@ -49,11 +62,17 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //changements maps
+            //curseur controls
 
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4)
             {
-                Game.LoadScreenchato_int_chambres_couloir();
+                _positionCursor.Y = _positionCursor.Y + 36;
+                _choix = _choix + 1;
+            }
+            if (keyboardState.IsKeyDown(Keys.Up) && _choix > 1)
+            {
+                _positionCursor.Y = _positionCursor.Y - 36;
+                _choix = _choix - 1;
             }
         }
 
@@ -65,6 +84,8 @@ namespace SAE101
             var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
+            _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
             _spriteBatch.End();
         }
     }

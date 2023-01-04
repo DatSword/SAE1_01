@@ -179,11 +179,11 @@ namespace SAE101
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
             _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
-            _spriteBatch.DrawString(_fontTest, _desc[_numDesc], _posText[4], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix1, _posText[0], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix2, _posText[1], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix3, _posText[2], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix4, _posText[3], Color.White);
+            _spriteBatch.DrawString(_fontTest, _desc, _posText[4], Color.White);
             _spriteBatch.End();
         }
 

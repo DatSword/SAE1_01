@@ -40,6 +40,10 @@ namespace SAE101
         public static int _posX;
         private int _stop;
 
+        public static int _limiteChambreX1;
+        public static int _limiteChambreX2;
+        public static int _limiteCouloirY1;
+
         //'zic
         private Song _songChato;
 
@@ -64,6 +68,10 @@ namespace SAE101
                 _positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);
 
             _stop = 1;
+
+            _limiteChambreX1 = 19 * 16;
+            _limiteChambreX2 = 25 * 16;
+            _limiteCouloirY1 = 5 * 16;
 
             _sensPersoX = 0;
             _sensPersoY = 0;

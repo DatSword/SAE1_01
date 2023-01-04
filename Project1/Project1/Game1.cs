@@ -61,7 +61,7 @@ namespace SAE101
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 512, 448);
             _camera = new OrthographicCamera(viewportadapter);
             _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
-            _numEcran = 0;
+            _numEcran = 1;
 
             _combatTest = false;
 
@@ -114,17 +114,37 @@ namespace SAE101
             }
 
             //Camera
-            if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambre1)
+            if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
-            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambre2)
+
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2 
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
-            else if (_numEcran == 2)
+
+            else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+
+
+            else if (_numEcran == 2 && (chato_int_chambres_couloir._positionPerso.Y > chato_int_chambres_couloir._limiteCouloirY1
+                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
+                _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+
+            else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
+                                && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
+                _cameraPosition = chato_int_chambres_nord._chambreCentre1;
+
+            else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
+                                && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
+                _cameraPosition = chato_int_chambres_nord._chambreCentre2;
+
+
             else if (_numEcran == 3)
                 _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
             else
                 _cameraPosition = new Vector2(384, 336);
 
+            Console.WriteLine(_numEcran);
 
             base.Update(gameTime);
         }

@@ -62,7 +62,7 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //changements maps
+            //curseur controls
 
             if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4)
             {

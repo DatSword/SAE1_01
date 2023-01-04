@@ -32,19 +32,15 @@ namespace SAE101
 
         private Texture2D _cursor;
         private Vector2 _positionCursor;
-        private int _choix;
+        private int _choixCursor;
         public SpriteFont _fontTest;
 
-        private String _choix1;
-        private String _choix2;
-        private String _choix3;
-        private String _choix4;
-        private String _desc;
-        private Vector2 _pos1;
-        private Vector2 _pos2;
-        private Vector2 _pos3;
-        private Vector2 _pos4;
-        private Vector2 _pos5;
+        private String[] _choix1;
+        private String[] _choix2;
+        private String[] _choix3;
+        private String[] _choix4;
+        private String[] _desc;
+        private Vector2[] _posText;
 
         private float _cooldown;
         private bool _cooldownVerif;
@@ -56,20 +52,13 @@ namespace SAE101
         {
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
+            _choixCursor = 1;
 
-            _choix = 1;
-
-            _pos1 = new Vector2(64, 300);
-            _pos2 = new Vector2(64, 336);
-            _pos3 = new Vector2(64, 372);
-            _pos4 = new Vector2(64, 408);
-            _pos5 = new Vector2(180, 265);
-
-            _choix1 = "Combat";
-            _choix2 = "???";
-            _choix3 = "Objets";
-            _choix4 = "Fuite";
-            _desc = "_";
+            _posText = new[] { new Vector2(64, 300), new Vector2(64, 336), new Vector2(64, 372), new Vector2(64, 408), new Vector2(180, 265) };
+            _choix1 = new String[] { "Combat", "Combat", "Combat" };
+            _choix2 = new String[] { "???", "Nomcool", "Magie" };
+            _choix3 = new String[] { "Objets", "Objets", "Objets" };
+            _choix4 = new String[] { "Objets", "Objets", "Objets" };
             base.Initialize();
         }
 
@@ -91,18 +80,18 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //curseur controls
-            if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4 && _cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 4 && _cooldownVerif == false)
             {
                 _positionCursor.Y = _positionCursor.Y + 36;
-                _choix = _choix + 1;
+                _choixCursor = _choixCursor + 1;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
             }
             
-            if (keyboardState.IsKeyDown(Keys.Up) && _choix > 1 && _cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 1 && _cooldownVerif == false)
             {
                 _positionCursor.Y = _positionCursor.Y - 36;
-                _choix = _choix - 1;
+                _choixCursor = _choixCursor - 1;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
             }
@@ -114,13 +103,13 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
-            if (_choix == 1)
+            if (_choixCursor == 1)
                 _desc = "Attaque un ennemi conventionnellement";
-            else if (_choix == 2)
+            else if (_choixCursor == 2)
                 _desc = "???";
-            else if (_choix == 3)
+            else if (_choixCursor == 3)
                 _desc = "Permet d'utiliser un objet";
-            else if (_choix == 4)
+            else if (_choixCursor == 4)
                 _desc = "Fuir un le combat";
         }
 
@@ -134,11 +123,11 @@ namespace SAE101
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
             _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix1, _pos1, Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix2, _pos2, Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix3, _pos3, Color.White);
-            _spriteBatch.DrawString(_fontTest, _choix4, _pos4, Color.White);
-            _spriteBatch.DrawString(_fontTest, _desc, _pos5, Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix1, _posText[0], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix2, _posText[1], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix3, _posText[2], Color.White);
+            _spriteBatch.DrawString(_fontTest, _choix4, _posText[3], Color.White);
+            _spriteBatch.DrawString(_fontTest, _desc, _posText[4], Color.White);
             _spriteBatch.End();
         }
     }

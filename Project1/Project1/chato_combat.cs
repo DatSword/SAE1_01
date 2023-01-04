@@ -27,11 +27,15 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private Texture2D _chatoCombatDecor;
 
+        private Texture2D _combatBox;
+        private Vector2 _positionCombat;
+
 
         public chato_combat(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
+            _positionCombat = new Vector2(0, 248);
 
             base.Initialize();
         }
@@ -40,6 +44,7 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _chatoCombatDecor = Content.Load<Texture2D>("img/chato/combat_decor");
+            _combatBox = Content.Load<Texture2D>("img/dialogue/combat_box");
 
             base.LoadContent();
         }
@@ -64,6 +69,7 @@ namespace SAE101
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
             _spriteBatch.End();
         }
     }

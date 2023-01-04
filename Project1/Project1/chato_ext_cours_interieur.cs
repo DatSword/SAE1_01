@@ -96,6 +96,7 @@ namespace SAE101
             _tiledMapRenderer.Update(gameTime);
 
             //Mouvement/animation
+            joueur.Update(gameTime);
             if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))
                 animation = "idle_down";
             else if (_stop == 2 && keyboardState.IsKeyUp(Keys.Up))

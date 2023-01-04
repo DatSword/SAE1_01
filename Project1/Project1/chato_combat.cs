@@ -65,11 +65,11 @@ namespace SAE101
             _pos4 = new Vector2(64, 408);
             _pos5 = new Vector2(180, 265);
 
-            _choix1 = "combat";
+            _choix1 = "Combat";
             _choix2 = "???";
             _choix3 = "Objets";
             _choix4 = "Fuite";
-            _desc = "merde";
+            _desc = "_";
             base.Initialize();
         }
 

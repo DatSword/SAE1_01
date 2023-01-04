@@ -213,7 +213,7 @@ namespace SAE101
         {
             _spécial = "NomCool";
             String[] _specialH = new String[] { "Zeweurld", "Baïtezedeuste", "_", "_" };          
-            String[] _descH = new String[] { "Arrête le temps", "Reviens au dernier tour", "_", "_" };
+            String[] _descH = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés", "Reviens au dernier tour", "_", "_" };
             if (_sousMenuSpecial == true)
             {
                 _choix = _specialH;
@@ -235,7 +235,7 @@ namespace SAE101
         public void Jon()
         {
             _spécial = "Magie";
-            String[] _specialJ = new String[] { "_", "_", "_", "_" };
+            String[] _specialJ = new String[] { "", "_", "_", "_" };
             String[] _descJ = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
             if (_sousMenuSpecial == true)
             {

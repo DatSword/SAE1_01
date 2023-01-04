@@ -21,9 +21,8 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
-    internal class joueur
+    internal class joueur : Game
     {
-        private AnimatedSprite _perso;
         public static Vector2 _positionPerso;
         private KeyboardState _keyboardState;
         private int _sensPersoX;
@@ -31,11 +30,15 @@ namespace SAE101
         public static int _vitessePerso;
         public static int _posX;
         private int _stop;
+        private AnimatedSprite _perso;
+        private SpriteBatch _spriteBatch;
+        private TiledMapRenderer _tiledMapRenderer;
+        private TiledMapTileLayer mapLayerIntersect;
 
         private TiledMap _tiledMap;
         private TiledMapTileLayer mapLayer;
 
-        public void Initialize()
+        public new void Initialize()
         {
             // Lieu Spawn
             _posX = 0;
@@ -45,10 +48,27 @@ namespace SAE101
             _sensPersoY = 0;
             _vitessePerso = 100;
 
-            Initialize();
+            base.Initialize();
         }
 
-        public void Update(GameTime gameTime)
+        public new void LoadContent()
+        {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // TODO: use this.Content to load your game content here
+
+            _tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_nord");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            mapLayerIntersect = _tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
+
+            //Load persos
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spriteSheet);
+
+            base.LoadContent();
+        }
+        public new void Update(GameTime gameTime)
         {
 
             _keyboardState = Keyboard.GetState();
@@ -107,6 +127,20 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
         }
+
+        public new void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Black);
+
+            // TODO: Add your drawing code here
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
+            _spriteBatch.Draw(_perso, _positionPerso);
+
+            _spriteBatch.End();
+        }
+
         private bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)

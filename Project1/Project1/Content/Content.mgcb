@@ -18,6 +18,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../../../Downloads/menu.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../../../../../../Downloads/menu.wav;sfx/menu.wav
+
 #begin anim/char/base_model_m/base_model_male - Copie.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -261,4 +267,52 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/title/title.mp3
+
+#begin sfx/hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/hit.wav
+
+#begin sfx/hit2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/hit2.wav
+
+#begin sfx/lose.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/lose.wav
+
+#begin sfx/macron_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/macron_1.wav
+
+#begin sfx/menu.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/menu.wav
+
+#begin sfx/non.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/non.wav
+
+#begin sfx/pelo.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/pelo.wav
+
+#begin sfx/vic.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/vic.wav
 

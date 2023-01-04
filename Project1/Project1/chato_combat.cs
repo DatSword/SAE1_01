@@ -16,43 +16,52 @@ using MonoGame.Extended.ViewportAdapters;
 using System;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
     internal class chato_combat : GameScreen
     {
-        //map
+        //Fond d'écran
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _chatoCombatDecor;
 
+        //Menu
         private Texture2D _combatBox;
         private Vector2 _positionCombat;
-
+        public SpriteFont _fontTest;
         private Texture2D _cursor;
         private Vector2 _positionCursor;
-        public SpriteFont _fontTest;
-
-        private bool _premierCombat;
-        private bool _tourPassé;
         private int _choixCursor;
-        private bool _sousMenu;
+
+        //Spécial
+        private bool _premierCombat;
+
+        //Tours
+        private bool _tourPassé;
+        private bool _sousMenuSpecial;
         private int _numPerso;
         private int _nbEquipe;
         private int _aAttaque;
         private bool _tourFini;
 
+        //Textes menu
         private String[] _choix;
         private String[] _choixBackup;
         private String[] _desc;
         private String[] _descBackup;
         private String _spécial;
-
         private Vector2[] _posText;
 
+        //Cooldown
         private float _cooldown;
         private bool _cooldownVerif;
+
+        //sfx
+        private SoundEffect _menu;
+        private SoundEffect _non;
 
 
         public chato_combat(Game1 game) : base(game) { }
@@ -63,7 +72,7 @@ namespace SAE101
             _positionCursor = new Vector2(16,300);
 
             _choixCursor = 0;
-            _sousMenu = false;
+            _sousMenuSpecial = false;
             _premierCombat = false;
             _nbEquipe = 2;
             _aAttaque = 1;
@@ -86,6 +95,9 @@ namespace SAE101
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
+            _menu = Content.Load<SoundEffect>("sfx/menu");
+            _non = Content.Load<SoundEffect>("sfx/non");
+
 
             base.LoadContent();
         }
@@ -98,17 +110,21 @@ namespace SAE101
             //curseur controls
             if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && _cooldownVerif == false)
             {
+                _menu.Play();
                 _positionCursor.Y = _positionCursor.Y + 36;
                 _choixCursor = _choixCursor + 1;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
+                
             }            
             if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && _cooldownVerif == false)
             {
+                _menu.Play();
                 _positionCursor.Y = _positionCursor.Y - 36;
                 _choixCursor = _choixCursor - 1;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
+                
             }
             if (_cooldownVerif == true)
             {
@@ -128,39 +144,39 @@ namespace SAE101
             }
             
             //Selection dans le menu
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _cooldownVerif == false && _sousMenu == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _cooldownVerif == false && _sousMenuSpecial == false)
             {
+                _menu.Play();
                 //ATTAQUE();
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
                 _aAttaque = _aAttaque + 1;
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && _cooldownVerif == false && _sousMenu == false && _premierCombat == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && _cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
             {
 
-                _sousMenu = true;
+                _sousMenuSpecial = true;
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && _cooldownVerif == false && _sousMenu == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && _cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Objects();
-                _sousMenu = true;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && _cooldownVerif == false && _sousMenu == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && _cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Fuite();
-                _sousMenu = false;
+                _sousMenuSpecial = false;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
             }
 
-            if (keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false && _sousMenu == true)
+            if (keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false && _sousMenuSpecial == true)
             {
-                _sousMenu = false;
+                _sousMenuSpecial = false;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
             }
@@ -198,12 +214,12 @@ namespace SAE101
             _spécial = "NomCool";
             String[] _specialH = new String[] { "Zeweurld", "Baïtezedeuste", "_", "_" };          
             String[] _descH = new String[] { "Arrête le temps", "Reviens au dernier tour", "_", "_" };
-            if (_sousMenu == true)
+            if (_sousMenuSpecial == true)
             {
                 _choix = _specialH;
                 _desc = _descH;
             }
-            else if (_sousMenu == false)
+            else if (_sousMenuSpecial == false)
             {
                 _choix = _choixBackup;
                 _desc = _descBackup;
@@ -221,12 +237,12 @@ namespace SAE101
             _spécial = "Magie";
             String[] _specialJ = new String[] { "_", "_", "_", "_" };
             String[] _descJ = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
-            if (_sousMenu == true)
+            if (_sousMenuSpecial == true)
             {
                 _choix = _specialJ;
                 _desc = _descJ;
             }
-            else if (_sousMenu == false)
+            else if (_sousMenuSpecial == false)
             {
                 _choix = _choixBackup;
                 _desc = _descBackup;
@@ -237,11 +253,13 @@ namespace SAE101
         public void Objects()
         {
             _desc[2] = "Aucun objets!";
+            _non.Play();
         }
 
         public void Fuite()
         {
             _desc[3] = "Hm? On dirait qu'un mur en scénarium vous\nempêche d'appuyer sur ce bouton!";
+            _non.Play();
         }
     }
 }

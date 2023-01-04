@@ -41,6 +41,7 @@ namespace SAE101
         private bool stopRight;
         private bool stopUp;
         private bool stopDown;
+        private int _stop;
 
         private AnimatedSprite _fren;
         private Vector2 _positionFren;
@@ -79,10 +80,7 @@ namespace SAE101
             else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
                 _positionPerso = new Vector2(36*16+8, 111);
             //x = casex * 16 + 8, y = casey * 16 + 8
-            stopLeft = false;
-            stopRight = false;
-            stopUp = true;
-            stopDown = false;
+            _stop = 1;
 
         // Lieu Spawn objects
             _positionFren = new Vector2(28 * 16 + 8, 4*16 + 8);
@@ -159,13 +157,13 @@ namespace SAE101
             float walkSpeed = deltaSeconds * _vitessePerso;
             String animation = null;
 
-            if (stopDown == true && keyboardState.IsKeyUp(Keys.Down))
+            if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))
                 animation = "idle_down";
-            else if (stopUp == true && keyboardState.IsKeyUp(Keys.Up))
+            else if (_stop == 2 && keyboardState.IsKeyUp(Keys.Up))
                 animation = "idle_up";
-            else if (stopLeft == true && keyboardState.IsKeyUp(Keys.Left))
+            else if (_stop == 3 && keyboardState.IsKeyUp(Keys.Left))
                 animation = "idle_left";
-            else if (stopRight == true && keyboardState.IsKeyUp(Keys.Right))
+            else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
             if (keyboardState.IsKeyDown(Keys.Up))
@@ -173,10 +171,7 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
                 animation = "move_up";
-                stopLeft = false;
-                stopRight = false;
-                stopUp = true;
-                stopDown = false;
+                _stop = 2;
                 if (!IsCollision(tx, ty))
                     _positionPerso.Y -= walkSpeed;
             }
@@ -185,10 +180,7 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
                 animation = "move_down";
-                stopLeft = false;
-                stopRight = false;
-                stopUp = false;
-                stopDown = true;
+                _stop = 1;
                 if (!IsCollision(tx, ty))
                     _positionPerso.Y += walkSpeed;
             }
@@ -197,10 +189,7 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_left";
-                stopLeft = true;
-                stopRight = false;
-                stopUp = false;
-                stopDown = false;
+                _stop = 3;
                 if (!IsCollision(tx, ty))
                     _positionPerso.X -= walkSpeed;
             }
@@ -209,10 +198,7 @@ namespace SAE101
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_right";
-                stopLeft = false;
-                stopRight = true;
-                stopUp = false;
-                stopDown = false;
+                _stop = 4;
                 if (!IsCollision(tx, ty))
                     _positionPerso.X += walkSpeed;
             }

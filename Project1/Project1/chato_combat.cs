@@ -46,6 +46,9 @@ namespace SAE101
         private Vector2 _pos4;
         private Vector2 _pos5;
 
+        private float _cooldown;
+        private bool _cooldownVerif;
+
 
         public chato_combat(Game1 game) : base(game) { }
 
@@ -88,15 +91,27 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //curseur controls
-            if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4)
+            if (keyboardState.IsKeyDown(Keys.Down) && _choix < 4 && _cooldownVerif == false)
             {
                 _positionCursor.Y = _positionCursor.Y + 36;
                 _choix = _choix + 1;
+                _cooldownVerif = true;
+                _cooldown = 0.2f;
             }
-            if (keyboardState.IsKeyDown(Keys.Up) && _choix > 1)
+            
+            if (keyboardState.IsKeyDown(Keys.Up) && _choix > 1 && _cooldownVerif == false)
             {
                 _positionCursor.Y = _positionCursor.Y - 36;
                 _choix = _choix - 1;
+                _cooldownVerif = true;
+                _cooldown = 0.2f;
+            }
+
+            if (_cooldownVerif == true)
+            {
+                _cooldown = _cooldown - deltaSeconds;
+                if (_cooldown <= 0)
+                    _cooldownVerif = false;
             }
 
             if (_choix == 1)

@@ -37,6 +37,8 @@ namespace SAE101
 
         //Combat?
         private bool _combatTest;
+        private float _cooldown;
+        private bool _cooldownVerif;
 
         public Game1()
         {
@@ -85,17 +87,30 @@ namespace SAE101
             //Mannette?
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            _keyboardState = Keyboard.GetState();
 
-            if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false)
+            _keyboardState = Keyboard.GetState();
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
                 LoadScreenchato_combat();
                 _combatTest = true;
+                _cooldownVerif = true;
+                _cooldown = 0.2f;
             }
-            else if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == true)
+            else if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == true && _cooldownVerif == false)
             {
                 LoadScreenchato_int_chambres_nord();
                 _combatTest = false;
+                _cooldownVerif = true;
+                _cooldown = 0.2f;
+            }
+
+            if (_cooldownVerif == true)
+            {
+                _cooldown = _cooldown - deltaSeconds;
+                if (_cooldown <= 0)
+                    _cooldownVerif = false;
             }
 
             //Camera

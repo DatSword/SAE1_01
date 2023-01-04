@@ -30,7 +30,7 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        private Vector2 _positionPerso;
+        public static Vector2 _positionPerso;
         private KeyboardState _keyboardState;
         private int _sensPersoX;
         private int _sensPersoY;
@@ -79,7 +79,6 @@ namespace SAE101
             _sensPersoY = 0;
 
             //Camera
-            //Game1.MoveCamera(gameTime);
             Game1._camera.LookAt(Game1._cameraPosition);
 
             _keyboardState = Keyboard.GetState();

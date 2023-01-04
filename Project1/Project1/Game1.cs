@@ -28,8 +28,7 @@ namespace SAE101
         //Camera
         public static OrthographicCamera _camera;
         public static Vector2 _cameraPosition;
-        public static Vector2 _cameraPosition2;
-        //public static Vector2 _positionPerso;
+        public int _numEcran;
 
         //Musiques
         private Song _songChato;
@@ -51,18 +50,16 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            _graphics.PreferredBackBufferWidth = 512;
-            _graphics.PreferredBackBufferHeight = 448;
+            _graphics.PreferredBackBufferWidth = 768;
+            _graphics.PreferredBackBufferHeight = 672;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
             //Camera
-            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 394, 345);
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 512, 448);
             _camera = new OrthographicCamera(viewportadapter);
             _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
-            //_cameraPosition = new Vector2(0,0);
-            //_cameraPosition2 = new Vector2(0, 0);
+            _numEcran = 0;
 
             _combatTest = false;
 
@@ -83,37 +80,6 @@ namespace SAE101
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
         }
 
-        public static Vector2 GetMovementDirection()
-        {
-            var movementDirection = Vector2.Zero;
-            var state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.Down))
-                movementDirection += Vector2.UnitY;
-            if (state.IsKeyDown(Keys.Up))
-                movementDirection -= Vector2.UnitY;
-            if (state.IsKeyDown(Keys.Left))
-                movementDirection -= Vector2.UnitX;
-            if (state.IsKeyDown(Keys.Right))
-                movementDirection += Vector2.UnitX;
-
-            // Can't normalize the zero vector so test for it before normalizing
-            if (movementDirection != Vector2.Zero)
-                movementDirection.Normalize();
-
-            return movementDirection;
-        }
-
-        /*public static void MoveCamera(GameTime gameTime)
-        {
-            var speed = chato_int_chambres_couloir._vitessePerso;
-            var seconds = gameTime.GetElapsedSeconds();
-            var movementDirection = GetMovementDirection();
-            //_cameraPosition += speed * movementDirection * seconds;
-            //_cameraPosition = _positionPerso;
-            _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
-            //_cameraPosition2 = _cameraPosition;
-        }*/
-
         protected override void Update(GameTime gameTime)
         {
             //Mannette?
@@ -132,7 +98,18 @@ namespace SAE101
                 _combatTest = false;
             }
 
-            _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+            //Camera
+            if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambre1)
+                _cameraPosition = chato_int_chambres_nord._chambreCentre1;
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambre2)
+                _cameraPosition = chato_int_chambres_nord._chambreCentre2;
+            else if (_numEcran == 2)
+                _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+            else if (_numEcran == 3)
+                _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
+            else
+                _cameraPosition = new Vector2(384, 336);
+
 
             base.Update(gameTime);
         }
@@ -156,22 +133,23 @@ namespace SAE101
             _screenManager.LoadScreen(new black_jack(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
 
-        public void LoadScreenchato_int_chambres_couloir()
-        {
-            _screenManager.LoadScreen(new chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
-            //_cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
-        }
-
         public void LoadScreenchato_int_chambres_nord()
         {
             _screenManager.LoadScreen(new chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
             MediaPlayer.Play(_songChato);
-            //_cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_nord._positionPerso.Y);
+            _numEcran = 1;
+        }
+
+        public void LoadScreenchato_int_chambres_couloir()
+        {
+            _screenManager.LoadScreen(new chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _numEcran = 2;
         }
 
         public void LoadScreenchato_ext_cours_interieur()
         {
             _screenManager.LoadScreen(new chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _numEcran = 3;
         }
 
         public void LoadScreenchato_combat()
@@ -179,6 +157,7 @@ namespace SAE101
             MediaPlayer.Stop();
             _screenManager.LoadScreen(new chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
             MediaPlayer.Play(_songCombat);
+            _numEcran = 4;
         }
     }
 }

@@ -48,13 +48,6 @@ namespace SAE101
             Initialize();
         }
 
-        /*public void LoadContent()
-        {
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
-            LoadContent();
-        }*/
-
         public void Update(GameTime gameTime)
         {
 

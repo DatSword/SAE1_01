@@ -46,6 +46,7 @@ namespace SAE101
         public static SoundEffect _non;
         public static SoundEffect _pelo;
         public static SoundEffect _vic;
+        public static SoundEffect _duck;
 
         //Combat?
         private bool _combatTest;
@@ -141,6 +142,7 @@ namespace SAE101
             _pelo = Content.Load<SoundEffect>("sfx/pelo");
             _vic = Content.Load<SoundEffect>("sfx/vic");
             _non = Content.Load<SoundEffect>("sfx/non");
+            _duck = Content.Load<SoundEffect>("sfx/duck");
 
             //Boite de dialogue
             _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");

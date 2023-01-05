@@ -38,7 +38,8 @@ namespace SAE101
             Game1._dialTrue = true;
             Game1._text = ":)";
             Game1._nom = "Fren";
-            Game1._dialTrue = true;                
+            Game1._dialTrue = true;
+            Game1._duck.Play();
         }
         public static void Fren2()
         {
@@ -47,6 +48,7 @@ namespace SAE101
             Game1._text = ":(";
             Game1._nom = "Fren";
             Game1._dialTrue = true;
+            Game1._duck.Play();
         }
 
         public static void Jon1()
@@ -70,6 +72,14 @@ namespace SAE101
             Game1._firstvisit = false;
         }
 
+        public static void Jon3()
+        {
+            Game1.SetCoolDown();
+            Game1._text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
+                          "déguerpir du Chato! On va devoir s'en débarrasser!";
+
+            Game1._nom = "Jon";
+        }
         public static void FermeBoite()
         {
             Game1._dialTrue = false;

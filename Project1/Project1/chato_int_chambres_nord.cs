@@ -204,7 +204,8 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false
+                && _positionPerso.X < _limiteChambreDroite)
             {
                 eventsetdial.Event2();
                 _frenTrue = true;
@@ -228,8 +229,12 @@ namespace SAE101
             else
                 animationChest = "open";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationChest == "close")
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationChest == "close" 
+                && _positionPerso.X > _limiteChambreDroite)
                 _chestTrue = true;
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationChest == "open" 
+                && _positionPerso.X > _limiteChambreDroite)
+                _chestTrue = false;
 
             _chest1.Play(animationChest);
             _chest1.Update(deltaSeconds);

@@ -29,7 +29,7 @@ namespace SAE101
         //Camera
         public static OrthographicCamera _camera;
         public static Vector2 _cameraPosition;
-        public int _numEcran;
+        public static int _numEcran;
 
         //Musiques
         private Song _songChato;

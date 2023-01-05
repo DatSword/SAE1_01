@@ -26,7 +26,7 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        private TiledMapTileLayer mapLayer;
+        public static TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
 
         //sprites
@@ -161,7 +161,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
                 animation = "move_up";
                 _stop = 2;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.Y -= walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Down))
@@ -170,7 +170,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
                 animation = "move_down";
                 _stop = 1;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.Y += walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Left))
@@ -179,7 +179,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_left";
                 _stop = 3;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.X -= walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Right))
@@ -188,7 +188,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_right";
                 _stop = 4;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.X += walkSpeed;
             }
             _perso.Play(animation);
@@ -266,7 +266,7 @@ namespace SAE101
             _spriteBatch.End();
         }
 
-        private bool IsCollision(ushort x, ushort y)
+        /*private bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
@@ -275,6 +275,6 @@ namespace SAE101
             if (!tile.Value.IsBlank)
                 return true;
             return false;
-        }
+        }*/
     }
 }

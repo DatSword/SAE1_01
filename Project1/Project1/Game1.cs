@@ -51,6 +51,18 @@ namespace SAE101
         private float _cooldown;
         private bool _cooldownVerif;
 
+        //Boites de dialogues
+        public static Texture2D _dialBox;
+        public static Vector2 _posDialBox;
+        public static String _text;
+        public static Vector2 _posText;
+        public static String _nom;
+        public static Vector2 _posNom;
+        public static bool _dialTrue;
+
+        //font
+        public static SpriteFont _font;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -59,6 +71,9 @@ namespace SAE101
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
         }
+
+
+
 
         protected override void Initialize()
         {
@@ -74,6 +89,13 @@ namespace SAE101
             _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
             _numEcran = 1;
 
+            //Dialogue
+            _posText = new Vector2(105, 360);
+            _posNom = new Vector2(25, 360);
+            _posDialBox = new Vector2(0, 348);          
+            _dialTrue = false;
+
+            //Combat?
             _combatTest = false;
 
             base.Initialize();
@@ -81,6 +103,9 @@ namespace SAE101
             //premier écran
             LoadScreenecran_de_titre();
         }
+
+
+
 
         protected override void LoadContent()
         {
@@ -102,7 +127,17 @@ namespace SAE101
             _vic = Content.Load<SoundEffect>("sfx/vic");
             _non = Content.Load<SoundEffect>("sfx/non");
 
+            //Boite de dialogue
+            _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+
+            //font
+            _font = Content.Load<SpriteFont>("font/font_test");
+
         }
+
+
+
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -135,6 +170,7 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
+
             //Camera
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
@@ -148,8 +184,16 @@ namespace SAE101
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
 
-            else if (_numEcran == 2 && (chato_int_chambres_couloir._positionPerso.Y > chato_int_chambres_couloir._limiteCouloirY1
-                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
+            else if (_numEcran == 2 
+                                && (chato_int_chambres_couloir._positionPerso.Y > 0
+                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || 
+                                chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
+                _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+
+            else if (_numEcran == 2
+                                && (chato_int_chambres_couloir._positionPerso.Y > chato_int_chambres_couloir._limiteCouloirY1
+                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 ||
+                                chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1

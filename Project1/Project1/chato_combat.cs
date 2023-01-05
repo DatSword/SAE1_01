@@ -227,8 +227,26 @@ namespace SAE101
         public void Jon()
         {
             _spécial = "Magie";
-            String[] _specialJ = new String[] { "", "_", "_", "_" };
+            String[] _specialJ = new String[] { "Boule de feu", "JSP", "_", "_" };
             String[] _descJ = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
+            if (_sousMenuSpecial == true)
+            {
+                _choix = _specialJ;
+                _desc = _descJ;
+            }
+            else if (_sousMenuSpecial == false)
+            {
+                _choix = _choixBackup;
+                _desc = _descBackup;
+                _choix[1] = _spécial;
+            }
+        }
+
+        public void Ben()
+        {
+            _spécial = "Cri";
+            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "_", "_" };
+            String[] _descJ = new String[] { "_", "_", "_", "_" };
             if (_sousMenuSpecial == true)
             {
                 _choix = _specialJ;

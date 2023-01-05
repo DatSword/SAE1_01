@@ -151,6 +151,7 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
+            //ENclenchement evenment
 
             //Changement de map          
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 26))

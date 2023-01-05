@@ -22,11 +22,12 @@ namespace SAE101
 {
     internal class eventsetdial
     {
-        public static void Event1()
+        public static void Jon()
         {
             Game1.SetCoolDown();
             Game1._dialTrue = true;
-            Game1._text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\nENCORE LONGTEMPS?!";
+            Game1._text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
+                          "ENCORE LONGTEMPS?!";
             Game1._nom = "???";          
         }
 
@@ -45,6 +46,27 @@ namespace SAE101
             Game1._text = ":(";
             Game1._nom = "Fren";
             Game1._dialTrue = true;
+        }
+
+        public static void Jon1()
+        {
+            Game1.SetCoolDown();
+            Game1._dialTrue = true;
+            Game1._text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
+                          "tout le monde est déjà parti vers la salle du trône!\n" +
+                          "Je comprend ta fatigue, mais ça serait dommage de ne pas\n" +
+                          "assister au courronnement, on a un peu beaucoup galérer\n" +
+                          "pour ce moment!";
+            Game1._nom = "Jon";
+        }
+
+        public static void Jon2()
+        {
+            Game1.SetCoolDown();
+            Game1._dialTrue = true;
+            Game1._text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
+                          ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
+            Game1._nom = "Jon";
         }
 
         public static void FermeBoite()

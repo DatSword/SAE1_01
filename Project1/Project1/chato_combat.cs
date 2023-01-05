@@ -59,10 +59,6 @@ namespace SAE101
         private float _cooldown;
         private bool _cooldownVerif;
 
-        //sfx
-        private SoundEffect _menu;
-        private SoundEffect _non;
-
 
         public chato_combat(Game1 game) : base(game) { }
 
@@ -95,10 +91,6 @@ namespace SAE101
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
-            _menu = Content.Load<SoundEffect>("sfx/menu");
-            _non = Content.Load<SoundEffect>("sfx/non");
-
-
             base.LoadContent();
         }
 
@@ -110,7 +102,7 @@ namespace SAE101
             //curseur controls
             if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && _cooldownVerif == false)
             {
-                _menu.Play();
+                Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y + 36;
                 _choixCursor = _choixCursor + 1;
                 _cooldownVerif = true;
@@ -119,7 +111,7 @@ namespace SAE101
             }            
             if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && _cooldownVerif == false)
             {
-                _menu.Play();
+                Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y - 36;
                 _choixCursor = _choixCursor - 1;
                 _cooldownVerif = true;
@@ -146,7 +138,7 @@ namespace SAE101
             //Selection dans le menu
             if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _cooldownVerif == false && _sousMenuSpecial == false)
             {
-                _menu.Play();
+                Game1._menu.Play();
                 //ATTAQUE();
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
@@ -253,13 +245,13 @@ namespace SAE101
         public void Objects()
         {
             _desc[2] = "Aucun objets!";
-            _non.Play();
+            Game1._non.Play();
         }
 
         public void Fuite()
         {
             _desc[3] = "Hm? On dirait qu'un mur en scénarium vous\nempêche d'appuyer sur ce bouton!";
-            _non.Play();
+            Game1._non.Play();
         }
     }
 }

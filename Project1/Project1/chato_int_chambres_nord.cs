@@ -70,17 +70,8 @@ namespace SAE101
             // Lieu Spawn perso
             _posX = 0;
 
-            if (_posX == 0)
-                _positionPerso = new Vector2(4 * 16 + 8, 3 * 16 + 8);
-            if (chato_int_chambres_couloir._posX >= 5 * 16 && chato_int_chambres_couloir._posX < 7 * 16)
-                _positionPerso = new Vector2(72, 111);
-            else if (chato_int_chambres_couloir._posX >= 13 * 16 && chato_int_chambres_couloir._posX < 15 * 16)
-                _positionPerso = new Vector2(12 * 16 + 8, 111);
-            else if (chato_int_chambres_couloir._posX >= 29 * 16 && chato_int_chambres_couloir._posX < 31 * 16)
-                _positionPerso = new Vector2(28 * 16 + 8, 111);
-            else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
-                _positionPerso = new Vector2(36 * 16 + 8, 111);
-            //x = casex * 16 + 8, y = casey * 16 + 8
+            joueur.SpawnPersoChambres();
+
             _stop = 1;
 
             // Lieu Spawn objects
@@ -90,7 +81,7 @@ namespace SAE101
             _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
             _chestTrue = false;
 
-
+            // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
             _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
             _limiteChambreX1 = 16 * 16;
@@ -137,9 +128,6 @@ namespace SAE101
             //debug autres collisions
             int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
             Console.WriteLine(b);
-
-            _sensPersoX = 0;
-            _sensPersoY = 0;
 
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
@@ -225,9 +213,6 @@ namespace SAE101
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
             }
-
-
-
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
 
@@ -251,6 +236,8 @@ namespace SAE101
                 if (_cooldown <= 0)
                     _cooldownVerif = false;
             }
+
+
             //EVENEMENTS
 
             //changement de map
@@ -286,6 +273,7 @@ namespace SAE101
 
         private bool IsCollision(ushort x, ushort y)
         {
+            // définition de tile qui peut être null (?)
             TiledMapTile? tile;
             if (mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;

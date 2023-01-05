@@ -93,14 +93,14 @@ namespace SAE101
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
 
             //SFX
-            /*_menu = Content.Load<SoundEffect>("sfx/menu");
+            _menu = Content.Load<SoundEffect>("sfx/menu");
             _non = Content.Load<SoundEffect>("sfx/non");
             _hit = Content.Load<SoundEffect>("sfx/hit");
             _hit2 = Content.Load<SoundEffect>("sfx/hit2");
-            _macron_1 = Content.Load<SoundEffect>("sfx/_macron_1");
+            _macron_1 = Content.Load<SoundEffect>("sfx/macron_1");
             _pelo = Content.Load<SoundEffect>("sfx/pelo");
             _vic = Content.Load<SoundEffect>("sfx/vic");
-            _non = Content.Load<SoundEffect>("sfx/non");*/
+            _non = Content.Load<SoundEffect>("sfx/non");
 
         }
 

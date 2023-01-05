@@ -147,7 +147,7 @@ namespace SAE101
 
             //changements maps
 
-            if (keyboardState.IsKeyDown(Keys.Left) && (a == 101))
+            if (keyboardState.IsKeyDown(Keys.Left) && (a == 101) && _positionPerso.X < 2 * 16)
             {
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();

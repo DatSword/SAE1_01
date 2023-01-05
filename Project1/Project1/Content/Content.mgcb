@@ -262,6 +262,12 @@
 /processorParam:Quality=Best
 /build:music/title/title.mp3
 
+#begin sfx/back.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/back.wav
+
 #begin sfx/duck.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -315,4 +321,16 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/vic.wav
+
+#begin sfx/wbeg.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/wbeg.wav
+
+#begin sfx/wend.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/wend.wav
 

@@ -45,7 +45,7 @@ namespace SAE101
         public static void Spawnchato_int_chambres_nord()
         {
             if (chato_int_chambres_nord._posX == 0)
-                chato_int_chambres_nord._positionPerso = new Vector2(4 * 16 + 8, 3 * 16 + 8);
+                chato_int_chambres_nord._positionPerso = new Vector2(3 * 16 + 8, 2 * 16 + 8);
 
             if (chato_int_chambres_couloir._posX >= 5 * 16 && chato_int_chambres_couloir._posX < 7 * 16)
                 chato_int_chambres_nord._positionPerso = new Vector2(72, 111);

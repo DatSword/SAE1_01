@@ -59,6 +59,24 @@ namespace SAE101
         private float _cooldown;
         private bool _cooldownVerif;
 
+        //Personnages
+        private AnimatedSprite _allie1;
+        private AnimatedSprite _allie2;
+        private AnimatedSprite _allie3;
+        private AnimatedSprite _allie4;
+        private AnimatedSprite _ennemy1;
+        private AnimatedSprite _ennemy2;
+        private AnimatedSprite _ennemy3;
+        private AnimatedSprite _ennemy4;
+        public static Vector2 _posAllie1;
+        public static Vector2 _posAllie2;
+        public static Vector2 _posAllie3;
+        public static Vector2 _posAllie4;
+        public static Vector2 _posEnnemy1;
+        public static Vector2 _posEnnemy2;
+        public static Vector2 _posEnnemy3;
+        public static Vector2 _posEnnemy4;
+
         public static Vector2 _centreCombat;
 
 
@@ -95,6 +113,25 @@ namespace SAE101
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
+            _allie1 = new AnimatedSprite(spriteSheet);
+            _allie2 = new AnimatedSprite(spriteSheet);
+            _allie3 = new AnimatedSprite(spriteSheet);
+            _allie4 = new AnimatedSprite(spriteSheet);
+            _posAllie1 = new Vector2(145, 230);
+            _posAllie2 = new Vector2(195,175);
+            _posAllie3 = new Vector2(45, 230);
+            _posAllie4 = new Vector2(95, 175);
+
+            _ennemy1 = new AnimatedSprite(spriteSheet);
+            _ennemy2 = new AnimatedSprite(spriteSheet);
+            _ennemy3 = new AnimatedSprite(spriteSheet);
+            _ennemy4 = new AnimatedSprite(spriteSheet);
+            _posEnnemy1 = new Vector2(315, 175);
+            _posEnnemy2 = new Vector2(365, 230);
+            _posEnnemy3 = new Vector2(415, 175);
+            _posEnnemy4 = new Vector2(465, 230);
+
             base.LoadContent();
         }
 
@@ -109,7 +146,6 @@ namespace SAE101
             //curseur controls
             if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
             {
-                Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y + 36;
                 _choixCursor = _choixCursor + 1;
                 Game1.SetCoolDown();
@@ -117,11 +153,9 @@ namespace SAE101
             }            
             if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
             {
-                Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y - 36;
                 _choixCursor = _choixCursor - 1;
                 Game1.SetCoolDown();
-
             }
 
             //Perso choisissant son action
@@ -137,7 +171,6 @@ namespace SAE101
             //Selection dans le menu
             if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
             {
-                Game1._menu.Play();
                 //ATTAQUE();
                 Game1.SetCoolDown();
                 _aAttaque = _aAttaque + 1;
@@ -198,13 +231,21 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
+            _spriteBatch.Draw(_allie1, _posAllie1);
+            _spriteBatch.Draw(_allie2, _posAllie2);
+            _spriteBatch.Draw(_allie3, _posAllie3);
+            _spriteBatch.Draw(_allie4, _posAllie4);
+            _spriteBatch.Draw(_ennemy1, _posEnnemy1);
+            _spriteBatch.Draw(_ennemy2, _posEnnemy2);
+            _spriteBatch.Draw(_ennemy3, _posEnnemy3);
+            _spriteBatch.Draw(_ennemy4, _posEnnemy4);
             _spriteBatch.End();
         }
 
         public void Hero()
         {
             _spécial = "NomCool";
-            String[] _specialH = new String[] { "Zeweurld", "Baïtezedeuste", "_", "_" };          
+            String[] _specialH = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };          
             String[] _descH = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
             if (_sousMenuSpecial == true)
             {

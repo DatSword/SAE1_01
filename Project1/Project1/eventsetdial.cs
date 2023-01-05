@@ -58,7 +58,7 @@ namespace SAE101
             Game1._text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
                           "tout le monde est déjà parti vers la salle du trône!\n" +
                           "Je comprend ta fatigue, mais ça serait dommage de ne pas\n" +
-                          "assister au courronnement, on a un peu beaucoup galérer\n" +
+                          "assister au courronnement, on a un peu beaucoup galéré\n" +
                           "pour ce moment!";
             Game1._nom = "Jon";
         }

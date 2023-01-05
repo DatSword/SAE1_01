@@ -105,41 +105,44 @@ namespace SAE101
             else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
-            if (keyboardState.IsKeyDown(Keys.Up))
+            if (Game1._dialTrue == false)
             {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
-                animation = "move_up";
-                _stop = 2;
-                if (!IsCollision(tx, ty))
-                    _positionPerso.Y -= walkSpeed;
-            }
-            if (keyboardState.IsKeyDown(Keys.Down))
-            {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
-                animation = "move_down";
-                _stop = 1;
-                if (!IsCollision(tx, ty))
-                    _positionPerso.Y += walkSpeed;
-            }
-            if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
-                ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
-                animation = "move_left";
-                _stop = 3;
-                if (!IsCollision(tx, ty))
-                    _positionPerso.X -= walkSpeed;
-            }
-            if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
-                ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
-                animation = "move_right";
-                _stop = 4;
-                if (!IsCollision(tx, ty))
-                    _positionPerso.X += walkSpeed;
+                if (keyboardState.IsKeyDown(Keys.Up))
+                {
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
+                    ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
+                    animation = "move_up";
+                    _stop = 2;
+                    if (!IsCollision(tx, ty))
+                        _positionPerso.Y -= walkSpeed;
+                }
+                if (keyboardState.IsKeyDown(Keys.Down))
+                {
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
+                    ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
+                    animation = "move_down";
+                    _stop = 1;
+                    if (!IsCollision(tx, ty))
+                        _positionPerso.Y += walkSpeed;
+                }
+                if (keyboardState.IsKeyDown(Keys.Left))
+                {
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
+                    ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
+                    animation = "move_left";
+                    _stop = 3;
+                    if (!IsCollision(tx, ty))
+                        _positionPerso.X -= walkSpeed;
+                }
+                if (keyboardState.IsKeyDown(Keys.Right))
+                {
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
+                    ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
+                    animation = "move_right";
+                    _stop = 4;
+                    if (!IsCollision(tx, ty))
+                        _positionPerso.X += walkSpeed;
+                }
             }
             _perso.Play(animation);
             _perso.Update(deltaSeconds);

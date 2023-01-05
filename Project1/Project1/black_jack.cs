@@ -76,13 +76,13 @@ namespace SAE101
 
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == false)
             {
-                eventsetdial.Event1();
+                eventsetdial.toutDebut();
             }
 
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == true)
-            {            
-                Game.LoadScreenchato_int_chambres_nord();
+            {
                 eventsetdial.FermeBoite();
+                Game.LoadScreenchato_int_chambres_nord();              
             }
         }
 

@@ -22,7 +22,8 @@ namespace SAE101
 {
     internal class eventsetdial
     {
-        public static void Jon()
+
+        public static void toutDebut()
         {
             Game1.SetCoolDown();
             Game1._dialTrue = true;
@@ -63,10 +64,10 @@ namespace SAE101
         public static void Jon2()
         {
             Game1.SetCoolDown();
-            Game1._dialTrue = true;
             Game1._text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
                           ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
             Game1._nom = "Jon";
+            Game1._firstvisit = false;
         }
 
         public static void FermeBoite()

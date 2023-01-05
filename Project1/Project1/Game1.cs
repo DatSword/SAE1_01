@@ -67,6 +67,9 @@ namespace SAE101
         //font
         public static SpriteFont _font;
 
+        //event
+        public static bool _firstvisit;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -106,6 +109,9 @@ namespace SAE101
 
             //Combat?
             _combatTest = false;
+
+            //event
+            _firstvisit = true;
 
             base.Initialize();
 
@@ -198,8 +204,6 @@ namespace SAE101
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
-            
-
 
             else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
@@ -235,9 +239,7 @@ namespace SAE101
             /*else
                 _cameraPosition*/
 
-
-
-            Console.WriteLine(_numEcran);
+            //Console.WriteLine(_numEcran);
 
             base.Update(gameTime);
         }

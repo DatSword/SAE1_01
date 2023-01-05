@@ -14,7 +14,6 @@ using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
-using Oscetch.MonoGame.Camera;
 
 
 namespace SAE101
@@ -51,7 +50,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            if (chato_int_chambres_nord._posX == 0)
+            /* if (chato_int_chambres_nord._posX == 0)
                 _positionPerso = new Vector2(104, 112);
             if (chato_int_chambres_nord._posX >= 3 * 16 && chato_int_chambres_nord._posX < 5 * 16)
                 _positionPerso = new Vector2(104, 112);
@@ -62,7 +61,9 @@ namespace SAE101
             else if (chato_int_chambres_nord._posX >= 35 * 16 && chato_int_chambres_nord._posX < 37 * 16)
                 _positionPerso = new Vector2(38 * 16 + 8, 112);
             else if (chato_ext_cours_interieur._posX != 0)
-                _positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);
+                _positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);*/
+
+            joueur.SpawnPersoCouloir();
 
             _stop = 1;
 

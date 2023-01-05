@@ -85,8 +85,9 @@ namespace SAE101
             _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
             _chestTrue = false;
 
-            _chambreCentre1 = new Vector2(8 * 16, 4 * 16);
-            _chambreCentre2 = new Vector2(32 * 16, 4 * 16);
+
+            _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
+            _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
             _limiteChambreY1 = 8 * 16;

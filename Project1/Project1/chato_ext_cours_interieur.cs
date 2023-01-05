@@ -147,7 +147,7 @@ namespace SAE101
 
             //changements maps
 
-            if (keyboardState.IsKeyDown(Keys.Left) && (a == 101))
+            if (keyboardState.IsKeyDown(Keys.Left) && (a == 101) && _positionPerso.X < 2 * 16)
             {
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();
@@ -165,6 +165,7 @@ namespace SAE101
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
 
+            _spriteBatch.Begin();
             if (Game1._dialTrue == true)
             {
                 _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);

@@ -75,6 +75,9 @@ namespace SAE101
             Components.Add(_screenManager);
         }
 
+
+
+
         protected override void Initialize()
         {
             // Definition écran
@@ -104,6 +107,9 @@ namespace SAE101
             LoadScreenecran_de_titre();
         }
 
+
+
+
         protected override void LoadContent()
         {
             //Jsp
@@ -131,6 +137,10 @@ namespace SAE101
             _font = Content.Load<SpriteFont>("font/font_test");
 
         }
+
+
+
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -164,6 +174,7 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
+
             //Camera
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
@@ -177,8 +188,16 @@ namespace SAE101
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
 
-            else if (_numEcran == 2 && (chato_int_chambres_couloir._positionPerso.Y > chato_int_chambres_couloir._limiteCouloirY1
-                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
+            else if (_numEcran == 2 
+                                && (chato_int_chambres_couloir._positionPerso.Y > 0
+                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || 
+                                chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
+                _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+
+            else if (_numEcran == 2
+                                && (chato_int_chambres_couloir._positionPerso.Y > chato_int_chambres_couloir._limiteCouloirY1
+                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 ||
+                                chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1

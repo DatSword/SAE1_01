@@ -23,7 +23,7 @@ namespace SAE101
 {
     internal class joueur
     {
-       public static void SpawnPersoCouloir()
+       public static void Spawnchato_int_chambres_couloir()
        {
             if (chato_int_chambres_nord._posX == 0)
                 chato_int_chambres_couloir._positionPerso = new Vector2(104, 112);
@@ -42,7 +42,7 @@ namespace SAE101
             //x = casex * 16 + 8, y = casey * 16 + 8
         }
 
-        public static void SpawnPersoChambres()
+        public static void Spawnchato_int_chambres_nord()
         {
             if (chato_int_chambres_nord._posX == 0)
                 chato_int_chambres_nord._positionPerso = new Vector2(4 * 16 + 8, 3 * 16 + 8);

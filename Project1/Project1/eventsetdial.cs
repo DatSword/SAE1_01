@@ -24,8 +24,7 @@ namespace SAE101
     {
         public static void Event1()
         {
-            Game1._cooldown = 0.2f;
-            Game1._cooldownVerif = true;
+            Game1.SetCoolDown();
             Game1._dialTrue = true;
             Game1._text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\nENCORE LONGTEMPS?!";
             Game1._nom = "???";          
@@ -33,8 +32,7 @@ namespace SAE101
 
         public static void Event2()
         {
-            Game1._cooldown = 0.2f;
-            Game1._cooldownVerif = true;
+            Game1.SetCoolDown();
             Game1._dialTrue = true;
             Game1._text = ":)";
             Game1._nom = "Fren";
@@ -43,9 +41,9 @@ namespace SAE101
 
         public static void FermeBoite()
         {
-            Game1._cooldown = 0.2f;
-            Game1._cooldownVerif = true;
             Game1._dialTrue = false;
+            Game1.SetCoolDown();
         }
+
     }
 }

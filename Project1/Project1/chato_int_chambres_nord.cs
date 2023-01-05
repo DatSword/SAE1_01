@@ -69,7 +69,7 @@ namespace SAE101
             // Lieu Spawn perso
             _posX = 0;
 
-            joueur.SpawnPersoChambres();
+            joueur.Spawnchato_int_chambres_nord();
 
             _stop = 1;
 

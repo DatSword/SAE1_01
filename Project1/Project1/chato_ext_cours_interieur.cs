@@ -26,7 +26,7 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        private TiledMapTileLayer mapLayer;
+        public static TiledMapTileLayer mapLayer;
 
         //sprite
         private AnimatedSprite _perso;

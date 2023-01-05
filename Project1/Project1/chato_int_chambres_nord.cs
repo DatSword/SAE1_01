@@ -223,6 +223,10 @@ namespace SAE101
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
 
+            if (keyboardState.IsKeyDown(Keys.P))
+            {
+                Game1._dialTrue = true;
+            }
 
             //Coffre(s?)
             String animationChest = null;
@@ -256,6 +260,7 @@ namespace SAE101
 
             // TODO: Add your drawing code here
             var transformMatrix = Game1._camera.GetViewMatrix();
+            
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_fren, _positionFren);
@@ -263,7 +268,8 @@ namespace SAE101
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
 
-            _spriteBatch.Begin();
+            var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (Game1._dialTrue == true)
             {
                 _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);

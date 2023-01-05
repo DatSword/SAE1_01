@@ -135,7 +135,7 @@ namespace SAE101
             }
             
             //Selection dans le menu
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _cooldownVerif == false && _sousMenuSpecial == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Game1._menu.Play();
                 //ATTAQUE();
@@ -143,26 +143,26 @@ namespace SAE101
                 _aAttaque = _aAttaque + 1;
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && _cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && Game1._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
             {
-
+                Game1.SetCoolDown();
                 _sousMenuSpecial = true;
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && _cooldownVerif == false && _sousMenuSpecial == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Objects();
                 Game1.SetCoolDown();
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && _cooldownVerif == false && _sousMenuSpecial == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Fuite();
                 _sousMenuSpecial = false;
                 Game1.SetCoolDown();
             }
 
-            if (keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false && _sousMenuSpecial == true)
+            if (keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false && _sousMenuSpecial == true)
             {
                 _sousMenuSpecial = false;
                 Game1.SetCoolDown();
@@ -263,13 +263,11 @@ namespace SAE101
         public void Objects()
         {
             _desc[2] = "Aucun objets!";
-            Game1._non.Play();
         }
 
         public void Fuite()
         {
             _desc[3] = "Hm? On dirait qu'un mur en scénarium vous\nempêche d'appuyer sur ce bouton!";
-            Game1._non.Play();
         }
     }
 }

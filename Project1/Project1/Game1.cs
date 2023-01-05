@@ -28,6 +28,7 @@ namespace SAE101
 
         //Camera
         public static OrthographicCamera _camera;
+        public static OrthographicCamera _cameraDial;
         public static Vector2 _cameraPosition;
         public static int _numEcran;
 
@@ -87,8 +88,10 @@ namespace SAE101
             _graphics.ApplyChanges();
 
             //Camera
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 512, 448);
+            var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
             _camera = new OrthographicCamera(viewportadapter);
+            _cameraDial = new OrthographicCamera(viewportadapterDial);
             _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
             _numEcran = 1;
 

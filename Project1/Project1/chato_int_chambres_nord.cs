@@ -206,15 +206,17 @@ namespace SAE101
 
             if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false)
             {
-                eventsetdial.Event2();
+                eventsetdial.Fren1();
                 _frenTrue = true;
             }
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Game1._dialTrue == true)
             {
                 eventsetdial.FermeBoite();
             }
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
+
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
             {
+                eventsetdial.Fren2();
                 _frenTrue = false;
             }
             _fren.Play(animationFren);

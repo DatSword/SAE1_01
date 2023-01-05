@@ -291,6 +291,7 @@ namespace SAE101
         {
             _cooldownVerif = true;
             _cooldown = 0.2f;
+            _menu.Play();
         }
     }
 }

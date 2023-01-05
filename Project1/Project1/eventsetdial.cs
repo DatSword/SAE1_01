@@ -30,13 +30,21 @@ namespace SAE101
             Game1._nom = "???";          
         }
 
-        public static void Event2()
+        public static void Fren1()
         {
             Game1.SetCoolDown();
             Game1._dialTrue = true;
             Game1._text = ":)";
             Game1._nom = "Fren";
             Game1._dialTrue = true;                
+        }
+        public static void Fren2()
+        {
+            Game1.SetCoolDown();
+            Game1._dialTrue = true;
+            Game1._text = ":(";
+            Game1._nom = "Fren";
+            Game1._dialTrue = true;
         }
 
         public static void FermeBoite()

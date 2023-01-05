@@ -26,7 +26,7 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
         private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        private TiledMapTileLayer mapLayer;
+        public static TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
 
         //sprite
@@ -49,19 +49,6 @@ namespace SAE101
         {
             // Lieu Spawn
             _posX = 0;
-
-            /* if (chato_int_chambres_nord._posX == 0)
-                _positionPerso = new Vector2(104, 112);
-            if (chato_int_chambres_nord._posX >= 3 * 16 && chato_int_chambres_nord._posX < 5 * 16)
-                _positionPerso = new Vector2(104, 112);
-            else if (chato_int_chambres_nord._posX >= 11 * 16 && chato_int_chambres_nord._posX < 13 * 16)
-                _positionPerso = new Vector2(14 * 16 + 8, 112);
-            else if (chato_int_chambres_nord._posX >= 27 * 16 && chato_int_chambres_nord._posX < 29 * 16)
-                _positionPerso = new Vector2(30 * 16 + 8, 112);
-            else if (chato_int_chambres_nord._posX >= 35 * 16 && chato_int_chambres_nord._posX < 37 * 16)
-                _positionPerso = new Vector2(38 * 16 + 8, 112);
-            else if (chato_ext_cours_interieur._posX != 0)
-                _positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);*/
 
             joueur.SpawnPersoCouloir();
 
@@ -95,9 +82,7 @@ namespace SAE101
 
         public override void Update(GameTime gameTime)
         {
-            //Debug changement de map
-            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+            // TODO: Add your update logic here
 
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
@@ -109,8 +94,13 @@ namespace SAE101
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
 
-            // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
+
+            
+
+            //Debug changement de map
+            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            Console.WriteLine(a);
 
             //Mouvement/animation
             if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))
@@ -128,7 +118,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
                 animation = "move_up";
                 _stop = 2;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.Y -= walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Down))
@@ -137,7 +127,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
                 animation = "move_down";
                 _stop = 1;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.Y += walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Left))
@@ -146,7 +136,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_left";
                 _stop = 3;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.X -= walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Right))
@@ -155,7 +145,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_right";
                 _stop = 4;
-                if (!IsCollision(tx, ty))
+                if (!joueur.IsCollision(tx, ty))
                     _positionPerso.X += walkSpeed;
             }
             _perso.Play(animation);
@@ -196,15 +186,6 @@ namespace SAE101
             _spriteBatch.End();
         }
 
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
-        }
+
     }
 }

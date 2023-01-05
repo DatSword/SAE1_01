@@ -51,10 +51,6 @@ namespace SAE101
         private Vector2 _positionChest1;
         private bool _chestTrue;
 
-        private Texture2D _dialBox;
-        private Vector2 _positionDial;
-        private bool _dialTrue;
-
         public static Vector2 _chambreCentre1;
         public static Vector2 _chambreCentre2;
         public static int _limiteChambreX1;
@@ -131,9 +127,6 @@ namespace SAE101
 
             SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
             _chest1 = new AnimatedSprite(spriteSheet3);
-
-            //Load Dialogues
-            _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
 
             base.LoadContent();
         }
@@ -223,6 +216,7 @@ namespace SAE101
                 animationFren = "hi";
             if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && _cooldownVerif == false)
             {
+                eventsetdial.Event2();
                 _frenTrue = true;
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
@@ -279,9 +273,16 @@ namespace SAE101
             _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
-            _spriteBatch.Draw(_dialBox, _positionDial, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.End();
 
+            _spriteBatch.Begin();
+            if (Game1._dialTrue == true)
+            {
+                _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Game1._text, Game1._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Game1._nom, Game1._posNom, Color.White);
+            }
             _spriteBatch.End();
         }
 

@@ -59,6 +59,8 @@ namespace SAE101
         private float _cooldown;
         private bool _cooldownVerif;
 
+        public static Vector2 _centreCombat;
+
 
         public chato_combat(Game1 game) : base(game) { }
 
@@ -80,6 +82,8 @@ namespace SAE101
             _desc = new String[] { "_", "_", "_", "_" };
             _descBackup = new String[] { "_", "_", "_", "_" };
 
+            _centreCombat = new Vector2(512 / 2, 448 / 2);
+
             base.Initialize();
         }
 
@@ -98,6 +102,9 @@ namespace SAE101
         {
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //Camera
+            Game1._camera.LookAt(Game1._cameraPosition);
 
             //curseur controls
             if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
@@ -189,9 +196,14 @@ namespace SAE101
 
             // TODO: Add your drawing code here
             var transformMatrix = Game1._camera.GetViewMatrix();
+
+            /*_spriteBatch.Begin();
+            
+            _spriteBatch.End();*/
+
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
-            _spriteBatch.Draw(_combatBox, _positionCombat , Color.White);
+            _spriteBatch.Draw(_combatBox, _positionCombat, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);

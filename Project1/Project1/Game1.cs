@@ -51,6 +51,8 @@ namespace SAE101
         private float _cooldown;
         private bool _cooldownVerif;
 
+
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -59,6 +61,9 @@ namespace SAE101
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
         }
+
+
+
 
         protected override void Initialize()
         {
@@ -79,8 +84,11 @@ namespace SAE101
             base.Initialize();
 
             //premier écran
-            LoadScreenecran_de_titre();
+            LoadScreenchato_int_chambres_nord();
         }
+
+
+
 
         protected override void LoadContent()
         {
@@ -103,6 +111,10 @@ namespace SAE101
             _non = Content.Load<SoundEffect>("sfx/non");
 
         }
+
+
+
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -134,6 +146,7 @@ namespace SAE101
                 if (_cooldown <= 0)
                     _cooldownVerif = false;
             }
+
 
             //Camera
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1

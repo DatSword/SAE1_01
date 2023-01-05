@@ -14,7 +14,6 @@ using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
-using Oscetch.MonoGame.Camera;
 
 
 namespace SAE101

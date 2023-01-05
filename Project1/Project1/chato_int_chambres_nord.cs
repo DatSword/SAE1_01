@@ -97,8 +97,8 @@ namespace SAE101
             _positionDial = new Vector2(0, 348);
             _dialTrue = false;
 
-            _chambreCentre1 = new Vector2(8 * 16, 4 * 16);
-            _chambreCentre2 = new Vector2(32 * 16, 4 * 16);
+            _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
+            _chambreCentre2 = new Vector2(32 * 16, 6 * 16);
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
             _limiteChambreY1 = 8 * 16;

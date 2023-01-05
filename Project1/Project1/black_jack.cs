@@ -52,28 +52,17 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //changements maps, tout premier dialogue
-
-            if (keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false && Game1._dialTrue == false)
+            
+            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == false)
             {
                 eventsetdial.Event1();
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
-
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false && Game1._dialTrue == true)
-            {
+            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == true)
+            {            
                 Game.LoadScreenchato_int_chambres_nord();
+                eventsetdial.FermeBoite();
             }
-
-            if (_cooldownVerif == true)
-            {
-                _cooldown = _cooldown - deltaSeconds;
-                if (_cooldown <= 0)
-                    _cooldownVerif = false;
-            }
-
-
         }
 
         public override void Draw(GameTime gameTime)

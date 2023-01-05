@@ -90,8 +90,6 @@ namespace SAE101
             _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
             _chestTrue = false;
 
-            _positionDial = new Vector2(0, 348);
-            _dialTrue = false;
 
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
             _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);

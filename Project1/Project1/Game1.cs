@@ -88,10 +88,13 @@ namespace SAE101
             _graphics.ApplyChanges();
 
             //Camera
-            var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
+
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
             _camera = new OrthographicCamera(viewportadapter);
+
+            var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
             _cameraDial = new OrthographicCamera(viewportadapterDial);
+
             _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
             _numEcran = 1;
 
@@ -159,15 +162,13 @@ namespace SAE101
             {
                 LoadScreenchato_combat();
                 _combatTest = true;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                SetCoolDown();
             }
             else if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == true && _cooldownVerif == false)
             {
                 LoadScreenchato_int_chambres_nord();
                 _combatTest = false;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                SetCoolDown();
             }
 
             if (_cooldownVerif == true)

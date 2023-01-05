@@ -205,7 +205,7 @@ namespace SAE101
         {
             _spécial = "NomCool";
             String[] _specialH = new String[] { "Zeweurld", "Baïtezedeuste", "_", "_" };          
-            String[] _descH = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés", "Reviens au dernier tour", "_", "_" };
+            String[] _descH = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
             if (_sousMenuSpecial == true)
             {
                 _choix = _specialH;
@@ -245,8 +245,8 @@ namespace SAE101
         public void Ben()
         {
             _spécial = "Cri";
-            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "_", "_" };
-            String[] _descJ = new String[] { "_", "_", "_", "_" };
+            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
+            String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
             if (_sousMenuSpecial == true)
             {
                 _choix = _specialJ;

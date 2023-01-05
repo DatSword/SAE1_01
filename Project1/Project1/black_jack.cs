@@ -24,17 +24,18 @@ namespace SAE101
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        //Début/Fin
         public Vector2 _textPos;
-
-        //Cooldown
-        private float _cooldown;
-        private bool _cooldownVerif;
+        public String _text;
+        public int _fin;
 
         public black_jack(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
             _textPos = new Vector2(50, 50);
+            _text = "null";
+            _fin = 0;
 
             base.Initialize();
         }
@@ -52,7 +53,27 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //changements maps, tout premier dialogue
-            
+            if (_fin == 0)
+                _text = "...et c'est ainsi qu'après cette grande aventure, nos héros ont\n" +
+                        "bien mérité de précieuses heures de repos dans le Chato, juste\n" +
+                        "avant le couronnement de leur ami Julius, pour enfin boucler\n" +
+                        "cette hist-";
+            if (_fin == 1)
+                _text = "Hum hum, malgré cette petite interruption, notre héros décida\n" +
+                        "qu'il n'allait pas être présent lors du courronnement. Bien";
+            if (_fin == 2)
+                _text = "Malheuresement, après avoir traversés tant d'obstacles, il\n" +
+                        "fallut que deux de nos héros périssent juste avant le\n" +
+                        "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
+                        "non?";
+            if (_fin == 3)
+                _text = "Et non! Il semble que l'histoire n'est pas fini! On dirait\n" +
+                        "même qu'elle vient tout juste de commencer! Que va t-il\n" +
+                        "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
+                        "envoyé d'on-ne-sais-quand? Toutes ces réponses, vous les aurez...\n" +
+                        "Peut être un jour...?";
+
+
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == false)
             {
                 eventsetdial.Event1();
@@ -72,7 +93,7 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (Game1._dialTrue == false)
-            _spriteBatch.DrawString(Game1._font, "Wake the fuck up Samurai, we've got a city to burn", _textPos, Color.White);
+            _spriteBatch.DrawString(Game1._font, _text , _textPos, Color.White);
 
             if (Game1._dialTrue == true)
             {

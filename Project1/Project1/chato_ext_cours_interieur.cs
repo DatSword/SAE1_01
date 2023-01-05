@@ -165,7 +165,8 @@ namespace SAE101
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
 
-            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (Game1._dialTrue == true)
             {
                 _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);

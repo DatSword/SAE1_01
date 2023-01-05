@@ -262,6 +262,12 @@
 /processorParam:Quality=Best
 /build:music/title/title.mp3
 
+#begin sfx/duck.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/duck.wav
+
 #begin sfx/hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

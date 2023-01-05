@@ -127,10 +127,10 @@ namespace SAE101
         {
             //debug map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+            //Console.WriteLine(a);
             //debug autres collisions
             int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            Console.WriteLine(b);
+            //Console.WriteLine(b);
 
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
@@ -204,16 +204,16 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Game1._dialTrue == true)
+            {
+                eventsetdial.FermeBoite();
+            }
+            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false
                 && _positionPerso.X < _limiteChambreDroite)
             {
                 eventsetdial.Fren1();
                 _frenTrue = true;
-            }
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Game1._dialTrue == true)
-            {
-                eventsetdial.FermeBoite();
-            }
+            }        
             else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
             {
                 eventsetdial.Fren2();
@@ -221,11 +221,6 @@ namespace SAE101
             }
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
-
-            if (keyboardState.IsKeyDown(Keys.P))
-            {
-                Game1._dialTrue = true;
-            }
 
             //Coffre(s?)
             String animationChest = null;
@@ -246,14 +241,15 @@ namespace SAE101
 
             //EVENEMENTS
             
-            /*if(Game1._firstvisit == true && Game1._cooldownVerif == false)
+            if(Game1._firstvisit == true && Game1._cooldownVerif == false)
             {
                 eventsetdial.Jon1();
-            }*/
-            if (Game1._firstvisit == true && Game1._cooldownVerif == false && keyboardState.IsKeyDown(Keys.W))
+                Game1._firstvisit = false;
+            }
+            /*if (Game1._cooldownVerif == false && keyboardState.IsKeyDown(Keys.W))
             {
                 eventsetdial.Jon2();
-            }
+            }*/
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == true && Game1._firstvisit == false)
             {
                 eventsetdial.FermeBoite();

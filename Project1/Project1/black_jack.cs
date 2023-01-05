@@ -60,14 +60,16 @@ namespace SAE101
                         "cette hist-";
             if (_fin == 1)
                 _text = "Hum hum, malgré cette petite interruption, notre héros décida\n" +
-                        "qu'il n'allait pas être présent lors du courronnement. Bien";
+                        "qu'il n'allait pas être présent lors du courronnement. Même si\n" +
+                        "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
+                        "d'épreuves, le sommeil reste son ennemi le plus puissant.";
             if (_fin == 2)
                 _text = "Malheuresement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
                         "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
                         "non?";
             if (_fin == 3)
-                _text = "Et non! Il semble que l'histoire n'est pas fini! On dirait\n" +
+                _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
                         "envoyé d'on-ne-sais-quand? Toutes ces réponses, vous les aurez...\n" +

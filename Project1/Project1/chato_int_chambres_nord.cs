@@ -52,16 +52,15 @@ namespace SAE101
         private bool _chestTrue;
 
         public static Vector2 _chambreCentre1;
+        public static Vector2 _chambreCentreUn;
         public static Vector2 _chambreCentre2;
+        public static Vector2 _chambreCentreDeux;
         public static int _limiteChambreX1;
         public static int _limiteChambreX2;
         public static int _limiteChambreY1;
         public static int _limiteChambreY2;
-
-        private float _cooldown;
-        private bool _cooldownVerif;
-
-
+        public static int _limiteChambreGauche;
+        public static int _limiteChambreDroite;
 
         public chato_int_chambres_nord(Game1 game) : base(game) { }
 
@@ -83,10 +82,14 @@ namespace SAE101
 
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
+            _chambreCentreUn = new Vector2((float)14.5 * 16, 6 * 16);
             _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
+            _chambreCentreDeux = new Vector2((float)38.5 * 16, 6 * 16);
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
             _limiteChambreY1 = 8 * 16;
+            _limiteChambreGauche = 8 * 16;
+            _limiteChambreDroite = 32 * 16;
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -200,18 +203,19 @@ namespace SAE101
                 animationFren = "idle";
             else
                 animationFren = "hi";
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && _cooldownVerif == false)
+
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false)
             {
                 eventsetdial.Event2();
                 _frenTrue = true;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
             }
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && _cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false)
+            {
+                eventsetdial.FermeBoite();
+            }
+            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
             {
                 _frenTrue = false;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
             }
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
@@ -229,15 +233,6 @@ namespace SAE101
 
             _chest1.Play(animationChest);
             _chest1.Update(deltaSeconds);
-
-            if (_cooldownVerif == true)
-            {
-                _cooldown = _cooldown - deltaSeconds;
-                if (_cooldown <= 0)
-                    _cooldownVerif = false;
-            }
-
-
             //EVENEMENTS
 
             //changement de map

@@ -24,7 +24,7 @@ namespace SAE101
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
-        private KeyboardState _keyboardState;
+        public static KeyboardState _keyboardState;
 
         //Camera
         public static OrthographicCamera _camera;
@@ -48,8 +48,11 @@ namespace SAE101
 
         //Combat?
         private bool _combatTest;
-        private float _cooldown;
-        private bool _cooldownVerif;
+
+        //Control
+        public static float _cooldown;
+        public static bool _cooldownVerif;
+        public static float deltaSeconds;
 
         //Boites de dialogues
         public static Texture2D _dialBox;
@@ -146,8 +149,9 @@ namespace SAE101
                 Exit();
 
             _keyboardState = Keyboard.GetState();
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            Console.WriteLine(_cooldownVerif);
             if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
                 LoadScreenchato_combat();
@@ -176,12 +180,26 @@ namespace SAE101
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
 
+            if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
+                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreGauche)
+                _cameraPosition = chato_int_chambres_nord._chambreCentreUn;
+
+
             else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2 
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
+                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite)
+
+                _cameraPosition = chato_int_chambres_nord._chambreCentreDeux;
+
+
             else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+
 
 
             else if (_numEcran == 2 
@@ -196,6 +214,9 @@ namespace SAE101
                                 chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
+
+
+
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
@@ -205,10 +226,13 @@ namespace SAE101
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
 
+
             else if (_numEcran == 3)
                 _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
             else
                 _cameraPosition = new Vector2(384, 336);
+
+
 
             Console.WriteLine(_numEcran);
 

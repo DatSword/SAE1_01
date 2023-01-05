@@ -310,9 +310,3 @@
 /processorParam:Quality=Best
 /build:sfx/vic.wav
 
-#begin W:/menu.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:W:/menu.wav;sfx/menu.wav
-

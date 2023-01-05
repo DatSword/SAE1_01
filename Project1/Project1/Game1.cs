@@ -14,6 +14,7 @@ using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
 using System;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
@@ -34,6 +35,16 @@ namespace SAE101
         private Song _songChato;
         private Song _titleTheme;
         private Song _songCombat;
+
+        //SFX
+        public static SoundEffect _hit;
+        public static SoundEffect _hit2;
+        public static SoundEffect _lose;
+        public static SoundEffect _macron_1;
+        public static SoundEffect _menu;
+        public static SoundEffect _non;
+        public static SoundEffect _pelo;
+        public static SoundEffect _vic;
 
         //Combat?
         private bool _combatTest;
@@ -80,6 +91,17 @@ namespace SAE101
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
             _titleTheme = Content.Load<Song>("music/title/title");
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
+
+            //SFX
+            /*_menu = Content.Load<SoundEffect>("sfx/menu");
+            _non = Content.Load<SoundEffect>("sfx/non");
+            _hit = Content.Load<SoundEffect>("sfx/hit");
+            _hit2 = Content.Load<SoundEffect>("sfx/hit2");
+            _macron_1 = Content.Load<SoundEffect>("sfx/_macron_1");
+            _pelo = Content.Load<SoundEffect>("sfx/pelo");
+            _vic = Content.Load<SoundEffect>("sfx/vic");
+            _non = Content.Load<SoundEffect>("sfx/non");*/
+
         }
 
         protected override void Update(GameTime gameTime)

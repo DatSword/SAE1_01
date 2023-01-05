@@ -98,7 +98,7 @@ namespace SAE101
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
             _cameraDial = new OrthographicCamera(viewportadapterDial);
 
-            _cameraPosition = new Vector2(chato_int_chambres_nord._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
+            _cameraPosition = chato_int_chambres_nord._chambreCentre1;
             _numEcran = 1;
 
             //Dialogue
@@ -186,52 +186,55 @@ namespace SAE101
 
 
             //Camera
-            if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
-                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = chato_int_chambres_nord._chambreCentre1;
+
 
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
                                 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreGauche)
-                _cameraPosition = chato_int_chambres_nord._chambreCentreUn;
-
-            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
-                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
-                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite)
-                _cameraPosition = chato_int_chambres_nord._chambreCentreDeux;
+                _cameraPosition = chato_int_chambres_nord._chambreCentre1;
 
             else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2 
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
-
             else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
 
-            else if (_numEcran == 2 
-                                && (chato_int_chambres_couloir._positionPerso.Y > 0
+            if (_numEcran == 2 && (chato_int_chambres_couloir._positionPerso.Y > 0
                                 && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || 
                                 chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
-            else if (_numEcran == 2
-                                && (chato_int_chambres_couloir._positionPerso.Y > chato_int_chambres_couloir._limiteCouloirY1
-                                && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 ||
-                                chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
-                _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
-
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
+                                && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreGauche
+                                && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
+                _cameraPosition = chato_int_chambres_nord._chambreCentre1;
+
+            else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1 
+                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreGauche
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
 
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
+                                && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreDroite
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
+            else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
+                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite
+                                && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
+                _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
-            else if (_numEcran == 3)
+            else if (_numEcran == 2 && chato_ext_cours_interieur._positionPerso.X < 1*16)
                 _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
+
+            else if (_numEcran == 3 & chato_int_chambres_nord._positionPerso.Y >= 1 * 16)
+                _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
+
+            else if (_numEcran == 3 && chato_int_chambres_nord._positionPerso.Y < 1*16 )
+                _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
+
             
             else if (_numEcran == 4)
                 _cameraPosition = chato_combat._centreCombat;
@@ -239,7 +242,7 @@ namespace SAE101
             /*else
                 _cameraPosition*/
 
-            //Console.WriteLine(_numEcran);
+            Console.WriteLine(_numEcran);
 
             base.Update(gameTime);
         }

@@ -185,16 +185,16 @@ namespace SAE101
                                 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreGauche)
                 _cameraPosition = chato_int_chambres_nord._chambreCentreUn;
 
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
+                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite)
+                _cameraPosition = chato_int_chambres_nord._chambreCentreDeux;
 
             else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2 
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
-            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
-                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
-                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite)
-
-                _cameraPosition = chato_int_chambres_nord._chambreCentreDeux;
+            
 
 
             else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
@@ -224,8 +224,12 @@ namespace SAE101
 
             else if (_numEcran == 3)
                 _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
-            else
-                _cameraPosition = new Vector2(384, 336);
+            
+            else if (_numEcran == 4)
+                _cameraPosition = chato_combat._centreCombat;
+
+            /*else
+                _cameraPosition*/
 
 
 

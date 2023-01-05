@@ -29,7 +29,7 @@ namespace SAE101
         //Camera
         public static OrthographicCamera _camera;
         public static Vector2 _cameraPosition;
-        public int _numEcran;
+        public static int _numEcran;
 
         //Musiques
         private Song _songChato;
@@ -201,7 +201,6 @@ namespace SAE101
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
 
-
             else if (_numEcran == 2 
                                 && (chato_int_chambres_couloir._positionPerso.Y > 0
                                 && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || 
@@ -214,7 +213,6 @@ namespace SAE101
                                 chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
-
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
@@ -222,7 +220,6 @@ namespace SAE101
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
-
 
 
             else if (_numEcran == 3)
@@ -248,6 +245,7 @@ namespace SAE101
             base.Draw(gameTime);
         }
 
+        //Chargements maps
         public void LoadScreenecran_de_titre()
         {
             _screenManager.LoadScreen(new ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.BlueViolet));
@@ -285,6 +283,14 @@ namespace SAE101
             _screenManager.LoadScreen(new chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
             MediaPlayer.Play(_songCombat);
             _numEcran = 4;
+        }
+
+        //autre
+
+        public static void SetCoolDown()
+        {
+            _cooldownVerif = true;
+            _cooldown = 0.2f;
         }
     }
 }

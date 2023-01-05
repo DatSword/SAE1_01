@@ -23,7 +23,7 @@ namespace SAE101
 {
     internal class joueur
     {
-       public static void SpawnPersoCouloir()
+       public static void Spawnchato_int_chambres_couloir()
        {
             if (chato_int_chambres_nord._posX == 0)
                 chato_int_chambres_couloir._positionPerso = new Vector2(104, 112);
@@ -42,7 +42,7 @@ namespace SAE101
             //x = casex * 16 + 8, y = casey * 16 + 8
         }
 
-        public static void SpawnPersoChambres()
+        public static void Spawnchato_int_chambres_nord()
         {
             if (chato_int_chambres_nord._posX == 0)
                 chato_int_chambres_nord._positionPerso = new Vector2(4 * 16 + 8, 3 * 16 + 8);
@@ -57,18 +57,27 @@ namespace SAE101
                 chato_int_chambres_nord._positionPerso = new Vector2(36 * 16 + 8, 111);
         }
 
-        /*public static GraphicsDeviceManager _graphics;
-        public static SpriteBatch _spriteBatch = new SpriteBatch(GraphicsDevice);
-        public static TiledMap _tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
-        public static TiledMapRenderer _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-        public static TiledMapTileLayer mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
-        public static TiledMapTileLayer mapLayerIntersect = _tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");*/
+        public static TiledMapTileLayer MapLayer()
+        {
+            TiledMapTileLayer mapLayerCollision = null;
+
+            if (Game1._numEcran == 1)
+                mapLayerCollision = chato_int_chambres_nord.mapLayer;
+            else if (Game1._numEcran == 2)
+                mapLayerCollision = chato_int_chambres_couloir.mapLayer;
+            else if (Game1._numEcran == 3)
+                mapLayerCollision = chato_ext_cours_interieur.mapLayer;
+            else
+                mapLayerCollision = chato_int_chambres_nord.mapLayer;
+
+            return mapLayerCollision;
+        }
 
         public static bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (chato_int_chambres_couloir.mapLayer.TryGetTile(x, y, out tile) == false)
+            if (MapLayer().TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;

@@ -112,8 +112,7 @@ namespace SAE101
                 Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y + 36;
                 _choixCursor = _choixCursor + 1;
-                Game1._cooldownVerif = true;
-                Game1._cooldown = 0.2f;
+                Game1.SetCoolDown();
                 
             }            
             if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
@@ -121,15 +120,8 @@ namespace SAE101
                 Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y - 36;
                 _choixCursor = _choixCursor - 1;
-                Game1._cooldownVerif = true;
-                Game1._cooldown = 0.2f;
-                
-            }
-            if (_cooldownVerif == true)
-            {
-                _cooldown = _cooldown - deltaSeconds;
-                if (_cooldown <= 0)
-                    _cooldownVerif = false;
+                Game1.SetCoolDown();
+
             }
 
             //Perso choisissant son action
@@ -147,8 +139,7 @@ namespace SAE101
             {
                 Game1._menu.Play();
                 //ATTAQUE();
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                Game1.SetCoolDown();
                 _aAttaque = _aAttaque + 1;
             }
 
@@ -161,23 +152,20 @@ namespace SAE101
             if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && _cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Objects();
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                Game1.SetCoolDown();
             }
 
             if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && _cooldownVerif == false && _sousMenuSpecial == false)
             {
                 Fuite();
                 _sousMenuSpecial = false;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                Game1.SetCoolDown();
             }
 
             if (keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false && _sousMenuSpecial == true)
             {
                 _sousMenuSpecial = false;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                Game1.SetCoolDown();
             }
 
             //Fin du tour

@@ -184,6 +184,15 @@ namespace SAE101
             _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
+
+            _spriteBatch.Begin();
+            if (Game1._dialTrue == true)
+            {
+                _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Game1._text, Game1._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Game1._nom, Game1._posNom, Color.White);
+            }
+            _spriteBatch.End();
         }
 
         private bool IsCollision(ushort x, ushort y)

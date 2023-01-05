@@ -24,15 +24,7 @@ namespace SAE101
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        //texte début/fin
-        public SpriteFont _fontTest;
         public Vector2 _textPos;
-
-        //boitedialogue
-        private Texture2D _dialBox;
-        private Vector2 _positionBox;
-        private Vector2 _positionDial;
-        private bool _dialTrue;
 
         //Cooldown
         private float _cooldown;
@@ -43,9 +35,6 @@ namespace SAE101
         public override void Initialize()
         {
             _textPos = new Vector2(50, 50);
-            _positionBox = new Vector2(0, 348);
-            _positionDial = new Vector2(105, 365);
-            _dialTrue = false;
 
             base.Initialize();
         }
@@ -53,8 +42,6 @@ namespace SAE101
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _fontTest = Content.Load<SpriteFont>("font/font_test");
-            _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
 
             base.LoadContent();
         }
@@ -66,15 +53,15 @@ namespace SAE101
 
             //changements maps, tout premier dialogue
 
-            if (keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false && _dialTrue == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false && Game1._dialTrue == false)
             {
-                _dialTrue = true;
+                eventsetdial.Event1();
                 _cooldownVerif = true;
                 _cooldown = 0.2f;
 
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false && _dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false && Game1._dialTrue == true)
             {
                 Game.LoadScreenchato_int_chambres_nord();
             }
@@ -95,15 +82,15 @@ namespace SAE101
 
             _spriteBatch.Begin();
 
-            if (_dialTrue == false)
-            _spriteBatch.DrawString(_fontTest, "Wake the fuck up Samurai, we've got a city to burn", _textPos, Color.White);
+            if (Game1._dialTrue == false)
+            _spriteBatch.DrawString(Game1._font, "Wake the fuck up Samurai, we've got a city to burn", _textPos, Color.White);
 
-            if (_dialTrue == true)
+            if (Game1._dialTrue == true)
             {
-                _spriteBatch.Draw(_dialBox, _positionBox, Color.White);
-                _spriteBatch.DrawString(_fontTest, "EH OH GAMIN, REVEIL-TOI! TU VAS M'FAIRE ATTENDRE\nENCORE LONGTEMPS?!", _positionDial, Color.White);
-            }              
-
+                _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Game1._text, Game1._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Game1._nom, Game1._posNom, Color.White);
+            }
             _spriteBatch.End();
         }
     }

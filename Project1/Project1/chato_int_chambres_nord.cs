@@ -52,11 +52,15 @@ namespace SAE101
         private bool _chestTrue;
 
         public static Vector2 _chambreCentre1;
+        public static Vector2 _chambreCentreUn;
         public static Vector2 _chambreCentre2;
+        public static Vector2 _chambreCentreDeux;
         public static int _limiteChambreX1;
         public static int _limiteChambreX2;
         public static int _limiteChambreY1;
         public static int _limiteChambreY2;
+        public static int _limiteChambreGauche;
+        public static int _limiteChambreDroite;
 
         private float _cooldown;
         private bool _cooldownVerif;
@@ -92,10 +96,14 @@ namespace SAE101
 
 
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
+            _chambreCentreUn = new Vector2((float)14.5 * 16, 6 * 16);
             _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
+            _chambreCentreDeux = new Vector2((float)38.5 * 16, 6 * 16);
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
             _limiteChambreY1 = 8 * 16;
+            _limiteChambreGauche = 8 * 16;
+            _limiteChambreDroite = 32 * 16;
 
             _sensPersoX = 0;
             _sensPersoY = 0;

@@ -68,8 +68,8 @@ namespace SAE101
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            _spriteBatch.Begin();
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (Game1._dialTrue == false)
             _spriteBatch.DrawString(Game1._font, "Wake the fuck up Samurai, we've got a city to burn", _textPos, Color.White);

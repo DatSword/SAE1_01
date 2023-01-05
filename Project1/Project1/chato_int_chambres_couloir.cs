@@ -118,7 +118,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
                 animation = "move_up";
                 _stop = 2;
-                if (!joueur.IsCollision(tx, ty))
+                if (!IsCollision(tx, ty))
                     _positionPerso.Y -= walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Down))
@@ -127,7 +127,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1);
                 animation = "move_down";
                 _stop = 1;
-                if (!joueur.IsCollision(tx, ty))
+                if (!IsCollision(tx, ty))
                     _positionPerso.Y += walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Left))
@@ -136,7 +136,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_left";
                 _stop = 3;
-                if (!joueur.IsCollision(tx, ty))
+                if (!IsCollision(tx, ty))
                     _positionPerso.X -= walkSpeed;
             }
             if (keyboardState.IsKeyDown(Keys.Right))
@@ -145,7 +145,7 @@ namespace SAE101
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 animation = "move_right";
                 _stop = 4;
-                if (!joueur.IsCollision(tx, ty))
+                if (!IsCollision(tx, ty))
                     _positionPerso.X += walkSpeed;
             }
             _perso.Play(animation);
@@ -186,6 +186,15 @@ namespace SAE101
             _spriteBatch.End();
         }
 
-
+        private bool IsCollision(ushort x, ushort y)
+        {
+            // définition de tile qui peut être null (?)
+            TiledMapTile? tile;
+            if (mapLayer.TryGetTile(x, y, out tile) == false)
+                return false;
+            if (!tile.Value.IsBlank)
+                return true;
+            return false;
+        }
     }
 }

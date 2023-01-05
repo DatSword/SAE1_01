@@ -42,6 +42,7 @@ namespace SAE101
         public static int _limiteChambreX1;
         public static int _limiteChambreX2;
         public static int _limiteCouloirY1;
+        public static int _limiteCouloirY2;
 
         public chato_int_chambres_couloir(Game1 game) : base(game) { }
 
@@ -56,6 +57,7 @@ namespace SAE101
 
             _limiteChambreX1 = 19 * 16;
             _limiteChambreX2 = 25 * 16;
+            _limiteCouloirY1 = 5 * 16;
             _limiteCouloirY1 = 5 * 16;
 
             _sensPersoX = 0;

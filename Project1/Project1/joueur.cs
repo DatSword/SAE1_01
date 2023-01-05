@@ -59,7 +59,7 @@ namespace SAE101
 
         public static TiledMapTileLayer MapLayer()
         {
-            TiledMapTileLayer mapLayerCollision = null;
+            TiledMapTileLayer mapLayerCollision = chato_int_chambres_nord.mapLayer;
 
             if (Game1._numEcran == 1)
                 mapLayerCollision = chato_int_chambres_nord.mapLayer;

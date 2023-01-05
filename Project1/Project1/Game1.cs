@@ -24,7 +24,7 @@ namespace SAE101
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
-        private KeyboardState _keyboardState;
+        public static KeyboardState _keyboardState;
 
         //Camera
         public static OrthographicCamera _camera;
@@ -48,8 +48,11 @@ namespace SAE101
 
         //Combat?
         private bool _combatTest;
-        private float _cooldown;
-        private bool _cooldownVerif;
+
+        //Control
+        public static float _cooldown;
+        public static bool _cooldownVerif;
+        public static float deltaSeconds;
 
         //Boites de dialogues
         public static Texture2D _dialBox;
@@ -146,8 +149,9 @@ namespace SAE101
                 Exit();
 
             _keyboardState = Keyboard.GetState();
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            Console.WriteLine(_cooldownVerif);
             if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
                 LoadScreenchato_combat();

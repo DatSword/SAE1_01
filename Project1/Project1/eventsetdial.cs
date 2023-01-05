@@ -22,19 +22,30 @@ namespace SAE101
 {
     internal class eventsetdial
     {
-        
         public static void Event1()
         {
+            Game1._cooldown = 0.2f;
+            Game1._cooldownVerif = true;
             Game1._dialTrue = true;
             Game1._text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\nENCORE LONGTEMPS?!";
-            Game1._nom = "???";
+            Game1._nom = "???";          
         }
 
         public static void Event2()
         {
+            Game1._cooldown = 0.2f;
+            Game1._cooldownVerif = true;
             Game1._dialTrue = true;
             Game1._text = ":)";
             Game1._nom = "Fren";
+            Game1._dialTrue = true;                
+        }
+
+        public static void FermeBoite()
+        {
+            Game1._cooldown = 0.2f;
+            Game1._cooldownVerif = true;
+            Game1._dialTrue = false;
         }
     }
 }

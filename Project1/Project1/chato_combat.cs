@@ -100,22 +100,22 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //curseur controls
-            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && _cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
             {
                 Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y + 36;
                 _choixCursor = _choixCursor + 1;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                Game1._cooldownVerif = true;
+                Game1._cooldown = 0.2f;
                 
             }            
-            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && _cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
             {
                 Game1._menu.Play();
                 _positionCursor.Y = _positionCursor.Y - 36;
                 _choixCursor = _choixCursor - 1;
-                _cooldownVerif = true;
-                _cooldown = 0.2f;
+                Game1._cooldownVerif = true;
+                Game1._cooldown = 0.2f;
                 
             }
             if (_cooldownVerif == true)

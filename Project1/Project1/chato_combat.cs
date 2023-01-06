@@ -227,6 +227,12 @@ namespace SAE101
             {
                 _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
 
+                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+                {
+                    _positionCursor.Y = _positionCursor.Y - 36;
+                    _choixCursor = _choixCursor - 1;
+                    Game1.SetCoolDown();
+                }
                 if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
                 {
                     _positionCursor.Y = _positionCursor.Y + 36;
@@ -234,36 +240,20 @@ namespace SAE101
                     Game1.SetCoolDown();
 
                 }
-                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
-                {
-                    _positionCursor.Y = _positionCursor.Y - 36;
-                    _choixCursor = _choixCursor - 1;
-                    Game1.SetCoolDown();
-                }
+                
             }               
             else
             {
-                if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor != 2 && _choixCursor != 0 && Game1._cooldownVerif == false)
-                {
-                    _choixCursorD = _choixCursorD - 1;
-                    Game1.SetCoolDown();
-
-                }
-                else if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor != 1 && _choixCursor != 3 && Game1._cooldownVerif == false)
+                
+                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < chato_combatcontenu._nbEnnemy && Game1._cooldownVerif == false)
                 {
                     _choixCursorD = _choixCursorD + 1;
                     Game1.SetCoolDown();
 
                 }
-                else if (keyboardState.IsKeyDown(Keys.Left) && _choixCursor != 0 && _choixCursor != 1 && Game1._cooldownVerif == false)
+                else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursorD > 0 && Game1._cooldownVerif == false)
                 {
                     _choixCursorD = _choixCursorD - 1;
-                    Game1.SetCoolDown();
-
-                }
-                else if (keyboardState.IsKeyDown(Keys.Right) && _choixCursor != 3 && _choixCursor != 2 && Game1._cooldownVerif == false)
-                {
-                    _choixCursorD = _choixCursorD + 1;
                     Game1.SetCoolDown();
 
                 }

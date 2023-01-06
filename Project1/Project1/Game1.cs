@@ -48,6 +48,16 @@ namespace SAE101
         public static SoundEffect _vic;
         public static SoundEffect _duck;
 
+        // on définit les différents états possibles du jeu ( à compléter) 
+        public enum Etats { Menu, Play, Quitter, Option };
+
+        // on définit un champ pour stocker l'état en cours du jeu
+        private Etats etat;
+
+        // on définit  2 écrans ( à compléter )
+        private ScreenMenu _screenMenu;
+        private ScreenPlay _screenPlay;
+
         //Combat?
         private bool _combatTest;
 
@@ -80,7 +90,8 @@ namespace SAE101
 
             //Camera
 
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
+            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
             _camera = new OrthographicCamera(viewportadapter);
 
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);

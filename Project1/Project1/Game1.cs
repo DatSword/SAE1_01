@@ -55,8 +55,8 @@ namespace SAE101
         private Etats etat;
 
         // on définit  2 écrans ( à compléter )
-        private ScreenMenu _screenMenu;
-        private ScreenPlay _screenPlay;
+        /*private ScreenMenu _screenMenu;
+        private ScreenPlay _screenPlay;*/
 
         //Combat?
         private bool _combatTest;
@@ -83,15 +83,15 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            _graphics.PreferredBackBufferWidth = 768;
-            _graphics.PreferredBackBufferHeight = 672;
+            _graphics.PreferredBackBufferWidth = 514; //768
+            _graphics.PreferredBackBufferHeight = 448; //672
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
             //Camera
 
-            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
+            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
             _camera = new OrthographicCamera(viewportadapter);
 
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
@@ -177,10 +177,32 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
+            
+            if (_keyboardState.IsKeyDown(Keys.E))
+            {
+                _graphics.PreferredBackBufferWidth = 514;
+                _graphics.PreferredBackBufferHeight = 448;
+                GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                _graphics.ApplyChanges();
+            }
+            if (_keyboardState.IsKeyDown(Keys.D))
+            {
+                _graphics.PreferredBackBufferWidth = 768;
+                _graphics.PreferredBackBufferHeight = 672;
+                GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                _graphics.ApplyChanges();
+            }
+            if (_keyboardState.IsKeyDown(Keys.F))
+            {
+                _graphics.PreferredBackBufferWidth = 1024;
+                _graphics.PreferredBackBufferHeight = 896;
+                GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                _graphics.ApplyChanges();
+            }
 
             //Camera
 
-                /* chambres nord */
+            /* chambres nord */
             Console.WriteLine(_numEcran);
 
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1

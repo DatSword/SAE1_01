@@ -77,14 +77,13 @@ namespace SAE101
         {
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
+            _positionCursorD = new Vector2(145, 200);
 
             _choixCursor = 0;
             _sousMenuSpecial = false;
             _premierCombat = false;
             _aAttaque = 1;
             _numPerso = 1;
-
-            //Combattest();
 
             //Menu
             _posText = new[] { new Vector2(48, 300), new Vector2(48, 336), new Vector2(48, 372), new Vector2(48, 408), new Vector2(180, 265) };
@@ -96,23 +95,33 @@ namespace SAE101
             _centreCombat = new Vector2(512 / 2, 448 / 2);
 
             //Generation allie
+           
+            chato_combatcontenu.CombatTest();
+
+            //Ordre ALLIE
+            int[] ordre = new int[chato_combatcontenu._nbEquipe];
+            int ordrej = 0;
+
+
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
+                ordrej = 0;
+                for (int j = 0; j < chato_combatcontenu._nbPersoJouable; j++)
+                {
+                    if (chato_combatcontenu._ordreJoueur[i] == chato_combatcontenu._nomPersoJouable[j])
+                    {
+                        ordre[i] = ordrej;                        
+                    }
+                    ordrej++;
+                }               
+            }
+
+            //for (int)
 
             _fileA = new String[chato_combatcontenu._nbEquipe];
             _sheetA = new SpriteSheet[chato_combatcontenu._nbEquipe];
             _allie = new AnimatedSprite[chato_combatcontenu._nbEquipe];
-            _posAllie = new[] { new Vector2(145,230), new Vector2(195, 175), new Vector2(45, 230), new Vector2(95, 175) };
-
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
-            {
-                for (int j = 0; j < chato_combatcontenu._nbEquipe; j++)
-                {
-                    if (chato_combatcontenu._ordreJoueur[i] == chato_combatcontenu._nomPersoJouable[j])
-                    {
-
-                    }
-                        
-                }
-            }
+            _posAllie = new[] { new Vector2(145, 230), new Vector2(195, 175), new Vector2(45, 230), new Vector2(95, 175) };
 
             for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
@@ -147,6 +156,7 @@ namespace SAE101
             _chatoCombatDecor = Content.Load<Texture2D>("img/chato/combat_decor");
             _combatBox = Content.Load<Texture2D>("img/dialogue/combat_box");
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
+            _cursorD = Content.Load<Texture2D>("img/dialogue/cursord");
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
             
@@ -156,6 +166,7 @@ namespace SAE101
 
         public override void Update(GameTime gameTime)
         {
+
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -170,6 +181,21 @@ namespace SAE101
                 Game1.SetCoolDown();
                 
             }            
+            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+            {
+                _positionCursor.Y = _positionCursor.Y - 36;
+                _choixCursor = _choixCursor - 1;
+                Game1.SetCoolDown();
+            }
+
+            //curseurd controls
+            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+            {
+                _positionCursor.Y = _positionCursor.Y + 36;
+                _choixCursor = _choixCursor + 1;
+                Game1.SetCoolDown();
+
+            }
             if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
             {
                 _positionCursor.Y = _positionCursor.Y - 36;
@@ -258,6 +284,7 @@ namespace SAE101
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
             _spriteBatch.Draw(_combatBox, _positionCombat, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
+            _spriteBatch.Draw(_cursorD, _positionCursorD, Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);

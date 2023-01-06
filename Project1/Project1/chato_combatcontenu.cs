@@ -47,11 +47,16 @@ namespace SAE101
         public static void CombatTest()
         {
             _nbEquipe = 2;
+            Console.WriteLine("1");
             _fileA = new String[_nbEquipe];
-            _ordreJoueur = new String[] { "Hero", "Jon" };
+            Console.WriteLine("2");
+            _ordreJoueur = new String[] { "Hero", "Ben" };
+            Console.WriteLine("4");
 
             _nbEnnemy = 2;
+            Console.WriteLine("5");
             _fileE = new String[_nbEnnemy];
+            Console.WriteLine("6");
 
         }
 

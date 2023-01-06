@@ -44,7 +44,6 @@ namespace SAE101
         private String[] _choixBackup;
         private String[] _desc;
         private String[] _descBackup;
-        private String _spécial;
         private Vector2[] _posText;
 
         //Spécial
@@ -53,6 +52,7 @@ namespace SAE101
         //Tours
         private bool _tourPassé;
         private bool _sousMenuSpecial;
+        private bool _sousMenuObjects;
         private int _numPerso;
        
         private int _aAttaque;
@@ -104,6 +104,18 @@ namespace SAE101
 
             for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
+                for (int j = 0; j < chato_combatcontenu._nbEquipe; j++)
+                {
+                    if (chato_combatcontenu._ordreJoueur[i] == chato_combatcontenu._nomPersoJouable[j])
+                    {
+
+                    }
+                        
+                }
+            }
+
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
                 _fileA[i] = chato_combatcontenu._fileA[i];
                _sheetA[i] = Content.Load<SpriteSheet>(_fileA[i], new JsonContentLoader());
                _allie[i] = new AnimatedSprite(_sheetA[i]);
@@ -117,6 +129,8 @@ namespace SAE101
             _posEnnemy = new[] { new Vector2(365, 230), new Vector2(315, 175), new Vector2(465, 230), new Vector2(415, 175)};
 
             SpriteSheet test = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
+            
+
             for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
             {
                 _fileE[i] = "anim/char/base_model_m/base_model_movement.sf";

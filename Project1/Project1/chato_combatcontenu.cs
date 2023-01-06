@@ -28,7 +28,8 @@ namespace SAE101
         public static String _special;
         public static String[] _specialP;
         public static String[] _descP;
-        public static String[] _nbPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
+        public static String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
+        public static int _nbPersoJouable = 4;
         public static String[] _ordreJoueur;
         public static String[] _ordreEnnemi;
 
@@ -54,13 +55,12 @@ namespace SAE101
 
         }
 
-
         //Personnages jouables
         public static void Hein()
         {
             _special = "???";
             _specialP = new String[] { "_", "_", "_", "_" };
-            _descP = new String[] { "_.", "_", "_", "_" };
+            _descP = new String[] { "_", "_", "_", "_" };
         }
 
         public static void Hero()

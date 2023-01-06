@@ -29,7 +29,7 @@ namespace SAE101
         // défini dans Game1
         private Game1 _myGame;
         // texture du menu avec 3 boutons
-        private Texture2D _textBoutons;
+        private AnimatedSprite _textBoutons;
         // contient les rectangles : position et taille des 3 boutons présents dans la texture 
         private Rectangle[] lesBoutons;
 
@@ -45,9 +45,9 @@ namespace SAE101
         {
             
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(75, 110, 640, 160);
-            lesBoutons[1] = new Rectangle(75, 320, 640, 160);
-            lesBoutons[2] = new Rectangle(75, 528, 640, 160);
+            lesBoutons[0] = new Rectangle(0, 0, 288, 448);
+            lesBoutons[1] = new Rectangle(514, 448, 640, 160);
+            lesBoutons[2] = new Rectangle(514, 448, 640, 160);
 
             base.Initialize();
         }
@@ -56,7 +56,8 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _textBoutons = Content.Load<Texture2D>("boutons");
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("menu/buttons(1).sf", new JsonContentLoader());
+            _textBoutons = new AnimatedSprite(spriteSheet);
 
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
@@ -103,7 +104,7 @@ namespace SAE101
 
             _spriteBatch.Begin();
             _spriteBatch.DrawString(_fontTest, "Jeu de Fou",new Vector2(0,0), Color.White);
-            Game1._spriteBatch.Draw(_textBoutons, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(_textBoutons, new Vector2(0, 0));
             _spriteBatch.End();
         }
     }

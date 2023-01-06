@@ -145,7 +145,7 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // on charge l'écran de menu par défaut 
-            _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.Black));
+            LoadScreenblack_jack();
 
             //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");

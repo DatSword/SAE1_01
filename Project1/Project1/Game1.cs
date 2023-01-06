@@ -60,16 +60,6 @@ namespace SAE101
         public static SoundEffect _vic;
         public static SoundEffect _duck;
 
-        // on définit les différents états possibles du jeu ( à compléter) 
-        public enum Etats { Menu, Play, Quitter, Option };
-
-        // on définit un champ pour stocker l'état en cours du jeu
-        private Etats etat;
-
-        // on définit  2 écrans ( à compléter )
-        /*private ScreenMenu _screenMenu;
-        private ScreenPlay _screenPlay;*/
-
         //Combat?
         private bool _combatTest;
 

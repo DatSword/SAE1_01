@@ -48,6 +48,7 @@ namespace SAE101
         //Personnages jouables
         public static void Hein()
         {
+            _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "???";
             _specialP = new String[] { "_", "_", "_", "_" };
             _descP = new String[] { "_", "_", "_", "_" };
@@ -62,17 +63,17 @@ namespace SAE101
         }
         public static void Jon()
         {
-            _anim = "anim/char/base_model_m/base_model_movement.sf";
+            _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
             _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
         }
         public static void Ben()
         {
-            _anim = "anim/char/base_model_m/base_model_movement.sf";
+            _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Cri";
-            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
-            String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };         
+            _specialP = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de 'blèmes", "_" };
+            _descP = new String[] { "_", "_", "Que des solutions!", "_" };         
         }
 
         //personnages non joueurs
@@ -87,14 +88,14 @@ namespace SAE101
         }
         public static void Mechant()
         {
-            _anim = "anim/char/base_model_m/base_model_movement.sf";
+            _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
             _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
         }
         public static void Pabo()
         {
-            _anim = "anim/char/base_model_m/base_model_movement.sf";
+            _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
             String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };

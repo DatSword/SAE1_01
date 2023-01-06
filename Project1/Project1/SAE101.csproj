@@ -27,7 +27,7 @@
     <PackageReference Include="Oscetch.MonoGame.Camera.GL" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\anim\char\base_model_m\base_model_movement.sf">
+    <None Update="Content\anim\char\base_model_m\character_movement.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Content\anim\char\enemy\base_model_ennemies.sf">
@@ -54,6 +54,9 @@
     <None Update="Content\menu\start.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\anim\char\base_model_m\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

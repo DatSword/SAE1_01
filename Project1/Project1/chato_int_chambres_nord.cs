@@ -117,7 +117,7 @@ namespace SAE101
             mapLayerIntersect = _tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
 
             //Load persos
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
 
             //Load objects

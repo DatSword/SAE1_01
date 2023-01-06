@@ -92,7 +92,7 @@ namespace SAE101
             _ordrefinal = 0;
 
             //Menu
-            _posText = new[] { new Vector2(48, 300), new Vector2(48, 336), new Vector2(48, 372), new Vector2(48, 408), new Vector2(180, 265) };
+            _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
             _choix = new String[] { "Combat", "???", "Objets","Fuite"};
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
@@ -218,6 +218,7 @@ namespace SAE101
         {
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            String animation = "idle_right";
 
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
@@ -340,7 +341,24 @@ namespace SAE101
                 _action = 0;
                 _numPerso = 1;
                 _tourFini = false;
-            }               
+            }
+            _allie[0].Play(animation);
+            _allie[0].Update(deltaSeconds);
+            _allie[1].Play(animation);
+            _allie[1].Update(deltaSeconds);
+            _allie[2].Play(animation);
+            _allie[2].Update(deltaSeconds);
+            _allie[3].Play(animation);
+            _allie[3].Update(deltaSeconds);
+            _ennemy[0].Play(animation);
+            _ennemy[0].Update(deltaSeconds);
+            _ennemy[1].Play(animation);
+            _ennemy[1].Update(deltaSeconds);
+            _ennemy[2].Play(animation);
+            _ennemy[2].Update(deltaSeconds);
+            _ennemy[3].Play(animation);
+            _ennemy[3].Update(deltaSeconds);
+
         }
 
         public override void Draw(GameTime gameTime)

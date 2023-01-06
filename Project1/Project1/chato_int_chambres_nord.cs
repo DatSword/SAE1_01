@@ -160,7 +160,7 @@ namespace SAE101
             else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
-            if (Game1._dialTrue == false)
+            if (eventsetdial._dialTrue == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -213,7 +213,7 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Game1._dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && eventsetdial._dialTrue == true)
             {
                 eventsetdial.FermeBoite();
             }
@@ -293,11 +293,11 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Game1._dialTrue == true)
+            if (eventsetdial._dialTrue == true)
             {
-                _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Game1._text, Game1._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Game1._nom, Game1._posNom, Color.White);
+                _spriteBatch.Draw(eventsetdial._dialBox, eventsetdial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, eventsetdial._text, eventsetdial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, eventsetdial._nom, eventsetdial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

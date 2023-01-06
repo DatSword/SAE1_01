@@ -56,15 +56,6 @@ namespace SAE101
         public static bool _cooldownVerif;
         public static float deltaSeconds;
 
-        //Boites de dialogues
-        public static Texture2D _dialBox;
-        public static Vector2 _posDialBox;
-        public static String _text;
-        public static Vector2 _posText;
-        public static String _nom;
-        public static Vector2 _posNom;
-        public static bool _dialTrue;
-
         //font
         public static SpriteFont _font;
 
@@ -79,10 +70,6 @@ namespace SAE101
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
         }
-
-
-
-
         protected override void Initialize()
         {
             // Definition écran
@@ -103,10 +90,10 @@ namespace SAE101
             _numEcran = 1;
 
             //Dialogue
-            _posText = new Vector2(105, 360);
-            _posNom = new Vector2(25, 360);
-            _posDialBox = new Vector2(0, 348);          
-            _dialTrue = false;
+            eventsetdial._posText = new Vector2(105, 360);
+            eventsetdial._posNom = new Vector2(25, 360);
+            eventsetdial._posDialBox = new Vector2(0, 348);
+            eventsetdial._dialTrue = false;
 
             //Combat?
             _combatTest = false;
@@ -119,9 +106,6 @@ namespace SAE101
             //premier écran
             LoadScreenecran_de_titre();
         }
-
-
-
 
         protected override void LoadContent()
         {
@@ -145,16 +129,12 @@ namespace SAE101
             _duck = Content.Load<SoundEffect>("sfx/duck");
 
             //Boite de dialogue
-            _dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+            eventsetdial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
 
         }
-
-
-
-
 
         protected override void Update(GameTime gameTime)
         {

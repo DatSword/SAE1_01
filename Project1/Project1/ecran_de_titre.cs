@@ -25,19 +25,38 @@ namespace SAE101
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
+        // défini dans Game1
+        private Game1 _myGame;
+        // texture du menu avec 3 boutons
+        private Texture2D _textBoutons;
+        // contient les rectangles : position et taille des 3 boutons présents dans la texture 
+        private Rectangle[] lesBoutons;
+
         //Titre
         public SpriteFont _fontTest;
 
-        public ecran_de_titre(Game1 game) : base(game) { }
+        public ecran_de_titre(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
+            
+            lesBoutons = new Rectangle[3];
+            lesBoutons[0] = new Rectangle(75, 110, 640, 160);
+            lesBoutons[1] = new Rectangle(75, 320, 640, 160);
+            lesBoutons[2] = new Rectangle(75, 528, 640, 160);
+
             base.Initialize();
         }
 
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _textBoutons = Content.Load<Texture2D>("boutons");
 
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
@@ -51,10 +70,31 @@ namespace SAE101
 
             //changements maps
 
-            if (keyboardState.IsKeyDown(Keys.Enter))
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+                for (int i = 0; i < lesBoutons.Length; i++)
+                {
+                    // si le clic correspond à un des 3 boutons
+                    if (lesBoutons[i].Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                    {
+                        // on change l'état défini dans Game1 en fonction du bouton cliqué
+                        if (i == 0)
+                            _myGame.Etat = Game1.Etats.Option;
+                        else if (i == 1)
+                            _myGame.Etat = Game1.Etats.Play;
+                        else
+                            _myGame.Etat = Game1.Etats.Quitter;
+                        break;
+                    }
+
+                }
+            }
+
+            /*if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 Game.LoadScreenblack_jack();
-            }
+            }*/
         }
 
         public override void Draw(GameTime gameTime)
@@ -63,6 +103,7 @@ namespace SAE101
 
             _spriteBatch.Begin();
             _spriteBatch.DrawString(_fontTest, "Jeu de Fou",new Vector2(0,0), Color.White);
+            Game1._spriteBatch.Draw(_textBoutons, new Vector2(0, 0), Color.White);
             _spriteBatch.End();
         }
     }

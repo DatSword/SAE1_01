@@ -17,19 +17,24 @@ using System;
 
 namespace SAE101
 {
-    internal class black_jack : GameScreen
+    public class black_jack : GameScreen
     {
         //"map"
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private Game1 _myGame;
+
         //Début/Fin
         public Vector2 _textPos;
         public String _text;
         public int _fin;
 
-        public black_jack(Game1 game) : base(game) { }
+        public black_jack(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
@@ -51,6 +56,9 @@ namespace SAE101
         {
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+                _myGame.Etat = Game1.Etats.Menu;
 
             //changements maps, tout premier dialogue
             if (_fin == 0)

@@ -55,8 +55,8 @@ namespace SAE101
         private Etats etat;
 
         // on définit  2 écrans ( à compléter )
-        private ScreenMenu _screenMenu;
-        private ScreenPlay _screenPlay;
+        private ecran_de_titre _ecranDeTitre;
+        private chato_int_chambres_nord _chatoIntChambresNord;
 
         //Combat?
         private bool _combatTest;
@@ -90,8 +90,8 @@ namespace SAE101
 
             //Camera
 
-            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
+            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
             _camera = new OrthographicCamera(viewportadapter);
 
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);

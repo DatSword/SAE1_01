@@ -36,6 +36,18 @@
 /processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
 /build:anim/char/base_model_m/base_model_movement.sf
 
+#begin anim/char/enemy/base_model_ennemies(3).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/enemy/base_model_ennemies(3).png
+
 #begin anim/char/fren/Fren.sf
 /importer:SpriteFactoryContentImporter
 /processor:SpriteFactoryContentProcessor

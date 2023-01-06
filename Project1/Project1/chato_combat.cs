@@ -54,7 +54,7 @@ namespace SAE101
         private bool _sousMenuSpecial;
         private bool _sousMenuObjects;
         private int _numPerso;
-       
+        private bool _selectionEnn;
         private int _action;
         private bool _tourFini;
 
@@ -80,12 +80,13 @@ namespace SAE101
         {
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
-            _positionCursorD = new Vector2(145, 200);
 
             _choixCursor = 0;
+            _choixCursorD = 0;
             _sousMenuSpecial = false;
             _sousMenuObjects = false;
             _premierCombat = false;
+            _selectionEnn = false;
             _action = 0;
             _numPerso = 1;
             _ordrefinal = 0;
@@ -221,35 +222,63 @@ namespace SAE101
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
 
-            //curseur controls
-            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+            //curseurs
+            if (_selectionEnn == false)
             {
-                _positionCursor.Y = _positionCursor.Y + 36;
-                _choixCursor = _choixCursor + 1;
-                Game1.SetCoolDown();
-                
-            }            
-            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
-            {
-                _positionCursor.Y = _positionCursor.Y - 36;
-                _choixCursor = _choixCursor - 1;
-                Game1.SetCoolDown();
-            }
+                _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
 
-            //curseurd controls
-            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
-            {
-                _positionCursor.Y = _positionCursor.Y + 36;
-                _choixCursor = _choixCursor + 1;
-                Game1.SetCoolDown();
+                if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+                {
+                    _positionCursor.Y = _positionCursor.Y + 36;
+                    _choixCursor = _choixCursor + 1;
+                    Game1.SetCoolDown();
 
-            }
-            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+                }
+                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+                {
+                    _positionCursor.Y = _positionCursor.Y - 36;
+                    _choixCursor = _choixCursor - 1;
+                    Game1.SetCoolDown();
+                }
+            }               
+            else
             {
-                _positionCursor.Y = _positionCursor.Y - 36;
-                _choixCursor = _choixCursor - 1;
-                Game1.SetCoolDown();
+                if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor != 2 && _choixCursor != 0 && Game1._cooldownVerif == false)
+                {
+                    _choixCursorD = _choixCursorD - 1;
+                    Game1.SetCoolDown();
+
+                }
+                else if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor != 1 && _choixCursor != 3 && Game1._cooldownVerif == false)
+                {
+                    _choixCursorD = _choixCursorD + 1;
+                    Game1.SetCoolDown();
+
+                }
+                else if (keyboardState.IsKeyDown(Keys.Left) && _choixCursor != 0 && _choixCursor != 1 && Game1._cooldownVerif == false)
+                {
+                    _choixCursorD = _choixCursorD - 1;
+                    Game1.SetCoolDown();
+
+                }
+                else if (keyboardState.IsKeyDown(Keys.Right) && _choixCursor != 3 && _choixCursor != 2 && Game1._cooldownVerif == false)
+                {
+                    _choixCursorD = _choixCursorD + 1;
+                    Game1.SetCoolDown();
+
+                }
+
+                if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                {
+                    
+                    Game1.SetCoolDown();
+                    _action = _action + 1;
+                    _selectionEnn = false;
+                }
+
+                _positionCursorD = _posEnnemy[_choixCursorD] - new Vector2(8, 55);
             }
+            
 
             //Perso choisissant son action
             //A revoir
@@ -262,6 +291,9 @@ namespace SAE101
                 chato_combatcontenu.Jon();
             else if (_ordreA[_action] == 3)
                 chato_combatcontenu.Ben();
+
+            if (_selectionEnn == false)
+                _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
 
             //Pas revoir
             if (_sousMenuSpecial == true)
@@ -279,9 +311,9 @@ namespace SAE101
             //Selection dans le menu
             if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
             {
-                //ATTAQUE();
+                Baston();
                 Game1.SetCoolDown();
-                _action = _action + 1;
+                
             }
 
             if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && Game1._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
@@ -349,7 +381,7 @@ namespace SAE101
         }
         public void Baston()
         {
-            
+            _selectionEnn = true;
         }
 
         public void Objects()
@@ -359,7 +391,7 @@ namespace SAE101
 
         public void Fuite()
         {
-            _desc[3] = "Hm? On dirait qu'un mur en scénarium vous\nempêche d'appuyer sur ce bouton!";
+            _desc[3] = "Fuite impossible!";
         }
 
         public void CombatSet()

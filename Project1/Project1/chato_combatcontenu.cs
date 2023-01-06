@@ -38,17 +38,11 @@ namespace SAE101
 
         public static void CombatTest()
         {
-            _nbEquipe = 2;
-            Console.WriteLine("1");
-            Console.WriteLine("2");
-            _ordreJoueur = new String[] { "Hero", "Ben" };
-            Console.WriteLine("4");
+            _nbEquipe = 4;
+            _ordreJoueur = new String[] { "Hero", "Ben" , "Hero", "Jon"};
 
             _nbEnnemy = 2;
-            Console.WriteLine("5");
-            _ordreEnnemi = new String[] { "Grand", "Mechant" };
-            Console.WriteLine("6");
-
+            _ordreEnnemi = new String[] { "Grand", "Mechant", "Pabo" };
         }
 
         //Personnages jouables
@@ -60,7 +54,7 @@ namespace SAE101
         }
         public static void Hero()
         {
-            _anim = "anim/char/ennemy/base_model_ennemies.sf";
+            _anim = "anim/char/enemy/base_model_ennemies.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
@@ -85,7 +79,7 @@ namespace SAE101
 
         public static void Grand()
         {
-            _anim = "anim/char/ennemy/base_model_ennemies.sf";
+            _anim = "anim/char/enemy/base_model_ennemies.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };

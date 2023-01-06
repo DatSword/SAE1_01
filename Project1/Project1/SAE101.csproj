@@ -27,6 +27,18 @@
     <PackageReference Include="Oscetch.MonoGame.Camera.GL" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Content\anim\char\base_model_m\base_model_movement.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\anim\char\enemy\base_model_ennemies.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\anim\char\Fren\Fren.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\anim\objects\chest1.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Content\menu\buttons%281%29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

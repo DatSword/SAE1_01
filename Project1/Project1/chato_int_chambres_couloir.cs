@@ -98,11 +98,9 @@ namespace SAE101
 
             _tiledMapRenderer.Update(gameTime);
 
-            
-
             //Debug changement de map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+            //Console.WriteLine(a);
 
             //Mouvement/animation
             if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))

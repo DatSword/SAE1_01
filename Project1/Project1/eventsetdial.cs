@@ -20,68 +20,78 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
+
+
     internal class eventsetdial
     {
+        public static Texture2D _dialBox;
+        public static Vector2 _posDialBox;
+        public static String _text;
+        public static Vector2 _posText;
+        public static String _nom;
+        public static Vector2 _posNom;
+        public static bool _dialTrue;
 
         public static void toutDebut()
         {
             Game1.SetCoolDown();
-            Game1._dialTrue = true;
-            Game1._text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
+            _dialTrue = true;
+            _text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
                           "ENCORE LONGTEMPS?!";
-            Game1._nom = "???";          
+            _nom = "???";          
         }
 
         public static void Fren1()
         {
             Game1.SetCoolDown();
-            Game1._dialTrue = true;
-            Game1._text = ":)";
-            Game1._nom = "Fren";
-            Game1._dialTrue = true;
+            _dialTrue = true;
+            _text = ":)";
+            _nom = "Fren";
+            _dialTrue = true;
             Game1._duck.Play();
         }
         public static void Fren2()
         {
             Game1.SetCoolDown();
-            Game1._dialTrue = true;
-            Game1._text = ":(";
-            Game1._nom = "Fren";
-            Game1._dialTrue = true;
+            _dialTrue = true;
+            _text = ":(";
+            _nom = "Fren";
+            _dialTrue = true;
             Game1._duck.Play();
         }
 
         public static void Jon1()
         {
             Game1.SetCoolDown();
-            Game1._dialTrue = true;
-            Game1._text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
-                          "tout le monde est déjà parti vers la salle du trône!\n" +
-                          "Je comprends ta fatigue, mais ça serait dommage de ne pas\n" +
-                          "assister au courronnement, on a un peu beaucoup galéré\n" +
-                          "pour ce moment!";
-            Game1._nom = "Jon";
+            _dialTrue = true;
+            _text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
+                    "tout le monde est déjà parti vers la salle du trône!\n" +
+                    "Je comprend ta fatigue, mais ça serait dommage de ne pas\n" +
+                    "assister au courronnement, on a un peu beaucoup galéré\n" +
+                    "pour ce moment!";
+            _nom = "Jon";
         }
 
         public static void Jon2()
         {
             Game1.SetCoolDown();
-            Game1._text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
-                          ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
-            Game1._nom = "Jon";
+            _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
+                    ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
+            _nom = "Jon";
             Game1._firstvisit = false;
         }
 
         public static void Jon3()
         {
             Game1.SetCoolDown();
-            Game1._text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
-                          "déguerpir du Chato! On va devoir s'en débarrasser!";
-            Game1._nom = "Jon";
+            _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
+                    "déguerpir du Chato! On va devoir s'en débarrasser!";
+
+            _nom = "Jon";
         }
         public static void FermeBoite()
         {
-            Game1._dialTrue = false;
+            _dialTrue = false;
             Game1.SetCoolDown();
         }
 

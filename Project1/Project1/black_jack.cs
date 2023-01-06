@@ -78,13 +78,13 @@ namespace SAE101
                 _text = "";
 
 
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == false)
+            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && eventsetdial._dialTrue == false)
             {
                 _fin = 01;
                 eventsetdial.toutDebut();
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && eventsetdial._dialTrue == true)
             {
                 eventsetdial.FermeBoite();
                 Game.LoadScreenchato_int_chambres_nord();              
@@ -97,14 +97,14 @@ namespace SAE101
             var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            if (Game1._dialTrue == false)
+            if (eventsetdial._dialTrue == false)
             _spriteBatch.DrawString(Game1._font, _text , _textPos, Color.White);
 
-            if (Game1._dialTrue == true)
+            if (eventsetdial._dialTrue == true)
             {
-                _spriteBatch.Draw(Game1._dialBox, Game1._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Game1._text, Game1._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Game1._nom, Game1._posNom, Color.White);
+                _spriteBatch.Draw(eventsetdial._dialBox, eventsetdial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, eventsetdial._text, eventsetdial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, eventsetdial._nom, eventsetdial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

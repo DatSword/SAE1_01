@@ -95,6 +95,7 @@ namespace SAE101
             float walkSpeed = deltaSeconds * _vitessePerso;
             String animation = "idle_down";
 
+
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
 

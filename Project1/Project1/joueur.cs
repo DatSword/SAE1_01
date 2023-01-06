@@ -36,6 +36,7 @@ namespace SAE101
                 chato_int_chambres_couloir._positionPerso = new Vector2(30 * 16 + 8, 7 * 16);
             else if (chato_int_chambres_nord._posX >= 35 * 16 && chato_int_chambres_nord._posX < 37 * 16)
                 chato_int_chambres_couloir._positionPerso = new Vector2(38 * 16 + 8, 7 * 16);
+
             else if (chato_ext_cours_interieur._posX >= 19 * 16 && chato_ext_cours_interieur._posX < 21 * 16)
                 chato_int_chambres_couloir._positionPerso = new Vector2((float)20.5 * 16 + 8, (float)1.5 * 16 + 8);
             else if (chato_ext_cours_interieur._posX >= 20 * 16 && chato_ext_cours_interieur._posX < 22 * 16)
@@ -63,7 +64,7 @@ namespace SAE101
                 chato_int_chambres_nord._positionPerso = new Vector2(36 * 16 + 8, 7 * 16);
         }
 
-        public static void Spawnchato_ext_cours_interieur()
+        /*public static void Spawnchato_ext_cours_interieur()
         {
             if (chato_int_chambres_couloir._posX == 0)
                 chato_ext_cours_interieur._positionPerso = new Vector2(22 * 16, 49 * 16);
@@ -76,7 +77,7 @@ namespace SAE101
                 chato_ext_cours_interieur._positionPerso = new Vector2(22 * 16 + 8, 49 * 16);
             else if (chato_int_chambres_couloir._posX >= 22.5 * 16 && chato_int_chambres_couloir._posX < 24 * 16)
                 chato_ext_cours_interieur._positionPerso = new Vector2(23 * 16 + 8, 49 * 16);
-        }
+        }*/
 
             public static TiledMapTileLayer MapLayer()
         {

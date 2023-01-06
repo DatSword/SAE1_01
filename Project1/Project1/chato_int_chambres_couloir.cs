@@ -165,7 +165,7 @@ namespace SAE101
             }        
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 30))
             {
-                _posX = (int)_positionPerso.X;
+                //_posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_ext_cours_interieur();
                 chato_int_chambres_nord._posX = 0;
             }

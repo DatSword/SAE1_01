@@ -46,7 +46,7 @@ namespace SAE101
             _posX = 0;
             _stop = 1;
 
-            joueur.Spawnchato_ext_cours_interieur();
+            //joueur.Spawnchato_ext_cours_interieur();
 
             //_positionPerso = new Vector2(40, 480);
             _positionPerso = new Vector2(22*16, 49*16);

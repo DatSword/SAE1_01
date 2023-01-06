@@ -67,6 +67,7 @@ namespace SAE101
         public static SpriteSheet[] _sheetE;
         public static String[] _fileA;
         public static String[] _fileE;
+        public static int _ordrefinal;
 
         public static Vector2 _centreCombat;
 
@@ -77,14 +78,14 @@ namespace SAE101
         {
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
+            _positionCursorD = new Vector2(145, 200);
 
             _choixCursor = 0;
+            _ordrefinal = 0;
             _sousMenuSpecial = false;
             _premierCombat = false;
             _aAttaque = 1;
             _numPerso = 1;
-
-            //Combattest();
 
             //Menu
             _posText = new[] { new Vector2(48, 300), new Vector2(48, 336), new Vector2(48, 372), new Vector2(48, 408), new Vector2(180, 265) };
@@ -95,47 +96,97 @@ namespace SAE101
 
             _centreCombat = new Vector2(512 / 2, 448 / 2);
 
-            //Generation allie
+            chato_combatcontenu.CombatTest();
+
+            //Génération mais surtout ordre allié
+            int[] ordreA = new int[chato_combatcontenu._nbEquipe];
+            int ordrejA = 0;
+
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
+                ordrejA = 0;
+                for (int j = 0; j < chato_combatcontenu._nbPersoJouable; j++)
+                {
+                    if (chato_combatcontenu._ordreJoueur[i] == chato_combatcontenu._nomPersoJouable[j])
+                    {
+                        ordreA[i] = ordrejA;                        
+                    }
+                    ordrejA++;
+                }               
+            }
 
             _fileA = new String[chato_combatcontenu._nbEquipe];
             _sheetA = new SpriteSheet[chato_combatcontenu._nbEquipe];
             _allie = new AnimatedSprite[chato_combatcontenu._nbEquipe];
-            _posAllie = new[] { new Vector2(145,230), new Vector2(195, 175), new Vector2(45, 230), new Vector2(95, 175) };
+            _posAllie = new[] { new Vector2(145, 230), new Vector2(195, 175), new Vector2(45, 230), new Vector2(95, 175) };
 
             for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
-                for (int j = 0; j < chato_combatcontenu._nbEquipe; j++)
+                if (ordreA[i] == 0)
                 {
-                    if (chato_combatcontenu._ordreJoueur[i] == chato_combatcontenu._nomPersoJouable[j])
-                    {
+                    chato_combatcontenu.Hein();
+                    GenerationAllie();
+                }
+                else if (ordreA[i] == 1)
+                {
+                    chato_combatcontenu.Hero();
+                    GenerationAllie();
+                }
+                else if (ordreA[i] == 2)
+                {
+                    chato_combatcontenu.Jon();
+                    GenerationAllie();
+                }
+                else if (ordreA[i] == 3)
+                {
+                    chato_combatcontenu.Ben();
+                    GenerationAllie();
+                }
+                _ordrefinal++;
+            }
 
+            //Generation ennemi mais surtout ordre ennemi
+
+            int[] ordreE = new int[chato_combatcontenu._nbEnnemy];
+            int ordrejE = 0;
+
+            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            {
+                ordrejE = 0;
+                for (int j = 0; j < chato_combatcontenu._nbEnnJouable; j++)
+                {
+                    if (chato_combatcontenu._ordreEnnemi[i] == chato_combatcontenu._nomEnnJouable[j])
+                    {
+                        ordreE[i] = ordrejE;
                     }
-                        
+                    ordrejE++;
                 }
             }
-
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
-            {
-                _fileA[i] = chato_combatcontenu._fileA[i];
-               _sheetA[i] = Content.Load<SpriteSheet>(_fileA[i], new JsonContentLoader());
-               _allie[i] = new AnimatedSprite(_sheetA[i]);
-            }
-
-            //Generation ennemi
 
             _fileE = new String[chato_combatcontenu._nbEnnemy];
             _sheetE = new SpriteSheet[chato_combatcontenu._nbEnnemy];
             _ennemy = new AnimatedSprite[chato_combatcontenu._nbEnnemy];
-            _posEnnemy = new[] { new Vector2(365, 230), new Vector2(315, 175), new Vector2(465, 230), new Vector2(415, 175)};
+            _posEnnemy = new[] { new Vector2(145, 230), new Vector2(195, 175), new Vector2(45, 230), new Vector2(95, 175) };
 
-            SpriteSheet test = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
-            
-
+            _ordrefinal = 0;
             for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
             {
-                _fileE[i] = "anim/char/base_model_m/base_model_movement.sf";
-                _sheetE[i] = Content.Load<SpriteSheet>(_fileA[i], new JsonContentLoader());
-                _ennemy[i] = new AnimatedSprite(_sheetA[i]);
+                if (ordreE[i] == 0)
+                {
+                    chato_combatcontenu.Grand();
+                    GenerationEnnemi();
+                }
+                else if (ordreE[i] == 1)
+                {
+                    chato_combatcontenu.Mechant();
+                    GenerationEnnemi();
+                }
+                else if (ordreE[i] == 2)
+                {
+                    chato_combatcontenu.Pabo();
+                    GenerationEnnemi();
+                }
+                _ordrefinal++;
             }
            
             base.Initialize();
@@ -147,6 +198,7 @@ namespace SAE101
             _chatoCombatDecor = Content.Load<Texture2D>("img/chato/combat_decor");
             _combatBox = Content.Load<Texture2D>("img/dialogue/combat_box");
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
+            _cursorD = Content.Load<Texture2D>("img/dialogue/cursord");
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
             
@@ -156,6 +208,7 @@ namespace SAE101
 
         public override void Update(GameTime gameTime)
         {
+
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -177,7 +230,23 @@ namespace SAE101
                 Game1.SetCoolDown();
             }
 
+            //curseurd controls
+            if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+            {
+                _positionCursor.Y = _positionCursor.Y + 36;
+                _choixCursor = _choixCursor + 1;
+                Game1.SetCoolDown();
+
+            }
+            if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+            {
+                _positionCursor.Y = _positionCursor.Y - 36;
+                _choixCursor = _choixCursor - 1;
+                Game1.SetCoolDown();
+            }
+
             //Perso choisissant son action
+            //A revoir
             if (_numPerso == 1)
             {
                 chato_combatcontenu.Hero();
@@ -191,6 +260,7 @@ namespace SAE101
                 chato_combatcontenu.Ben();
             }
 
+            //Pas revoir
             if (_sousMenuSpecial == true)
             {
                 _choix = chato_combatcontenu._specialP;
@@ -258,6 +328,7 @@ namespace SAE101
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
             _spriteBatch.Draw(_combatBox, _positionCombat, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
+            _spriteBatch.Draw(_cursorD, _positionCursorD, Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
@@ -289,6 +360,20 @@ namespace SAE101
             //nombre d'ennemi
             chato_combatcontenu._nbEquipe = 2;
             chato_combatcontenu._nbEnnemy = 1;
+        }
+
+        public void GenerationAllie()
+        {
+            _fileA[_ordrefinal] = chato_combatcontenu._anim;
+            _sheetA[_ordrefinal] = Content.Load<SpriteSheet>(_fileA[_ordrefinal], new JsonContentLoader());
+            _allie[_ordrefinal] = new AnimatedSprite(_sheetA[_ordrefinal]);
+        }
+
+        public void GenerationEnnemi()
+        {
+            _fileE[_ordrefinal] = chato_combatcontenu._anim;
+            _sheetE[_ordrefinal] = Content.Load<SpriteSheet>(_fileE[_ordrefinal], new JsonContentLoader());
+            _ennemy[_ordrefinal] = new AnimatedSprite(_sheetE[_ordrefinal]);
         }
     }
 }

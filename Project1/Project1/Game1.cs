@@ -60,6 +60,16 @@ namespace SAE101
         public static SoundEffect _vic;
         public static SoundEffect _duck;
 
+        // on définit les différents états possibles du jeu ( à compléter) 
+        public enum Etats { Menu, Play, Quitter, Option };
+
+        // on définit un champ pour stocker l'état en cours du jeu
+        private Etats etat;
+
+        // on définit  2 écrans ( à compléter )
+        /*private ScreenMenu _screenMenu;
+        private ScreenPlay _screenPlay;*/
+
         //Combat?
         private bool _combatTest;
 
@@ -95,8 +105,8 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            _graphics.PreferredBackBufferWidth = 768;
-            _graphics.PreferredBackBufferHeight = 672;
+            _graphics.PreferredBackBufferWidth = 514; //768
+            _graphics.PreferredBackBufferHeight = 448; //672
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
@@ -219,10 +229,32 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
+            
+            if (_keyboardState.IsKeyDown(Keys.E))
+            {
+                _graphics.PreferredBackBufferWidth = 514;
+                _graphics.PreferredBackBufferHeight = 448;
+                GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                _graphics.ApplyChanges();
+            }
+            if (_keyboardState.IsKeyDown(Keys.D))
+            {
+                _graphics.PreferredBackBufferWidth = 768;
+                _graphics.PreferredBackBufferHeight = 672;
+                GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                _graphics.ApplyChanges();
+            }
+            if (_keyboardState.IsKeyDown(Keys.F))
+            {
+                _graphics.PreferredBackBufferWidth = 1024;
+                _graphics.PreferredBackBufferHeight = 896;
+                GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                _graphics.ApplyChanges();
+            }
 
             //Camera
 
-                /* chambres nord */
+            /* chambres nord */
             Console.WriteLine(_numEcran);
 
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1

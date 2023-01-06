@@ -60,16 +60,6 @@ namespace SAE101
         public static SoundEffect _vic;
         public static SoundEffect _duck;
 
-        // on définit les différents états possibles du jeu ( à compléter) 
-        public enum Etats { Menu, Play, Quitter, Option };
-
-        // on définit un champ pour stocker l'état en cours du jeu
-        private Etats etat;
-
-        // on définit  2 écrans ( à compléter )
-        /*private ScreenMenu _screenMenu;
-        private ScreenPlay _screenPlay;*/
-
         //Combat?
         private bool _combatTest;
 
@@ -155,7 +145,7 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // on charge l'écran de menu par défaut 
-            _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.Black));
+            LoadScreenblack_jack();
 
             //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");

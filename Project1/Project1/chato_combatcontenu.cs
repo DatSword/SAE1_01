@@ -30,10 +30,12 @@ namespace SAE101
         public static String[] _descP;
         public static String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
         public static int _nbPersoJouable = 4;
+        public static String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
+        public static int _nbEnnJouable = 3;       
         public static String[] _ordreJoueur;
         public static String[] _ordreEnnemi;
 
-        public static String[] _fileA;
+        public static String _anim;
         public static String[] _fileE;
         public static String _anim1;
         public static String _anim2;
@@ -48,14 +50,13 @@ namespace SAE101
         {
             _nbEquipe = 2;
             Console.WriteLine("1");
-            _fileA = new String[_nbEquipe];
             Console.WriteLine("2");
             _ordreJoueur = new String[] { "Hero", "Ben" };
             Console.WriteLine("4");
 
             _nbEnnemy = 2;
             Console.WriteLine("5");
-            _fileE = new String[_nbEnnemy];
+            _ordreEnnemi = new String[] { "Grand", "Mechant" };
             Console.WriteLine("6");
 
         }
@@ -67,10 +68,9 @@ namespace SAE101
             _specialP = new String[] { "_", "_", "_", "_" };
             _descP = new String[] { "_", "_", "_", "_" };
         }
-
         public static void Hero()
         {
-            
+            _anim = "anim/char/ennemy/base_model_ennemies.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
@@ -78,15 +78,42 @@ namespace SAE101
         }
         public static void Jon()
         {
+            _anim = "anim/char/base_model_m/base_model_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
             _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
         }
         public static void Ben()
         {
+            _anim = "anim/char/base_model_m/base_model_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
             String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };         
+        }
+
+        //personnages non joueurs
+
+        public static void Grand()
+        {
+            _anim = "anim/char/ennemy/base_model_ennemies.sf";
+            _special = "NommCoul";
+            _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
+            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
+
+        }
+        public static void Mechant()
+        {
+            _anim = "anim/char/base_model_m/base_model_movement.sf";
+            _special = "Magie";
+            _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
+            _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
+        }
+        public static void Pabo()
+        {
+            _anim = "anim/char/base_model_m/base_model_movement.sf";
+            _special = "Cri";
+            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
+            String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
         }
     }
 }

@@ -47,7 +47,7 @@ namespace SAE101
             _stop = 1;
 
             _positionPerso = new Vector2(40, 480);
-            _positionPerso = new Vector2(21*16, 49*16);
+            _positionPerso = new Vector2(22*16, 49*16);
             _sensPersoX = 0;
             _sensPersoY = 0;
 

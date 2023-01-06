@@ -178,6 +178,7 @@ namespace SAE101
                 _spriteBatch.DrawString(Game1._font, eventsetdial._text, eventsetdial._posText, Color.White);
                 _spriteBatch.DrawString(Game1._font, eventsetdial._nom, eventsetdial._posNom, Color.White);
             }
+            _spriteBatch.End();
         }
 
         private bool IsCollision(ushort x, ushort y)

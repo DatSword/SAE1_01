@@ -104,7 +104,7 @@ namespace SAE101
 
             for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
-                _fileA[i] = "anim/char/base_model_m/base_model_movement.sf";
+                _fileA[i] = chato_combatcontenu._fileA[i];
                _sheetA[i] = Content.Load<SpriteSheet>(_fileA[i], new JsonContentLoader());
                _allie[i] = new AnimatedSprite(_sheetA[i]);
             }
@@ -166,11 +166,15 @@ namespace SAE101
             //Perso choisissant son action
             if (_numPerso == 1)
             {
-                Hero();
+                chato_combatcontenu.Hero();
             }
             else if (_numPerso == 2)
             {
-                Jon();
+                chato_combatcontenu.Jon();
+            }
+            else if (_numPerso == 3)
+            {
+                chato_combatcontenu.Ben();
             }
 
             if (_sousMenuSpecial == true)
@@ -182,7 +186,7 @@ namespace SAE101
             {
                 _choix = _choixBackup;
                 _desc = _descBackup;
-                _choix[1] = _spécial;
+                _choix[1] = chato_combatcontenu._special;
             }
 
             //Selection dans le menu
@@ -254,38 +258,6 @@ namespace SAE101
                 _spriteBatch.Draw(_ennemy[i], _posEnnemy[i]);
             }
             _spriteBatch.End();
-        }
-
-        public void Hero()
-        {
-            _spécial = "NomCool";
-            String[] _specialH = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };          
-            String[] _descH = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
- 
-        }
-        public void Jon()
-        {
-            _spécial = "Magie";
-            String[] _specialJ = new String[] { "Boule de feu", "JSP", "_", "_" };
-            String[] _descJ = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
-        }
-
-        public void Ben()
-        {
-            _spécial = "Cri";
-            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
-            String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
-            if (_sousMenuSpecial == true)
-            {
-                _choix = _specialJ;
-                _desc = _descJ;
-            }
-            else if (_sousMenuSpecial == false)
-            {
-                _choix = _choixBackup;
-                _desc = _descBackup;
-                _choix[1] = _spécial;
-            }
         }
 
         public void Objects()

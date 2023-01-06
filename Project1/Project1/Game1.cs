@@ -169,20 +169,34 @@ namespace SAE101
 
             //Camera
 
+                /* chambres nord */
+            Console.WriteLine(_numEcran);
 
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
-                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreGauche)
+                                && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreGauche)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre1;
+
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
+                _cameraPosition = chato_int_chambres_nord._chambreCentreUn;
+
+            else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
+                                && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1
+                                && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite)
+                _cameraPosition = chato_int_chambres_nord._chambreCentreDeux;
 
             else if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2 
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
+        
+
             else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
 
+                /* couloir */
             if (_numEcran == 2 && (chato_int_chambres_couloir._positionPerso.Y > 0
                                 && (chato_int_chambres_couloir._positionPerso.X > chato_int_chambres_couloir._limiteChambreX1 || 
                                 chato_int_chambres_couloir._positionPerso.X < chato_int_chambres_couloir._limiteChambreX2)))
@@ -196,7 +210,7 @@ namespace SAE101
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1 
                                 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreGauche
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = chato_int_chambres_nord._chambreCentre1;
+                _cameraPosition = chato_int_chambres_nord._chambreCentreUn;
 
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
                                 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreDroite
@@ -206,9 +220,9 @@ namespace SAE101
             else if (_numEcran == 2 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreX2
                                 && chato_int_chambres_nord._positionPerso.X > chato_int_chambres_nord._limiteChambreDroite
                                 && chato_int_chambres_nord._positionPerso.Y >= chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = chato_int_chambres_nord._chambreCentre2;
+                _cameraPosition = chato_int_chambres_nord._chambreCentreDeux;
 
-            else if (_numEcran == 2 && chato_ext_cours_interieur._positionPerso.X < 1*16)
+            else if (_numEcran == 2 && chato_ext_cours_interieur._positionPerso.Y > 49*16)
                 _cameraPosition = new Vector2(chato_ext_cours_interieur._positionPerso.X, chato_ext_cours_interieur._positionPerso.Y);
 
             else if (_numEcran == 3 & chato_int_chambres_nord._positionPerso.Y >= 1 * 16)
@@ -224,7 +238,6 @@ namespace SAE101
             /*else
                 _cameraPosition*/
 
-            Console.WriteLine(_numEcran);
 
             base.Update(gameTime);
         }
@@ -254,6 +267,7 @@ namespace SAE101
             _screenManager.LoadScreen(new chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
             MediaPlayer.Play(_songChato);
             _numEcran = 1;
+
         }
 
         public void LoadScreenchato_int_chambres_couloir()
@@ -281,7 +295,7 @@ namespace SAE101
         public static void SetCoolDown()
         {
             _cooldownVerif = true;
-            _cooldown = 0.2f;
+            _cooldown = 0.15f;
             _menu.Play();
         }
     }

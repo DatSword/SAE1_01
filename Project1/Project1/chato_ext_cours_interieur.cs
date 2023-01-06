@@ -44,10 +44,10 @@ namespace SAE101
         {
             // Lieu Spawn
             _posX = 0;
-
             _stop = 1;
 
             _positionPerso = new Vector2(40, 480);
+            _positionPerso = new Vector2(22*16, 49*16);
             _sensPersoX = 0;
             _sensPersoY = 0;
 
@@ -76,8 +76,8 @@ namespace SAE101
         public override void Update(GameTime gameTime)
         {
             //debug map
-            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth - 1), (ushort)(_positionPerso.Y / _tiledMap.TileHeight)).GlobalIdentifier;
-            Console.WriteLine(a);
+            int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
+            //Console.WriteLine(a);
 
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -150,7 +150,7 @@ namespace SAE101
 
             //changements maps
 
-            if (keyboardState.IsKeyDown(Keys.Left) && (a == 101) && _positionPerso.X < 2 * 16)
+            if (keyboardState.IsKeyDown(Keys.Down) && (a == 101) && _positionPerso.Y >= 48 * 16)
             {
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();

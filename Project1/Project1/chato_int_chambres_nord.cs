@@ -84,15 +84,17 @@ namespace SAE101
             _chestTrue = false;
 
             // Emplacements pour camera
-            //_chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
-            _chambreCentre1 = new Vector2((float)8 * 16, 6 * 16);
+            _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
+            //_chambreCentre1 = new Vector2((float)8 * 16, 6 * 16);
             _chambreCentreUn = new Vector2((float)14.5 * 16, 6 * 16);
-            //_chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
-            _chambreCentre2 = new Vector2((float)32.5 * 16, 6 * 16);
+            _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
+            //_chambreCentre2 = new Vector2((float)32.5 * 16, 6 * 16);
             _chambreCentreDeux = new Vector2((float)38.5 * 16, 6 * 16);
+
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
             _limiteChambreY1 = 8 * 16;
+
             _limiteChambreGauche = 8 * 16;
             _limiteChambreDroite = 32 * 16;
 
@@ -199,7 +201,11 @@ namespace SAE101
                         _positionPerso.X += walkSpeed;
                 }
             }
-            
+            else if (animation == null)
+                animation = "idle_down";
+            else
+                animation = animation;
+
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
@@ -241,12 +247,11 @@ namespace SAE101
             if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationChest == "close" 
                 && _positionPerso.X > _limiteChambreDroite)
                 _chestTrue = true;
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationChest == "open" 
-                && _positionPerso.X > _limiteChambreDroite)
-                _chestTrue = false;
+            
 
             _chest1.Play(animationChest);
             _chest1.Update(deltaSeconds);
+
 
             //EVENEMENTS
             

@@ -98,11 +98,9 @@ namespace SAE101
 
             _tiledMapRenderer.Update(gameTime);
 
-            
-
             //Debug changement de map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+            //Console.WriteLine(a);
 
             //Mouvement/animation
             if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))
@@ -156,15 +154,16 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
-            //ENclenchement evenment
+            //Enclenchement evenment
 
             //Changement de map          
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 26))
             {
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_nord();
+                
             }        
-            if (keyboardState.IsKeyDown(Keys.Up) && (a == 29 || a == 30))
+            if (keyboardState.IsKeyDown(Keys.Up) && (a == 30))
             {
                 Game.LoadScreenchato_ext_cours_interieur();
                 chato_int_chambres_nord._posX = 0;

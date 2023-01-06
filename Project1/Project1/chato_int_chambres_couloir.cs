@@ -154,15 +154,16 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
-            //ENclenchement evenment
+            //Enclenchement evenment
 
             //Changement de map          
             if (keyboardState.IsKeyDown(Keys.Up) && (a == 26))
             {
                 _posX = (int)_positionPerso.X;
                 Game.LoadScreenchato_int_chambres_nord();
+                
             }        
-            if (keyboardState.IsKeyDown(Keys.Up) && (a == 29 || a == 30))
+            if (keyboardState.IsKeyDown(Keys.Up) && (a == 30))
             {
                 Game.LoadScreenchato_ext_cours_interieur();
                 chato_int_chambres_nord._posX = 0;

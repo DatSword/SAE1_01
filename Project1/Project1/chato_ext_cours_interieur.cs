@@ -77,7 +77,7 @@ namespace SAE101
         {
             //debug map
             int a = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+            //Console.WriteLine(a);
 
             _sensPersoX = 0;
             _sensPersoY = 0;

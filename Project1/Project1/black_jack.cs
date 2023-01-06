@@ -64,7 +64,7 @@ namespace SAE101
                         "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
                         "d'épreuves, le sommeil reste son ennemi le plus puissant.";
             if (_fin == 2)
-                _text = "Malheuresement, après avoir traversés tant d'obstacles, il\n" +
+                _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
                         "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
                         "non?";

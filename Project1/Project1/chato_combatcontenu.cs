@@ -26,6 +26,7 @@ namespace SAE101
         public static int _nbEnnemy;
 
         public static String _special;
+        public static String _anim;
         public static String[] _specialP;
         public static String[] _descP;
         public static String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
@@ -34,17 +35,6 @@ namespace SAE101
         public static int _nbEnnJouable = 3;       
         public static String[] _ordreJoueur;
         public static String[] _ordreEnnemi;
-
-        public static String _anim;
-        public static String[] _fileE;
-        public static String _anim1;
-        public static String _anim2;
-        public static String _anim3;
-        public static String _anim4;
-        public static String _anim5;
-        public static String _anim6;
-        public static String _anim7;
-        public static String _anim8;
 
         public static void CombatTest()
         {

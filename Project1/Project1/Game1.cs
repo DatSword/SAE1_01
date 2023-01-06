@@ -22,9 +22,21 @@ namespace SAE101
     {
         //honnêtement j'en sais r
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public static SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
         public static KeyboardState _keyboardState;
+
+
+        // on définit les différents états possibles du jeu ( à compléter) 
+        public enum Etats { Menu, Play, Quitter, Option };
+
+        // on définit un champ pour stocker l'état en cours du jeu
+        private Etats etat;
+
+        // on définit  2 écrans ( à compléter )
+        private ecran_de_titre _ecranDeTitre;
+        private black_jack _blackJack;
+
 
         //Camera
         public static OrthographicCamera _camera;
@@ -48,16 +60,6 @@ namespace SAE101
         public static SoundEffect _vic;
         public static SoundEffect _duck;
 
-        // on définit les différents états possibles du jeu ( à compléter) 
-        public enum Etats { Menu, Play, Quitter, Option };
-
-        // on définit un champ pour stocker l'état en cours du jeu
-        private Etats etat;
-
-        // on définit  2 écrans ( à compléter )
-        private ecran_de_titre _ecranDeTitre;
-        private chato_int_chambres_nord _chatoIntChambresNord;
-
         //Combat?
         private bool _combatTest;
 
@@ -72,6 +74,19 @@ namespace SAE101
         //event
         public static bool _firstvisit;
 
+        public Etats Etat
+        {
+            get
+            {
+                return this.etat;
+            }
+
+            set
+            {
+                this.etat = value;
+            }
+        }
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -80,6 +95,8 @@ namespace SAE101
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
         }
+
+
         protected override void Initialize()
         {
             // Definition écran
@@ -88,10 +105,16 @@ namespace SAE101
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
+            // Par défaut, le 1er état flèche l'écran de menu
+            Etat = Etats.Menu;
+
+            // on charge les 2 écrans 
+            _ecranDeTitre = new ecran_de_titre(this);
+            _blackJack = new black_jack(this);
+
             //Camera
 
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
-            //var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 768, 672);
             _camera = new OrthographicCamera(viewportadapter);
 
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
@@ -123,6 +146,9 @@ namespace SAE101
             //Jsp
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // on charge l'écran de menu par défaut 
+            _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.Black));
+
             //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
             _titleTheme = Content.Load<Song>("music/title/title");
@@ -144,8 +170,8 @@ namespace SAE101
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
-
         }
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -156,7 +182,28 @@ namespace SAE101
             _keyboardState = Keyboard.GetState();
             deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            // On teste le clic de souris et l'état pour savoir quelle action faire 
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+                // Attention, l'état a été mis à jour directement par l'écran en question
+                if (this.Etat == Etats.Quitter)
+                    Exit();
+
+                else if (this.Etat == Etats.Play)
+                    _screenManager.LoadScreen(_blackJack, new FadeTransition(GraphicsDevice, Color.Black));
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+            {
+                if (this.Etat == Etats.Menu)
+                    _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.Black));
+            }
+
             Console.WriteLine(_cooldownVerif);
+
             if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
                 LoadScreenchato_combat();

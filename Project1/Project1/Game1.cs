@@ -77,14 +77,9 @@ namespace SAE101
         public Etats Etat
         {
             get
-            {
-                return this.etat;
-            }
-
+            {   return this.etat;   }
             set
-            {
-                this.etat = value;
-            }
+            {   this.etat = value;  }
         }
 
         public Game1()
@@ -105,12 +100,13 @@ namespace SAE101
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
+
             // Par défaut, le 1er état flèche l'écran de menu
             Etat = Etats.Menu;
-
             // on charge les 2 écrans 
             _ecranDeTitre = new ecran_de_titre(this);
             _blackJack = new black_jack(this);
+
 
             //Camera
 
@@ -123,11 +119,13 @@ namespace SAE101
             _cameraPosition = chato_int_chambres_nord._chambreCentre1;
             _numEcran = 1;
 
+
             //Dialogue
             eventsetdial._posText = new Vector2(105, 360);
             eventsetdial._posNom = new Vector2(25, 360);
             eventsetdial._posDialBox = new Vector2(0, 348);
             eventsetdial._dialTrue = false;
+
 
             //Combat?
             _combatTest = false;
@@ -182,9 +180,6 @@ namespace SAE101
             _keyboardState = Keyboard.GetState();
             deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // On teste le clic de souris et l'état pour savoir quelle action faire 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
@@ -194,12 +189,12 @@ namespace SAE101
                     Exit();
 
                 else if (this.Etat == Etats.Play)
-                    _screenManager.LoadScreen(_blackJack, new FadeTransition(GraphicsDevice, Color.Black));
+                    LoadScreenblack_jack();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Back))
             {
                 if (this.Etat == Etats.Menu)
-                    _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.Black));
+                    LoadScreenecran_de_titre();
             }
 
             Console.WriteLine(_cooldownVerif);
@@ -248,8 +243,6 @@ namespace SAE101
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = chato_int_chambres_nord._chambreCentre2;
 
-        
-
             else if (_numEcran == 1 && chato_int_chambres_couloir._positionPerso.Y >= chato_int_chambres_couloir._limiteCouloirY1)
                 _cameraPosition = new Vector2(chato_int_chambres_couloir._positionPerso.X, chato_int_chambres_couloir._positionPerso.Y);
 
@@ -293,12 +286,10 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = chato_combat._centreCombat;
 
-            /*else
-                _cameraPosition*/
-
 
             base.Update(gameTime);
         }
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -306,6 +297,7 @@ namespace SAE101
 
             base.Draw(gameTime);
         }
+
 
         //Chargements maps
         public void LoadScreenecran_de_titre()

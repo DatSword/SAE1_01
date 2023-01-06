@@ -30,12 +30,6 @@
 /processorParam:TextureFormat=Color
 /build:anim/char/base_model_m/base_model_male - Copie.png
 
-#begin anim/char/base_model_m/base_model_movement.sf
-/importer:SpriteFactoryContentImporter
-/processor:SpriteFactoryContentProcessor
-/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
-/build:anim/char/base_model_m/base_model_movement.sf
-
 #begin anim/char/enemy/base_model_ennemies(3).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,12 +42,6 @@
 /processorParam:TextureFormat=Color
 /build:anim/char/enemy/base_model_ennemies(3).png
 
-#begin anim/char/fren/Fren.sf
-/importer:SpriteFactoryContentImporter
-/processor:SpriteFactoryContentProcessor
-/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
-/build:anim/char/fren/Fren.sf
-
 #begin anim/char/fren/objects1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -65,12 +53,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:anim/char/fren/objects1.png
-
-#begin anim/objects/chest1.sf
-/importer:SpriteFactoryContentImporter
-/processor:SpriteFactoryContentProcessor
-/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
-/build:anim/objects/chest1.sf
 
 #begin anim/objects/objects1.png
 /importer:TextureImporter
@@ -267,6 +249,30 @@
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:map/chato/tsx/vegetation1.tsx
+
+#begin menu/buttons(1).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:menu/buttons(1).png
+
+#begin menu/buttons.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:menu/buttons.png
 
 #begin music/chato/EdgarAndSabin.mp3
 /importer:Mp3Importer

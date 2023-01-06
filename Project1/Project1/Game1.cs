@@ -301,7 +301,7 @@ namespace SAE101
         public static void SetCoolDown()
         {
             _cooldownVerif = true;
-            _cooldown = 0.2f;
+            _cooldown = 0.15f;
             _menu.Play();
         }
     }

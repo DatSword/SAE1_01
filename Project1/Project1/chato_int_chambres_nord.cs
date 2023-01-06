@@ -248,6 +248,7 @@ namespace SAE101
             _chest1.Play(animationChest);
             _chest1.Update(deltaSeconds);
 
+
             //EVENEMENTS
             
             if(Game1._firstvisit == true && Game1._cooldownVerif == false && numDial == 0)

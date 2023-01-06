@@ -134,10 +134,11 @@ namespace SAE101
         {
             //debug map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
-            //Console.WriteLine(a);
+            Console.WriteLine(a);
             //debug autres collisions
             int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
-            //Console.WriteLine(b);
+            Console.WriteLine(b);
+
 
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);

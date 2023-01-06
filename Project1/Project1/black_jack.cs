@@ -72,12 +72,15 @@ namespace SAE101
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
-                        "envoyé d'on-ne-sais-quand? Toutes ces réponses, vous les aurez...\n" +
-                        "Peut être un jour...?";
+                        "envoyé d'on-ne-sait-quand? Toutes ces réponses, vous les aurez...\n" +
+                        "Peut-être un jour...?";
+            if (_fin == 01)
+                _text = "";
 
 
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Game1._dialTrue == false)
             {
+                _fin = 01;
                 eventsetdial.toutDebut();
             }
 

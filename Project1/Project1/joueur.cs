@@ -29,13 +29,13 @@ namespace SAE101
                 chato_int_chambres_couloir._positionPerso = new Vector2(104, 112);
 
             if (chato_int_chambres_nord._posX >= 3 * 16 && chato_int_chambres_nord._posX < 5 * 16)
-                chato_int_chambres_couloir._positionPerso = new Vector2(104, 112);
+                chato_int_chambres_couloir._positionPerso = new Vector2(6 * 16 + 8, 7 * 16);
             else if (chato_int_chambres_nord._posX >= 11 * 16 && chato_int_chambres_nord._posX < 13 * 16)
-                chato_int_chambres_couloir._positionPerso = new Vector2(14 * 16 + 8, 112);
+                chato_int_chambres_couloir._positionPerso = new Vector2(14 * 16 + 8, 7 * 16);
             else if (chato_int_chambres_nord._posX >= 27 * 16 && chato_int_chambres_nord._posX < 29 * 16)
-                chato_int_chambres_couloir._positionPerso = new Vector2(30 * 16 + 8, 112);
+                chato_int_chambres_couloir._positionPerso = new Vector2(30 * 16 + 8, 7 * 16);
             else if (chato_int_chambres_nord._posX >= 35 * 16 && chato_int_chambres_nord._posX < 37 * 16)
-                chato_int_chambres_couloir._positionPerso = new Vector2(38 * 16 + 8, 112);
+                chato_int_chambres_couloir._positionPerso = new Vector2(38 * 16 + 8, 7 * 16);
             else if (chato_ext_cours_interieur._posX != 0)
                 chato_int_chambres_couloir._positionPerso = new Vector2(22 * 16 + 8, 2 * 16 + 8);
 
@@ -48,13 +48,13 @@ namespace SAE101
                 chato_int_chambres_nord._positionPerso = new Vector2(3 * 16 + 8, 2 * 16 + 8);
 
             if (chato_int_chambres_couloir._posX >= 5 * 16 && chato_int_chambres_couloir._posX < 7 * 16)
-                chato_int_chambres_nord._positionPerso = new Vector2(72, 111);
+                chato_int_chambres_nord._positionPerso = new Vector2(72, 7 * 16);
             else if (chato_int_chambres_couloir._posX >= 13 * 16 && chato_int_chambres_couloir._posX < 15 * 16)
-                chato_int_chambres_nord._positionPerso = new Vector2(12 * 16 + 8, 111);
+                chato_int_chambres_nord._positionPerso = new Vector2(12 * 16 + 8, 7 * 16);
             else if (chato_int_chambres_couloir._posX >= 29 * 16 && chato_int_chambres_couloir._posX < 31 * 16)
-                chato_int_chambres_nord._positionPerso = new Vector2(28 * 16 + 8, 111);
+                chato_int_chambres_nord._positionPerso = new Vector2(28 * 16 + 8, 7 * 16);
             else if (chato_int_chambres_couloir._posX >= 37 * 16 && chato_int_chambres_couloir._posX < 39 * 16)
-                chato_int_chambres_nord._positionPerso = new Vector2(36 * 16 + 8, 111);
+                chato_int_chambres_nord._positionPerso = new Vector2(36 * 16 + 8, 7 * 16);
         }
 
         public static TiledMapTileLayer MapLayer()

@@ -29,7 +29,10 @@ namespace SAE101
         // défini dans Game1
         private Game1 _myGame;
         // texture du menu avec 3 boutons
-        private AnimatedSprite _textBoutons;
+        private Texture2D _start;
+        private Texture2D _option;
+        private Texture2D _quit;
+     
         // contient les rectangles : position et taille des 3 boutons présents dans la texture 
         private Rectangle[] lesBoutons;
 
@@ -45,9 +48,11 @@ namespace SAE101
         {
             
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(0, 0, 288, 448);
-            lesBoutons[1] = new Rectangle(514, 448, 640, 160);
-            lesBoutons[2] = new Rectangle(514, 448, 640, 160);
+            lesBoutons[0] = new Rectangle(144, 75, 192, 144);
+            lesBoutons[1] = new Rectangle(144, 150, 192, 144);
+            lesBoutons[2] = new Rectangle(144, 200, 192, 144);
+
+            
 
             base.Initialize();
         }
@@ -56,8 +61,9 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("menu/buttons(1).sf", new JsonContentLoader());
-            _textBoutons = new AnimatedSprite(spriteSheet);
+            _start = Content.Load<Texture2D>("menu/start");
+            _option = Content.Load<Texture2D>("menu/options");
+            _quit = Content.Load<Texture2D>("menu/quit");
 
             _fontTest = Content.Load<SpriteFont>("font/font_test");
 
@@ -81,9 +87,9 @@ namespace SAE101
                     {
                         // on change l'état défini dans Game1 en fonction du bouton cliqué
                         if (i == 0)
-                            _myGame.Etat = Game1.Etats.Option;
-                        else if (i == 1)
                             _myGame.Etat = Game1.Etats.Play;
+                        else if (i == 1)
+                            _myGame.Etat = Game1.Etats.Option;
                         else
                             _myGame.Etat = Game1.Etats.Quitter;
                         break;
@@ -100,11 +106,13 @@ namespace SAE101
 
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.BlueViolet);
+            GraphicsDevice.Clear(Color.LightGray);
 
             _spriteBatch.Begin();
             _spriteBatch.DrawString(_fontTest, "Jeu de Fou",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_textBoutons, new Vector2(0, 0));
+            _spriteBatch.Draw(_start, new Vector2(144, 75), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(144, 150), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(144, 225), Color.White);
             _spriteBatch.End();
         }
     }

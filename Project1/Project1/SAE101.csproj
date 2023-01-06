@@ -27,7 +27,19 @@
     <PackageReference Include="Oscetch.MonoGame.Camera.GL" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\menu\buttons.sf">
+    <None Update="Content\menu\buttons%281%29.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\menu\buttons%281%29.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\menu\options.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\menu\quit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\menu\start.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

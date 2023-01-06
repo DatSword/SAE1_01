@@ -145,7 +145,9 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // on charge l'écran de menu par défaut 
-            LoadScreenblack_jack();
+            //LoadScreenblack_jack();
+            //LoadScreenecran_de_titre();
+            _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.LightGray));
 
             //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
@@ -324,7 +326,7 @@ namespace SAE101
         //Chargements maps
         public void LoadScreenecran_de_titre()
         {
-            _screenManager.LoadScreen(new ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.BlueViolet));
+            _screenManager.LoadScreen(new ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
             MediaPlayer.Play(_titleTheme);
         }
 

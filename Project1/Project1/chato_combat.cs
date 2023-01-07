@@ -94,8 +94,8 @@ namespace SAE101
             _numPerso = 1;
             _ordrefinal = 0;
 
-            String[] animationA = new String[4] { "idle_right","idle_right","idle_right","idle_right"};
-            String[] animationE = new String[4] { "idle_left", "idle_left", "idle_left", "idle_left" };
+            String[] animationA = new String[] { "idle_right","idle_right","idle_right","idle_right"};
+            String[] animationE = new String[] { "idle_left", "idle_left", "idle_left", "idle_left" };
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
@@ -348,31 +348,17 @@ namespace SAE101
                 _tourFini = false;
             }
 
-            /*_allie[0].Play(animationA[0]);
-            _allie[0].Update(deltaSeconds);
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
+                _allie[i].Play(animationA[i]);
+                _allie[i].Update(deltaSeconds);
+            }
 
-            _allie[1].Play(animationA[1]);
-            _allie[1].Update(deltaSeconds);
-
-            _allie[2].Play(animationA[2]);
-            _allie[2].Update(deltaSeconds);
-
-            _allie[3].Play(animationA[3]);
-            _allie[3].Update(deltaSeconds);
-
-
-            _ennemy[0].Play(animationE[0]);
-            _ennemy[0].Update(deltaSeconds);
-
-            _ennemy[1].Play(animationE[1]);
-            _ennemy[1].Update(deltaSeconds);
-
-            _ennemy[2].Play(animationE[2]);
-            _ennemy[2].Update(deltaSeconds);
-
-            _ennemy[3].Play(animationE[3]);
-            _ennemy[3].Update(deltaSeconds);*/
-
+            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            {
+                _ennemy[i].Play("idle_right");
+                _ennemy[i].Update(deltaSeconds);
+            }
         }
 
         public override void Draw(GameTime gameTime)

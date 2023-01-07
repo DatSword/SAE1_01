@@ -50,9 +50,9 @@ namespace SAE101
         {
             
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(144, 75, 192, 144);
-            lesBoutons[1] = new Rectangle(144, 150, 192, 144);
-            lesBoutons[2] = new Rectangle(144, 200, 192, 144);
+            lesBoutons[0] = new Rectangle(144, 200, 210, 63);
+            lesBoutons[1] = new Rectangle(144, 275, 210, 63);
+            lesBoutons[2] = new Rectangle(144, 350, 210, 63);
 
             
 
@@ -110,12 +110,13 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            _spriteBatch.Begin();
+            var transformMatrix = Game1._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(144, 150), Color.White); //75
-            _spriteBatch.Draw(_option, new Vector2(144, 225), Color.White); //150
-            _spriteBatch.Draw(_quit, new Vector2(144, 300), Color.White); //225
+            _spriteBatch.Draw(_start, new Vector2(144, 200), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(144, 275), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(144, 350), Color.White);
             _spriteBatch.End();
         }
     }

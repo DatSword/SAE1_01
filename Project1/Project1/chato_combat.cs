@@ -350,13 +350,13 @@ namespace SAE101
 
             for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
-                _allie[i].Play("idle_right");
+                _allie[i].Play("selected_right");
                 _allie[i].Update(deltaSeconds);
             }
 
             for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
             {
-                _ennemy[i].Play("idle_left");
+                _ennemy[i].Play("selected_left");
                 _ennemy[i].Update(deltaSeconds);
             }
         }

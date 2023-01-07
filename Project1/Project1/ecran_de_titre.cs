@@ -28,7 +28,9 @@ namespace SAE101
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
         private Game1 _myGame;
+
         // texture du menu avec 3 boutons
+        private Texture2D _titleS;
         private Texture2D _start;
         private Texture2D _option;
         private Texture2D _quit;
@@ -37,7 +39,7 @@ namespace SAE101
         private Rectangle[] lesBoutons;
 
         //Titre
-        public SpriteFont _fontTest;
+        public SpriteFont _fontTitle;
 
         public ecran_de_titre(Game1 game) : base(game) 
         {
@@ -64,8 +66,8 @@ namespace SAE101
             _start = Content.Load<Texture2D>("menu/start");
             _option = Content.Load<Texture2D>("menu/options");
             _quit = Content.Load<Texture2D>("menu/quit");
-
-            _fontTest = Content.Load<SpriteFont>("font/font_test");
+            _titleS = Content.Load<Texture2D>("menu/tantopie");
+            _fontTitle = Content.Load<SpriteFont>("font/fonttitle");
 
             base.LoadContent();
         }
@@ -109,10 +111,11 @@ namespace SAE101
             GraphicsDevice.Clear(Color.LightGray);
 
             _spriteBatch.Begin();
-            _spriteBatch.DrawString(_fontTest, "Jeu de Fou",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(144, 75), Color.White);
-            _spriteBatch.Draw(_option, new Vector2(144, 150), Color.White);
-            _spriteBatch.Draw(_quit, new Vector2(144, 225), Color.White);
+            _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
+            _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
+            _spriteBatch.Draw(_start, new Vector2(144, 150), Color.White); //75
+            _spriteBatch.Draw(_option, new Vector2(144, 225), Color.White); //150
+            _spriteBatch.Draw(_quit, new Vector2(144, 300), Color.White); //225
             _spriteBatch.End();
         }
     }

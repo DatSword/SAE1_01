@@ -170,6 +170,8 @@ namespace SAE101
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
+
+            
         }
 
 

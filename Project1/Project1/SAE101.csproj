@@ -27,6 +27,9 @@
     <PackageReference Include="Oscetch.MonoGame.Camera.GL" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Content\anim\char\ally\hero\character_movement.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Content\anim\char\base_model_m\character_movement.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

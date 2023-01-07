@@ -1,6 +1,6 @@
 {
   "textureAtlas": {
-    "texture": "base_model_male.png",
+    "texture": "hero.png",
     "regionWidth": 16,
     "regionHeight": 32
   },

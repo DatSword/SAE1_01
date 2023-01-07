@@ -35,19 +35,21 @@ namespace SAE101
         public static int _nbEnnJouable = 3;       
         public static String[] _ordreJoueur;
         public static String[] _ordreEnnemi;
+        public static int[] _stat; //PV, Attaque, Défense, Vitesse
 
         public static void CombatTest()
         {
-            _nbEquipe = 4;
-            _ordreJoueur = new String[] { "Hero", "Ben" , "Hero", "Jon"};
+            _nbEquipe = 2;
+            _ordreJoueur = new String[] { "Hein", "Hero" ,};
 
-            _nbEnnemy = 2;
-            _ordreEnnemi = new String[] { "Grand", "Mechant", "Pabo" };
+            _nbEnnemy = 0;
+            _ordreEnnemi = new String[] {};
         }
 
         //Personnages jouables
         public static void Hein()
         {
+            _stat = new int[4] { 1, 1, 1, 1 };
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "???";
             _specialP = new String[] { "_", "_", "_", "_" };
@@ -55,7 +57,8 @@ namespace SAE101
         }
         public static void Hero()
         {
-            _anim = "anim/char/enemy/base_model_ennemies.sf";
+            _stat = new int[4] { 80, 50, 60, 70 };
+            _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
@@ -63,6 +66,7 @@ namespace SAE101
         }
         public static void Jon()
         {
+            _stat = new int[4] { 100, 100, 40, 10 };
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
@@ -70,6 +74,7 @@ namespace SAE101
         }
         public static void Ben()
         {
+            _stat = new int[4] { 50, 40, 90, 60 };
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Cri";
             _specialP = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de 'blèmes", "_" };

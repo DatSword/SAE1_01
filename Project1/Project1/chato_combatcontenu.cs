@@ -42,8 +42,8 @@ namespace SAE101
             _nbEquipe = 2;
             _ordreJoueur = new String[] { "Hein", "Hero" ,};
 
-            _nbEnnemy = 0;
-            _ordreEnnemi = new String[] {};
+            _nbEnnemy = 3;
+            _ordreEnnemi = new String[] {"Grand","Mechant","Pabo"};
         }
 
         //Personnages jouables
@@ -85,7 +85,7 @@ namespace SAE101
 
         public static void Grand()
         {
-            _anim = "anim/char/enemy/base_model_ennemies.sf";
+            _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
@@ -93,14 +93,14 @@ namespace SAE101
         }
         public static void Mechant()
         {
-            _anim = "anim/char/base_model_m/character_movement.sf";
+            _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
             _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
         }
         public static void Pabo()
         {
-            _anim = "anim/char/base_model_m/character_movement.sf";
+            _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
             String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };

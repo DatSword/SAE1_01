@@ -42,7 +42,7 @@
 /processorParam:TextureFormat=Color
 /build:anim/char/base_model_m/base_model_male.png
 
-#begin anim/char/enemy/base_model_ennemies(3).png
+#begin anim/char/enemy/grand/grand.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -52,7 +52,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:anim/char/enemy/base_model_ennemies(3).png
+/build:anim/char/enemy/grand/grand.png
+
+#begin anim/char/enemy/mechant/mechant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/enemy/mechant/mechant.png
+
+#begin anim/char/enemy/pabo/pabo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/enemy/pabo/pabo.png
 
 #begin anim/char/fren/objects1.png
 /importer:TextureImporter

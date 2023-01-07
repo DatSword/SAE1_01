@@ -70,7 +70,7 @@ namespace SAE101
             mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
 
             //Load Perso
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/base_model_m/base_model_movement.sf", new JsonContentLoader());
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
 
             base.LoadContent();

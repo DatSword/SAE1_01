@@ -59,6 +59,8 @@ namespace SAE101
         public static SoundEffect _pelo;
         public static SoundEffect _vic;
         public static SoundEffect _duck;
+        public static SoundEffect _wbeg;
+        public static SoundEffect _wend;
 
         //Combat?
         private bool _combatTest;
@@ -164,6 +166,8 @@ namespace SAE101
             _vic = Content.Load<SoundEffect>("sfx/vic");
             _non = Content.Load<SoundEffect>("sfx/non");
             _duck = Content.Load<SoundEffect>("sfx/duck");
+            _wbeg = Content.Load<SoundEffect>("sfx/wbeg");
+            _wend = Content.Load<SoundEffect>("sfx/wend");
 
             //Boite de dialogue
             eventsetdial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
@@ -201,7 +205,7 @@ namespace SAE101
                     LoadScreenecran_de_titre();
             }
 
-            Console.WriteLine(_cooldownVerif);
+            //Console.WriteLine(_cooldownVerif);
 
             if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
@@ -249,7 +253,7 @@ namespace SAE101
             //Camera
 
             /* chambres nord */
-            Console.WriteLine(_numEcran);
+            //Console.WriteLine(_numEcran);
 
             if (_numEcran == 1 && chato_int_chambres_nord._positionPerso.X < chato_int_chambres_nord._limiteChambreX1
                                 && chato_int_chambres_nord._positionPerso.Y < chato_int_chambres_nord._limiteChambreY1

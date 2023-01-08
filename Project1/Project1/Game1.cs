@@ -48,6 +48,7 @@ namespace SAE101
         private Song _songChato;
         private Song _titleTheme;
         private Song _songCombat;
+        private Song _songDodo;
 
         //SFX
         public static SoundEffect _hit;
@@ -65,10 +66,13 @@ namespace SAE101
         //Combat?
         private bool _combatTest;
 
-        //Control
+        //Control cooldown
         public static float _cooldown;
         public static bool _cooldownVerif;
         public static float deltaSeconds;
+        //Combat cooldown
+        public static float _cooldownC;
+        public static bool _cooldownVerifC;
 
         //font
         public static SpriteFont _font;
@@ -155,6 +159,7 @@ namespace SAE101
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
             _titleTheme = Content.Load<Song>("music/title/title");
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
+            _songDodo = Content.Load<Song>("music/fins/smb_dodo");
 
             //SFX
             _menu = Content.Load<SoundEffect>("sfx/menu");
@@ -227,7 +232,15 @@ namespace SAE101
                     _cooldownVerif = false;
             }
 
-            
+            if (_cooldownVerifC == true)
+            {
+                _cooldownC = _cooldownC - deltaSeconds;
+                if (_cooldownC <= 0)
+                    _cooldownVerifC = false;
+            }
+            Console.WriteLine(_cooldownVerifC);
+            Console.WriteLine(_cooldownC);
+
             if (_keyboardState.IsKeyDown(Keys.E))
             {
                 _graphics.PreferredBackBufferWidth = 514;
@@ -375,8 +388,14 @@ namespace SAE101
         public static void SetCoolDown()
         {
             _cooldownVerif = true;
-            _cooldown = 0.15f;
+            _cooldown = 0.2f;
             _menu.Play();
+        }
+
+        public static void SetCoolDownCombat()
+        {
+            _cooldownVerifC = true;
+            _cooldownC = 3.0f;
         }
     }
 }

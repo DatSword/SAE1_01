@@ -22,6 +22,25 @@ namespace SAE101
 {
     internal class chato_combat : GameScreen
     {
+        //Constantes position pour animation;
+        private const int POS_ALLIEX0 = 145;
+        private const int POS_ALLIEX1 = 195;
+        private const int POS_ALLIEX2 = 45;
+        private const int POS_ALLIEX3 = 95;
+        private const int POS_ALLIEY0 = 230;
+        private const int POS_ALLIEY1 = 175;
+        private int[] _posAllieBaseX;
+        private int _persoAnime;
+        private bool _droite;
+        private bool _gauche;
+        private bool _animationAttack;
+        private bool un;
+        private bool deux;
+        private bool fini;
+        private bool _cool;
+        private bool _merde;
+        private bool _animationSpe;
+
         //Fond d'écran
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
@@ -73,6 +92,9 @@ namespace SAE101
         public static int[] _defAllie;
         public static int[] _vitAllie;
 
+        //Attaque Personnages
+        public static int[,] _attaquePerso;
+
         //Ennemies
         private AnimatedSprite[] _ennemy;      
         public static Vector2[] _posEnnemy;
@@ -86,6 +108,9 @@ namespace SAE101
         public static int[] _attEnn;
         public static int[] _defEnn;
         public static int[] _vitEnn;
+
+        //Attaque Ennemies
+        public static int[,] _attaqueEnnemy;
 
         //The Legend came to life
         public static int _ordrefinal;
@@ -109,7 +134,19 @@ namespace SAE101
             _action = 0;
             _numPerso = 1;
             _victoire = false;
+            _persoAnime = 0;
             _ordrefinal = 0;
+            _droite = false;
+            _gauche = false;
+            _animationAttack = false;
+            _animationSpe = false;
+            _cool = false;
+            un = false;
+            deux = false;
+            fini = false;
+            _merde = false;
+
+            chato_combatcontenu.CombatTest();
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
@@ -117,12 +154,12 @@ namespace SAE101
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
             _descBackup = new String[] { "_", "_", "_", "_" };
+            _attaquePerso = new int[3, chato_combatcontenu._nbEquipe];
+            _attaqueEnnemy = new int[3, chato_combatcontenu._nbEnnemy];
 
             //Camera j'crois
             _centreCombat = new Vector2(512 / 2, 448 / 2);
-
-            chato_combatcontenu.CombatTest();
-
+           
             //ordre allié
             _ordreA = new int[chato_combatcontenu._nbEquipe];
             int ordrejA = 0;
@@ -144,7 +181,8 @@ namespace SAE101
             _fileA = new String[chato_combatcontenu._nbEquipe];
             _sheetA = new SpriteSheet[chato_combatcontenu._nbEquipe];
             _allie = new AnimatedSprite[chato_combatcontenu._nbEquipe];
-            _posAllie = new[] { new Vector2(145, 230), new Vector2(195, 175), new Vector2(45, 230), new Vector2(95, 175) };
+            _posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
+            _posAllieBaseX = new int [] {POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
             _vieAllie = new int[chato_combatcontenu._nbEquipe];
             _attAllie = new int[chato_combatcontenu._nbEquipe];
             _defAllie = new int[chato_combatcontenu._nbEquipe];
@@ -289,7 +327,7 @@ namespace SAE101
                 if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == false)
                 {                   
                     Game1.SetCoolDown();
-                    Baston();
+                    Combat();
                     _selectionEnn = false;
                 }
 
@@ -301,6 +339,7 @@ namespace SAE101
             if (chato_combatcontenu._nbEquipe == _action)
             {
                 _tourFini = true;
+                Baston();
                 _action = 0;
                 _numPerso = 1;
                 _tourFini = false;
@@ -384,14 +423,116 @@ namespace SAE101
                 _ennemy[i].Update(deltaSeconds);
             }
 
+            Console.WriteLine(deux);
+            //ANIMATIONS
 
-            //mort d'un ennemi
+            if (_animationAttack == true)
+            {               
+                if (un == true)
+                {
+                    _animationA[_persoAnime] = "attack_right1";
 
-            _animationA[_action] = "selected_right";
-            //test 
-            
-                
-            //mort d'un allié
+                    _cool = true;
+                    un = false;
+                    _merde = true;
+                                     
+                }              
+                else if (_posAllie[_persoAnime].X > _posAllieBaseX[_persoAnime] + 80 && _merde == false)
+                {
+                    un = true;
+                }
+                else if (_posAllie[_persoAnime].X < _posAllieBaseX[_persoAnime])
+                {
+                    deux = false;
+                    _merde = false;
+                    _posAllie[_persoAnime].X = _posAllieBaseX[_persoAnime];
+                    fini = true;
+                    _animationA[_persoAnime] = "idle_right";
+                }
+                else if (deux == true && _merde == true)
+                {
+                    _animationA[_persoAnime] = "move_left";
+                    _posAllie[_persoAnime].X -= 2;
+                }
+                else if (un == false && deux == false && Game1._cooldownVerifC  == false && _merde == false)
+                {
+                    _animationA[_persoAnime] = "move_right";
+                    _posAllie[_persoAnime].X += 2;
+                }
+                else if (Game1._cooldownVerifC == false && _merde == true)
+                {
+                    un = false;
+                    deux = true;
+                    _merde = true;
+                }
+
+            }
+
+            if (fini == true)
+            {
+                _animationAttack = false;
+                fini = false;
+                _persoAnime++;
+            }
+
+            if (_animationSpe == true)
+            {
+                if (un == true)
+                {
+                    _animationA[_persoAnime] = "attack_right3";
+                    Game1._wbeg.Play();
+                    MediaPlayer.Stop();
+                    _cool = true;
+                    un = false;
+                    _merde = true;
+
+                }
+                else if (_posAllie[_persoAnime].X > _posAllieBaseX[_persoAnime] + 80 && _merde == false)
+                {
+                    un = true;
+                }
+                else if (_posAllie[_persoAnime].X < _posAllieBaseX[_persoAnime])
+                {
+                    deux = false;
+                    _merde = false;
+                    _posAllie[_persoAnime].X = _posAllieBaseX[_persoAnime];
+                    fini = true;
+                    _animationA[_persoAnime] = "idle_right";
+                }
+                else if (deux == true && _merde == true)
+                {
+                    _animationA[_persoAnime] = "move_left";
+                    _posAllie[_persoAnime].X -= 2;
+                }
+                else if (un == false && deux == false && Game1._cooldownVerifC == false && _merde == false)
+                {
+                    _animationA[_persoAnime] = "move_right";
+                    _posAllie[_persoAnime].X += 2;
+                }
+                else if (Game1._cooldownVerifC == false && _merde == true)
+                {
+                    un = false;
+                    deux = true;
+                    _merde = true;
+                }
+
+            }
+
+            if (fini == true)
+            {
+                _animationSpe = false;
+                fini = false;
+                _persoAnime++;
+            }
+
+
+
+
+            if (_cool == true)
+                Game1.SetCoolDownCombat();
+            _cool = false;
+            //_animationA[_action] = "selected_right";
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -420,28 +561,23 @@ namespace SAE101
             }
             _spriteBatch.End();
         }
-        public void Baston()
-        {
-            _vieEnn[_choixCursorD] = _vieEnn[_choixCursorD] - _attAllie[_action];
-            _action++;
 
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
-            {
-                if (_vieEnn[i] <= 0)
-                {
-                    _animationE[i] = "ded";
-                    Victoire();
-                }
-                
-            }
-            
+        //actions
+        public void Combat()
+        {
+            _attaquePerso[_action, 0] = 0;
+            _attaquePerso[_action, 1] = _choixCursorD;
+            _attaquePerso[_action, 2] = 0;
+
+            _action++;
         }
 
         public void Special()
         {
             if (_choixCursor == 0 && _ordreA[_action] == 1)
-                Game1._wbeg.Play();
-            _action++;
+                _animationSpe = true;
+            _action++ ;
+            _sousMenuSpecial = false;
 
         }
 
@@ -453,6 +589,27 @@ namespace SAE101
         public void Fuite()
         {
             _desc[3] = "Fuite impossible!";
+        }
+
+        //Déroulement des attaques;
+
+        public void Baston()
+        {
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
+
+                if (_attaquePerso[i, 0] == 0)
+                {
+                    _animationAttack = true;
+                    un = false;
+                    deux = false;
+                    fini = false;
+                    _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
+                    EnnemiMort();
+                }
+                //_persoAnime++;
+            }
+                        
         }
 
         public void GenerationAllie()
@@ -477,6 +634,19 @@ namespace SAE101
             _attEnn[_ordrefinal] = chato_combatcontenu._stat[1];
             _defEnn[_ordrefinal] = chato_combatcontenu._stat[2];
             _vitEnn[_ordrefinal] = chato_combatcontenu._stat[3];
+        }
+
+        public void EnnemiMort()
+        {
+            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            {
+                if (_vieEnn[i] <= 0)
+                {
+                    _animationE[i] = "ded";
+                    Victoire();
+                }
+
+            }
         }
 
         public void Victoire()

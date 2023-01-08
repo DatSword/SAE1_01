@@ -17,6 +17,7 @@ using System;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.Xna.Framework.Audio;
+using System.Runtime.InteropServices;
 
 namespace SAE101
 {
@@ -39,7 +40,7 @@ namespace SAE101
         private bool fini;
         private bool _cool;
         private bool _merde;
-        private bool _animationSpe;
+        private bool _animationZeweurld;
         private int[] _ordretour;
         private int kk;
 
@@ -141,12 +142,13 @@ namespace SAE101
             _droite = false;
             _gauche = false;
             _animationAttack = false;
-            _animationSpe = false;
+            _animationZeweurld = false;
             _cool = false;
             un = false;
             deux = false;
             fini = false;
             _merde = false;
+            kk = 0;
 
             chato_combatcontenu.CombatTest();
 
@@ -293,50 +295,93 @@ namespace SAE101
             Game1._camera.LookAt(Game1._cameraPosition);
 
             //curseurs
-            if (_selectionEnn == false)
+            if (_animationAttack != true && _animationZeweurld != true)
             {
-                _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
+                if (_selectionEnn == false)
+                {
+                    _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
 
-                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
-                {
-                    _positionCursor.Y = _positionCursor.Y - 36;
-                    _choixCursor = _choixCursor - 1;
-                    Game1.SetCoolDown();
+                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+                    {
+                        _positionCursor.Y = _positionCursor.Y - 36;
+                        _choixCursor = _choixCursor - 1;
+                        Game1.SetCoolDown();
+                    }
+                    if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+                    {
+                        _positionCursor.Y = _positionCursor.Y + 36;
+                        _choixCursor = _choixCursor + 1;
+                        Game1.SetCoolDown();
+
+                    }
+
                 }
-                if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+                else
                 {
-                    _positionCursor.Y = _positionCursor.Y + 36;
-                    _choixCursor = _choixCursor + 1;
+
+                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < chato_combatcontenu._nbEnnemy - 1 && Game1._cooldownVerif == false)
+                    {
+                        _choixCursorD = _choixCursorD + 1;
+                        Game1.SetCoolDown();
+                    }
+                    else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursorD > 0 && Game1._cooldownVerif == false)
+                    {
+                        _choixCursorD = _choixCursorD - 1;
+                        Game1.SetCoolDown();
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                    {
+                        Game1.SetCoolDown();
+                        Combat();
+                        _selectionEnn = false;
+                    }
+
+                    _positionCursorD = _posEnnemy[_choixCursorD] - new Vector2(8, 55);                    
+                }
+
+                //Selection dans le menu
+
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                {
+                    _selectionEnn = true;
                     Game1.SetCoolDown();
 
                 }
-                
-            }               
-            else
-            {
-                
-                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < chato_combatcontenu._nbEnnemy - 1 && Game1._cooldownVerif == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && Game1._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
                 {
-                    _choixCursorD = _choixCursorD + 1;
+                    Game1.SetCoolDown();
+                    _sousMenuSpecial = true;
+                }
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                {
+                    Objects();
                     Game1.SetCoolDown();
                 }
-                else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursorD > 0 && Game1._cooldownVerif == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
                 {
-                    _choixCursorD = _choixCursorD - 1;
+                    Fuite();
+                    _sousMenuObjects = true;
                     Game1.SetCoolDown();
                 }
 
-                if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == false)
-                {                   
-                    Game1.SetCoolDown();
-                    Combat();
+                if (keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false && (_sousMenuSpecial == true || _selectionEnn))
+                {
+                    _sousMenuSpecial = false;
                     _selectionEnn = false;
+                    Game1.SetCoolDown();
                 }
 
-                _positionCursorD = _posEnnemy[_choixCursorD] - new Vector2(8, 55);
+                //test
+                if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == true && _premierCombat == false)
+                {
+                    Game1.SetCoolDown();
+                    Special();
+                    _sousMenuSpecial = true;
+                }
             }
 
-            //Fin du tour (à mettre huste avant choix action sinon plantage)
+            //Fin du tour (à mettre juste avant choix action sinon plantage)
 
             if (chato_combatcontenu._nbEquipe == _action)
             {
@@ -373,60 +418,9 @@ namespace SAE101
                 _choix[1] = chato_combatcontenu._special;
             }
 
-            //Selection dans le menu
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
-            {
-                _selectionEnn = true;
-                Game1.SetCoolDown();
-                
-            }
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && Game1._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
-            {
-                Game1.SetCoolDown();
-                _sousMenuSpecial = true;
-            }
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
-            {
-                Objects();
-                Game1.SetCoolDown();
-            }
-            if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
-            {
-                Fuite();
-                _sousMenuObjects = true;
-                Game1.SetCoolDown();
-            }
-
-            if (keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false && (_sousMenuSpecial == true || _selectionEnn))
-            {
-                _sousMenuSpecial = false;
-                _selectionEnn = false;
-                Game1.SetCoolDown();
-            }
-
-            //test
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == true && _premierCombat == false)
-            {
-                Game1.SetCoolDown();
-                Special();
-                _sousMenuSpecial = true;
-            }
-
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
-            {
-                _allie[i].Play(_animationA[i]);
-                _allie[i].Update(deltaSeconds);
-            }
-
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
-            {
-                _ennemy[i].Play(_animationE[i]);
-                _ennemy[i].Update(deltaSeconds);
-            }
-
-            //Console.WriteLine(deux);
             //ANIMATIONS
 
+            //Animation de combat (l'attaque de base)
             if (_animationAttack == true)
             {               
                 if (un == true)
@@ -452,6 +446,7 @@ namespace SAE101
                 }
                 else if (deux == true && _merde == true)
                 {
+                    Game1._hit.Play();
                     _animationA[_persoAnime] = "move_left";
                     _posAllie[_persoAnime].X -= 2;
                 }
@@ -469,14 +464,9 @@ namespace SAE101
 
             }
 
-            if (fini == true)
-            {
-                _animationAttack = false;
-                Vitesse2();
+            
 
-            }
-
-            if (_animationSpe == true)
+            if (_animationZeweurld == true)
             {
                 if (un == true)
                 {
@@ -516,23 +506,37 @@ namespace SAE101
                     deux = true;
                     _merde = true;
                 }
-
             }
 
             if (fini == true)
             {
-                _animationSpe = false;
-                Vitesse2();
+                _animationAttack = false;
+                _animationZeweurld = false;
+                EnnemiMort();
+                if (kk != chato_combatcontenu._nbEquipe)
+                {
+                    Vitesse2();
+                }
+                else
+                    kk = 0;
+                fini = false;
             }
-
-
-
 
             if (_cool == true)
                 Game1.SetCoolDownCombat();
             _cool = false;
-            //_animationA[_action] = "selected_right";
 
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
+                _allie[i].Play(_animationA[i]);
+                _allie[i].Update(deltaSeconds);
+            }
+
+            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            {
+                _ennemy[i].Play(_animationE[i]);
+                _ennemy[i].Update(deltaSeconds);
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -627,18 +631,16 @@ namespace SAE101
 
         public void Vitesse2()
         {
-            for (int k = kk; k < _ordretour.Length; k++)
+            for (int i = 0; i < _ordretour.Length; i++)
             {
-                for (int i = 0; i < _ordretour.Length; i++)
+                if (_ordretour[kk] == _vitAllie[i])
                 {
-                    if (_ordretour[k] == _vitAllie[i])
-                    {
-                        Baston(i);
-                        kk++;
-                    }
-                        
+                    Baston(i);
+                    
                 }
+
             }
+            kk++;
         }
 
         public void Baston(int i)
@@ -651,12 +653,11 @@ namespace SAE101
                 deux = false;
                 fini = false;
                 _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
-                EnnemiMort();
                 Console.WriteLine(i);
             }
             else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 1)
             {
-                _animationSpe = true;
+                _animationZeweurld = true;
                 un = false;
                 deux = false;
                 fini = false;
@@ -715,6 +716,12 @@ namespace SAE101
             {
                 _victoire = true;
                 Game1._pelo.Play();
+                for (int j = 0; j < chato_combatcontenu._nbEquipe; j++)
+                {
+                    if (_animationA[j] != "ded")
+                        _animationA[j] = "victory_right1";
+                }
+
             }
             
 

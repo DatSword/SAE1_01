@@ -395,7 +395,7 @@ namespace SAE101
         public static void SetCoolDownCombat()
         {
             _cooldownVerifC = true;
-            _cooldownC = 3.0f;
+            _cooldownC = 2.0f;
         }
     }
 }

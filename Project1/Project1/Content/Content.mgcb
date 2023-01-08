@@ -293,6 +293,18 @@
 /processor:TiledMapTilesetProcessor
 /build:map/chato/tsx/vegetation1.tsx
 
+#begin menu/cursorr.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:menu/cursorr.png
+
 #begin menu/options.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -304,6 +316,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:menu/options.png
+
+#begin menu/options_box.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:menu/options_box.png
 
 #begin menu/quit.png
 /importer:TextureImporter
@@ -341,6 +365,18 @@
 /processorParam:TextureFormat=Color
 /build:menu/tantopie.png
 
+#begin music/chato/chato.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/chato/chato.mp3
+
+#begin music/chato/combat.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/chato/combat.mp3
+
 #begin music/chato/EdgarAndSabin.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -352,6 +388,12 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/chato/GUERRE.mp3
+
+#begin music/fins/sleep.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/fins/sleep.mp3
 
 #begin music/fins/smb_dodo.mp3
 /importer:Mp3Importer
@@ -371,11 +413,23 @@
 /processorParam:Quality=Best
 /build:sfx/back.wav
 
+#begin sfx/death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/death.wav
+
 #begin sfx/duck.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/duck.wav
+
+#begin sfx/fire.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/fire.wav
 
 #begin sfx/hit.wav
 /importer:WavImporter
@@ -388,6 +442,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/hit2.wav
+
+#begin sfx/kick.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/kick.wav
 
 #begin sfx/lose.wav
 /importer:WavImporter
@@ -418,6 +478,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/pelo.wav
+
+#begin sfx/toink.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/toink.wav
 
 #begin sfx/vic.wav
 /importer:WavImporter

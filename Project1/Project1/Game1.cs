@@ -238,8 +238,8 @@ namespace SAE101
                 if (_cooldownC <= 0)
                     _cooldownVerifC = false;
             }
-            Console.WriteLine(_cooldownVerifC);
-            Console.WriteLine(_cooldownC);
+            //Console.WriteLine(_cooldownVerifC);
+            //Console.WriteLine(_cooldownC);
 
             if (_keyboardState.IsKeyDown(Keys.E))
             {

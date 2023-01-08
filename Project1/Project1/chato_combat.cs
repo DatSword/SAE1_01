@@ -40,6 +40,8 @@ namespace SAE101
         private bool _cool;
         private bool _merde;
         private bool _animationSpe;
+        private int[] _ordretour;
+        private int kk;
 
         //Fond d'écran
         private new Game1 Game => (Game1)base.Game;
@@ -154,8 +156,8 @@ namespace SAE101
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
             _descBackup = new String[] { "_", "_", "_", "_" };
-            _attaquePerso = new int[3, chato_combatcontenu._nbEquipe];
-            _attaqueEnnemy = new int[3, chato_combatcontenu._nbEnnemy];
+            _attaquePerso = new int[chato_combatcontenu._nbEquipe, 3];
+            _attaqueEnnemy = new int[chato_combatcontenu._nbEnnemy, 3];
 
             //Camera j'crois
             _centreCombat = new Vector2(512 / 2, 448 / 2);
@@ -339,14 +341,13 @@ namespace SAE101
             if (chato_combatcontenu._nbEquipe == _action)
             {
                 _tourFini = true;
-                Baston();
+                Vitesse();
                 _action = 0;
                 _numPerso = 1;
                 _tourFini = false;
             }
 
             //Perso choisissant son action
-            //A revoir
             if (_ordreA[_action] == 0)
                 chato_combatcontenu.Hein();
             else if (_ordreA[_action] == 1)
@@ -423,7 +424,7 @@ namespace SAE101
                 _ennemy[i].Update(deltaSeconds);
             }
 
-            Console.WriteLine(deux);
+            //Console.WriteLine(deux);
             //ANIMATIONS
 
             if (_animationAttack == true)
@@ -471,8 +472,8 @@ namespace SAE101
             if (fini == true)
             {
                 _animationAttack = false;
-                fini = false;
-                _persoAnime++;
+                Vitesse2();
+
             }
 
             if (_animationSpe == true)
@@ -521,8 +522,7 @@ namespace SAE101
             if (fini == true)
             {
                 _animationSpe = false;
-                fini = false;
-                _persoAnime++;
+                Vitesse2();
             }
 
 
@@ -575,9 +575,14 @@ namespace SAE101
         public void Special()
         {
             if (_choixCursor == 0 && _ordreA[_action] == 1)
-                _animationSpe = true;
-            _action++ ;
-            _sousMenuSpecial = false;
+            {
+                _attaquePerso[_action, 0] = 1;
+                _attaquePerso[_action, 1] = -1;
+                _attaquePerso[_action, 2] = 1;
+                _action++;
+                _sousMenuSpecial = false;
+            }
+            
 
         }
 
@@ -592,24 +597,71 @@ namespace SAE101
         }
 
         //Déroulement des attaques;
-
-        public void Baston()
+        public void Vitesse()
         {
+            _ordretour = new int[chato_combatcontenu._nbEquipe];
             for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
-
-                if (_attaquePerso[i, 0] == 0)
-                {
-                    _animationAttack = true;
-                    un = false;
-                    deux = false;
-                    fini = false;
-                    _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
-                    EnnemiMort();
-                }
-                //_persoAnime++;
+                _ordretour[i] = _vitAllie[i];
             }
+
+            int temp = 0;
+
+            for (int j = 0; j < _ordretour.Length; j++)
+            {
+                for (int i = 0; i < (_ordretour.Length - 1) - j; i++)
+                {
+                    if (_ordretour[i] < _ordretour[i + 1])
+                    {
+                        temp = _ordretour[i];
+                        _ordretour[i] = _ordretour[i + 1];
+                        _ordretour[i + 1] = temp;
+                    }
+                }
+            }
+            Console.WriteLine(_ordretour[0]+ " " +_ordretour[1] + " " + _ordretour[2] + " " + _ordretour[3]);
+            Console.WriteLine(_vitAllie[0] + " " + _vitAllie[1] + " " + _vitAllie[2] + " " + _vitAllie[3]);
+
+            Vitesse2();
+        }
+
+        public void Vitesse2()
+        {
+            for (int k = kk; k < _ordretour.Length; k++)
+            {
+                for (int i = 0; i < _ordretour.Length; i++)
+                {
+                    if (_ordretour[k] == _vitAllie[i])
+                    {
+                        Baston(i);
+                        kk++;
+                    }
                         
+                }
+            }
+        }
+
+        public void Baston(int i)
+        {
+            _persoAnime = i;
+            if (_attaquePerso[i, 0] == 0)
+            {
+                _animationAttack = true;
+                un = false;
+                deux = false;
+                fini = false;
+                _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
+                EnnemiMort();
+                Console.WriteLine(i);
+            }
+            else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 1)
+            {
+                _animationSpe = true;
+                un = false;
+                deux = false;
+                fini = false;
+                Console.WriteLine(i);
+            }
         }
 
         public void GenerationAllie()

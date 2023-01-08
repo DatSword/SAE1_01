@@ -39,8 +39,8 @@ namespace SAE101
 
         public static void CombatTest()
         {
-            _nbEquipe = 3;
-            _ordreJoueur = new String[] { "Hero", "Hero" , "Hein"};
+            _nbEquipe = 4;
+            _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 
             _nbEnnemy = 3;
             _ordreEnnemi = new String[] {"Grand","Mechant","Pabo"};

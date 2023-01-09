@@ -127,6 +127,7 @@ namespace SAE101
 
         //Attaque Ennemies
         public static int[,] _attaqueEnnemy;
+        private Random _random;
 
         //The Legend came to life
         public static int _ordrefinal;
@@ -161,6 +162,7 @@ namespace SAE101
             _animationOver = false;
             _animationP3 = false;
             kk = 0;
+            _random = new Random();
 
 
             Chato_combat_contenu.CombatTest();
@@ -396,7 +398,6 @@ namespace SAE101
             }
 
             //Fin du tour (à mettre juste avant choix action sinon plantage)
-
             if (Chato_combat_contenu._nbAlly == _action)
             {
                 _tourFini = true;
@@ -415,10 +416,14 @@ namespace SAE101
             else if (_ordreA[_action] == 3)
                 Chato_combat_contenu.Ben();
 
+            //Si tel Perso est mort, alors pas d'action
+            if (_animationA[_action] == "ded")
+                _action++;
+
+            //Qui est suivi par le curseur
             if (_selectionEnn == false)
                 _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
 
-            //Pas revoir
             if (_sousMenuSpecial == true)
             {
                 _choix = Chato_combat_contenu._specialP;
@@ -431,14 +436,14 @@ namespace SAE101
                 _choix[1] = Chato_combat_contenu._special;
             }
 
-            //ANIMATION
+            //ANIMATIONS
 
             //Animation de sélection
             for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
                 if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
                     _animationA[i] = "selected_right";
-                else
+                else if (_animationEnCours == false)
                     _animationA[i] = "idle_right";
             }           
 
@@ -578,13 +583,17 @@ namespace SAE101
                 _animationAttackE = false;
                 _animationZeweurld = false;
                 EnnemiMort();
-                if (kk != Chato_combat_contenu._nbAlly)
+                AllieMort();
+                if (kk != Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy)
                 {
                     Vitesse2();
                 }
                 else
-                    //kk = 0;
-                _animationOver = false;
+                {
+                    _animationOver = false;
+                    kk = 0;
+                }
+                
             }
 
             if (_coolDownAnimation == true)
@@ -602,6 +611,8 @@ namespace SAE101
                 _ennemy[i].Play(_animationE[i]);
                 _ennemy[i].Update(deltaSeconds);
             }
+
+            
         }
 
         public override void Draw(GameTime gameTime)
@@ -666,7 +677,7 @@ namespace SAE101
             _desc[3] = "Fuite impossible!";
         }
 
-        //Déroulement des attaques;
+        //Déroulement des attaques : Choisi l'ordre dans lequel tous les personnages vont jouer
         public void Vitesse()
         {
             _ordretour = new int[Chato_combat_contenu._nbAlly+ Chato_combat_contenu._nbEnnemy];
@@ -707,6 +718,7 @@ namespace SAE101
             Vitesse2();
         }
 
+        //Invoque le personnage qui va jouer
         public void Vitesse2()
         {
             for (int i = 0; i < _ordretour.Length; i++)
@@ -723,41 +735,55 @@ namespace SAE101
             kk++;
         }
 
+        //Si un allié se bat
         public void BastonA(int i)
         {
-            _allyAnime = i;
-            _animationEnCours = true;
-            if (_attaquePerso[i, 0] == 0)
+            if (_animationA[i] != "ded")
             {
-                _animationAttackA = true;
-                _animationP1 = false;
-                _animationP2 = false;
-                _animationOver = false;
-                _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
-                Console.WriteLine(i);
+                _allyAnime = i;
+                _animationEnCours = true;
+                if (_attaquePerso[i, 0] == 0)
+                {
+                    _animationAttackA = true;
+                    _animationP1 = false;
+                    _animationP2 = false;
+                    _animationOver = false;
+                    _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
+                    Console.WriteLine(i);
+                }
+                else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 1)
+                {
+                    _animationZeweurld = true;
+                    _animationP1 = false;
+                    _animationP2 = false;
+                    _animationOver = false;
+                    Console.WriteLine(i);
+                }
             }
-            else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 1)
-            {
-                _animationZeweurld = true;
-                _animationP1 = false;
-                _animationP2 = false;
-                _animationOver = false;
-                Console.WriteLine(i);
-            }
+            
         }
 
+        //SI un ennemi se bat
         public void BastonE(int i)
         {
-            _enemyAnime = i;
+            if (_animationE[i] != "ded")
+            {
+                _enemyAnime = i;
+                int all = _random.Next(0, Chato_combat_contenu._nbAlly);
 
-            _animationAttackE = true;
-            _animationEnCours = true;
-            _animationP1 = false;
-            _animationP2 = false;
-            _animationOver = false;
-            _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - _attEnn[i];
-            Console.WriteLine(i);
+                _attaqueEnnemy[i, 0] = 0;
+                _attaqueEnnemy[i, 1] = all;
+                _attaqueEnnemy[i, 2] = 0;
 
+
+                _animationAttackE = true;
+                _animationEnCours = true;
+                _animationP1 = false;
+                _animationP2 = false;
+                _animationOver = false;
+                _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - _attEnn[i];
+                Console.WriteLine(i);
+            }
         }
 
         public void GenerationAllie()
@@ -801,10 +827,10 @@ namespace SAE101
         {
             for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
-                if (_vieEnn[i] <= 0)
+                if (_vieAllie[i] <= 0)
                 {
-                    _animationE[i] = "ded";
-                    Victoire();
+                    _animationA[i] = "ded";
+                    GameOver();
                 }
 
             }
@@ -832,9 +858,34 @@ namespace SAE101
                     _desc[0] = "Victoire Totale!";
                     _desc[1] = "Victoire Totale!";
                 }
+            }           
+        }
+
+        public void GameOver()
+        {
+            int verif = 0;
+
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
+            {
+                if (_vieEnn[i] <= 0)
+                    verif++;
+            }
+
+            if (verif == Chato_combat_contenu._nbAlly)
+            {
+                _victoire = true;
+                Game1._pelo.Play();
+                for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)
+                {
+                    if (_animationA[j] != "ded")
+                        _animationA[j] = "victory_right1";
+                    kk = Chato_combat_contenu._nbAlly;
+                    _desc[0] = "Anihilé";
+                    _desc[1] = "Anihilé";
+                }
 
             }
-            
+
 
         }
     }

@@ -39,7 +39,7 @@ namespace SAE101
 
         public static void CombatTest()
         {
-            _nbEquipe = 4;
+            _nbEquipe = 3;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 
             _nbEnnemy = 3;
@@ -102,7 +102,7 @@ namespace SAE101
         }
         public static void Pabo()
         {
-            _stat = new int[4] { 70, 70, 50, 100 };
+            _stat = new int[4] { 70, 70, 50, 90 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };

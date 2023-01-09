@@ -170,9 +170,9 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Musiques
-            _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
+            _songChato = Content.Load<Song>("music/chato/chato");
             _titleTheme = Content.Load<Song>("music/title/title");
-            _songCombat = Content.Load<Song>("music/chato/GUERRE");
+            _songCombat = Content.Load<Song>("music/chato/combat");
             _songDodo = Content.Load<Song>("music/fins/smb_dodo");
 
             //SFX

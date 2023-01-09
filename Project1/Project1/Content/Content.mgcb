@@ -401,18 +401,6 @@
 /processorParam:Quality=Best
 /build:music/chato/combat.mp3
 
-#begin music/chato/EdgarAndSabin.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:music/chato/EdgarAndSabin.mp3
-
-#begin music/chato/GUERRE.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:music/chato/GUERRE.mp3
-
 #begin music/fins/sleep.mp3
 /importer:Mp3Importer
 /processor:SongProcessor

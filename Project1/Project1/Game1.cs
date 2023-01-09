@@ -54,8 +54,8 @@ namespace SAE101
         //Musiques
         private Song _songChato;
         private Song _titleTheme;
-        private Song _songCombat;
-        private Song _songDodo;
+        public static Song _songCombat;
+        public static Song _songDodo;
 
         //ZoneMusique
         private bool _chato;
@@ -92,6 +92,7 @@ namespace SAE101
 
         //event
         public static bool _firstvisit;
+        public static int _fin;
 
         public Etats Etat
         {
@@ -160,6 +161,7 @@ namespace SAE101
 
             //event
             _firstvisit = true;
+            _fin = 0;
 
             base.Initialize();
         }
@@ -173,7 +175,7 @@ namespace SAE101
             _songChato = Content.Load<Song>("music/chato/chato");
             _titleTheme = Content.Load<Song>("music/title/title");
             _songCombat = Content.Load<Song>("music/chato/combat");
-            _songDodo = Content.Load<Song>("music/fins/smb_dodo");
+            _songDodo = Content.Load<Song>("music/fins/sleep");
 
             //SFX
             _menu = Content.Load<SoundEffect>("sfx/menu");
@@ -354,13 +356,6 @@ namespace SAE101
             // combat
             else if (_numEcran == 4)
                 _cameraPosition = Chato_combat._centreCombat;
-
-            if (_chato == true)
-                MediaPlayer.Play(_titleTheme);
-            else if (_ecranTitre == true)
-                MediaPlayer.Play(_titleTheme);
-            else if (_chatoCombat == true)
-                MediaPlayer.Play(_songCombat);
 
 
 

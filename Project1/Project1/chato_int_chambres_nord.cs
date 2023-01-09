@@ -229,7 +229,7 @@ namespace SAE101
                 if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false)
                 {
                     Game1.SetCoolDown();
-                    Black_jack._fin = 1;
+                    Game1._fin = 1;
                     Game.LoadScreenblack_jack();
                     
                 }
@@ -309,7 +309,9 @@ namespace SAE101
 
             if (keyboardState.IsKeyDown(Keys.W) && (b == 72) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false && Game1._cooldownVerif == false)
             {
-                Event_et_dial.Fin1();
+                //Event_et_dial.Fin1();
+                Game1._fin = 1;
+                Game.LoadScreenblack_jack();
             }
 
             //changement de map

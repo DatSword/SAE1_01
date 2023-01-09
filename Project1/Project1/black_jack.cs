@@ -29,7 +29,6 @@ namespace SAE101
         //Début/Fin
         public Vector2 _textPos;
         public String _text;
-        public static int _fin;
 
         public Black_jack(Game1 game) : base(game) 
         {
@@ -40,7 +39,9 @@ namespace SAE101
         {
             _textPos = new Vector2(50, 50);
             _text = "null";
-            _fin = 0;
+
+            if (Game1._fin == 1)
+                MediaPlayer.Play(Game1._songDodo);
 
             base.Initialize();
         }
@@ -61,34 +62,34 @@ namespace SAE101
                 _myGame.Etat = Game1.Etats.Menu;
 
             //changements maps, tout premier dialogue
-            if (_fin == 0)
+            if (Game1._fin == 0)
                 _text = "...et c'est ainsi qu'après cette grande aventure, nos héros ont\n" +
                         "bien mérité de précieuses heures de repos dans le Chato, juste\n" +
                         "avant le couronnement de leur ami Julius, pour enfin boucler\n" +
                         "cette hist-";
-            if (_fin == 1)
+            if (Game1._fin == 1)
                 _text = "Hum hum, malgré cette petite interruption, notre héros décida\n" +
                         "qu'il n'allait pas être présent lors du courronnement. Même si\n" +
                         "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
                         "d'épreuves, le sommeil reste son ennemi le plus puissant.";
-            if (_fin == 2)
+            if (Game1._fin == 2)
                 _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
                         "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
                         "non?";
-            if (_fin == 3)
+            if (Game1._fin == 3)
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
                         "envoyé d'on-ne-sait-quand? Toutes ces réponses, vous les aurez...\n" +
                         "Peut-être un jour...?";
-            if (_fin == 01)
+            if (Game1._fin == 01)
                 _text = "";
 
 
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false)
             {
-                _fin = 01;
+                Game1._fin = 1;
                 Game1._toink.Play();
                 Event_et_dial.toutDebut();
             }

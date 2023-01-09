@@ -29,7 +29,7 @@ namespace SAE101
         //Début/Fin
         public Vector2 _textPos;
         public String _text;
-        public int _fin;
+        public static int _fin;
 
         public Black_jack(Game1 game) : base(game) 
         {

@@ -147,6 +147,12 @@ namespace SAE101
             Event_et_dial._posNom = new Vector2(25, 360);
             Event_et_dial._posDialBox = new Vector2(0, 348);
             Event_et_dial._dialTrue = false;
+            Event_et_dial._posChoiceBox = new Vector2(450, 284);
+            Event_et_dial._posCursor = new Vector2(430, 316);
+            Event_et_dial._posYes = new Vector2(470, 300);
+            Event_et_dial._posNo = new Vector2(470, 315);
+            Event_et_dial._yes = "oui";
+            Event_et_dial._no = "non";
 
 
             //Combat?
@@ -185,6 +191,8 @@ namespace SAE101
 
             //Boite de dialogue
             Event_et_dial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+            Event_et_dial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
+            Event_et_dial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");

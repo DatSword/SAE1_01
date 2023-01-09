@@ -30,6 +30,15 @@ namespace SAE101
         public static String _nom;
         public static Vector2 _posNom;
         public static bool _dialTrue;
+        public static Texture2D _choiceBox;
+        public static Vector2 _posChoiceBox;
+        public static Texture2D _cursor;
+        public static Vector2 _posCursor;
+        public static String _yes;
+        public static String _no;
+        public static Vector2 _posYes;
+        public static Vector2 _posNo;
+        public static bool _choiceTrue;
 
         public static void toutDebut()
         {
@@ -46,7 +55,6 @@ namespace SAE101
             _dialTrue = true;
             _text = ":)";
             _nom = "Fren";
-            _dialTrue = true;
             Game1._duck.Play();
         }
         public static void Fren2()
@@ -55,7 +63,6 @@ namespace SAE101
             _dialTrue = true;
             _text = ":(";
             _nom = "Fren";
-            _dialTrue = true;
             Game1._duck.Play();
         }
 
@@ -94,5 +101,24 @@ namespace SAE101
             Game1.SetCoolDown();
         }
 
-    }
+        public static void Fin1()
+        {
+            Game1.SetCoolDown();
+            _dialTrue = true;
+            _choiceTrue = true;
+            _text = "Un lit décidemment très confortable. Voulez-vous\nvous rendormir?";
+            _nom = " ";
+            _dialTrue = true;
+        }
+
+        public static void Update(GameTime gameTime)
+        {
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            KeyboardState _keyboardState = Keyboard.GetState();
+            if (_keyboardState.IsKeyDown(Keys.O))
+                Game1._duck.Play();
+                
+        }
+
+       }
 }

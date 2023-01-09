@@ -62,6 +62,8 @@ namespace SAE101
         public static int _limiteChambreGauche;
         public static int _limiteChambreDroite;
 
+        private int _choixCursor;
+
         int numDial;
 
         public Chato_int_chambres_nord(Game1 game) : base(game) { }
@@ -101,6 +103,7 @@ namespace SAE101
             _sensPersoX = 0;
             _sensPersoY = 0;
             _vitessePerso = 100;
+            _choixCursor = 1;
 
             base.Initialize();
         }
@@ -134,9 +137,9 @@ namespace SAE101
         {
             //debug map
             int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 1)).GlobalIdentifier;
-            Console.WriteLine(a);
+            //Console.WriteLine(a);
             //debug autres collisions
-            int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            int b = mapLayer.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth-1), (ushort)(_positionPerso.Y / _tiledMap.TileHeight)).GlobalIdentifier;
             Console.WriteLine(b);
 
 
@@ -210,6 +213,34 @@ namespace SAE101
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
+            if(Event_et_dial._choiceTrue == true)
+            {
+                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && Game1._cooldownVerif == false)
+                {
+                    Game1.SetCoolDown();
+                    Event_et_dial._posCursor = new Vector2(430, 301);
+                }
+                else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                {
+                    Game1.SetCoolDown();
+                    Event_et_dial._posCursor = new Vector2(430, 301);
+                }
+                Console.WriteLine(Game1._cooldownVerif);
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                {
+                    Game1.SetCoolDown();
+                    Black_jack._fin = 1;
+                    Game.LoadScreenblack_jack();
+                    
+                }
+                if ((keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false)
+                {
+                    Game1.SetCoolDown();
+                    Event_et_dial._choiceTrue = false;
+                    Event_et_dial._dialTrue = false;
+                }
+            }
+
 
             //MOUVEMENT/ANIMATION OBJETS
 
@@ -274,6 +305,12 @@ namespace SAE101
                 numDial = 3;
             }
 
+            //DODO
+
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 72) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false && Game1._cooldownVerif == false)
+            {
+                Event_et_dial.Fin1();
+            }
 
             //changement de map
             if (keyboardState.IsKeyDown(Keys.Down) && (a == 41))
@@ -304,6 +341,14 @@ namespace SAE101
                 _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
                 _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
                 _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
+                
+            }
+            if (Event_et_dial._choiceTrue == true)
+            {
+                _spriteBatch.Draw(Event_et_dial._choiceBox, Event_et_dial._posChoiceBox, Color.White);
+                _spriteBatch.Draw(Event_et_dial._cursor, Event_et_dial._posCursor, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._yes, Event_et_dial._posYes, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._no, Event_et_dial._posNo, Color.White);
             }
             _spriteBatch.End();
         }

@@ -52,6 +52,7 @@ namespace SAE101
         private bool _merde;
         private bool _animationZeweurld;
         private int[] _ordretour;
+        private int[] _ordretour2;
         private int kk;
         private int iAlly;
         private int iEnn;
@@ -514,15 +515,15 @@ namespace SAE101
                 {
                     deux = false;
                     _merde = false;
-                    _posAllie[_enemyAnime].X = _posEnnBaseX[_enemyAnime];
+                    _posEnnemy[_enemyAnime].X = _posEnnBaseX[_enemyAnime];
                     fini = true;
                     _animationE[_enemyAnime] = "idle_left";
                 }
                 else if (deux == true && _merde == true)
                 {
                     Game1._hit.Play();
-                    _animationE[_enemyAnime] = "move_left";
-                    _posAllie[_enemyAnime].X -= 2;
+                    _animationE[_enemyAnime] = "move_right";
+                    _posEnnemy[_enemyAnime].X += 2;
                 }
                 else if (un == false && deux == false && Game1._cooldownVerifC == false && _merde == false)
                 {
@@ -590,7 +591,7 @@ namespace SAE101
                     Vitesse2();
                 }
                 else
-                    kk = 0;
+                    //kk = 0;
                 fini = false;
             }
 
@@ -676,13 +677,22 @@ namespace SAE101
         //Déroulement des attaques;
         public void Vitesse()
         {
-            _ordretour = new int[chato_combatcontenu._nbEquipe];
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            _ordretour = new int[Chato_combat_contenu._nbEquipe+ Chato_combat_contenu._nbEnnemy];
+            _ordretour2 = new int[Chato_combat_contenu._nbEquipe + Chato_combat_contenu._nbEnnemy];
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe + Chato_combat_contenu._nbEnnemy; i++)
             {
-                if (i <= chato_combatcontenu._nbEquipe)
+                if (i < Chato_combat_contenu._nbEquipe) 
+                {
                     _ordretour[i] = _vitAllie[i];
-                else if (i > chato_combatcontenu._nbEquipe)
-                    _ordretour[i] = _vitEnn[i];
+                    _ordretour2[i] = _vitAllie[i];
+                }
+                    
+                else if (i >= Chato_combat_contenu._nbEquipe)
+                {
+                    _ordretour[i] = _vitEnn[i - Chato_combat_contenu._nbEquipe];
+                    _ordretour2[i] = _vitEnn[i - Chato_combat_contenu._nbEquipe];
+                }
+                    
             }
 
             int temp = 0;
@@ -702,7 +712,7 @@ namespace SAE101
             for (int i = 0; i < _ordretour.Length; i++)
                 Console.WriteLine(_ordretour[i]);
 
-            Console.WriteLine(_ordretour[0]+ " " +_ordretour[1] + " " + _ordretour[2] + " " + _ordretour[3]);
+            //Console.WriteLine(_ordretour[0]+ " " +_ordretour[1] + " " + _ordretour[2] + " " + _ordretour[3]);
             //Console.WriteLine(_vitAllie[0] + " " + _vitAllie[1] + " " + _vitAllie[2] + " " + _vitAllie[3]);
 
             Vitesse2();
@@ -710,19 +720,15 @@ namespace SAE101
 
         public void Vitesse2()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < _ordretour.Length; i++)
             {
-                if (_ordretour[kk] == _vitAllie[i])
+                if (_ordretour[kk] == _ordretour2[i])
                 {
-                    BastonA(i);
-                    Console.WriteLine("oui1");
+                    if (i > Chato_combat_contenu._nbEquipe)
+                        BastonE(i - Chato_combat_contenu._nbEquipe);
+                    else
+                        BastonA(i);                   
                 }
-                else if (_ordretour[kk] == _vitEnn[i])
-                {
-                    BastonE(i);
-                    Console.WriteLine("oui2");
-                }
-
             }
 
             kk++;

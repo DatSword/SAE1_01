@@ -112,7 +112,7 @@ namespace SAE101
             else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
-            if (Eventsetdial._dialTrue == false)
+            if (Event_et_dial._dialTrue == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -184,11 +184,11 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Eventsetdial._dialTrue == true)
+            if (Event_et_dial._dialTrue == true)
             {
-                _spriteBatch.Draw(Eventsetdial._dialBox, Eventsetdial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Eventsetdial._text, Eventsetdial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Eventsetdial._nom, Eventsetdial._posNom, Color.White);
+                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

@@ -163,7 +163,7 @@ namespace SAE101
             else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
-            if (Eventsetdial._dialTrue == false)
+            if (Event_et_dial._dialTrue == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -220,19 +220,19 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Eventsetdial._dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == true)
             {
-                Eventsetdial.FermeBoite();
+                Event_et_dial.FermeBoite();
             }
             else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false
                 && _positionPerso.X < _limiteChambreDroite)
             {
-                Eventsetdial.Fren1();
+                Event_et_dial.Fren1();
                 _frenTrue = true;
             }        
             else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
             {
-                Eventsetdial.Fren2();
+                Event_et_dial.Fren2();
                 _frenTrue = false;
             }
             _fren.Play(animationFren);
@@ -258,19 +258,19 @@ namespace SAE101
             
             if(Game1._firstvisit == true && Game1._cooldownVerif == false && numDial == 0)
             {
-                Eventsetdial.Jon1();
+                Event_et_dial.Jon1();
                 Game1._firstvisit = false;
                 numDial = 1;
                 _stop = 4;
             }
             if (Game1._cooldownVerif == false && keyboardState.IsKeyDown(Keys.W) && numDial == 1)
             {
-                Eventsetdial.Jon2();
+                Event_et_dial.Jon2();
                 numDial = 2;
             }
             if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false &&  numDial == 2)
             {
-                Eventsetdial.FermeBoite();
+                Event_et_dial.FermeBoite();
                 numDial = 3;
             }
 
@@ -299,11 +299,11 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Eventsetdial._dialTrue == true)
+            if (Event_et_dial._dialTrue == true)
             {
-                _spriteBatch.Draw(Eventsetdial._dialBox, Eventsetdial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Eventsetdial._text, Eventsetdial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Eventsetdial._nom, Eventsetdial._posNom, Color.White);
+                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

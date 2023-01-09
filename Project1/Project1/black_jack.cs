@@ -86,16 +86,16 @@ namespace SAE101
                 _text = "";
 
 
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Eventsetdial._dialTrue == false)
+            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false)
             {
                 _fin = 01;
                 Game1._toink.Play();
-                Eventsetdial.toutDebut();
+                Event_et_dial.toutDebut();
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Eventsetdial._dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == true)
             {
-                Eventsetdial.FermeBoite();
+                Event_et_dial.FermeBoite();
                 Game.LoadScreenchato_int_chambres_nord();              
             }
         }
@@ -106,14 +106,14 @@ namespace SAE101
             var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            if (Eventsetdial._dialTrue == false)
+            if (Event_et_dial._dialTrue == false)
             _spriteBatch.DrawString(Game1._font, _text , _textPos, Color.White);
 
-            if (Eventsetdial._dialTrue == true)
+            if (Event_et_dial._dialTrue == true)
             {
-                _spriteBatch.Draw(Eventsetdial._dialBox, Eventsetdial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Eventsetdial._text, Eventsetdial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Eventsetdial._nom, Eventsetdial._posNom, Color.White);
+                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

@@ -57,6 +57,11 @@ namespace SAE101
         private Song _songCombat;
         private Song _songDodo;
 
+        //ZoneMusique
+        private bool _chato;
+        private bool _chatoCombat;
+        private bool _ecranTitre;
+
         //SFX
         public static SoundEffect _hit;
         public static SoundEffect _hit2;
@@ -138,10 +143,10 @@ namespace SAE101
 
 
             //Dialogue
-            Eventsetdial._posText = new Vector2(105, 360);
-            Eventsetdial._posNom = new Vector2(25, 360);
-            Eventsetdial._posDialBox = new Vector2(0, 348);
-            Eventsetdial._dialTrue = false;
+            Event_et_dial._posText = new Vector2(105, 360);
+            Event_et_dial._posNom = new Vector2(25, 360);
+            Event_et_dial._posDialBox = new Vector2(0, 348);
+            Event_et_dial._dialTrue = false;
 
 
             //Combat?
@@ -179,7 +184,7 @@ namespace SAE101
             _toink = Content.Load<SoundEffect>("sfx/toink");
 
             //Boite de dialogue
-            Eventsetdial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+            Event_et_dial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
@@ -342,6 +347,14 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = Chato_combat._centreCombat;
 
+            if (_chato == true)
+                MediaPlayer.Play(_titleTheme);
+            else if (_ecranTitre == true)
+                MediaPlayer.Play(_titleTheme);
+            else if (_chatoCombat == true)
+                MediaPlayer.Play(_songCombat);
+
+
 
             base.Update(gameTime);
         }
@@ -359,7 +372,7 @@ namespace SAE101
         public void LoadScreenecran_de_titre()
         {
             _screenManager.LoadScreen(new Ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
-            MediaPlayer.Play(_titleTheme);
+            _ecranTitre = true;
             this.Etat = Etats.Menu;
         }
 
@@ -367,11 +380,13 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Option(this), new FadeTransition(GraphicsDevice, Color.LightGray));
             this.Etat = Etats.Option;
+            _ecranTitre = true;
         }
 
         public void LoadScreenblack_jack()
         {
             MediaPlayer.Stop();
+            _ecranTitre = false;
             _screenManager.LoadScreen(new Black_jack(this), new FadeTransition(GraphicsDevice, Color.Black));
             this.Etat = Etats.Play;
         }
@@ -379,21 +394,25 @@ namespace SAE101
         public void LoadScreenchato_int_chambres_nord()
         {
             _screenManager.LoadScreen(new Chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
-            MediaPlayer.Play(_songChato);
+            _chato = true;
             _numEcran = 1;
-
+            _chatoCombat = false;
         }
 
         public void LoadScreenchato_int_chambres_couloir()
         {
             _screenManager.LoadScreen(new Chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
             _numEcran = 2;
+            _chato = true;
+            _chatoCombat = false;
         }
 
         public void LoadScreenchato_ext_cours_interieur()
         {
             _screenManager.LoadScreen(new Chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
             _numEcran = 3;
+            _chato = true;
+            _chatoCombat = false;
         }
 
         public void LoadScreenchato_combat()
@@ -402,6 +421,8 @@ namespace SAE101
             _screenManager.LoadScreen(new Chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
             MediaPlayer.Play(_songCombat);
             _numEcran = 4;
+            _chato = false;
+            _chatoCombat = true;
         }
 
         //autre

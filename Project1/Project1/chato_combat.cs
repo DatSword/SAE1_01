@@ -135,6 +135,9 @@ namespace SAE101
         //Camera
         public static Vector2 _centreCombat;
 
+        //Spécial
+        private bool _zeuwerld;
+
         public Chato_combat(Game1 game) : base(game) { }
 
         public override void Initialize()
@@ -162,6 +165,8 @@ namespace SAE101
             _animationOver = false;
             _animationP3 = false;
             kk = 0;
+            _zeuwerld = false;
+
             _random = new Random();
 
 
@@ -563,6 +568,9 @@ namespace SAE101
                 {
                     _animationA[_allyAnime] = "move_left";
                     _posAllie[_allyAnime].X -= 2;
+                    kk = Chato_combat_contenu._nbEnnemy + Chato_combat_contenu._nbAlly;
+                    _zeuwerld = true;
+
                 }
                 else if (_animationP1 == false && _animationP2 == false && Game1._cooldownVerifC == false && _animationP3 == false)
                 {
@@ -593,9 +601,10 @@ namespace SAE101
                 {
                     _animationOver = false;
                     kk = 0;
-                }
-                
+                }                
             }
+
+
 
             if (_coolDownAnimation == true)
                 Game1.SetCoolDownCombat();

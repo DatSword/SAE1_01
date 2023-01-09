@@ -196,15 +196,15 @@ namespace SAE101
             }
 
             //préparation génération
-            _fileA = new String[chato_combatcontenu._nbEquipe];
-            _sheetA = new SpriteSheet[chato_combatcontenu._nbEquipe];
-            _allie = new AnimatedSprite[chato_combatcontenu._nbEquipe];
+            _fileA = new String[Chato_combat_contenu._nbEquipe];
+            _sheetA = new SpriteSheet[Chato_combat_contenu._nbEquipe];
+            _allie = new AnimatedSprite[Chato_combat_contenu._nbEquipe];
             _posEnnemy = new[] { new Vector2(POS_ENNX0, POS_ENNY0), new Vector2(POS_ENNX1, POS_ENNY1), new Vector2(POS_ENNX2, POS_ENNY0), new Vector2(POS_ENNX3, POS_ENNY1) };
             _posEnnBaseX = new int [] { POS_ENNX0, POS_ENNX1, POS_ENNX2, POS_ENNX3};
-            _vieAllie = new int[chato_combatcontenu._nbEquipe];
-            _attAllie = new int[chato_combatcontenu._nbEquipe];
-            _defAllie = new int[chato_combatcontenu._nbEquipe];
-            _vitAllie = new int[chato_combatcontenu._nbEquipe];
+            _vieAllie = new int[Chato_combat_contenu._nbEquipe];
+            _attAllie = new int[Chato_combat_contenu._nbEquipe];
+            _defAllie = new int[Chato_combat_contenu._nbEquipe];
+            _vitAllie = new int[Chato_combat_contenu._nbEquipe];
             _animationA = new String[] { "idle_right", "idle_right", "idle_right", "idle_right" };
 
             //génération allié
@@ -251,16 +251,16 @@ namespace SAE101
             }
 
             //préparation génération ennemi
-            _fileE = new String[chato_combatcontenu._nbEnnemy];
-            _sheetE = new SpriteSheet[chato_combatcontenu._nbEnnemy];
-            _ennemy = new AnimatedSprite[chato_combatcontenu._nbEnnemy];
+            _fileE = new String[Chato_combat_contenu._nbEnnemy];
+            _sheetE = new SpriteSheet[Chato_combat_contenu._nbEnnemy];
+            _ennemy = new AnimatedSprite[Chato_combat_contenu._nbEnnemy];
             _posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
             _posAllieBaseX = new int[] { POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
             
-            _vieEnn = new int[chato_combatcontenu._nbEnnemy];
-            _attEnn = new int[chato_combatcontenu._nbEnnemy];
-            _defEnn = new int[chato_combatcontenu._nbEnnemy];
-            _vitEnn = new int[chato_combatcontenu._nbEnnemy];
+            _vieEnn = new int[Chato_combat_contenu._nbEnnemy];
+            _attEnn = new int[Chato_combat_contenu._nbEnnemy];
+            _defEnn = new int[Chato_combat_contenu._nbEnnemy];
+            _vitEnn = new int[Chato_combat_contenu._nbEnnemy];
             _animationE = new String[] { "idle_left", "idle_left", "idle_left", "idle_left" };
 
             //génération ennemy
@@ -676,12 +676,12 @@ namespace SAE101
         //Déroulement des attaques;
         public void Vitesse()
         {
-            _ordretour = new int[chato_combatcontenu._nbEquipe];
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            _ordretour = new int[Chato_combat_contenu._nbEquipe];
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
-                if (i <= chato_combatcontenu._nbEquipe)
+                if (i <= Chato_combat_contenu._nbEquipe)
                     _ordretour[i] = _vitAllie[i];
-                else if (i > chato_combatcontenu._nbEquipe)
+                else if (i > Chato_combat_contenu._nbEquipe)
                     _ordretour[i] = _vitEnn[i];
             }
 

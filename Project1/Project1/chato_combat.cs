@@ -420,6 +420,21 @@ namespace SAE101
 
             //ANIMATIONS
 
+            //Animation de sélection
+
+
+
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            {
+                if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationA)
+                    _animationA[i] = "selected_right";
+                else
+                    _animationA[i] = "idle_right";
+            }
+            
+
+
+
             //Animation de combat (l'attaque de base)
             if (_animationAttack == true)
             {               
@@ -583,8 +598,9 @@ namespace SAE101
                 _attaquePerso[_action, 0] = 1;
                 _attaquePerso[_action, 1] = -1;
                 _attaquePerso[_action, 2] = 1;
-                _action++;
                 _sousMenuSpecial = false;
+                _action++;
+                
             }
             
 
@@ -720,6 +736,9 @@ namespace SAE101
                 {
                     if (_animationA[j] != "ded")
                         _animationA[j] = "victory_right1";
+                    kk = chato_combatcontenu._nbEquipe;
+                    _desc[0] = "Victoire Totale!";
+                    _desc[1] = "Victoire Totale!";
                 }
 
             }

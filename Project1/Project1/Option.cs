@@ -35,6 +35,8 @@ namespace SAE101
         // dialbox
         private Texture2D _optBox;
         private Vector2 _posOptBox;
+        private String _text;
+        private Vector2 _posText;
 
 
         public Option(Game1 game) : base(game) { }
@@ -42,6 +44,8 @@ namespace SAE101
         public override void Initialize()
         {
             _posOptBox = new Vector2(0, 228);
+
+            _text = "← ↑ ↓ →";
 
             base.Initialize();
         }
@@ -71,7 +75,7 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
-            _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(10, 0), Color.White);
+            _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(10, 0), Color.Gray);
             _spriteBatch.Draw(_optBox, _posOptBox, Color.White);
 
             _spriteBatch.End();

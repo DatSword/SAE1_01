@@ -431,17 +431,16 @@ namespace SAE101
                 _choix[1] = Chato_combat_contenu._special;
             }
 
+            //ANIMATION
 
+            //Animation de sélection
             for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
                 if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
                     _animationA[i] = "selected_right";
                 else
                     _animationA[i] = "idle_right";
-            }
-            
-
-
+            }           
 
             //Animation de combat (l'attaque de base)
             if (_animationAttackA == true)
@@ -528,7 +527,6 @@ namespace SAE101
                     _animationP2 = true;
                     _animationP3 = true;
                 }
-
             }
 
             if (_animationZeweurld == true)

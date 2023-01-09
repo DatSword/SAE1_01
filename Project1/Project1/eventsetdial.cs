@@ -21,7 +21,6 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-
     internal class Eventsetdial
     {
         public static Texture2D _dialBox;

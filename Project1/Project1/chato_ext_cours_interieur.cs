@@ -45,7 +45,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            joueur.Spawnchato_ext_cours_interieur();
+            Joueur.Spawnchato_ext_cours_interieur();
 
             _stop = 1;
 

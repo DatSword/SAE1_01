@@ -676,13 +676,13 @@ namespace SAE101
         //Déroulement des attaques;
         public void Vitesse()
         {
-            _ordretour = new int[Chato_combat_contenu._nbEquipe + Chato_combat_contenu._nbEnnemy];
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe + Chato_combat_contenu._nbEnnemy; i++)
+            _ordretour = new int[chato_combatcontenu._nbEquipe];
+            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
-                if (i < Chato_combat_contenu._nbEquipe)
+                if (i <= chato_combatcontenu._nbEquipe)
                     _ordretour[i] = _vitAllie[i];
-                else if (i >= Chato_combat_contenu._nbEquipe)
-                    _ordretour[i] = _vitEnn[i- Chato_combat_contenu._nbEquipe];
+                else if (i > chato_combatcontenu._nbEquipe)
+                    _ordretour[i] = _vitEnn[i];
             }
 
             int temp = 0;

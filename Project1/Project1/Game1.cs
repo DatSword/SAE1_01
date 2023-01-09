@@ -28,7 +28,7 @@ namespace SAE101
 
 
         // on définit les différents états possibles du jeu ( à compléter) 
-        public enum Etats { Menu, Play, Quitter, Option };
+        public enum Etats { Menu, Start, Play, Quitter, Option };
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
@@ -188,22 +188,26 @@ namespace SAE101
             _keyboardState = Keyboard.GetState();
             deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // On teste le clic de souris et l'état pour savoir quelle action faire 
+            // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
             {
-                // Attention, l'état a été mis à jour directement par l'écran en question
                 if (this.Etat == Etats.Quitter)
                     Exit();
 
-                else if (this.Etat == Etats.Play)
+                else if (this.Etat == Etats.Start)
                     LoadScreenblack_jack();
+
+                else if (this.Etat == Etats.Option)
+                    LoadScreenoption();
+
+                else
+                    Console.WriteLine("STOP");
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Back))
-            {
-                if (this.Etat == Etats.Menu)
+                if (this.Etat == Etats.Start || this.Etat == Etats.Option || this.Etat == Etats.Menu)
                     LoadScreenecran_de_titre();
-            }
 
             //Console.WriteLine(_cooldownVerif);
 
@@ -260,9 +264,7 @@ namespace SAE101
 
             //Camera
 
-            /* chambres nord */
-            //Console.WriteLine(_numEcran);
-
+            // chambres nord
             if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
                                 && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
                                 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche)
@@ -285,7 +287,7 @@ namespace SAE101
                 _cameraPosition = new Vector2(Chato_int_chambres_couloir._positionPerso.X, Chato_int_chambres_couloir._positionPerso.Y);
 
 
-                /* couloir */
+            // couloir
             if (_numEcran == 2 && (Chato_int_chambres_couloir._positionPerso.Y > 0
                                 && (Chato_int_chambres_couloir._positionPerso.X > Chato_int_chambres_couloir._limiteChambreX1 || 
                                 Chato_int_chambres_couloir._positionPerso.X < Chato_int_chambres_couloir._limiteChambreX2)))
@@ -314,13 +316,14 @@ namespace SAE101
             else if (_numEcran == 2 && Chato_ext_cours_interieur._positionPerso.Y > 49*16)
                 _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
 
+            // cours
             else if (_numEcran == 3 & Chato_int_chambres_nord._positionPerso.Y >= 1 * 16)
                 _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
 
             else if (_numEcran == 3 && Chato_int_chambres_nord._positionPerso.Y < 1*16 )
                 _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
 
-            
+            // combat
             else if (_numEcran == 4)
                 _cameraPosition = Chato_combat._centreCombat;
 
@@ -342,12 +345,20 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
             MediaPlayer.Play(_titleTheme);
+            this.Etat = Etats.Menu;
+        }
+
+        public void LoadScreenoption()
+        {
+            _screenManager.LoadScreen(new Option(this), new FadeTransition(GraphicsDevice, Color.LightGray));
+            this.Etat = Etats.Option;
         }
 
         public void LoadScreenblack_jack()
         {
             MediaPlayer.Stop();
             _screenManager.LoadScreen(new Black_jack(this), new FadeTransition(GraphicsDevice, Color.Black));
+            this.Etat = Etats.Play;
         }
 
         public void LoadScreenchato_int_chambres_nord()

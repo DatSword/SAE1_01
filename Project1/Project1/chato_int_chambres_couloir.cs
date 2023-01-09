@@ -51,7 +51,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            joueur.Spawnchato_int_chambres_couloir();
+            Joueur.Spawnchato_int_chambres_couloir();
 
             _stop = 1;
 

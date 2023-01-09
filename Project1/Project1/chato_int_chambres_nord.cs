@@ -72,7 +72,7 @@ namespace SAE101
             _posX = 0;
             numDial = 0;
 
-            joueur.Spawnchato_int_chambres_nord();
+            Joueur.Spawnchato_int_chambres_nord();
 
             _stop = 1;
 

@@ -18,7 +18,7 @@ using System;
 
 namespace SAE101
 {
-    public class chato_ext_cours_interieur : GameScreen
+    public class Chato_ext_cours_interieur : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -38,14 +38,14 @@ namespace SAE101
         public static int _posX;
         private int _stop;
 
-        public chato_ext_cours_interieur(Game1 game) : base(game) { }
+        public Chato_ext_cours_interieur(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
             // Lieu Spawn
             _posX = 0;
 
-            joueur.Spawnchato_ext_cours_interieur();
+            Joueur.Spawnchato_ext_cours_interieur();
 
             _stop = 1;
 
@@ -109,7 +109,7 @@ namespace SAE101
             else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
-            if (eventsetdial._dialTrue == false)
+            if (Eventsetdial._dialTrue == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -174,11 +174,11 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (eventsetdial._dialTrue == true)
+            if (Eventsetdial._dialTrue == true)
             {
-                _spriteBatch.Draw(eventsetdial._dialBox, eventsetdial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, eventsetdial._text, eventsetdial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, eventsetdial._nom, eventsetdial._posNom, Color.White);
+                _spriteBatch.Draw(Eventsetdial._dialBox, Eventsetdial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, Eventsetdial._text, Eventsetdial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, Eventsetdial._nom, Eventsetdial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

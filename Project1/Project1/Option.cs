@@ -32,10 +32,16 @@ namespace SAE101
         private Texture2D _titleS;
         private SpriteFont _fontTitle;
 
+        // dialbox
+        private Texture2D _optBox;
+        private Vector2 _posOptBox;
+
+
         public Option(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
+            _posOptBox = new Vector2(0, 228);
 
             base.Initialize();
         }
@@ -47,14 +53,14 @@ namespace SAE101
             _titleS = Content.Load<Texture2D>("menu/tantopie");
             _fontTitle = Content.Load<SpriteFont>("font/fonttitle");
 
+            _optBox = Content.Load<Texture2D>("menu/options_box");
+
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            
         }
 
         public override void Draw(GameTime gameTime)
@@ -63,9 +69,13 @@ namespace SAE101
 
             var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(10, 0), Color.White);
+            _spriteBatch.Draw(_optBox, _posOptBox, Color.White);
+
             _spriteBatch.End();
+
         }
     }
 }

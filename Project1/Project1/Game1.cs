@@ -192,7 +192,6 @@ namespace SAE101
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
             {
-                // Attention, l'état a été mis à jour directement par l'écran en question
                 if (this.Etat == Etats.Quitter)
                     Exit();
 
@@ -205,11 +204,10 @@ namespace SAE101
                 else
                     Console.WriteLine("STOP");
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Back))
-            {
-                if (this.Etat == Etats.Menu)
+                if (this.Etat == Etats.Start || this.Etat == Etats.Option || this.Etat == Etats.Menu)
                     LoadScreenecran_de_titre();
-            }
 
             //Console.WriteLine(_cooldownVerif);
 
@@ -347,19 +345,20 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
             MediaPlayer.Play(_titleTheme);
+            this.Etat = Etats.Menu;
         }
 
         public void LoadScreenoption()
         {
             _screenManager.LoadScreen(new Option(this), new FadeTransition(GraphicsDevice, Color.LightGray));
-            //MediaPlayer.Play(_titleTheme);
+            this.Etat = Etats.Option;
         }
 
         public void LoadScreenblack_jack()
         {
             MediaPlayer.Stop();
             _screenManager.LoadScreen(new Black_jack(this), new FadeTransition(GraphicsDevice, Color.Black));
-            Etat = Etats.Play;
+            this.Etat = Etats.Play;
         }
 
         public void LoadScreenchato_int_chambres_nord()

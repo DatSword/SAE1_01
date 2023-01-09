@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 
 namespace SAE101
 {
-    internal class chato_combat : GameScreen
+    internal class Chato_combat : GameScreen
     {
         //Constantes position pour animation;
         private const int POS_ALLIEX0 = 145;
@@ -121,7 +121,7 @@ namespace SAE101
         //Camera
         public static Vector2 _centreCombat;
 
-        public chato_combat(Game1 game) : base(game) { }
+        public Chato_combat(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
@@ -150,7 +150,7 @@ namespace SAE101
             _merde = false;
             kk = 0;
 
-            chato_combatcontenu.CombatTest();
+            Chato_combat_contenu.CombatTest();
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
@@ -158,22 +158,22 @@ namespace SAE101
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
             _descBackup = new String[] { "_", "_", "_", "_" };
-            _attaquePerso = new int[chato_combatcontenu._nbEquipe, 3];
-            _attaqueEnnemy = new int[chato_combatcontenu._nbEnnemy, 3];
+            _attaquePerso = new int[Chato_combat_contenu._nbEquipe, 3];
+            _attaqueEnnemy = new int[Chato_combat_contenu._nbEnnemy, 3];
 
             //Camera j'crois
             _centreCombat = new Vector2(512 / 2, 448 / 2);
            
             //ordre allié
-            _ordreA = new int[chato_combatcontenu._nbEquipe];
+            _ordreA = new int[Chato_combat_contenu._nbEquipe];
             int ordrejA = 0;
 
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
                 ordrejA = 0;
-                for (int j = 0; j < chato_combatcontenu._nbPersoJouable; j++)
+                for (int j = 0; j < Chato_combat_contenu._nbPersoJouable; j++)
                 {
-                    if (chato_combatcontenu._ordreJoueur[i] == chato_combatcontenu._nomPersoJouable[j])
+                    if (Chato_combat_contenu._ordreJoueur[i] == Chato_combat_contenu._nomPersoJouable[j])
                     {
                         _ordreA[i] = ordrejA;                        
                     }
@@ -182,53 +182,53 @@ namespace SAE101
             }
 
             //préparation génération
-            _fileA = new String[chato_combatcontenu._nbEquipe];
-            _sheetA = new SpriteSheet[chato_combatcontenu._nbEquipe];
-            _allie = new AnimatedSprite[chato_combatcontenu._nbEquipe];
+            _fileA = new String[Chato_combat_contenu._nbEquipe];
+            _sheetA = new SpriteSheet[Chato_combat_contenu._nbEquipe];
+            _allie = new AnimatedSprite[Chato_combat_contenu._nbEquipe];
             _posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
             _posAllieBaseX = new int [] {POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
-            _vieAllie = new int[chato_combatcontenu._nbEquipe];
-            _attAllie = new int[chato_combatcontenu._nbEquipe];
-            _defAllie = new int[chato_combatcontenu._nbEquipe];
-            _vitAllie = new int[chato_combatcontenu._nbEquipe];
+            _vieAllie = new int[Chato_combat_contenu._nbEquipe];
+            _attAllie = new int[Chato_combat_contenu._nbEquipe];
+            _defAllie = new int[Chato_combat_contenu._nbEquipe];
+            _vitAllie = new int[Chato_combat_contenu._nbEquipe];
             _animationA = new String[] { "idle_right", "idle_right", "idle_right", "idle_right" };
 
             //génération allié
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
                 if (_ordreA[i] == 0)
                 {
-                    chato_combatcontenu.Hein();
+                    Chato_combat_contenu.Hein();
                     GenerationAllie();
                 }
                 else if (_ordreA[i] == 1)
                 {
-                    chato_combatcontenu.Hero();
+                    Chato_combat_contenu.Hero();
                     GenerationAllie();
                 }
                 else if (_ordreA[i] == 2)
                 {
-                    chato_combatcontenu.Jon();
+                    Chato_combat_contenu.Jon();
                     GenerationAllie();
                 }
                 else if (_ordreA[i] == 3)
                 {
-                    chato_combatcontenu.Ben();
+                    Chato_combat_contenu.Ben();
                     GenerationAllie();
                 }
                 _ordrefinal++;
             }
 
             //ordre ennemi
-            _ordreE = new int[chato_combatcontenu._nbEnnemy];
+            _ordreE = new int[Chato_combat_contenu._nbEnnemy];
             int ordrejE = 0;
 
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEnnemy; i++)
             {
                 ordrejE = 0;
-                for (int j = 0; j < chato_combatcontenu._nbEnnJouable; j++)
+                for (int j = 0; j < Chato_combat_contenu._nbEnnJouable; j++)
                 {
-                    if (chato_combatcontenu._ordreEnnemi[i] == chato_combatcontenu._nomEnnJouable[j])
+                    if (Chato_combat_contenu._ordreEnnemi[i] == Chato_combat_contenu._nomEnnJouable[j])
                     {
                         _ordreE[i] = ordrejE;
                     }
@@ -237,33 +237,33 @@ namespace SAE101
             }
 
             //préparation génération ennemi
-            _fileE = new String[chato_combatcontenu._nbEnnemy];
-            _sheetE = new SpriteSheet[chato_combatcontenu._nbEnnemy];
-            _ennemy = new AnimatedSprite[chato_combatcontenu._nbEnnemy];
+            _fileE = new String[Chato_combat_contenu._nbEnnemy];
+            _sheetE = new SpriteSheet[Chato_combat_contenu._nbEnnemy];
+            _ennemy = new AnimatedSprite[Chato_combat_contenu._nbEnnemy];
             _posEnnemy = new[] { new Vector2(365, 230), new Vector2(315, 175), new Vector2(465, 230), new Vector2(415, 175) };
-            _vieEnn = new int[chato_combatcontenu._nbEnnemy];
-            _attEnn = new int[chato_combatcontenu._nbEnnemy];
-            _defEnn = new int[chato_combatcontenu._nbEnnemy];
-            _vitEnn = new int[chato_combatcontenu._nbEnnemy];
+            _vieEnn = new int[Chato_combat_contenu._nbEnnemy];
+            _attEnn = new int[Chato_combat_contenu._nbEnnemy];
+            _defEnn = new int[Chato_combat_contenu._nbEnnemy];
+            _vitEnn = new int[Chato_combat_contenu._nbEnnemy];
             _animationE = new String[] { "idle_left", "idle_left", "idle_left", "idle_left" };
 
             //génération ennemy
             _ordrefinal = 0;
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEnnemy; i++)
             {
                 if (_ordreE[i] == 0)
                 {
-                    chato_combatcontenu.Grand();
+                    Chato_combat_contenu.Grand();
                     GenerationEnnemi();
                 }
                 else if (_ordreE[i] == 1)
                 {
-                    chato_combatcontenu.Mechant();
+                    Chato_combat_contenu.Mechant();
                     GenerationEnnemi();
                 }
                 else if (_ordreE[i] == 2)
                 {
-                    chato_combatcontenu.Pabo();
+                    Chato_combat_contenu.Pabo();
                     GenerationEnnemi();
                 }
                 _ordrefinal++;
@@ -319,7 +319,7 @@ namespace SAE101
                 else
                 {
 
-                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < chato_combatcontenu._nbEnnemy - 1 && Game1._cooldownVerif == false)
+                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < Chato_combat_contenu._nbEnnemy - 1 && Game1._cooldownVerif == false)
                     {
                         _choixCursorD = _choixCursorD + 1;
                         Game1.SetCoolDown();
@@ -383,7 +383,7 @@ namespace SAE101
 
             //Fin du tour (à mettre juste avant choix action sinon plantage)
 
-            if (chato_combatcontenu._nbEquipe == _action)
+            if (Chato_combat_contenu._nbEquipe == _action)
             {
                 _tourFini = true;
                 Vitesse();
@@ -394,13 +394,13 @@ namespace SAE101
 
             //Perso choisissant son action
             if (_ordreA[_action] == 0)
-                chato_combatcontenu.Hein();
+                Chato_combat_contenu.Hein();
             else if (_ordreA[_action] == 1)
-                chato_combatcontenu.Hero();
+                Chato_combat_contenu.Hero();
             else if (_ordreA[_action] == 2)
-                chato_combatcontenu.Jon();
+                Chato_combat_contenu.Jon();
             else if (_ordreA[_action] == 3)
-                chato_combatcontenu.Ben();
+                Chato_combat_contenu.Ben();
 
             if (_selectionEnn == false)
                 _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
@@ -408,14 +408,14 @@ namespace SAE101
             //Pas revoir
             if (_sousMenuSpecial == true)
             {
-                _choix = chato_combatcontenu._specialP;
-                _desc = chato_combatcontenu._descP;
+                _choix = Chato_combat_contenu._specialP;
+                _desc = Chato_combat_contenu._descP;
             }
             else if (_sousMenuSpecial == false)
             {
                 _choix = _choixBackup;
                 _desc = _descBackup;
-                _choix[1] = chato_combatcontenu._special;
+                _choix[1] = Chato_combat_contenu._special;
             }
 
             //ANIMATIONS
@@ -528,7 +528,7 @@ namespace SAE101
                 _animationAttack = false;
                 _animationZeweurld = false;
                 EnnemiMort();
-                if (kk != chato_combatcontenu._nbEquipe)
+                if (kk != Chato_combat_contenu._nbEquipe)
                 {
                     Vitesse2();
                 }
@@ -541,13 +541,13 @@ namespace SAE101
                 Game1.SetCoolDownCombat();
             _cool = false;
 
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
                 _allie[i].Play(_animationA[i]);
                 _allie[i].Update(deltaSeconds);
             }
 
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEnnemy; i++)
             {
                 _ennemy[i].Play(_animationE[i]);
                 _ennemy[i].Update(deltaSeconds);
@@ -570,11 +570,11 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
                 _spriteBatch.Draw(_allie[i], _posAllie[i]);              
             }
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEnnemy; i++)
             {
                 _spriteBatch.Draw(_ennemy[i], _posEnnemy[i]);
             }
@@ -619,8 +619,8 @@ namespace SAE101
         //Déroulement des attaques;
         public void Vitesse()
         {
-            _ordretour = new int[chato_combatcontenu._nbEquipe];
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            _ordretour = new int[Chato_combat_contenu._nbEquipe];
+            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
             {
                 _ordretour[i] = _vitAllie[i];
             }
@@ -683,31 +683,31 @@ namespace SAE101
 
         public void GenerationAllie()
         {
-            _fileA[_ordrefinal] = chato_combatcontenu._anim;
+            _fileA[_ordrefinal] = Chato_combat_contenu._anim;
             _sheetA[_ordrefinal] = Content.Load<SpriteSheet>(_fileA[_ordrefinal], new JsonContentLoader());
             _allie[_ordrefinal] = new AnimatedSprite(_sheetA[_ordrefinal]);
 
-            _vieAllie[_ordrefinal] = chato_combatcontenu._stat[0];
-            _attAllie[_ordrefinal] = chato_combatcontenu._stat[1];
-            _defAllie[_ordrefinal] = chato_combatcontenu._stat[2];
-            _vitAllie[_ordrefinal] = chato_combatcontenu._stat[3];
+            _vieAllie[_ordrefinal] = Chato_combat_contenu._stat[0];
+            _attAllie[_ordrefinal] = Chato_combat_contenu._stat[1];
+            _defAllie[_ordrefinal] = Chato_combat_contenu._stat[2];
+            _vitAllie[_ordrefinal] = Chato_combat_contenu._stat[3];
         }
 
         public void GenerationEnnemi()
         {
-            _fileE[_ordrefinal] = chato_combatcontenu._anim;
+            _fileE[_ordrefinal] = Chato_combat_contenu._anim;
             _sheetE[_ordrefinal] = Content.Load<SpriteSheet>(_fileE[_ordrefinal], new JsonContentLoader());
             _ennemy[_ordrefinal] = new AnimatedSprite(_sheetE[_ordrefinal]);
 
-            _vieEnn[_ordrefinal] = chato_combatcontenu._stat[0];
-            _attEnn[_ordrefinal] = chato_combatcontenu._stat[1];
-            _defEnn[_ordrefinal] = chato_combatcontenu._stat[2];
-            _vitEnn[_ordrefinal] = chato_combatcontenu._stat[3];
+            _vieEnn[_ordrefinal] = Chato_combat_contenu._stat[0];
+            _attEnn[_ordrefinal] = Chato_combat_contenu._stat[1];
+            _defEnn[_ordrefinal] = Chato_combat_contenu._stat[2];
+            _vitEnn[_ordrefinal] = Chato_combat_contenu._stat[3];
         }
 
         public void EnnemiMort()
         {
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEnnemy; i++)
             {
                 if (_vieEnn[i] <= 0)
                 {
@@ -722,21 +722,21 @@ namespace SAE101
         {
             int verif = 0;
 
-            for (int i = 0; i < chato_combatcontenu._nbEnnemy; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbEnnemy; i++)
             {
                 if (_vieEnn[i] <= 0)
                     verif++;
             }
 
-            if (verif == chato_combatcontenu._nbEnnemy)
+            if (verif == Chato_combat_contenu._nbEnnemy)
             {
                 _victoire = true;
                 Game1._pelo.Play();
-                for (int j = 0; j < chato_combatcontenu._nbEquipe; j++)
+                for (int j = 0; j < Chato_combat_contenu._nbEquipe; j++)
                 {
                     if (_animationA[j] != "ded")
                         _animationA[j] = "victory_right1";
-                    kk = chato_combatcontenu._nbEquipe;
+                    kk = Chato_combat_contenu._nbEquipe;
                     _desc[0] = "Victoire Totale!";
                     _desc[1] = "Victoire Totale!";
                 }

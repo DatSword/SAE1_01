@@ -54,8 +54,6 @@ namespace SAE101
             lesBoutons[1] = new Rectangle(144, 275, 210, 63);
             lesBoutons[2] = new Rectangle(144, 350, 210, 63);
 
-            
-
             base.Initialize();
         }
 
@@ -89,7 +87,7 @@ namespace SAE101
                     {
                         // on change l'état défini dans Game1 en fonction du bouton cliqué
                         if (i == 0)
-                            _myGame.Etat = Game1.Etats.Play;
+                            _myGame.Etat = Game1.Etats.Start;
                         else if (i == 1)
                             _myGame.Etat = Game1.Etats.Option;
                         else

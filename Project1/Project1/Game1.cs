@@ -62,6 +62,7 @@ namespace SAE101
         public static SoundEffect _duck;
         public static SoundEffect _wbeg;
         public static SoundEffect _wend;
+        public static SoundEffect _toink;
 
         //Combat?
         private bool _combatTest;
@@ -165,6 +166,7 @@ namespace SAE101
             _duck = Content.Load<SoundEffect>("sfx/duck");
             _wbeg = Content.Load<SoundEffect>("sfx/wbeg");
             _wend = Content.Load<SoundEffect>("sfx/wend");
+            _toink = Content.Load<SoundEffect>("sfx/toink");
 
             //Boite de dialogue
             Eventsetdial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
@@ -401,7 +403,7 @@ namespace SAE101
         public static void SetCoolDownCombat()
         {
             _cooldownVerifC = true;
-            _cooldownC = 2.0f;
+            _cooldownC = 0.5f;
         }
     }
 }

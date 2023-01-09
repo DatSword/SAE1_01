@@ -419,6 +419,7 @@ namespace SAE101
             //Si tel Perso est mort, alors pas d'action
             if (_animationA[_action] == "ded")
                 _action++;
+            Console.WriteLine(_action);
 
             //Qui est suivi par le curseur
             if (_selectionEnn == false)
@@ -443,7 +444,7 @@ namespace SAE101
             {
                 if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
                     _animationA[i] = "selected_right";
-                else if (_animationEnCours == false)
+                else if (_animationEnCours == false && _animationA[i] != "ded")
                     _animationA[i] = "idle_right";
             }           
 
@@ -726,12 +727,15 @@ namespace SAE101
                 if (_ordretour[kk] == _ordretour2[i])
                 {
                     if (i >= Chato_combat_contenu._nbAlly)
+                    {
                         BastonE(i - Chato_combat_contenu._nbAlly);
+                    }
                     else
-                        BastonA(i);                   
-                }
+                    {
+                        BastonA(i);
+                    }                                        
+                }               
             }
-
             kk++;
         }
 
@@ -760,6 +764,10 @@ namespace SAE101
                     Console.WriteLine(i);
                 }
             }
+            else
+            {
+                _animationOver = true;
+            }
             
         }
 
@@ -783,6 +791,10 @@ namespace SAE101
                 _animationOver = false;
                 _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - _attEnn[i];
                 Console.WriteLine(i);
+            }
+            else
+            {
+                _animationOver = true;
             }
         }
 
@@ -867,13 +879,13 @@ namespace SAE101
 
             for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
-                if (_vieEnn[i] <= 0)
+                if (_vieAllie[i] <= 0)
                     verif++;
             }
 
             if (verif == Chato_combat_contenu._nbAlly)
             {
-                _victoire = true;
+                _victoire = false;
                 Game1._pelo.Play();
                 for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)
                 {

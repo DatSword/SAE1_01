@@ -22,7 +22,7 @@ namespace SAE101
 {
 
 
-    internal class eventsetdial
+    internal class Eventsetdial
     {
         public static Texture2D _dialBox;
         public static Vector2 _posDialBox;

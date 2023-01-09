@@ -50,9 +50,9 @@ namespace SAE101
         {
             
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(144, 200, 210, 63);
-            lesBoutons[1] = new Rectangle(144, 275, 210, 63);
-            lesBoutons[2] = new Rectangle(144, 350, 210, 63);
+            lesBoutons[0] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3, 210, 63);
+            lesBoutons[1] = new Rectangle(Game1.xEcran / 2 - 210 / 2, (int)(Game1.yEcran / 3 * 1.5), 210, 63);
+            lesBoutons[2] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2, 210, 63);
 
             base.Initialize();
         }
@@ -98,6 +98,16 @@ namespace SAE101
                 }
             }
 
+            if (Game1.chan != 1)
+                for (int i = 0; i < lesBoutons.Length; i++)
+                {
+                    lesBoutons[i].Width *= (int) Game1.chan;
+                    lesBoutons[i].Height *= (int) Game1.chan;
+                }
+
+
+
+
             /*if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 Game.LoadScreenblack_jack();
@@ -112,10 +122,23 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(144, 200), Color.White);
-            _spriteBatch.Draw(_option, new Vector2(144, 275), Color.White);
-            _spriteBatch.Draw(_quit, new Vector2(144, 350), Color.White);
+            _spriteBatch.Draw(_start, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(Game1.xEcran / 2 - 210 / 2, (float)(Game1.yEcran / 3 * 1.5)), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2), Color.White);
             _spriteBatch.End();
+        }
+    }
+
+    internal record struct NewStruct(object Item1, int Item2)
+    {
+        public static implicit operator (object, int)(NewStruct value)
+        {
+            return (value.Item1, value.Item2);
+        }
+
+        public static implicit operator NewStruct((object, int) value)
+        {
+            return new NewStruct(value.Item1, value.Item2);
         }
     }
 }

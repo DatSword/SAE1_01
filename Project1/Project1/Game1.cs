@@ -37,6 +37,13 @@ namespace SAE101
         private Ecran_de_titre _ecranDeTitre;
         private Black_jack _blackJack;
 
+        //Ecran
+        public static int xEcran;
+        public static int yEcran;
+        public static int changement0 = 1;
+        public static double changement1 = 1.5;
+        public static int changement2 = 2;
+        public static double chan = 1;
 
         //Camera
         public static OrthographicCamera _camera;
@@ -101,8 +108,11 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            _graphics.PreferredBackBufferWidth = 514; //768
-            _graphics.PreferredBackBufferHeight = 448; //672
+            xEcran = 514; //768
+            yEcran = 448; //672
+
+            _graphics.PreferredBackBufferWidth = xEcran;
+            _graphics.PreferredBackBufferHeight = yEcran;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
@@ -147,7 +157,7 @@ namespace SAE101
             //Jsp
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-                //Musiques
+            //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
             _titleTheme = Content.Load<Song>("music/title/title");
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
@@ -245,20 +255,23 @@ namespace SAE101
                 _graphics.PreferredBackBufferWidth = 514;
                 _graphics.PreferredBackBufferHeight = 448;
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                chan = changement0;
                 _graphics.ApplyChanges();
             }
             if (_keyboardState.IsKeyDown(Keys.D))
             {
-                _graphics.PreferredBackBufferWidth = 768;
-                _graphics.PreferredBackBufferHeight = 672;
+                _graphics.PreferredBackBufferWidth = (int)(xEcran * changement1);
+                _graphics.PreferredBackBufferHeight = (int)(yEcran * changement1);
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                chan = changement1;
                 _graphics.ApplyChanges();
             }
             if (_keyboardState.IsKeyDown(Keys.F))
             {
-                _graphics.PreferredBackBufferWidth = 1024;
-                _graphics.PreferredBackBufferHeight = 896;
+                _graphics.PreferredBackBufferWidth = xEcran * changement2;
+                _graphics.PreferredBackBufferHeight = yEcran * changement2;
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                chan = changement2;
                 _graphics.ApplyChanges();
             }
 

@@ -173,17 +173,17 @@ namespace SAE101
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
             _descBackup = new String[] { "_", "_", "_", "_" };
-            _attaquePerso = new int[Chato_combat_contenu._nbEquipe, 3];
+            _attaquePerso = new int[Chato_combat_contenu._nbAlly, 3];
             _attaqueEnnemy = new int[Chato_combat_contenu._nbEnnemy, 3];
 
             //Camera j'crois
             _centreCombat = new Vector2(512 / 2, 448 / 2);
            
             //ordre allié
-            _ordreA = new int[Chato_combat_contenu._nbEquipe];
+            _ordreA = new int[Chato_combat_contenu._nbAlly];
             int ordrejA = 0;
 
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
                 ordrejA = 0;
                 for (int j = 0; j < Chato_combat_contenu._nbPersoJouable; j++)
@@ -197,19 +197,19 @@ namespace SAE101
             }
 
             //préparation génération
-            _fileA = new String[Chato_combat_contenu._nbEquipe];
-            _sheetA = new SpriteSheet[Chato_combat_contenu._nbEquipe];
-            _allie = new AnimatedSprite[Chato_combat_contenu._nbEquipe];
+            _fileA = new String[Chato_combat_contenu._nbAlly];
+            _sheetA = new SpriteSheet[Chato_combat_contenu._nbAlly];
+            _allie = new AnimatedSprite[Chato_combat_contenu._nbAlly];
             _posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
             _posAllieBaseX = new int[] { POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
-            _vieAllie = new int[Chato_combat_contenu._nbEquipe];
-            _attAllie = new int[Chato_combat_contenu._nbEquipe];
-            _defAllie = new int[Chato_combat_contenu._nbEquipe];
-            _vitAllie = new int[Chato_combat_contenu._nbEquipe];
+            _vieAllie = new int[Chato_combat_contenu._nbAlly];
+            _attAllie = new int[Chato_combat_contenu._nbAlly];
+            _defAllie = new int[Chato_combat_contenu._nbAlly];
+            _vitAllie = new int[Chato_combat_contenu._nbAlly];
             _animationA = new String[] { "idle_right", "idle_right", "idle_right", "idle_right" };
 
             //génération allié
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
                 if (_ordreA[i] == 0)
                 {
@@ -399,7 +399,7 @@ namespace SAE101
 
             //Fin du tour (à mettre juste avant choix action sinon plantage)
 
-            if (Chato_combat_contenu._nbEquipe == _action)
+            if (Chato_combat_contenu._nbAlly == _action)
             {
                 _tourFini = true;
                 Vitesse();
@@ -585,7 +585,7 @@ namespace SAE101
                 _animationAttackA = false;
                 _animationZeweurld = false;
                 EnnemiMort();
-                if (kk != Chato_combat_contenu._nbEquipe)
+                if (kk != Chato_combat_contenu._nbAlly)
                 {
                     Vitesse2();
                 }
@@ -598,7 +598,7 @@ namespace SAE101
                 Game1.SetCoolDownCombat();
             _cool = false;
 
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
                 _allie[i].Play(_animationA[i]);
                 _allie[i].Update(deltaSeconds);
@@ -627,7 +627,7 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
                 _spriteBatch.Draw(_allie[i], _posAllie[i]);              
             }
@@ -802,6 +802,19 @@ namespace SAE101
             }
         }
 
+        public void AllieMort()
+        {
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
+            {
+                if (_vieEnn[i] <= 0)
+                {
+                    _animationE[i] = "ded";
+                    Victoire();
+                }
+
+            }
+        }
+
         public void Victoire()
         {
             int verif = 0;
@@ -816,11 +829,11 @@ namespace SAE101
             {
                 _victoire = true;
                 Game1._pelo.Play();
-                for (int j = 0; j < Chato_combat_contenu._nbEquipe; j++)
+                for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)
                 {
                     if (_animationA[j] != "ded")
                         _animationA[j] = "victory_right1";
-                    kk = Chato_combat_contenu._nbEquipe;
+                    kk = Chato_combat_contenu._nbAlly;
                     _desc[0] = "Victoire Totale!";
                     _desc[1] = "Victoire Totale!";
                 }

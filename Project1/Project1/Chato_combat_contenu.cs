@@ -22,7 +22,7 @@ namespace SAE101
 {
     internal class Chato_combat_contenu
     {
-        public static int _nbEquipe;
+        public static int _nbAlly;
         public static int _nbEnnemy;
 
         public static String _special;
@@ -39,7 +39,7 @@ namespace SAE101
 
         public static void CombatTest()
         {
-            _nbEquipe = 3;
+            _nbAlly = 3;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 
             _nbEnnemy = 3;

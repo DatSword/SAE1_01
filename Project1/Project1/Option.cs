@@ -34,6 +34,8 @@ namespace SAE101
         private Vector2 _posOptBox;
         private String[] _textOpt;
         private Vector2[] _posTextOpt;
+        private Texture2D[] _touchesOpt;
+        private Vector2[] _posTouches;
         private String _textDep;
 
 
@@ -43,8 +45,11 @@ namespace SAE101
         {
             _posOptBox = new Vector2(0, 224);
 
-            _textOpt = new String[3] { "touche pour valider", "touche pour revenir en arrière", "touches pour les déplacements" };
-            _posTextOpt = new Vector2[3] { new Vector2(60, 255), new Vector2(60, 275), new Vector2(60, 295) };
+            _textOpt = new String[3] { "pour valider", "pour revenir en arrière", "pour les déplacements" };
+            _posTextOpt = new Vector2[3] { new Vector2(100, 260), new Vector2(100, 290), new Vector2(100, 320) };
+
+            _touchesOpt = new Texture2D[3] { Content.Load<Texture2D>("menu/toucheX"), Content.Load<Texture2D>("menu/toucheX"), Content.Load<Texture2D>("menu/toucheX") };
+            _posTouches = new Vector2[3] { new Vector2(40, 250), new Vector2(40, 280), new Vector2(20, 310) };
 
             _textDep = "hi";
 
@@ -83,6 +88,8 @@ namespace SAE101
 
             for (int i = 0; i < _textOpt.Length; i++)
                 _spriteBatch.DrawString(Game1._font, _textOpt[i], _posTextOpt[i], Color.White);
+            for (int i = 0; i < _textOpt.Length; i++)
+                _spriteBatch.Draw(_touchesOpt[i], _posTouches[i], Color.White);
 
 
             _spriteBatch.End();

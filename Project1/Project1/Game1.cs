@@ -182,7 +182,7 @@ namespace SAE101
         protected override void Update(GameTime gameTime)
         {
             //Mannette?
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             _keyboardState = Keyboard.GetState();
@@ -205,7 +205,7 @@ namespace SAE101
                     Console.WriteLine("STOP");
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+            if (Keyboard.GetState().IsKeyDown(Keys.X))
                 if (this.Etat == Etats.Start || this.Etat == Etats.Option || this.Etat == Etats.Menu)
                     LoadScreenecran_de_titre();
 

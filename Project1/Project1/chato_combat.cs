@@ -434,7 +434,7 @@ namespace SAE101
             //ANIMATION
 
             //Animation de sélection
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe; i++)
+            for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
             {
                 if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
                     _animationA[i] = "selected_right";
@@ -669,20 +669,20 @@ namespace SAE101
         //Déroulement des attaques;
         public void Vitesse()
         {
-            _ordretour = new int[Chato_combat_contenu._nbEquipe+ Chato_combat_contenu._nbEnnemy];
-            _ordretour2 = new int[Chato_combat_contenu._nbEquipe + Chato_combat_contenu._nbEnnemy];
-            for (int i = 0; i < Chato_combat_contenu._nbEquipe + Chato_combat_contenu._nbEnnemy; i++)
+            _ordretour = new int[Chato_combat_contenu._nbAlly+ Chato_combat_contenu._nbEnnemy];
+            _ordretour2 = new int[Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy];
+            for (int i = 0; i < Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy; i++)
             {
-                if (i < Chato_combat_contenu._nbEquipe) 
+                if (i < Chato_combat_contenu._nbAlly) 
                 {
                     _ordretour[i] = _vitAllie[i];
                     _ordretour2[i] = _vitAllie[i];
                 }
                     
-                else if (i >= Chato_combat_contenu._nbEquipe)
+                else if (i >= Chato_combat_contenu._nbAlly)
                 {
-                    _ordretour[i] = _vitEnn[i - Chato_combat_contenu._nbEquipe];
-                    _ordretour2[i] = _vitEnn[i - Chato_combat_contenu._nbEquipe];
+                    _ordretour[i] = _vitEnn[i - Chato_combat_contenu._nbAlly];
+                    _ordretour2[i] = _vitEnn[i - Chato_combat_contenu._nbAlly];
                 }
                     
             }
@@ -713,8 +713,8 @@ namespace SAE101
             {
                 if (_ordretour[kk] == _ordretour2[i])
                 {
-                    if (i >= Chato_combat_contenu._nbEquipe)
-                        BastonE(i - Chato_combat_contenu._nbEquipe);
+                    if (i >= Chato_combat_contenu._nbAlly)
+                        BastonE(i - Chato_combat_contenu._nbAlly);
                     else
                         BastonA(i);                   
                 }

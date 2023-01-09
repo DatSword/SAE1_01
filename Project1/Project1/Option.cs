@@ -25,9 +25,6 @@ namespace SAE101
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est défini dans Game1
-        private Game1 _myGame;
-
         //Titre
         private Texture2D _titleS;
         private SpriteFont _fontTitle;
@@ -35,17 +32,28 @@ namespace SAE101
         // dialbox
         private Texture2D _optBox;
         private Vector2 _posOptBox;
-        private String _text;
-        private Vector2 _posText;
+        private String[] _textOpt;
+        private Vector2[] _posTextOpt;
+        private Texture2D[] _touchesOpt;
+        private Vector2[] _posTouches;
+        private String _textDep;
 
 
         public Option(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
-            _posOptBox = new Vector2(0, 228);
+            _posOptBox = new Vector2(0, 224);
 
-            _text = "← ↑ ↓ →";
+            _textOpt = new String[3] { "pour valider", "pour revenir en arrière", "pour les déplacements" };
+            _posTextOpt = new Vector2[3] { new Vector2(100, 260), new Vector2(100, 290), new Vector2(100, 320) };
+
+            _touchesOpt = new Texture2D[3] { Content.Load<Texture2D>("menu/toucheX"), Content.Load<Texture2D>("menu/toucheX"), Content.Load<Texture2D>("menu/toucheX") };
+            _posTouches = new Vector2[3] { new Vector2(40, 250), new Vector2(40, 280), new Vector2(20, 310) };
+
+            _textDep = "hi";
+
+                //"← ↑ ↓ →";
 
             base.Initialize();
         }
@@ -77,6 +85,12 @@ namespace SAE101
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(10, 0), Color.Gray);
             _spriteBatch.Draw(_optBox, _posOptBox, Color.White);
+
+            for (int i = 0; i < _textOpt.Length; i++)
+                _spriteBatch.DrawString(Game1._font, _textOpt[i], _posTextOpt[i], Color.White);
+            for (int i = 0; i < _textOpt.Length; i++)
+                _spriteBatch.Draw(_touchesOpt[i], _posTouches[i], Color.White);
+
 
             _spriteBatch.End();
 

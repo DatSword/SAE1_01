@@ -18,7 +18,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace SAE101
 {
-    internal class ecran_de_titre : GameScreen
+    internal class Ecran_de_titre : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -41,7 +41,7 @@ namespace SAE101
         //Titre
         public SpriteFont _fontTitle;
 
-        public ecran_de_titre(Game1 game) : base(game) 
+        public Ecran_de_titre(Game1 game) : base(game) 
         {
             _myGame = game;
         }

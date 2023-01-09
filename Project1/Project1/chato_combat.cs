@@ -424,13 +424,13 @@ namespace SAE101
 
 
 
-            for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
+            /*for (int i = 0; i < chato_combatcontenu._nbEquipe; i++)
             {
                 if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationA)
                     _animationA[i] = "selected_right";
                 else
                     _animationA[i] = "idle_right";
-            }
+            }*/
             
 
 

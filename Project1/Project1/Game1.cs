@@ -34,7 +34,7 @@ namespace SAE101
         private Etats etat;
 
         // on définit  2 écrans ( à compléter )
-        private ecran_de_titre _ecranDeTitre;
+        private Ecran_de_titre _ecranDeTitre;
         private black_jack _blackJack;
 
 
@@ -110,7 +110,7 @@ namespace SAE101
             // Par défaut, le 1er état flèche l'écran de menu
             Etat = Etats.Menu;
             // on charge les 2 écrans 
-            _ecranDeTitre = new ecran_de_titre(this);
+            _ecranDeTitre = new Ecran_de_titre(this);
             _blackJack = new black_jack(this);
 
 
@@ -140,9 +140,6 @@ namespace SAE101
             _firstvisit = true;
 
             base.Initialize();
-
-            //premier écran
-            LoadScreenecran_de_titre();
         }
 
         protected override void LoadContent()
@@ -150,12 +147,7 @@ namespace SAE101
             //Jsp
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // on charge l'écran de menu par défaut 
-            //LoadScreenblack_jack();
-            //LoadScreenecran_de_titre();
-            _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.LightGray));
-
-            //Musiques
+                //Musiques
             _songChato = Content.Load<Song>("music/chato/EdgarAndSabin");
             _titleTheme = Content.Load<Song>("music/title/title");
             _songCombat = Content.Load<Song>("music/chato/GUERRE");
@@ -180,7 +172,10 @@ namespace SAE101
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
 
-            
+            // on charge l'écran de menu par défaut 
+            LoadScreenecran_de_titre();
+
+            base.LoadContent();
         }
 
 
@@ -345,7 +340,7 @@ namespace SAE101
         //Chargements maps
         public void LoadScreenecran_de_titre()
         {
-            _screenManager.LoadScreen(new ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
+            _screenManager.LoadScreen(new Ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
             MediaPlayer.Play(_titleTheme);
         }
 

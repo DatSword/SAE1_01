@@ -93,9 +93,14 @@ namespace SAE101
         public static int _fin;
 
         //pour évènements et déplacementss
+        public static float _walkSpeed;
+        public static float _speed;
         public static TiledMap _tiledMap;
         public static Vector2 _positionPerso;
         public static TiledMapTileLayer mapLayer;
+        public static int _stop;
+        public static String _animationPlayer;
+        public static TiledMapTileLayer mapLayerDoor;
         //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat
@@ -170,6 +175,9 @@ namespace SAE101
             //event
             _firstvisit = true;
             _fin = 0;
+            _speed = 100;
+            _animationPlayer = "idle_down";
+            
 
             base.Initialize();
         }
@@ -367,8 +375,8 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = Chato_combat._centreCombat;
 
-
-
+            _walkSpeed = _speed * deltaSeconds;
+            Console.WriteLine(Chato_int_chambres_nord._posX);
             base.Update(gameTime);
         }
 

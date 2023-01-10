@@ -43,7 +43,12 @@ namespace SAE101
         public static Vector2 _posNo;
         public static bool _choiceTrue;
 
-
+        public static int u;
+        public static int d;
+        public static int l;
+        public static int r;
+        public static int ud;
+        public static int dd;
 
         public static void toutDebut()
         {
@@ -119,16 +124,25 @@ namespace SAE101
         public static void SetCollision()
         {
             Game1.mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            Game1.mapLayerDoor = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
         }
         public static void BoiteDialogues()
         {
             //float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             KeyboardState _keyboardState = Keyboard.GetState();
-            int u = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1)).GlobalIdentifier;
-            int d = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
-            int l = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
-            int r = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
-            Console.WriteLine(r);
+            u = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1)).GlobalIdentifier;
+            d = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
+            l = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
+            r = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
+            dd = Game1.mapLayerDoor.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
+            ud = Game1.mapLayerDoor.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1)).GlobalIdentifier;
+
+            Console.WriteLine("r = " + r);
+            Console.WriteLine("u = " + u);
+            Console.WriteLine("d = " + d);
+            Console.WriteLine("l = " + l);
+            Console.WriteLine("ud = " + ud);
+            Console.WriteLine("dd = " + dd);
         }
 
        }

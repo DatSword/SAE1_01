@@ -62,99 +62,50 @@ namespace SAE101
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            
 
-            // TODO: use this.Content to load your game content here
-
-            Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
+            /*Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
             mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
 
             //Load Perso
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+            Event_et_dial.SetCollision();
+            */
+
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
+
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spriteSheet);
+
+            Event_et_dial.SetCollision();
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            //debug map
-            int a = mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
-            //Console.WriteLine(a);
-
-            _sensPersoX = 0;
-            _sensPersoY = 0;
+            _keyboardState = Keyboard.GetState();
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
 
-            _keyboardState = Keyboard.GetState();
-            KeyboardState keyboardState = Keyboard.GetState();
 
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float walkSpeed = deltaSeconds * _vitessePerso;
-            String animation = "idle_down";
-
-
-            // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
-
-            //Mouvement/animation
-            if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))
-                animation = "idle_down";
-            else if (_stop == 2 && keyboardState.IsKeyUp(Keys.Up))
-                animation = "idle_up";
-            else if (_stop == 3 && keyboardState.IsKeyUp(Keys.Left))
-                animation = "idle_left";
-            else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
-                animation = "idle_right";
-
-            if (Event_et_dial._dialTrue == false)
-            {
-                if (keyboardState.IsKeyDown(Keys.Up))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1);
-                    animation = "move_up";
-                    _stop = 2;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.Y -= walkSpeed;
-                }
-                if (keyboardState.IsKeyDown(Keys.Down))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1);
-                    animation = "move_down";
-                    _stop = 1;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.Y += walkSpeed;
-                }
-                if (keyboardState.IsKeyDown(Keys.Left))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
-                    animation = "move_left";
-                    _stop = 3;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.X -= walkSpeed;
-                }
-                if (keyboardState.IsKeyDown(Keys.Right))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
-                    animation = "move_right";
-                    _stop = 4;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.X += walkSpeed;
-                }
-            }
-            _perso.Play(animation);
+            Event_et_dial.BoiteDialogues();
+            Joueur.Mouvement(gameTime);
+            _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
+
 
 
             //changements maps
 
-            if (keyboardState.IsKeyDown(Keys.Down) && (a == 101) && Game1._positionPerso.Y > 49 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 43) && Game1._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)Game1._positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();

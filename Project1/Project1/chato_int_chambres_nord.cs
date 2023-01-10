@@ -84,8 +84,7 @@ namespace SAE101
 
             _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
             _chestTrue = false;
-            Event_et_dial.SetCollision();
-            Event_et_dial.BoiteDialogues();
+            
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
             //_chambreCentre1 = new Vector2((float)8 * 16, 6 * 16);
@@ -105,7 +104,8 @@ namespace SAE101
             _sensPersoY = 0;
             _vitessePerso = 100;
             _choixCursor = 1;
-
+            
+            
             base.Initialize();
         }
 
@@ -119,7 +119,7 @@ namespace SAE101
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
             mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
             mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
-
+            Event_et_dial.SetCollision();
             //Load persos
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
@@ -143,7 +143,7 @@ namespace SAE101
             int b = mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth-1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
             Console.WriteLine(b);
 
-
+            Event_et_dial.BoiteDialogues();
             //Camera
             Game1._camera.LookAt(Game1._cameraPosition);
 

@@ -99,6 +99,7 @@ namespace SAE101
         public static TiledMapTileLayer mapLayerDown;
         public static TiledMapTileLayer mapLayerLeft;
         public static TiledMapTileLayer mapLayerRight;
+        public static TiledMapTileLayer mapLayer;
 
         public Etats Etat
         {

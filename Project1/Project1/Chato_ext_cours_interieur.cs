@@ -31,6 +31,7 @@ namespace SAE101
         // défini dans Game1
         private Game1 _myGame;
         private Event_et_dial _eventEtDial;
+        private Joueur _joueur;
 
         //sprite
         private AnimatedSprite _perso;
@@ -50,6 +51,7 @@ namespace SAE101
         public override void Initialize()
         {
             _eventEtDial = _myGame._eventEtDial;
+            _joueur = _myGame._joueur;
 
             // Lieu Spawn
             _posX = 0;
@@ -106,7 +108,7 @@ namespace SAE101
 
             _tiledMapRenderer.Update(gameTime);
             Event_et_dial.BoiteDialogues();
-            Joueur.Mouvement(gameTime);
+            _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
 

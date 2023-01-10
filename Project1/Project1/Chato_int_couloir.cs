@@ -29,20 +29,18 @@ namespace SAE101
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        //private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        public static TiledMapTileLayer mapLayer;
-        private TiledMapTileLayer mapLayerIntersect;
+
+        private KeyboardState _keyboardState;
 
         //sprite
         private AnimatedSprite _perso;
-        //public static Vector2 _positionPerso;       
         private KeyboardState _keyboardState;
-        private int _sensPersoX;
-        private int _sensPersoY;
         public static int _vitessePerso;
         public static int _posX;
-        private int _stop;
+
+        private AnimatedSprite _ennemi;
+        private Vector2 _positionEnnemi;  
 
         public int _limiteChambreX1;
         public int _limiteChambreX2;
@@ -64,16 +62,15 @@ namespace SAE101
 
             _joueur.Spawnchato_int_chambres_couloir();
 
-            _stop = 1;
-
             _limiteChambreX1 = 19 * 16;
             _limiteChambreX2 = 25 * 16;
             _limiteCouloirY1 = 5 * 16;
             _limiteCouloirY1 = 5 * 16;
 
-            _sensPersoX = 0;
-            _sensPersoY = 0;
             _vitessePerso = 100;
+            Game1._numSalle = 2;
+
+            _positionEnnemi = new Vector2(26 * 16, 9 * 16);
 
             base.Initialize();
         }
@@ -84,8 +81,11 @@ namespace SAE101
             Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);     
             
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
+            SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spriteSheetA);
+
+            SpriteSheet spriteSheetE = Content.Load<SpriteSheet>("anim/char/enemy/mechant/character_movement.sf", new JsonContentLoader());
+            _ennemi = new AnimatedSprite(spriteSheetE);
 
             _eventEtDial.SetCollision();
 
@@ -98,7 +98,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._camera.LookAt(Game1._cameraPosition);
+            Game1._camera.LookAt(_myGame._cameraPosition);
 
 
             _tiledMapRenderer.Update(gameTime);
@@ -130,13 +130,14 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, Game1._positionPerso);
+            _spriteBatch.Draw(_ennemi, _positionEnnemi);
             _spriteBatch.End();
 
-            var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (_eventEtDial._dialTrue == true)
             {
@@ -145,17 +146,6 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
             _spriteBatch.End();
-        }
-
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace SAE101
             _eventEtDial = _myGame._eventEtDial;
 
             _textPos = new Vector2(50, 150);
-            _text = "null";
+            _text = "";
 
             if (Game1._fin == 1)
                 MediaPlayer.Play(Game1._songDodo);
@@ -108,7 +108,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)

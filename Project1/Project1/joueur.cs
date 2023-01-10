@@ -25,7 +25,7 @@ namespace SAE101
     {
         // défini dans Game1
         private new Game1 Game => (Game1)base.Game;
-        private Game1 _myGame;
+        public Game1 _myGame;
         private Event_et_dial _eventEtDial;
 
         public Joueur(Game1 game) : base(game)
@@ -48,13 +48,13 @@ namespace SAE101
             else if (Chato_int_chambres._posX >= 35 * 16 && Chato_int_chambres._posX < 37 * 16)
                 Game1._positionPerso = new Vector2(38 * 16 + 8, 7 * 16);
 
-            else if (Chato_ext_cours_interieur._posX >= 19 * 16 && Chato_ext_cours_interieur._posX < 21 * 16)
+            else if (Chato_ext_cours._posX >= 19 * 16 && Chato_ext_cours._posX < 21 * 16)
                 Game1._positionPerso = new Vector2((float)20.5 * 16 + 8, (float)1.5 * 16 + 8);
-            else if (Chato_ext_cours_interieur._posX >= 20 * 16 && Chato_ext_cours_interieur._posX < 22 * 16)
+            else if (Chato_ext_cours._posX >= 20 * 16 && Chato_ext_cours._posX < 22 * 16)
                 Game1._positionPerso = new Vector2((float)21.5 * 16 + 8, (float)1.5 * 16 + 8);
-            else if (Chato_ext_cours_interieur._posX >= 21 * 16 && Chato_ext_cours_interieur._posX < 23 * 16)
+            else if (Chato_ext_cours._posX >= 21 * 16 && Chato_ext_cours._posX < 23 * 16)
                 Game1._positionPerso = new Vector2((float)22.5 * 16 + 8, (float)1.5 * 16 + 8);
-            else if (Chato_ext_cours_interieur._posX >= 22 * 16 && Chato_ext_cours_interieur._posX < 24 * 16)
+            else if (Chato_ext_cours._posX >= 22 * 16 && Chato_ext_cours._posX < 24 * 16)
                 Game1._positionPerso = new Vector2((float)23.5 * 16 + 8, (float)1.5 * 16 + 8);
 
             //x = casex * 16 + 8, y = casey * 16 + 8
@@ -88,22 +88,6 @@ namespace SAE101
                 Game1._positionPerso = new Vector2(22 * 16 + 8, 49 * 16);
             else if (Chato_int_couloir._posX >= 23.5 * 16 && Chato_int_couloir._posX < 25 * 16)
                 Game1._positionPerso = new Vector2(23 * 16 + 8, 49 * 16);
-        }
-
-        public static TiledMapTileLayer MapLayer()
-        {
-            TiledMapTileLayer mapLayerCollision = Chato_int_chambres.mapLayer;
-
-            if (Game1._numEcran == 1)
-                mapLayerCollision = Chato_int_chambres.mapLayer;
-            else if (Game1._numEcran == 2)
-                mapLayerCollision = Chato_int_couloir.mapLayer;
-            else if (Game1._numEcran == 3)
-                mapLayerCollision = Chato_ext_cours_interieur.mapLayer;
-            else
-                mapLayerCollision = Chato_int_chambres.mapLayer;
-
-            return mapLayerCollision;
         }
 
         public void Mouvement(GameTime gameTime)

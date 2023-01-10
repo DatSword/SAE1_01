@@ -18,13 +18,11 @@ using System;
 
 namespace SAE101
 {
-    public class Chato_ext_cours_interieur : GameScreen
+    public class Chato_ext_cours : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        //private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
         public static TiledMapTileLayer mapLayer;
 
@@ -35,13 +33,8 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        //public static Vector2 _positionPerso;
         private KeyboardState _keyboardState;
-        private int _sensPersoX;
-        private int _sensPersoY;
-        private int _vitessePerso;
         public static int _posX;
-        private int _stop;
 
         private AnimatedSprite _grand;
         private Vector2 _positionGrand;
@@ -50,6 +43,10 @@ namespace SAE101
 
 
         public Chato_ext_cours_interieur(Game1 game) : base(game)
+
+
+
+        public Chato_ext_cours(Game1 game) : base(game)
         {
             _myGame = game;
         }
@@ -64,14 +61,7 @@ namespace SAE101
 
             _joueur.Spawnchato_ext_cours_interieur();
 
-            _stop = 1;
-
-            //_positionPerso = new Vector2(40, 480);
-            //_positionPerso = new Vector2(22*16, 49*16);
-            _sensPersoX = 0;
-            _sensPersoY = 0;
-
-            _vitessePerso = 100;
+            Game1._numSalle = 2;
 
             _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
 
@@ -103,7 +93,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._camera.LookAt(Game1._cameraPosition);
+            Game1._camera.LookAt(_myGame._cameraPosition);
 
 
             _tiledMapRenderer.Update(gameTime);
@@ -137,19 +127,17 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
 
             _spriteBatch.Draw(_grand, _positionGrand);
 
             _spriteBatch.End();
 
-
-
-            var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
 
             if (_eventEtDial._dialTrue == true)

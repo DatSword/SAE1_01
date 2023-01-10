@@ -126,7 +126,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);

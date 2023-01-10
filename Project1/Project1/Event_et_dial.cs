@@ -114,7 +114,6 @@ namespace SAE101
             _myGame.SetCoolDown();
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
-
             _nom = "Jon";
         }
         public void FermeBoite()

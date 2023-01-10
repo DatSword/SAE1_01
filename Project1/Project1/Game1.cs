@@ -50,10 +50,10 @@ namespace SAE101
         public double chan = 1;
 
         //Camera
-        public OrthographicCamera _camera;
-        public static OrthographicCamera _cameraDial;
-        public static Vector2 _cameraPosition;
-        public static int _numEcran;
+        public static OrthographicCamera _camera;
+        public OrthographicCamera _cameraDial;
+        public Vector2 _cameraPosition;
+        public int _numEcran;
 
         //Musiques
         private Song _songChato;
@@ -419,7 +419,7 @@ namespace SAE101
 
         public void LoadScreenchato_ext_cours_interieur()
         {
-            _screenManager.LoadScreen(new Chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(new Chato_ext_cours(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
             this.Etat = Etats.Play;
             _numEcran = 3;

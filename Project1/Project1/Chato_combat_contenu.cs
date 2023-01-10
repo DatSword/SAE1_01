@@ -39,7 +39,7 @@ namespace SAE101
 
         public static void CombatTest()
         {
-            _nbAlly = 3;
+            _nbAlly = 2;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 
             _nbEnnemy = 3;

@@ -17,7 +17,7 @@ using System;
 
 namespace SAE101
 {
-    public class Black_jack : GameScreen
+    public class BlackJack : GameScreen
     {
         //"map"
         private new Game1 Game => (Game1)base.Game;
@@ -25,13 +25,13 @@ namespace SAE101
         private SpriteBatch _spriteBatch;
 
         private Game1 _myGame;
-        private Event_et_dial _eventEtDial;
+        private EventEtDial _eventEtDial;
 
         //Début/Fin
         public Vector2 _textPos;
         public String _text;
 
-        public Black_jack(Game1 game) : base(game) 
+        public BlackJack(Game1 game) : base(game) 
         {
             _myGame = game;
         }

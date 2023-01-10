@@ -27,15 +27,15 @@ namespace SAE101
         public KeyboardState _keyboardState;
 
         // on définit écrans
-        public Ecran_de_titre _ecranDeTitre;
-        public Black_jack _blackJack;
-        public Event_et_dial _eventEtDial;
-        public Joueur _joueur;
-        public Chato_int_couloir _chatoIntCouloir;
-        public Chato_int_chambres _chatoIntChambres;
-        public Chato_ext_cours _chatoExtCours;
-        public Chato_combat_contenu _chatoCombatContenu;
-        public Chato_combat _chatoCombat;
+        public EcranDeTitre _ecranDeTitre;
+        public BlackJack _blackJack;
+        public EventEtDial _eventEtDial;
+        public JoueurSpawn _joueur;
+        public ChatoIntCouloir _chatoIntCouloir;
+        public ChatoIntChambres _chatoIntChambres;
+        public ChatoExtCours _chatoExtCours;
+        public ChatoCombatContenu _chatoCombatContenu;
+        public ChatoCombat _chatoCombat;
         public Option _option;
 
         //Ecran interactif
@@ -84,6 +84,7 @@ namespace SAE101
         public SoundEffect _wend;
         public SoundEffect _toink;
         public SoundEffect _death;
+        public SoundEffect _fire;
 
         //Combat?
         private bool _combatTest;
@@ -152,15 +153,15 @@ namespace SAE101
             _graphics.ApplyChanges();
 
             // variables écran
-            _ecranDeTitre = new Ecran_de_titre(this);
-            _eventEtDial = new Event_et_dial(this);
-            _blackJack = new Black_jack(this);
-            _chatoIntCouloir = new Chato_int_couloir(this);
-            _chatoIntChambres = new Chato_int_chambres(this);
-            _chatoExtCours = new Chato_ext_cours(this);
-            _joueur = new Joueur(this);
-            _chatoCombatContenu = new Chato_combat_contenu(this);
-            _chatoCombat = new Chato_combat(this);
+            _ecranDeTitre = new EcranDeTitre(this);
+            _eventEtDial = new EventEtDial(this);
+            _blackJack = new BlackJack(this);
+            _chatoIntCouloir = new ChatoIntCouloir(this);
+            _chatoIntChambres = new ChatoIntChambres(this);
+            _chatoExtCours = new ChatoExtCours(this);
+            _joueur = new JoueurSpawn(this);
+            _chatoCombatContenu = new ChatoCombatContenu(this);
+            _chatoCombat = new ChatoCombat(this);
             _option = new Option(this);
 
             Etat = Etats.Menu;
@@ -233,6 +234,7 @@ namespace SAE101
             _wend = Content.Load<SoundEffect>("sfx/wend");
             _toink = Content.Load<SoundEffect>("sfx/toink");
             _death = Content.Load<SoundEffect>("sfx/death");
+            _fire = Content.Load<SoundEffect>("sfx/fire");
 
             //Boite de dialogue
             _eventEtDial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");

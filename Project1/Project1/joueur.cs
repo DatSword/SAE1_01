@@ -34,7 +34,7 @@ namespace SAE101
             _eventEtDial = _myGame._eventEtDial;
         }
 
-        public static void Spawnchato_int_chambres_couloir()
+        public void Spawnchato_int_chambres_couloir()
         {
             if (Chato_int_chambres_nord._posX == 0)
                 Game1._positionPerso = new Vector2(104, 112);
@@ -60,7 +60,7 @@ namespace SAE101
             //x = casex * 16 + 8, y = casey * 16 + 8
         }
 
-        public static void Spawnchato_int_chambres_nord()
+        public void Spawnchato_int_chambres_nord()
         {
             if (Chato_int_chambres_nord._posX == 0)
                 Game1._positionPerso = new Vector2(3 * 16 + 8, 2 * 16 + 8);
@@ -75,7 +75,7 @@ namespace SAE101
                 Game1._positionPerso = new Vector2(36 * 16 + 8, 7 * 16);
         }
 
-        public static void Spawnchato_ext_cours_interieur()
+        public void Spawnchato_ext_cours_interieur()
         {
             if (Chato_int_chambres_couloir._posX == 0)
                 Game1._positionPerso = new Vector2(22 * 16, 49 * 16);

@@ -33,24 +33,21 @@ namespace SAE101
         public Joueur _joueur;
 
         //Ecran interactif
-        // on définit les différents états possibles du jeu
+        // états possibles du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
-        // on définit un champ pour stocker l'état en cours du jeu
+        // stocker l'état en cours du jeu
         private Etats etat;
 
 
 
         //Ecran
-        public static int xEcran;
-        public static int yEcran;
+        public int xEcran;
+        public int yEcran;
 
-        public static int xE;
-        public static int yE;
+        public int xE;
+        public int yE;
 
-        public static int changement0 = 1;
-        public static double changement1 = 1.5;
-        public static int changement2 = 2;
-        public static double chan = 1;
+        public double chan = 1;
 
         //Camera
         public OrthographicCamera _camera;
@@ -240,12 +237,12 @@ namespace SAE101
 
         protected override void Update(GameTime gameTime)
         {
-            //Mannette?
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             _keyboardState = Keyboard.GetState();
             deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (_keyboardState.IsKeyDown(Keys.Escape))
+                Exit();
+
 
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
@@ -322,11 +319,6 @@ namespace SAE101
                 chan = changement1;
                 _graphics.ApplyChanges();
             }*/
-
-            if (_keyboardState.IsKeyDown(Keys.F))
-            {
-                ChangementEcran(changement1);
-            }
 
 
             //Camera
@@ -435,7 +427,8 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
-            _ecranTitre=false;
+            this.Etat = Etats.Play;
+            _ecranTitre =false;
             _numEcran = 1;
             _chatoCombat = false;
         }
@@ -444,6 +437,7 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
+            this.Etat = Etats.Play;
             _numEcran = 2;
             _chatoCombat = false;
         }
@@ -452,6 +446,7 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
+            this.Etat = Etats.Play;
             _numEcran = 3;
             _chatoCombat = false;
         }
@@ -462,6 +457,7 @@ namespace SAE101
             _screenManager.LoadScreen(new Chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChatoCombat();
             MediaPlayer.Play(_songCombat);
+            this.Etat = Etats.Play;
             _numEcran = 4;
             _chato = false;
             _chatoCombat = true;

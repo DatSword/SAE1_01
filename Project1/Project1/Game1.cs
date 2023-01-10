@@ -22,9 +22,9 @@ namespace SAE101
     {
         //Graphique
         private GraphicsDeviceManager _graphics;
-        public static SpriteBatch _spriteBatch;
+        public SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
-        public static KeyboardState _keyboardState;
+        public KeyboardState _keyboardState;
 
         // on définit écrans
         public Ecran_de_titre _ecranDeTitre;
@@ -33,6 +33,7 @@ namespace SAE101
         public Joueur _joueur;
         public Chato_int_couloir _chatoIntCouloir;
         public Chato_int_chambres _chatoIntChambres;
+        public Chato_ext_cours _chatoExtCours;
 
         //Ecran interactif
         // états du jeu
@@ -153,6 +154,7 @@ namespace SAE101
             _blackJack = new Black_jack(this);
             _chatoIntCouloir = new Chato_int_couloir(this);
             _chatoIntChambres = new Chato_int_chambres(this);
+            _chatoExtCours = new Chato_ext_cours(this);
             _joueur = new Joueur(this);
 
             Etat = Etats.Menu;
@@ -435,7 +437,7 @@ namespace SAE101
 
         public void LoadScreenchato_ext_cours_interieur()
         {
-            _screenManager.LoadScreen(new Chato_ext_cours(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_chatoExtCours, new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
             this.Etat = Etats.Play;
             _numEcran = 3;

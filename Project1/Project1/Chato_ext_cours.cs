@@ -42,10 +42,6 @@ namespace SAE101
 
 
 
-        public Chato_ext_cours_interieur(Game1 game) : base(game)
-
-
-
         public Chato_ext_cours(Game1 game) : base(game)
         {
             _myGame = game;

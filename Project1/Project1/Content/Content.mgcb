@@ -30,6 +30,18 @@
 /processorParam:TextureFormat=Color
 /build:anim/char/ally/hero/hero.png
 
+#begin anim/char/ally/Jon/jon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/ally/Jon/jon.png
+
 #begin anim/char/base_model_m/base_model_male.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -90,6 +102,18 @@
 /processorParam:TextureFormat=Color
 /build:anim/char/fren/objects1.png
 
+#begin anim/objects/explosion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/objects/explosion.png
+
 #begin anim/objects/objects1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -101,6 +125,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:anim/objects/objects1.png
+
+#begin anim/objects/projectile1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/objects/projectile1.png
 
 #begin font/font_test.spritefont
 /importer:FontDescriptionImporter

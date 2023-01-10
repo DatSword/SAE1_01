@@ -81,7 +81,7 @@ namespace SAE101
         public void Jon()
         {
             _stat = new int[4] { 100, 100, 40, 10 };//90
-            _anim = "anim/char/base_model_m/character_movement.sf";
+            _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };

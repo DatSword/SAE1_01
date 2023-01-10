@@ -1,0 +1,19 @@
+{
+  "textureAtlas": {
+    "texture": "projectile1.png",
+    "regionWidth": 16,
+    "regionHeight": 16
+  },
+  "cycles": {
+    "fireball": {
+      "frames": [0,1,2,3],
+      "isLooping": false,
+      "frameDuration": 0.1
+    },
+    "badaboom": {
+      "frames": [4,5,6,7],
+      "isLooping": false,
+      "frameDuration": 0.1
+    }
+  }
+}

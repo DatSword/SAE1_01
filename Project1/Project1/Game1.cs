@@ -384,7 +384,7 @@ namespace SAE101
                 _cameraPosition = _chatoCombat._centreCombat;
 
             _walkSpeed = _speed * deltaSeconds;
-            Console.WriteLine(Chato_int_chambres._posX);
+            Console.WriteLine(_chatoIntChambres._posX);
             base.Update(gameTime);
         }
 

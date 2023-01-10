@@ -24,6 +24,7 @@ namespace SAE101
         private Game1 _myGame;
         private Event_et_dial _eventEtDial;
         private Joueur _joueur;
+        private Chato_int_chambres _chatoIntChambres;
 
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -35,8 +36,8 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        public static int _vitessePerso;
-        public static int _posX;
+        public int _vitessePerso;
+        public int _posX;
 
         private AnimatedSprite _ennemi;
         private Vector2 _positionEnnemi;
@@ -56,6 +57,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
+            _chatoIntChambres = _myGame._chatoIntChambres;
 
             // Lieu Spawn
             _posX = 0;
@@ -134,7 +136,7 @@ namespace SAE101
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_ext_cours_interieur();
-                Chato_int_chambres._posX = 0;
+                _chatoIntChambres._posX = 0;
             }
         }
 

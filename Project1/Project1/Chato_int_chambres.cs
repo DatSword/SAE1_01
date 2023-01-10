@@ -33,7 +33,7 @@ namespace SAE101
         //sprites
         private AnimatedSprite _perso;
         private KeyboardState _keyboardState;
-        public static int _posX;
+        public int _posX;
 
         private AnimatedSprite _fren;
         private Vector2 _positionFren;

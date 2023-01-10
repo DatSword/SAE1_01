@@ -26,25 +26,25 @@ namespace SAE101
        public static void Spawnchato_int_chambres_couloir()
        {
             if (Chato_int_chambres_nord._posX == 0)
-                Chato_int_chambres_couloir._positionPerso = new Vector2(104, 112);
+                Game1._positionPerso = new Vector2(104, 112);
 
             if (Chato_int_chambres_nord._posX >= 3 * 16 && Chato_int_chambres_nord._posX < 5 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2(6 * 16 + 8, 7 * 16);
+                Game1._positionPerso = new Vector2(6 * 16 + 8, 7 * 16);
             else if (Chato_int_chambres_nord._posX >= 11 * 16 && Chato_int_chambres_nord._posX < 13 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2(14 * 16 + 8, 7 * 16);
+                Game1._positionPerso = new Vector2(14 * 16 + 8, 7 * 16);
             else if (Chato_int_chambres_nord._posX >= 27 * 16 && Chato_int_chambres_nord._posX < 29 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2(30 * 16 + 8, 7 * 16);
+                Game1._positionPerso = new Vector2(30 * 16 + 8, 7 * 16);
             else if (Chato_int_chambres_nord._posX >= 35 * 16 && Chato_int_chambres_nord._posX < 37 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2(38 * 16 + 8, 7 * 16);
+                Game1._positionPerso = new Vector2(38 * 16 + 8, 7 * 16);
 
             else if (Chato_ext_cours_interieur._posX >= 19 * 16 && Chato_ext_cours_interieur._posX < 21 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2((float)20.5 * 16 + 8, (float)1.5 * 16 + 8);
+                Game1._positionPerso = new Vector2((float)20.5 * 16 + 8, (float)1.5 * 16 + 8);
             else if (Chato_ext_cours_interieur._posX >= 20 * 16 && Chato_ext_cours_interieur._posX < 22 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2((float)21.5 * 16 + 8, (float)1.5 * 16 + 8);
+                Game1._positionPerso = new Vector2((float)21.5 * 16 + 8, (float)1.5 * 16 + 8);
             else if (Chato_ext_cours_interieur._posX >= 21 * 16 && Chato_ext_cours_interieur._posX < 23 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2((float)22.5 * 16 + 8, (float)1.5 * 16 + 8);
+                Game1._positionPerso = new Vector2((float)22.5 * 16 + 8, (float)1.5 * 16 + 8);
             else if (Chato_ext_cours_interieur._posX >= 22 * 16 && Chato_ext_cours_interieur._posX < 24 * 16)
-                Chato_int_chambres_couloir._positionPerso = new Vector2((float)23.5 * 16 + 8, (float)1.5 * 16 + 8);
+                Game1._positionPerso = new Vector2((float)23.5 * 16 + 8, (float)1.5 * 16 + 8);
 
             //x = casex * 16 + 8, y = casey * 16 + 8
         }

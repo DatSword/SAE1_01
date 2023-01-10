@@ -321,15 +321,15 @@ namespace SAE101
                                 && Game1._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentre2;
 
-            else if (_numEcran == 1 && Chato_int_chambres_couloir._positionPerso.Y >= Chato_int_chambres_couloir._limiteCouloirY1)
-                _cameraPosition = new Vector2(Chato_int_chambres_couloir._positionPerso.X, Chato_int_chambres_couloir._positionPerso.Y);
+            else if (_numEcran == 1 && Game1._positionPerso.Y >= Chato_int_chambres_couloir._limiteCouloirY1)
+                _cameraPosition = new Vector2(Game1._positionPerso.X, Game1._positionPerso.Y);
 
 
             // couloir
-            if (_numEcran == 2 && (Chato_int_chambres_couloir._positionPerso.Y > 0
-                                && (Chato_int_chambres_couloir._positionPerso.X > Chato_int_chambres_couloir._limiteChambreX1 || 
-                                Chato_int_chambres_couloir._positionPerso.X < Chato_int_chambres_couloir._limiteChambreX2)))
-                _cameraPosition = new Vector2(Chato_int_chambres_couloir._positionPerso.X, Chato_int_chambres_couloir._positionPerso.Y);
+            if (_numEcran == 2 && (Game1._positionPerso.Y > 0
+                                && (Game1._positionPerso.X > Chato_int_chambres_couloir._limiteChambreX1 ||
+                                Game1._positionPerso.X < Chato_int_chambres_couloir._limiteChambreX2)))
+                _cameraPosition = new Vector2(Game1._positionPerso.X, Game1._positionPerso.Y);
 
             else if (_numEcran == 2 && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
                                 && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche

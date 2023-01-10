@@ -108,5 +108,10 @@ namespace SAE101
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
             String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
         }
+
+        public static void Animation()
+        {
+
+        }
     }
 }

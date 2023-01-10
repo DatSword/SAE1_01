@@ -22,9 +22,7 @@ namespace SAE101
     {
         //map
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        //private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
         public static TiledMapTileLayer mapLayer;
 
@@ -35,13 +33,11 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        //public static Vector2 _positionPerso;
         private KeyboardState _keyboardState;
-        private int _sensPersoX;
-        private int _sensPersoY;
-        private int _vitessePerso;
         public static int _posX;
-        private int _stop;
+
+
+
 
         public Chato_ext_cours_interieur(Game1 game) : base(game)
         {
@@ -56,16 +52,9 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            Joueur.Spawnchato_ext_cours_interieur();
+            _joueur.Spawnchato_ext_cours_interieur();
 
-            _stop = 1;
-
-            //_positionPerso = new Vector2(40, 480);
-            //_positionPerso = new Vector2(22*16, 49*16);
-            _sensPersoX = 0;
-            _sensPersoY = 0;
-
-            _vitessePerso = 100;
+            Game1._numSalle = 2;
 
             base.Initialize();
         }
@@ -81,7 +70,7 @@ namespace SAE101
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
 
-            Event_et_dial.SetCollision();
+            _eventEtDial.SetCollision();
 
             base.LoadContent();
         }
@@ -96,10 +85,12 @@ namespace SAE101
 
 
             _tiledMapRenderer.Update(gameTime);
-            Event_et_dial.BoiteDialogues();
+            _eventEtDial.BoiteDialogues();
             _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
+
+
 
 
 
@@ -108,7 +99,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 43) && Game1._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)Game1._positionPerso.X;
-                Game.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchato_int_chambres_couloir();
             }
         }
 
@@ -116,21 +107,24 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
+
             _spriteBatch.End();
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
+
             if (_eventEtDial._dialTrue == true)
             {
                 _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
+
             _spriteBatch.End();
         }
 

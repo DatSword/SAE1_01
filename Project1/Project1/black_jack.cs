@@ -93,7 +93,7 @@ namespace SAE101
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 )
             {
                 Game1._fin = 10;
-                Game1._toink.Play();
+                _myGame._toink.Play();
                 _eventEtDial.toutDebut();
             }
 

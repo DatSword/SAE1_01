@@ -26,6 +26,7 @@ namespace SAE101
         // défini dans Game1
         private Game1 _myGame;
         private Event_et_dial _eventEtDial;
+        private Chato_combat_contenu _chatoCombatContenu;
 
         //Constantes position pour animation;
         private const int POS_ALLIEX0 = 145;
@@ -152,6 +153,7 @@ namespace SAE101
         public override void Initialize()
         {
             _eventEtDial = _myGame._eventEtDial;
+            _chatoCombatContenu = _myGame._chatoCombatContenu;
 
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
@@ -183,7 +185,7 @@ namespace SAE101
             _random = new Random();
 
 
-            Chato_combat_contenu.Combat();
+            _chatoCombatContenu.Combat();
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
@@ -231,22 +233,22 @@ namespace SAE101
             {
                 if (_ordreA[i] == 0)
                 {
-                    Chato_combat_contenu.Hein();
+                    _chatoCombatContenu.Hein();
                     GenerationAllie();
                 }
                 else if (_ordreA[i] == 1)
                 {
-                    Chato_combat_contenu.Hero();
+                    _chatoCombatContenu.Hero();
                     GenerationAllie();
                 }
                 else if (_ordreA[i] == 2)
                 {
-                    Chato_combat_contenu.Jon();
+                    _chatoCombatContenu.Jon();
                     GenerationAllie();
                 }
                 else if (_ordreA[i] == 3)
                 {
-                    Chato_combat_contenu.Ben();
+                    _chatoCombatContenu.Ben();
                     GenerationAllie();
                 }
                 _ordrefinal++;
@@ -287,17 +289,17 @@ namespace SAE101
             {
                 if (_ordreE[i] == 0)
                 {
-                    Chato_combat_contenu.Grand();
+                    _chatoCombatContenu.Grand();
                     GenerationEnnemi();
                 }
                 else if (_ordreE[i] == 1)
                 {
-                    Chato_combat_contenu.Mechant();
+                    _chatoCombatContenu.Mechant();
                     GenerationEnnemi();
                 }
                 else if (_ordreE[i] == 2)
                 {
-                    Chato_combat_contenu.Pabo();
+                    _chatoCombatContenu.Pabo();
                     GenerationEnnemi();
                 }
                 _ordrefinal++;
@@ -424,7 +426,7 @@ namespace SAE101
                 if (_nbTourZeuWerld == 2)
                 {
                     MediaPlayer.Play(Game1._songCombat);
-                    Game1._wend.Play();
+                    _myGame._wend.Play();
                     _attackZeuwerld = false;
                     _nbTourZeuWerld = 0;
                     _action = 0;
@@ -446,13 +448,13 @@ namespace SAE101
 
             //Perso choisissant son action
             if (_ordreA[_action] == 0)
-                Chato_combat_contenu.Hein();
+                _chatoCombatContenu.Hein();
             else if (_ordreA[_action] == 1)
-                Chato_combat_contenu.Hero();
+                _chatoCombatContenu.Hero();
             else if (_ordreA[_action] == 2)
-                Chato_combat_contenu.Jon();
+                _chatoCombatContenu.Jon();
             else if (_ordreA[_action] == 3)
-                Chato_combat_contenu.Ben();
+                _chatoCombatContenu.Ben();
 
             //Si tel Perso est mort, alors pas d'action
             if (_animationA[_action] == "ded")
@@ -518,7 +520,7 @@ namespace SAE101
                     }
                     else if (_animationP2 == true && _animationP3 == true)
                     {
-                        Game1._hit.Play();
+                        _myGame._hit.Play();
                         _animationA[_allyAnime] = "move_left";
                         _posAllie[_allyAnime].X -= 2;
                     }
@@ -561,7 +563,7 @@ namespace SAE101
                     }
                     else if (_animationP2 == true && _animationP3 == true)
                     {
-                        Game1._hit.Play();
+                        _myGame._hit.Play();
                         _animationE[_enemyAnime] = "move_right";
                         _posEnemy[_enemyAnime].X += 2;
                     }
@@ -583,7 +585,7 @@ namespace SAE101
                     if (_animationP1 == true)
                     {
                         _animationA[_allyAnime] = "attack_right3";
-                        Game1._wbeg.Play();
+                        _myGame._wbeg.Play();
                         MediaPlayer.Stop();
                         _attackZeuwerld = true;
                         _coolDownAnimation = true;
@@ -723,7 +725,7 @@ namespace SAE101
             if (_choixCursor == 0 && _ordreA[_action] == 1)
             {
                 if (_attackZeuwerld == true)
-                    Game1._non.Play();
+                    _myGame._non.Play();
 
                 _attaquePerso[_action, 0] = 1;
                 _attaquePerso[_action, 1] = -1;
@@ -956,7 +958,7 @@ namespace SAE101
                 _victoire = true;
                 Game1._combatFini = true;
                 _myGame.SetCoolDownFive();
-                Game1._vic.Play();
+                _myGame._vic.Play();
                 for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)
                 {
                     if (_animationA[j] != "ded")
@@ -983,7 +985,7 @@ namespace SAE101
                 kk = 0;
                 _gameOver = true;
                 _myGame.SetCoolDownFive();
-                Game1._death.Play();
+                _myGame._death.Play();
                 for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)
                 {
                     _desc[0] = "Anihilé";
@@ -994,9 +996,9 @@ namespace SAE101
 
         public void RetourChato()
         {
-            if (Game1._numSalle == 1)
+            if (_myGame._numSalle == 1)
                 _myGame.LoadScreenchato_int_chambres_couloir();
-            else if (Game1._numSalle == 2)
+            else if (_myGame._numSalle == 2)
                 _myGame.LoadScreenchato_ext_cours_interieur();
             /*if (Game1._numSalle == 3)
                 _myGame.LoadScreenchato_int_salle_courronnement();*/

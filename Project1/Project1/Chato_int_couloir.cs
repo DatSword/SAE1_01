@@ -68,7 +68,7 @@ namespace SAE101
             _limiteCouloirY1 = 5 * 16;
 
             _vitessePerso = 100;
-            Game1._numSalle = 2;
+            _myGame._numSalle = 2;
 
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
             _animationEnnemi = "idle_down";
@@ -79,8 +79,8 @@ namespace SAE101
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);     
+            _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);     
             
             SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheetA);
@@ -105,7 +105,7 @@ namespace SAE101
             _tiledMapRenderer.Update(gameTime);
             
             _joueur.Mouvement(gameTime);
-            _perso.Play(Game1._animationPlayer);
+            _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
             _ennemi.Play(_animationEnnemi);
             _ennemi.Update(deltaSeconds);
@@ -113,7 +113,7 @@ namespace SAE101
 
             //Enclenchement evenment
 
-            if (Game1._positionPerso.X >= 19 * 16)
+            if (_myGame._positionPerso.X >= 19 * 16)
             {
                 _animationEnnemi = "idle_left";
                 _eventEtDial.Jon3();
@@ -121,18 +121,18 @@ namespace SAE101
                     _myGame.LoadScreenchato_combat();
             }
                 
-            if (Game1._positionPerso.X < 19 * 16)
+            if (_myGame._positionPerso.X < 19 * 16)
                 _animationEnnemi = "idle_down";
 
             //Changement de map          
             if (_keyboardState.IsKeyDown(Keys.Up) && (Event_et_dial.ud == 26))
             {
-                _posX = (int)Game1._positionPerso.X;
+                _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_nord();
             }        
             if (_keyboardState.IsKeyDown(Keys.Up) && (Event_et_dial.ud == 30))
             {
-                _posX = (int)Game1._positionPerso.X;
+                _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_ext_cours_interieur();
                 Chato_int_chambres._posX = 0;
             }
@@ -147,7 +147,7 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
-            _spriteBatch.Draw(_perso, Game1._positionPerso);
+            _spriteBatch.Draw(_perso, _myGame._positionPerso);
             _spriteBatch.Draw(_ennemi, _positionEnnemi);
 
             _spriteBatch.End();

@@ -20,8 +20,18 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
-    public class Chato_combat_contenu
+    public class Chato_combat_contenu : GameScreen
     {
+
+        // défini dans Game1
+        private new Game1 Game => (Game1)base.Game;
+        private Game1 _myGame;
+
+        public Chato_combat_contenu(Game1 game) : base(game)
+        {
+            _myGame = game;
+        }
+
         public static int _nbAlly;
         public static int _nbEnnemy;
 
@@ -39,9 +49,9 @@ namespace SAE101
 
         public static Vector2 _lastPosition;
 
-        public static void Combat()
+        public void Combat()
         {
-            _lastPosition = Game1._positionPerso;
+            _lastPosition = _myGame._positionPerso;
 
             _nbAlly = 2;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
@@ -51,7 +61,7 @@ namespace SAE101
         }
 
         //Personnages jouables
-        public static void Hein()
+        public void Hein()
         {
             _stat = new int[4] { 1, 1, 1, 1 };
             _anim = "anim/char/base_model_m/character_movement.sf";
@@ -59,7 +69,7 @@ namespace SAE101
             _specialP = new String[] { "_", "_", "_", "_" };
             _descP = new String[] { "_", "_", "_", "_" };
         }
-        public static void Hero()
+        public void Hero()
         {
             _stat = new int[4] { 80, 100 ,60, 70 };//50
             _anim = "anim/char/ally/hero/character_movement.sf";
@@ -68,7 +78,7 @@ namespace SAE101
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour ", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 
         }
-        public static void Jon()
+        public void Jon()
         {
             _stat = new int[4] { 100, 100, 40, 10 };//90
             _anim = "anim/char/base_model_m/character_movement.sf";
@@ -76,7 +86,7 @@ namespace SAE101
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
-        public static void Ben()
+        public void Ben()
         {
             _stat = new int[4] { 50, 40, 90, 60 };
             _anim = "anim/char/base_model_m/character_movement.sf";
@@ -87,7 +97,7 @@ namespace SAE101
 
         //personnages non joueurs
 
-        public static void Grand()
+        public void Grand()
         {
             _stat = new int[4] { 60, 0, 60, 100 };//20
             _anim = "anim/char/enemy/grand/character_movement.sf";
@@ -96,7 +106,7 @@ namespace SAE101
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 
         }
-        public static void Mechant()
+        public void Mechant()
         {
             _stat = new int[4] { 70, 0, 50, 50 };//70
             _anim = "anim/char/enemy/mechant/character_movement.sf";
@@ -104,7 +114,7 @@ namespace SAE101
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
-        public static void Pabo()
+        public void Pabo()
         {
             _stat = new int[4] { 70, 0, 50, 90 };//70
             _anim = "anim/char/enemy/pabo/character_movement.sf";
@@ -113,9 +123,15 @@ namespace SAE101
             String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
         }
 
-        public static void Animation()
+        public void Animation()
         {
 
         }
+
+        public override void Update(GameTime gameTime)
+        {        }
+
+        public override void Draw(GameTime gameTime)
+        {        }
     }
 }

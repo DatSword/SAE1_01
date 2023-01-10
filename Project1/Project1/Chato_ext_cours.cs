@@ -56,7 +56,7 @@ namespace SAE101
 
             _joueur.Spawnchato_ext_cours_interieur();
 
-            Game1._numSalle = 2;
+            _myGame._numSalle = 2;
 
             _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
 
@@ -69,8 +69,8 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
+            _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
@@ -96,13 +96,13 @@ namespace SAE101
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
             _joueur.Mouvement(gameTime);
-            _perso.Play(Game1._animationPlayer);
+            _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
 
             animationGrand = "idle_up"; 
 
 
-            if (Game1._positionPerso.X >= 20 && Game1._positionPerso.X <= 23 && Game1._positionPerso.Y == 34)
+            if (_myGame._positionPerso.X >= 20 && _myGame._positionPerso.X <= 23 && _myGame._positionPerso.Y == 34)
             {
                 animationGrand = "idle_down";
                 _eventEtDial.Ninja();
@@ -113,9 +113,9 @@ namespace SAE101
 
             //changements maps
 
-            if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 43) && Game1._positionPerso.Y > 49 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
             {
-                _posX = (int)Game1._positionPerso.X;
+                _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_couloir();
             }
         }
@@ -128,7 +128,7 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
-            _spriteBatch.Draw(_perso, Game1._positionPerso);
+            _spriteBatch.Draw(_perso, _myGame._positionPerso);
 
             _spriteBatch.Draw(_grand, _positionGrand);
 

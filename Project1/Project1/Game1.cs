@@ -34,6 +34,7 @@ namespace SAE101
         public Chato_int_couloir _chatoIntCouloir;
         public Chato_int_chambres _chatoIntChambres;
         public Chato_ext_cours _chatoExtCours;
+        public Chato_combat_contenu _chatoCombatContenu;
 
         //Ecran interactif
         // états du jeu
@@ -51,7 +52,7 @@ namespace SAE101
         public double chan = 1;
 
         //Camera
-        public static OrthographicCamera _camera;
+        public OrthographicCamera _camera;
         public OrthographicCamera _cameraDial;
         public Vector2 _cameraPosition;
         public int _numEcran;
@@ -59,8 +60,8 @@ namespace SAE101
         //Musiques
         private Song _songChato;
         private Song _titleTheme;
-        public static Song _songCombat;
-        public static Song _songDodo;
+        public Song _songCombat;
+        public Song _songDodo;
 
         //ZoneMusique
         private bool _chato;
@@ -68,31 +69,31 @@ namespace SAE101
         private bool _ecranTitre;
 
         //SFX
-        public static SoundEffect _hit;
-        public static SoundEffect _hit2;
-        public static SoundEffect _lose;
-        public static SoundEffect _macron_1;
-        public static SoundEffect _menu;
-        public static SoundEffect _non;
-        public static SoundEffect _pelo;
-        public static SoundEffect _vic;
-        public static SoundEffect _duck;
-        public static SoundEffect _wbeg;
-        public static SoundEffect _wend;
-        public static SoundEffect _toink;
-        public static SoundEffect _death;
+        public SoundEffect _hit;
+        public SoundEffect _hit2;
+        public SoundEffect _lose;
+        public SoundEffect _macron_1;
+        public SoundEffect _menu;
+        public SoundEffect _non;
+        public SoundEffect _pelo;
+        public SoundEffect _vic;
+        public SoundEffect _duck;
+        public SoundEffect _wbeg;
+        public SoundEffect _wend;
+        public SoundEffect _toink;
+        public SoundEffect _death;
 
         //Combat?
         private bool _combatTest;
-        public static bool _combatFini;
+        public bool _combatFini;
 
         //Control cooldown 0.2s
-        public static float _cooldown;
+        public float _cooldown;
         public bool _cooldownVerif;
-        public static float deltaSeconds;
+        public float deltaSeconds;
         //Combat cooldown 0.5s
-        public static float _cooldownC;
-        public static bool _cooldownVerifC;
+        public float _cooldownC;
+        public bool _cooldownVerifC;
         //Combat cooldown 5.0s
         public float _cooldownF;
         public bool _cooldownVerifF;
@@ -105,15 +106,15 @@ namespace SAE101
         public static int _fin;
 
         //pour évènements et déplacementss
-        public static float _walkSpeed;
-        public static float _speed;
-        public static TiledMap _tiledMap;
-        public static Vector2 _positionPerso;
-        public static TiledMapTileLayer mapLayer;
-        public static int _stop;
-        public static String _animationPlayer;
-        public static TiledMapTileLayer mapLayerDoor;
-        public static int _numSalle;
+        public float _walkSpeed;
+        public float _speed;
+        public TiledMap _tiledMap;
+        public Vector2 _positionPerso;
+        public TiledMapTileLayer mapLayer;
+        public int _stop;
+        public String _animationPlayer;
+        public TiledMapTileLayer mapLayerDoor;
+        public int _numSalle;
         //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat
@@ -156,6 +157,7 @@ namespace SAE101
             _chatoIntChambres = new Chato_int_chambres(this);
             _chatoExtCours = new Chato_ext_cours(this);
             _joueur = new Joueur(this);
+            _chatoCombatContenu = new Chato_combat_contenu(this);
 
             Etat = Etats.Menu;
 

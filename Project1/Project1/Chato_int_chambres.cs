@@ -105,8 +105,8 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_nord");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
+            _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_nord");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);
 
             _eventEtDial.SetCollision();
 
@@ -137,7 +137,7 @@ namespace SAE101
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
             _joueur.Mouvement(gameTime);
-            _perso.Play(Game1._animationPlayer);
+            _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
             
 
@@ -185,7 +185,7 @@ namespace SAE101
                 _eventEtDial.FermeBoite();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
-                && Game1._positionPerso.X < _limiteChambreDroite)
+                && _myGame._positionPerso.X < _limiteChambreDroite)
             {
                 _eventEtDial.Fren1();
                 _frenTrue = true;
@@ -206,7 +206,7 @@ namespace SAE101
                 animationChest = "open";
 
             if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationChest == "close" 
-                && Game1._positionPerso.X > _limiteChambreDroite)
+                && _myGame._positionPerso.X > _limiteChambreDroite)
                 _chestTrue = true;
             
 
@@ -244,7 +244,7 @@ namespace SAE101
             //changement de map
             if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 41))
             {
-                _posX = (int)Game1._positionPerso.X;
+                _posX = (int)_myGame._positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();
             }
         }
@@ -261,7 +261,7 @@ namespace SAE101
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
-            _spriteBatch.Draw(_perso, Game1._positionPerso);
+            _spriteBatch.Draw(_perso, _myGame._positionPerso);
 
             _spriteBatch.End();
 
@@ -288,7 +288,7 @@ namespace SAE101
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (Game1.mapLayer.TryGetTile(x, y, out tile) == false)
+            if (_myGame.mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;

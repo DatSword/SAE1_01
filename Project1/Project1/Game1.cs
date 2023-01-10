@@ -83,6 +83,7 @@ namespace SAE101
 
         //Combat?
         private bool _combatTest;
+        public static bool _combatFini;
 
         //Control cooldown 0.2s
         public static float _cooldown;

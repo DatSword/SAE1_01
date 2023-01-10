@@ -112,6 +112,7 @@ namespace SAE101
         public void Jon3()
         {
             _myGame.SetCoolDown();
+            _dialTrue = true;
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
             _nom = "Jon";

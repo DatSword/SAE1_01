@@ -39,7 +39,8 @@ namespace SAE101
         public static int _posX;
 
         private AnimatedSprite _ennemi;
-        private Vector2 _positionEnnemi;  
+        private Vector2 _positionEnnemi;
+        private String _animationEnnemi;
 
         public int _limiteChambreX1;
         public int _limiteChambreX2;
@@ -70,6 +71,7 @@ namespace SAE101
             Game1._numSalle = 2;
 
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
+            _animationEnnemi = "idle_down";
 
             base.Initialize();
         }
@@ -105,16 +107,28 @@ namespace SAE101
             _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
+            _ennemi.Play(_animationEnnemi);
+            _ennemi.Update(deltaSeconds);
             _eventEtDial.BoiteDialogues();
 
             //Enclenchement evenment
+
+            if (Game1._positionPerso.X >= 19 * 16)
+            {
+                _animationEnnemi = "idle_left";
+                _eventEtDial.Jon3();
+                if (_keyboardState.IsKeyDown(Keys.W))
+                    _myGame.LoadScreenchato_combat();
+            }
+                
+            if (Game1._positionPerso.X < 19 * 16)
+                _animationEnnemi = "idle_down";
 
             //Changement de map          
             if (_keyboardState.IsKeyDown(Keys.Up) && (Event_et_dial.ud == 26))
             {
                 _posX = (int)Game1._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_nord();
-                
             }        
             if (_keyboardState.IsKeyDown(Keys.Up) && (Event_et_dial.ud == 30))
             {
@@ -131,9 +145,11 @@ namespace SAE101
             // TODO: Add your drawing code here
             var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, Game1._positionPerso);
             _spriteBatch.Draw(_ennemi, _positionEnnemi);
+
             _spriteBatch.End();
 
             var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();

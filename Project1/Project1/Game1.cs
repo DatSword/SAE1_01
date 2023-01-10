@@ -33,9 +33,9 @@ namespace SAE101
         public Joueur _joueur;
 
         //Ecran interactif
-        // on définit les différents états possibles du jeu
+        // états possibles du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
-        // on définit un champ pour stocker l'état en cours du jeu
+        // stocker l'état en cours du jeu
         private Etats etat;
 
 
@@ -47,11 +47,7 @@ namespace SAE101
         public int xE;
         public int yE;
 
-       /* public static int changement0 = 1;
-        public static double changement1 = 1.5;
-        public static int changement2 = 2;*/
-
-        public static double chan = 1;
+        public double chan = 1;
 
         //Camera
         public OrthographicCamera _camera;

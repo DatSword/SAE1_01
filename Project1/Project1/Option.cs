@@ -64,6 +64,7 @@ namespace SAE101
             _posTouches = new Vector2[6] { new Vector2(50, 280), new Vector2(50, 310), new Vector2(20, 370), new Vector2(50, 340), new Vector2(50, 370), new Vector2(80, 370) };
 
             _espaceText = 130;
+
             _positionCursor = new Vector2(40, 250);
             _textResEcran = new String[3] { "514 x 448", "771 x 672", "1028 x 996" };
             _posTextResEcran = new Vector2[3] { new Vector2(70, 250), new Vector2(70 + _espaceText, 250), new Vector2(70 + _espaceText * 2, 250) };
@@ -132,7 +133,6 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _textResEcran[k], _posTextResEcran[k], Color.White);
 
             _spriteBatch.End();
-
         }
     }
 }

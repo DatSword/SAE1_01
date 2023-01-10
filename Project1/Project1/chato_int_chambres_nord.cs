@@ -85,7 +85,7 @@ namespace SAE101
             _posX = 0;
             numDial = 0;
 
-            Joueur.Spawnchato_int_chambres_nord();
+            _joueur.Spawnchato_int_chambres_nord();
 
             _stop = 1;
 
@@ -98,10 +98,9 @@ namespace SAE101
             
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
-            //_chambreCentre1 = new Vector2((float)8 * 16, 6 * 16);
             _chambreCentreUn = new Vector2((float)14.5 * 16, 6 * 16);
+
             _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
-            //_chambreCentre2 = new Vector2((float)32.5 * 16, 6 * 16);
             _chambreCentreDeux = new Vector2((float)38.5 * 16, 6 * 16);
 
             _limiteChambreX1 = 16 * 16;
@@ -141,6 +140,7 @@ namespace SAE101
             SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
             _chest1 = new AnimatedSprite(spriteSheet3);
 
+
             base.LoadContent();
         }
 
@@ -173,6 +173,7 @@ namespace SAE101
                     _eventEtDial._posCursor = new Vector2(430, 301);
                 }
                 Console.WriteLine(_myGame._cooldownVerif);
+
                 if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
                     _myGame.SetCoolDown();
@@ -253,7 +254,6 @@ namespace SAE101
             }
 
             //DODO
-
             if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _myGame._cooldownVerif == false)
             {
                 //Event_et_dial.Fin1();
@@ -277,10 +277,12 @@ namespace SAE101
             var transformMatrix = _myGame._camera.GetViewMatrix();
             
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
             _spriteBatch.Draw(_perso, Game1._positionPerso);
+
             _spriteBatch.End();
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();

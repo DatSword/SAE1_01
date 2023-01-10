@@ -67,6 +67,7 @@ namespace SAE101
         public Vector2 _posNo;
         public bool _choiceTrue;
 
+        public int _count = 0;
 
         public void toutDebut()
         {
@@ -74,7 +75,8 @@ namespace SAE101
             _dialTrue = true;
             _text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
                           "ENCORE LONGTEMPS?!";
-            _nom = "???";          
+            _nom = "???";
+            _count += 1;
         }
 
         public void Fren1()

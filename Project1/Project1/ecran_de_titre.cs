@@ -77,14 +77,14 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * Game1.chan / 2), (int)(_myGame.yE/3 * 1   + (63 * Game1.chan) * Game1.chan),
-                 (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1 + (63 * _myGame.chan) * _myGame.chan),
+                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
 
-            lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * Game1.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * Game1.chan) * Game1.chan),
-                (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * _myGame.chan) * _myGame.chan),
+                (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
 
-            lesBoutons[2] = new Rectangle( (int)(_myGame.xE / 2 - 210 * Game1.chan / 2), (int)(_myGame.yE/3 * 2   + (63 * Game1.chan) * Game1.chan),
-                (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[2] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 2 + (63 * _myGame.chan) * _myGame.chan),
+                (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
 
 
 

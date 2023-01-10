@@ -73,17 +73,6 @@ namespace SAE101
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-
-            /*Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
-            mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
-
-            //Load Perso
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
-            Event_et_dial.SetCollision();
-            */
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");

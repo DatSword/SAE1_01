@@ -26,14 +26,19 @@ namespace SAE101
         private readonly ScreenManager _screenManager;
         public static KeyboardState _keyboardState;
 
+        // on définit écrans
+        private Ecran_de_titre _ecranDeTitre;
+        private Black_jack _blackJack;
+        public Event_et_dial _eventEtDial;
+        public Joueur _joueur;
+
         //Ecran interactif
         // on définit les différents états possibles du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
-        // on définit  2 écrans ( à compléter )
-        private Ecran_de_titre _ecranDeTitre;
-        private Black_jack _blackJack;
+
+
 
         //Ecran
         public static int xEcran;
@@ -48,7 +53,7 @@ namespace SAE101
         public static double chan = 1;
 
         //Camera
-        public static OrthographicCamera _camera;
+        public OrthographicCamera _camera;
         public static OrthographicCamera _cameraDial;
         public static Vector2 _cameraPosition;
         public static int _numEcran;
@@ -83,23 +88,28 @@ namespace SAE101
 
         //Control cooldown 0.2s
         public static float _cooldown;
-        public static bool _cooldownVerif;
+        public bool _cooldownVerif;
         public static float deltaSeconds;
         //Combat cooldown 0.5s
         public static float _cooldownC;
         public static bool _cooldownVerifC;
 
         //font
-        public static SpriteFont _font;
+        public SpriteFont _font;
 
         //event
         public static bool _firstvisit;
         public static int _fin;
 
         //pour évènements et déplacementss
+        public static float _walkSpeed;
+        public static float _speed;
         public static TiledMap _tiledMap;
         public static Vector2 _positionPerso;
         public static TiledMapTileLayer mapLayer;
+        public static int _stop;
+        public static String _animationPlayer;
+        public static TiledMapTileLayer mapLayerDoor;
         //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat
@@ -134,12 +144,14 @@ namespace SAE101
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
+            // on charge les 2 écrans 
+            _ecranDeTitre = new Ecran_de_titre(this);
+            _eventEtDial = new Event_et_dial(this);
+            _blackJack = new Black_jack(this);
+            _joueur = new Joueur(this);
 
             // Par défaut, le 1er état flèche l'écran de menu
             Etat = Etats.Menu;
-            // on charge les 2 écrans 
-            _ecranDeTitre = new Ecran_de_titre(this);
-            _blackJack = new Black_jack(this);
 
             //Zone jeu
             _chato = false;
@@ -159,16 +171,16 @@ namespace SAE101
 
 
             //Dialogue
-            Event_et_dial._posText = new Vector2(105, 360);
-            Event_et_dial._posNom = new Vector2(25, 360);
-            Event_et_dial._posDialBox = new Vector2(0, 348);
-            Event_et_dial._dialTrue = false;
-            Event_et_dial._posChoiceBox = new Vector2(450, 284);
-            Event_et_dial._posCursor = new Vector2(430, 316);
-            Event_et_dial._posYes = new Vector2(470, 300);
-            Event_et_dial._posNo = new Vector2(470, 315);
-            Event_et_dial._yes = "oui";
-            Event_et_dial._no = "non";
+            _eventEtDial._posText = new Vector2(105, 360);
+            _eventEtDial._posNom = new Vector2(25, 360);
+            _eventEtDial._posDialBox = new Vector2(0, 348);
+            _eventEtDial._dialTrue = false;
+            _eventEtDial._posChoiceBox = new Vector2(450, 284);
+            _eventEtDial._posCursor = new Vector2(430, 316);
+            _eventEtDial._posYes = new Vector2(470, 300);
+            _eventEtDial._posNo = new Vector2(470, 315);
+            _eventEtDial._yes = "oui";
+            _eventEtDial._no = "non";
 
 
             //Combat?
@@ -177,6 +189,9 @@ namespace SAE101
             //event
             _firstvisit = true;
             _fin = 0;
+            _speed = 100;
+            _animationPlayer = "idle_down";
+            
 
             base.Initialize();
         }
@@ -207,9 +222,9 @@ namespace SAE101
             _toink = Content.Load<SoundEffect>("sfx/toink");
 
             //Boite de dialogue
-            Event_et_dial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
-            Event_et_dial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
-            Event_et_dial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
+            _eventEtDial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+            _eventEtDial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
+            _eventEtDial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
@@ -246,7 +261,7 @@ namespace SAE101
                     LoadScreenoption();
 
                 else
-                    Console.WriteLine("STOP");
+                    Console.WriteLine("");
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.X))
@@ -285,8 +300,8 @@ namespace SAE101
             //Console.WriteLine(_cooldownC);
 
 
-            ///changement de dimension d'écran
-            if (_keyboardState.IsKeyDown(Keys.E))
+            // changement de dimension d'écran
+            /*if (_keyboardState.IsKeyDown(Keys.E))
             {
                 _graphics.PreferredBackBufferWidth = 514;
                 _graphics.PreferredBackBufferHeight = 448;
@@ -306,20 +321,12 @@ namespace SAE101
                 yE = (int)(yEcran * changement1);
                 chan = changement1;
                 _graphics.ApplyChanges();
-            }
+            }*/
 
             if (_keyboardState.IsKeyDown(Keys.F))
             {
-                _graphics.PreferredBackBufferWidth = xEcran * changement2;
-                _graphics.PreferredBackBufferHeight = yEcran * changement2;
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                xE = (int)(xEcran * changement2);
-                yE = (int)(yEcran * changement2);
-                chan = changement2;
-                _graphics.ApplyChanges();
+                ChangementEcran(changement1);
             }
-
-
 
 
             //Camera
@@ -387,8 +394,8 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = Chato_combat._centreCombat;
 
-
-
+            _walkSpeed = _speed * deltaSeconds;
+            Console.WriteLine(Chato_int_chambres_nord._posX);
             base.Update(gameTime);
         }
 
@@ -461,8 +468,7 @@ namespace SAE101
         }
 
         //autre
-
-        public static void SetCoolDown()
+        public void SetCoolDown()
         {
             _cooldownVerif = true;
             _cooldown = 0.2f;
@@ -503,6 +509,17 @@ namespace SAE101
                 _ecranTitre = true;
                 MediaPlayer.Play(_titleTheme);
             }
+        }
+
+        public void ChangementEcran(double changement)
+        {
+            _graphics.PreferredBackBufferWidth = (int)(xEcran * changement);
+            _graphics.PreferredBackBufferHeight = (int)(yEcran * changement);
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            xE = (int)(xEcran * changement);
+            yE = (int)(yEcran * changement);
+            chan = changement;
+            _graphics.ApplyChanges();
         }
     }
 }

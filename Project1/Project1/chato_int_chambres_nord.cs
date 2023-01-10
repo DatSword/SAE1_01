@@ -29,6 +29,11 @@ namespace SAE101
         public static TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
 
+        // défini dans Game1
+        private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
+        private Joueur _joueur;
+
         //sprites
         private AnimatedSprite _perso;
         //public static Vector2 _positionPerso;
@@ -66,10 +71,16 @@ namespace SAE101
 
         int numDial;
 
-        public Chato_int_chambres_nord(Game1 game) : base(game) { }
+        public Chato_int_chambres_nord(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
+            _joueur = _myGame._joueur;
+
             // Lieu Spawn perso
             _posX = 0;
             numDial = 0;
@@ -113,13 +124,12 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-
             Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_nord");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
-            //mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
+
             mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
             Event_et_dial.SetCollision();
+
             //Load persos
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
@@ -136,109 +146,45 @@ namespace SAE101
 
         public override void Update(GameTime gameTime)
         {
-            //debug map
-            int a = mapLayerIntersect.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
-            //Console.WriteLine(a);
-            //debug autres collisions
-            int b = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth-1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
-            Console.WriteLine(b);
-
-            Event_et_dial.BoiteDialogues();
-            //Camera
-            Game1._camera.LookAt(Game1._cameraPosition);
-
             _keyboardState = Keyboard.GetState();
-            KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // TODO: Add your update logic here
+            //Camera
+            _myGame._camera.LookAt(Game1._cameraPosition);
+
+
             _tiledMapRenderer.Update(gameTime);
-
-            //Mouvement/animation perso
-            float walkSpeed = deltaSeconds * _vitessePerso;
-            String animation = null;
-
-            if (_stop == 1 && keyboardState.IsKeyUp(Keys.Down))
-                animation = "idle_down";
-            else if (_stop == 2 && keyboardState.IsKeyUp(Keys.Up))
-                animation = "idle_up";
-            else if (_stop == 3 && keyboardState.IsKeyUp(Keys.Left))
-                animation = "idle_left";
-            else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
-                animation = "idle_right";
-
-            if (Event_et_dial._dialTrue == false)
-            {
-                if (keyboardState.IsKeyDown(Keys.Up))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1);
-                    animation = "move_up";
-                    _stop = 2;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.Y -= walkSpeed;
-                }
-                if (keyboardState.IsKeyDown(Keys.Down))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1);
-                    animation = "move_down";
-                    _stop = 1;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.Y += walkSpeed;
-                }
-                if (keyboardState.IsKeyDown(Keys.Left))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
-                    animation = "move_left";
-                    _stop = 3;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.X -= walkSpeed;
-                }
-                if (keyboardState.IsKeyDown(Keys.Right))
-                {
-                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
-                    animation = "move_right";
-                    _stop = 4;
-                    if (!IsCollision(tx, ty))
-                        Game1._positionPerso.X += walkSpeed;
-                }
-            }
-            else if (animation == null)
-                animation = "idle_down";
-            else
-                animation = animation;
-
-            _perso.Play(animation);
+            Event_et_dial.BoiteDialogues();
+            _joueur.Mouvement(gameTime);
+            _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
+            
 
-            if(Event_et_dial._choiceTrue == true)
+            if (_eventEtDial._choiceTrue == true)
             {
-                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && Game1._cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
-                    Event_et_dial._posCursor = new Vector2(430, 301);
+                    _myGame.SetCoolDown();
+                    _eventEtDial._posCursor = new Vector2(430, 301);
                 }
-                else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                else if (_keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
-                    Event_et_dial._posCursor = new Vector2(430, 301);
+                    _myGame.SetCoolDown();
+                    _eventEtDial._posCursor = new Vector2(430, 301);
                 }
-                Console.WriteLine(Game1._cooldownVerif);
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                Console.WriteLine(_myGame._cooldownVerif);
+                if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Game1._fin = 1;
                     Game.LoadScreenblack_jack();
                     
                 }
-                if ((keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false)
+                if ((_keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || _keyboardState.IsKeyDown(Keys.X) && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
-                    Event_et_dial._choiceTrue = false;
-                    Event_et_dial._dialTrue = false;
+                    _myGame.SetCoolDown();
+                    _eventEtDial._choiceTrue = false;
+                    _eventEtDial._dialTrue = false;
                 }
             }
 
@@ -252,19 +198,19 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == true)
+            if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
-                Event_et_dial.FermeBoite();
+                _eventEtDial.FermeBoite();
             }
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false
+            else if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
                 && Game1._positionPerso.X < _limiteChambreDroite)
             {
-                Event_et_dial.Fren1();
+                _eventEtDial.Fren1();
                 _frenTrue = true;
             }        
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
+            else if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationFren == "hi" && _myGame._cooldownVerif == false)
             {
-                Event_et_dial.Fren2();
+                _eventEtDial.Fren2();
                 _frenTrue = false;
             }
             _fren.Play(animationFren);
@@ -277,7 +223,7 @@ namespace SAE101
             else
                 animationChest = "open";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationChest == "close" 
+            if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationChest == "close" 
                 && Game1._positionPerso.X > _limiteChambreDroite)
                 _chestTrue = true;
             
@@ -288,27 +234,27 @@ namespace SAE101
 
             //EVENEMENTS
             
-            if(Game1._firstvisit == true && Game1._cooldownVerif == false && numDial == 0)
+            if(Game1._firstvisit == true && _myGame._cooldownVerif == false && numDial == 0)
             {
-                Event_et_dial.Jon1();
+                _eventEtDial.Jon1();
                 Game1._firstvisit = false;
                 numDial = 1;
                 _stop = 4;
             }
-            if (Game1._cooldownVerif == false && keyboardState.IsKeyDown(Keys.W) && numDial == 1)
+            if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
             {
-                Event_et_dial.Jon2();
+                _eventEtDial.Jon2();
                 numDial = 2;
             }
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false &&  numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false &&  numDial == 2)
             {
-                Event_et_dial.FermeBoite();
+                _eventEtDial.FermeBoite();
                 numDial = 3;
             }
 
             //DODO
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 72) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false && Game1._cooldownVerif == false)
+            if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _myGame._cooldownVerif == false)
             {
                 //Event_et_dial.Fin1();
                 Game1._fin = 1;
@@ -316,7 +262,7 @@ namespace SAE101
             }
 
             //changement de map
-            if (keyboardState.IsKeyDown(Keys.Down) && (a == 41))
+            if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 41))
             {
                 _posX = (int)Game1._positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();
@@ -328,10 +274,10 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
             _spriteBatch.Draw(_perso, Game1._positionPerso);
@@ -339,19 +285,19 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Event_et_dial._dialTrue == true)
+            if (_eventEtDial._dialTrue == true)
             {
-                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
+                _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
                 
             }
-            if (Event_et_dial._choiceTrue == true)
+            if (_eventEtDial._choiceTrue == true)
             {
-                _spriteBatch.Draw(Event_et_dial._choiceBox, Event_et_dial._posChoiceBox, Color.White);
-                _spriteBatch.Draw(Event_et_dial._cursor, Event_et_dial._posCursor, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._yes, Event_et_dial._posYes, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._no, Event_et_dial._posNo, Color.White);
+                _spriteBatch.Draw(_eventEtDial._choiceBox, _eventEtDial._posChoiceBox, Color.White);
+                _spriteBatch.Draw(_eventEtDial._cursor, _eventEtDial._posCursor, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._yes, _eventEtDial._posYes, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._no, _eventEtDial._posNo, Color.White);
             }
             _spriteBatch.End();
         }

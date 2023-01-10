@@ -21,10 +21,21 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
-    internal class Joueur
+    public class Joueur : GameScreen
     {
-       public static void Spawnchato_int_chambres_couloir()
-       {
+        // défini dans Game1
+        private new Game1 Game => (Game1)base.Game;
+        private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
+
+        public Joueur(Game1 game) : base(game)
+        {
+            _myGame = game;
+            _eventEtDial = _myGame._eventEtDial;
+        }
+
+        public static void Spawnchato_int_chambres_couloir()
+        {
             if (Chato_int_chambres_nord._posX == 0)
                 Game1._positionPerso = new Vector2(104, 112);
 
@@ -95,15 +106,79 @@ namespace SAE101
             return mapLayerCollision;
         }
 
+        public void Mouvement(GameTime gameTime)
+        {
+            if (Game1._stop == 1 && Game1._keyboardState.IsKeyUp(Keys.Down))
+                Game1._animationPlayer = "idle_down";
+            else if (Game1._stop == 2 && Game1._keyboardState.IsKeyUp(Keys.Up))
+                Game1._animationPlayer = "idle_up";
+            else if (Game1._stop == 3 && Game1._keyboardState.IsKeyUp(Keys.Left))
+                Game1._animationPlayer = "idle_left";
+            else if (Game1._stop == 4 && Game1._keyboardState.IsKeyUp(Keys.Right))
+                Game1._animationPlayer = "idle_right";
+
+            if (_eventEtDial._dialTrue == false)
+            {
+                if (Game1._keyboardState.IsKeyDown(Keys.Up))
+                {
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1);
+                    Game1._animationPlayer = "move_up";
+                    Game1._stop = 2;
+                    if (!IsCollision(tx, ty))
+                        Game1._positionPerso.Y -= Game1._walkSpeed;
+                }
+                if (Game1._keyboardState.IsKeyDown(Keys.Down))
+                {
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1);
+                    Game1._animationPlayer = "move_down";
+                    Game1._stop = 1;
+                    if (!IsCollision(tx, ty))
+                        Game1._positionPerso.Y += Game1._walkSpeed;
+                }
+                if (Game1._keyboardState.IsKeyDown(Keys.Left))
+                {
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
+                    Game1._animationPlayer = "move_left";
+                    Game1._stop = 3;
+                    if (!IsCollision(tx, ty))
+                        Game1._positionPerso.X -= Game1._walkSpeed;
+                }
+                if (Game1._keyboardState.IsKeyDown(Keys.Right))
+                {
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
+                    Game1._animationPlayer = "move_right";
+                    Game1._stop = 4;
+                    if (!IsCollision(tx, ty))
+                        Game1._positionPerso.X += Game1._walkSpeed;
+                }
+                else if (Game1._animationPlayer == null)
+                    Game1._animationPlayer = "idle_down";
+                else
+                    Game1._animationPlayer = Game1._animationPlayer;
+
+
+            }
+        }
+
         public static bool IsCollision(ushort x, ushort y)
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (MapLayer().TryGetTile(x, y, out tile) == false)
+            if (Game1.mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;
             return false;
         }
+
+        public override void Update(GameTime gameTime)
+        {        }
+
+        public override void Draw(GameTime gameTime)
+        {        }
     }
 }

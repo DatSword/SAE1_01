@@ -20,7 +20,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
-    internal class Chato_combat_contenu
+    public class Chato_combat_contenu
     {
         public static int _nbAlly;
         public static int _nbEnnemy;

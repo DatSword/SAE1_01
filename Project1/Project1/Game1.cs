@@ -36,6 +36,7 @@ namespace SAE101
         public Chato_ext_cours _chatoExtCours;
         public Chato_combat_contenu _chatoCombatContenu;
         public Chato_combat _chatoCombat;
+        public Option _option;
 
         //Ecran interactif
         // états du jeu
@@ -160,6 +161,7 @@ namespace SAE101
             _joueur = new Joueur(this);
             _chatoCombatContenu = new Chato_combat_contenu(this);
             _chatoCombat = new Chato_combat(this);
+            _option = new Option(this);
 
             Etat = Etats.Menu;
 
@@ -407,7 +409,7 @@ namespace SAE101
 
         public void LoadScreenoption()
         {
-            _screenManager.LoadScreen(new Option(this), new FadeTransition(GraphicsDevice, Color.LightGray));
+            _screenManager.LoadScreen(_option, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
             this.Etat = Etats.Option;
         }

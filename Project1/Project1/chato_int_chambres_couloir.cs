@@ -24,7 +24,7 @@ namespace SAE101
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private TiledMap _tiledMap;
+        //private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
         public static TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
@@ -72,7 +72,7 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
             mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
             mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
 
@@ -116,8 +116,8 @@ namespace SAE101
             {
                 if (keyboardState.IsKeyDown(Keys.Up))
                 {
-                    ushort tx = (ushort)(Game1._positionPerso.X / _tiledMap.TileWidth);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / _tiledMap.TileHeight - 1);
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1);
                     animation = "move_up";
                     _stop = 2;
                     if (!IsCollision(tx, ty))
@@ -125,8 +125,8 @@ namespace SAE101
                 }
                 if (keyboardState.IsKeyDown(Keys.Down))
                 {
-                    ushort tx = (ushort)(Game1._positionPerso.X / _tiledMap.TileWidth);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / _tiledMap.TileHeight + 1);
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1);
                     animation = "move_down";
                     _stop = 1;
                     if (!IsCollision(tx, ty))
@@ -134,8 +134,8 @@ namespace SAE101
                 }
                 if (keyboardState.IsKeyDown(Keys.Left))
                 {
-                    ushort tx = (ushort)(Game1._positionPerso.X / _tiledMap.TileWidth - 1);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / _tiledMap.TileHeight);
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
                     animation = "move_left";
                     _stop = 3;
                     if (!IsCollision(tx, ty))
@@ -143,8 +143,8 @@ namespace SAE101
                 }
                 if (keyboardState.IsKeyDown(Keys.Right))
                 {
-                    ushort tx = (ushort)(Game1._positionPerso.X / _tiledMap.TileWidth + 1);
-                    ushort ty = (ushort)(Game1._positionPerso.Y / _tiledMap.TileHeight);
+                    ushort tx = (ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1);
+                    ushort ty = (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight);
                     animation = "move_right";
                     _stop = 4;
                     if (!IsCollision(tx, ty))

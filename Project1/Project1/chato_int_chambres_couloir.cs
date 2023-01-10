@@ -71,10 +71,10 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
+            Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_couloir");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-            mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
-            mapLayerIntersect = _tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
+            mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
@@ -99,7 +99,7 @@ namespace SAE101
             _tiledMapRenderer.Update(gameTime);
 
             //Debug changement de map
-            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / _tiledMap.TileWidth), (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1)).GlobalIdentifier;
+            int a = mapLayerIntersect.GetTile((ushort)(_positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(_positionPerso.Y / Game1._tiledMap.TileHeight - 1)).GlobalIdentifier;
             //Console.WriteLine(a);
 
             //Mouvement/animation

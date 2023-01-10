@@ -20,7 +20,7 @@ namespace SAE101
 {
     public class Game1 : Game
     {
-        //honnêtement j'en sais r
+        //Graphique
         private GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
@@ -94,6 +94,10 @@ namespace SAE101
         public static bool _firstvisit;
         public static int _fin;
 
+        //pour évènements et déplacementss
+        public static TiledMap _tiledMap;
+        public static Vector2 _positionPerso;
+
         public Etats Etat
         {
             get
@@ -130,6 +134,10 @@ namespace SAE101
             _ecranDeTitre = new Ecran_de_titre(this);
             _blackJack = new Black_jack(this);
 
+            //Zone jeu
+            _chato = false;
+            _ecranTitre = false;
+            _chatoCombat = false;
 
             //Camera
 
@@ -295,22 +303,22 @@ namespace SAE101
             //Camera
 
             // chambres nord
-            if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
-                                && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche)
+            if (_numEcran == 1 && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
+                                && Game1._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
+                                && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentre1;
 
-            else if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
+            else if (_numEcran == 1 && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
+                                && Game1._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentreUn;
 
-            else if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
-                                && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreDroite)
+            else if (_numEcran == 1 && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
+                                && Game1._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
+                                && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreDroite)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentreDeux;
 
-            else if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2 
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
+            else if (_numEcran == 1 && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2 
+                                && Game1._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentre2;
 
             else if (_numEcran == 1 && Chato_int_chambres_couloir._positionPerso.Y >= Chato_int_chambres_couloir._limiteCouloirY1)
@@ -323,35 +331,35 @@ namespace SAE101
                                 Chato_int_chambres_couloir._positionPerso.X < Chato_int_chambres_couloir._limiteChambreX2)))
                 _cameraPosition = new Vector2(Chato_int_chambres_couloir._positionPerso.X, Chato_int_chambres_couloir._positionPerso.Y);
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
-                                && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
+            else if (_numEcran == 2 && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
+                                && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche
+                                && Game1._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentre1;
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1 
-                                && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreGauche
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
+            else if (_numEcran == 2 && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1 
+                                && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreGauche
+                                && Game1._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentreUn;
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
-                                && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreDroite
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
+            else if (_numEcran == 2 && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
+                                && Game1._positionPerso.X < Chato_int_chambres_nord._limiteChambreDroite
+                                && Game1._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentre2;
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
-                                && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreDroite
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
+            else if (_numEcran == 2 && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
+                                && Game1._positionPerso.X > Chato_int_chambres_nord._limiteChambreDroite
+                                && Game1._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentreDeux;
 
-            else if (_numEcran == 2 && Chato_ext_cours_interieur._positionPerso.Y > 49*16)
-                _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
+            else if (_numEcran == 2 && Game1._positionPerso.Y > 49*16)
+                _cameraPosition = new Vector2(Game1._positionPerso.X, Game1._positionPerso.Y);
 
             // cours
-            else if (_numEcran == 3 & Chato_int_chambres_nord._positionPerso.Y >= 1 * 16)
-                _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
+            else if (_numEcran == 3 & Game1._positionPerso.Y >= 1 * 16)
+                _cameraPosition = new Vector2(Game1._positionPerso.X, Game1._positionPerso.Y);
 
-            else if (_numEcran == 3 && Chato_int_chambres_nord._positionPerso.Y < 1*16 )
-                _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
+            else if (_numEcran == 3 && Game1._positionPerso.Y < 1*16 )
+                _cameraPosition = new Vector2(Game1._positionPerso.X, Game1._positionPerso.Y);
 
             // combat
             else if (_numEcran == 4)
@@ -375,15 +383,15 @@ namespace SAE101
         public void LoadScreenecran_de_titre()
         {
             _screenManager.LoadScreen(new Ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
-            _ecranTitre = true;
+            MusiqueTitre();
             this.Etat = Etats.Menu;
         }
 
         public void LoadScreenoption()
         {
             _screenManager.LoadScreen(new Option(this), new FadeTransition(GraphicsDevice, Color.LightGray));
+            MusiqueTitre();
             this.Etat = Etats.Option;
-            _ecranTitre = true;
         }
 
         public void LoadScreenblack_jack()
@@ -397,7 +405,8 @@ namespace SAE101
         public void LoadScreenchato_int_chambres_nord()
         {
             _screenManager.LoadScreen(new Chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
-            _chato = true;
+            MusiqueChato();
+            _ecranTitre=false;
             _numEcran = 1;
             _chatoCombat = false;
         }
@@ -405,16 +414,16 @@ namespace SAE101
         public void LoadScreenchato_int_chambres_couloir()
         {
             _screenManager.LoadScreen(new Chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
             _numEcran = 2;
-            _chato = true;
             _chatoCombat = false;
         }
 
         public void LoadScreenchato_ext_cours_interieur()
         {
             _screenManager.LoadScreen(new Chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
             _numEcran = 3;
-            _chato = true;
             _chatoCombat = false;
         }
 
@@ -422,6 +431,7 @@ namespace SAE101
         {
             MediaPlayer.Stop();
             _screenManager.LoadScreen(new Chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChatoCombat();
             MediaPlayer.Play(_songCombat);
             _numEcran = 4;
             _chato = false;
@@ -441,6 +451,36 @@ namespace SAE101
         {
             _cooldownVerifC = true;
             _cooldownC = 0.5f;
+        }
+
+        public void MusiqueChatoCombat()
+        {
+            if (_chatoCombat == false)
+            {
+                MediaPlayer.Stop();
+                _chatoCombat = true;
+                MediaPlayer.Play(_songCombat);
+            }
+        }
+
+        public void MusiqueChato()
+        {
+            if (_chato == false)
+            {
+                MediaPlayer.Stop();
+                _chato = true;
+                MediaPlayer.Play(_songChato);
+            }
+        }
+
+        public void MusiqueTitre()
+        {
+            if (_ecranTitre == false)
+            {
+                MediaPlayer.Stop();
+                _ecranTitre = true;
+                MediaPlayer.Play(_titleTheme);
+            }
         }
     }
 }

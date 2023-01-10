@@ -140,8 +140,8 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            xEcran = 514; //768
-            yEcran = 448; //672
+            xEcran = 514;
+            yEcran = 448;
             xE = xEcran;
             yE = yEcran;
             

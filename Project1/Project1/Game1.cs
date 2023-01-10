@@ -431,7 +431,8 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
-            _ecranTitre=false;
+            this.Etat = Etats.Play;
+            _ecranTitre =false;
             _numEcran = 1;
             _chatoCombat = false;
         }
@@ -440,6 +441,7 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
+            this.Etat = Etats.Play;
             _numEcran = 2;
             _chatoCombat = false;
         }
@@ -448,6 +450,7 @@ namespace SAE101
         {
             _screenManager.LoadScreen(new Chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
+            this.Etat = Etats.Play;
             _numEcran = 3;
             _chatoCombat = false;
         }
@@ -458,6 +461,7 @@ namespace SAE101
             _screenManager.LoadScreen(new Chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChatoCombat();
             MediaPlayer.Play(_songCombat);
+            this.Etat = Etats.Play;
             _numEcran = 4;
             _chato = false;
             _chatoCombat = true;

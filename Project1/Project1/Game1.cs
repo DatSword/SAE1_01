@@ -291,6 +291,8 @@ namespace SAE101
                 _graphics.PreferredBackBufferWidth = 514;
                 _graphics.PreferredBackBufferHeight = 448;
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                xE = (int)(xEcran * changement0);
+                yE = (int)(yEcran * changement0);
                 chan = changement0;
                 _graphics.ApplyChanges();
 

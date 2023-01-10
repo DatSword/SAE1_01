@@ -75,22 +75,22 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            lesBoutons[0] = new Rectangle((int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 1   + (63 * Game1.chan) * Game1.chan), (int)Game1.chan * 210, (int)Game1.chan * 63);
-            lesBoutons[1] = new Rectangle((int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 1.5 + (63 * Game1.chan) * Game1.chan), (int)Game1.chan * 210, (int)Game1.chan * 63);
-            lesBoutons[2] = new Rectangle((int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 2   + (63 * Game1.chan) * Game1.chan), (int)Game1.chan * 210, (int)Game1.chan * 63);
+            lesBoutons[0] = new Rectangle( (int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 1   + (63 * Game1.chan) * Game1.chan), (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[1] = new Rectangle( (int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 1.5 + (63 * Game1.chan) * Game1.chan), (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[2] = new Rectangle( (int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 2   + (63 * Game1.chan) * Game1.chan), (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+                                            // x                                           // y                                                  // longueur (width)          // hauteur (height)
+
 
 
             for (int i = 0; i < lesBoutons.Length; i++)
             {
 
-
-
                 if (i == 0)
-                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 1 + lesBoutons[i].Height);
+                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 1   + lesBoutons[i].Height);
                 else if (i == 1)
                     lesBoutons[i].Y = (int)(Game1.yE / 3 * 1.5 + lesBoutons[i].Height);
                 else
-                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 2 + lesBoutons[i].Height);
+                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 2   + lesBoutons[i].Height);
 
             }
 

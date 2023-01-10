@@ -22,12 +22,8 @@ namespace SAE101
     {
         //map
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        //private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        public static TiledMapTileLayer mapLayer;
-        private TiledMapTileLayer mapLayerIntersect;
 
         // défini dans Game1
         private Game1 _myGame;
@@ -36,17 +32,8 @@ namespace SAE101
 
         //sprites
         private AnimatedSprite _perso;
-        //public static Vector2 _positionPerso;
         private KeyboardState _keyboardState;
-        private int _sensPersoX;
-        private int _sensPersoY;
-        private int _vitessePerso;
         public static int _posX;
-        private bool stopLeft;
-        private bool stopRight;
-        private bool stopUp;
-        private bool stopDown;
-        private int _stop;
 
         private AnimatedSprite _fren;
         private Vector2 _positionFren;
@@ -88,8 +75,6 @@ namespace SAE101
 
             _joueur.Spawnchato_int_chambres_nord();
 
-            _stop = 1;
-
             // Lieu Spawn objects
             _positionFren = new Vector2(28 * 16 + 8, 4 * 16 + 8);
             _frenTrue = false;
@@ -98,22 +83,18 @@ namespace SAE101
             _chestTrue = false;
             
             // Emplacements pour camera
-            _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
-            _chambreCentreUn = new Vector2((float)14.5 * 16, 6 * 16);
+            _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
+            _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
 
-            _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
-            _chambreCentreDeux = new Vector2((float)38.5 * 16, 6 * 16);
+            _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
+            _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
 
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
-            _limiteChambreY1 = 8 * 16;
+            _limiteChambreY1 = 7 * 16;
 
             _limiteChambreGauche = 8 * 16;
             _limiteChambreDroite = 32 * 16;
-
-            _sensPersoX = 0;
-            _sensPersoY = 0;
-            _vitessePerso = 100;
             _choixCursor = 1;
             
             
@@ -127,7 +108,6 @@ namespace SAE101
             Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_nord");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
 
-            mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
             _eventEtDial.SetCollision();
 
             //Load persos
@@ -241,7 +221,6 @@ namespace SAE101
                 _eventEtDial.Jon1();
                 Game1._firstvisit = false;
                 numDial = 1;
-                _stop = 4;
             }
             if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
             {

@@ -83,6 +83,7 @@ namespace SAE101
 
         //Combat?
         private bool _combatTest;
+        public static bool _combatFini;
 
         //Control cooldown 0.2s
         public static float _cooldown;
@@ -111,6 +112,7 @@ namespace SAE101
         public static int _stop;
         public static String _animationPlayer;
         public static TiledMapTileLayer mapLayerDoor;
+        public static int _numSalle;
         //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat

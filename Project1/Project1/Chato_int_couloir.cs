@@ -29,21 +29,14 @@ namespace SAE101
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        //private TiledMap _tiledMap;
         private TiledMapRenderer _tiledMapRenderer;
-        public static TiledMapTileLayer mapLayer;
-        private TiledMapTileLayer mapLayerIntersect;
 
         private KeyboardState _keyboardState;
 
         //sprite
         private AnimatedSprite _perso;
-        //public static Vector2 _positionPerso;       
-        private int _sensPersoX;
-        private int _sensPersoY;
         public static int _vitessePerso;
         public static int _posX;
-        private int _stop;
 
         private AnimatedSprite _ennemi;
         private Vector2 _positionEnnemi;
@@ -69,16 +62,13 @@ namespace SAE101
 
             _joueur.Spawnchato_int_chambres_couloir();
 
-            _stop = 1;
-
             _limiteChambreX1 = 19 * 16;
             _limiteChambreX2 = 25 * 16;
             _limiteCouloirY1 = 5 * 16;
             _limiteCouloirY1 = 5 * 16;
 
-            _sensPersoX = 0;
-            _sensPersoY = 0;
             _vitessePerso = 100;
+            Game1._numSalle = 2;
 
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
             _animationEnnemi = "idle_down";

@@ -21,7 +21,7 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
-    internal class Joueur
+    public class Joueur
     {
        public static void Spawnchato_int_chambres_couloir()
        {

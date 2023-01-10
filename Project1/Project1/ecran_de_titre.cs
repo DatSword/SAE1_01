@@ -18,7 +18,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace SAE101
 {
-    internal class Ecran_de_titre : GameScreen
+    public class Ecran_de_titre : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -28,6 +28,7 @@ namespace SAE101
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
         private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
 
         // texture du menu avec 3 boutons
         private Texture2D _titleS;
@@ -48,6 +49,7 @@ namespace SAE101
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
 
             lesBoutons = new Rectangle[3];
             lesBoutons[0] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 + 63, 210, 63);

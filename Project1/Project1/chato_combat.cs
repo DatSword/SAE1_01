@@ -21,10 +21,11 @@ using System.Runtime.InteropServices;
 
 namespace SAE101
 {
-    internal class Chato_combat : GameScreen
+    public class Chato_combat : GameScreen
     {
         // défini dans Game1
         private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
 
         //Constantes position pour animation;
         private const int POS_ALLIEX0 = 145;
@@ -148,6 +149,8 @@ namespace SAE101
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
+
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
 

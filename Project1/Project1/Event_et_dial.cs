@@ -21,10 +21,10 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-    internal class Event_et_dial
+    public class Event_et_dial : GameScreen
     {
         // défini dans Game1
-        private new Game1 game => (Game1)base.Game;
+        private new Game1 Game => (Game1)base.Game;
         private Game1 _myGame;
 
         public Event_et_dial(Game1 game) : base(game)
@@ -32,28 +32,27 @@ namespace SAE101
             _myGame = game;
         }
 
-        public static Texture2D _dialBox;
-        public static Vector2 _posDialBox;
-        public static String _text;
-        public static Vector2 _posText;
-        public static String _nom;
-        public static Vector2 _posNom;
-        public static bool _dialTrue;
+        public Texture2D _dialBox;
+        public Vector2 _posDialBox;
+        public String _text;
+        public Vector2 _posText;
+        public String _nom;
+        public Vector2 _posNom;
+        public bool _dialTrue;
 
         //Boites de choix
-        public static Texture2D _choiceBox;
-        public static Vector2 _posChoiceBox;
-        public static Texture2D _cursor;
-        public static Vector2 _posCursor;
-        public static String _yes;
-        public static String _no;
-        public static Vector2 _posYes;
-        public static Vector2 _posNo;
-        public static bool _choiceTrue;
+        public Texture2D _choiceBox;
+        public Vector2 _posChoiceBox;
+        public Texture2D _cursor;
+        public Vector2 _posCursor;
+        public String _yes;
+        public String _no;
+        public Vector2 _posYes;
+        public Vector2 _posNo;
+        public bool _choiceTrue;
 
 
-
-        public static void toutDebut()
+        public void toutDebut()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
@@ -62,7 +61,7 @@ namespace SAE101
             _nom = "???";          
         }
 
-        public static void Fren1()
+        public void Fren1()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
@@ -70,7 +69,7 @@ namespace SAE101
             _nom = "Fren";
             Game1._duck.Play();
         }
-        public static void Fren2()
+        public void Fren2()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
@@ -79,9 +78,10 @@ namespace SAE101
             Game1._duck.Play();
         }
 
-        public static void Jon1()
+        public void Jon1()
         {
-            _myGame _dialTrue = true;
+            _myGame.SetCoolDown();
+            _dialTrue = true;
             _text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
                     "tout le monde est déjà parti vers la salle du trône!\n" +
                     "Je comprend ta fatigue, mais ça serait dommage de ne pas\n" +
@@ -90,7 +90,7 @@ namespace SAE101
             _nom = "Jon";
         }
 
-        public static void Jon2()
+        public void Jon2()
         {
             _myGame.SetCoolDown();
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
@@ -99,7 +99,7 @@ namespace SAE101
             Game1._firstvisit = false;
         }
 
-        public static void Jon3()
+        public void Jon3()
         {
             _myGame.SetCoolDown();
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
@@ -107,13 +107,13 @@ namespace SAE101
 
             _nom = "Jon";
         }
-        public static void FermeBoite()
+        public void FermeBoite()
         {
             _dialTrue = false;
             _myGame.SetCoolDown();
         }
 
-        public static void Fin1()
+        public void Fin1()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
@@ -138,5 +138,8 @@ namespace SAE101
             Console.WriteLine(r);
         }
 
-       }
+        public override void Update(GameTime gameTime) {   }
+
+        public override void Draw(GameTime gameTime) {  }
+    }
 }

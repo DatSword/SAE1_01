@@ -26,14 +26,17 @@ namespace SAE101
         private readonly ScreenManager _screenManager;
         public static KeyboardState _keyboardState;
 
+
+
         //Ecran interactif
         // on définit les différents états possibles du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
-        // on définit  2 écrans ( à compléter )
+        // on définit écrans
         private Ecran_de_titre _ecranDeTitre;
         private Black_jack _blackJack;
+        public Event_et_dial _eventEtDial;
 
         //Ecran
         public static int xEcran;
@@ -134,12 +137,13 @@ namespace SAE101
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
+            // on charge les 2 écrans 
+            _ecranDeTitre = new Ecran_de_titre(this);
+            _eventEtDial = new Event_et_dial(this);
+            _blackJack = new Black_jack(this);
 
             // Par défaut, le 1er état flèche l'écran de menu
             Etat = Etats.Menu;
-            // on charge les 2 écrans 
-            _ecranDeTitre = new Ecran_de_titre(this);
-            _blackJack = new Black_jack(this);
 
             //Zone jeu
             _chato = false;
@@ -159,16 +163,16 @@ namespace SAE101
 
 
             //Dialogue
-            Event_et_dial._posText = new Vector2(105, 360);
-            Event_et_dial._posNom = new Vector2(25, 360);
-            Event_et_dial._posDialBox = new Vector2(0, 348);
-            Event_et_dial._dialTrue = false;
-            Event_et_dial._posChoiceBox = new Vector2(450, 284);
-            Event_et_dial._posCursor = new Vector2(430, 316);
-            Event_et_dial._posYes = new Vector2(470, 300);
-            Event_et_dial._posNo = new Vector2(470, 315);
-            Event_et_dial._yes = "oui";
-            Event_et_dial._no = "non";
+            _eventEtDial._posText = new Vector2(105, 360);
+            _eventEtDial._posNom = new Vector2(25, 360);
+            _eventEtDial._posDialBox = new Vector2(0, 348);
+            _eventEtDial._dialTrue = false;
+            _eventEtDial._posChoiceBox = new Vector2(450, 284);
+            _eventEtDial._posCursor = new Vector2(430, 316);
+            _eventEtDial._posYes = new Vector2(470, 300);
+            _eventEtDial._posNo = new Vector2(470, 315);
+            _eventEtDial._yes = "oui";
+            _eventEtDial._no = "non";
 
 
             //Combat?
@@ -207,9 +211,9 @@ namespace SAE101
             _toink = Content.Load<SoundEffect>("sfx/toink");
 
             //Boite de dialogue
-            Event_et_dial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
-            Event_et_dial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
-            Event_et_dial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
+            _eventEtDial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+            _eventEtDial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
+            _eventEtDial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
@@ -285,8 +289,8 @@ namespace SAE101
             //Console.WriteLine(_cooldownC);
 
 
-            ///changement de dimension d'écran
-            if (_keyboardState.IsKeyDown(Keys.E))
+            // changement de dimension d'écran
+            /*if (_keyboardState.IsKeyDown(Keys.E))
             {
                 _graphics.PreferredBackBufferWidth = 514;
                 _graphics.PreferredBackBufferHeight = 448;
@@ -304,20 +308,12 @@ namespace SAE101
                 yE = (int)(yEcran * changement1);
                 chan = changement1;
                 _graphics.ApplyChanges();
-            }
+            }*/
 
             if (_keyboardState.IsKeyDown(Keys.F))
             {
-                _graphics.PreferredBackBufferWidth = xEcran * changement2;
-                _graphics.PreferredBackBufferHeight = yEcran * changement2;
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                xE = (int)(xEcran * changement2);
-                yE = (int)(yEcran * changement2);
-                chan = changement2;
-                _graphics.ApplyChanges();
+                ChangementEcran(changement1);
             }
-
-
 
 
             //Camera
@@ -507,7 +503,9 @@ namespace SAE101
             _graphics.PreferredBackBufferWidth = (int)(xEcran * changement);
             _graphics.PreferredBackBufferHeight = (int)(yEcran * changement);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            chan = changement1;
+            xE = (int)(xEcran * changement);
+            yE = (int)(yEcran * changement);
+            chan = changement;
             _graphics.ApplyChanges();
         }
     }

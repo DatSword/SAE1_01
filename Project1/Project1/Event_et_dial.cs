@@ -41,7 +41,7 @@ namespace SAE101
         public bool _dialTrue;
 
         //Boites de choix
-        public static Texture2D _choiceBox;
+        /*public static Texture2D _choiceBox;
         public static Vector2 _posChoiceBox;
         public static Texture2D _cursor;
         public static Vector2 _posCursor;
@@ -49,7 +49,7 @@ namespace SAE101
         public static String _no;
         public static Vector2 _posYes;
         public static Vector2 _posNo;
-        public static bool _choiceTrue;
+        public static bool _choiceTrue;*/
 
         public static int u;
         public static int d;

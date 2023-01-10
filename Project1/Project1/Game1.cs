@@ -26,17 +26,19 @@ namespace SAE101
         private readonly ScreenManager _screenManager;
         public static KeyboardState _keyboardState;
 
-
+        // on définit écrans
+        private Ecran_de_titre _ecranDeTitre;
+        private Black_jack _blackJack;
+        public Event_et_dial _eventEtDial;
+        public Joueur _joueur;
 
         //Ecran interactif
         // on définit les différents états possibles du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
-        // on définit écrans
-        private Ecran_de_titre _ecranDeTitre;
-        private Black_jack _blackJack;
-        public Event_et_dial _eventEtDial;
+
+
 
         //Ecran
         public static int xEcran;
@@ -51,7 +53,7 @@ namespace SAE101
         public static double chan = 1;
 
         //Camera
-        public static OrthographicCamera _camera;
+        public OrthographicCamera _camera;
         public static OrthographicCamera _cameraDial;
         public static Vector2 _cameraPosition;
         public static int _numEcran;
@@ -93,7 +95,7 @@ namespace SAE101
         public static bool _cooldownVerifC;
 
         //font
-        public static SpriteFont _font;
+        public SpriteFont _font;
 
         //event
         public static bool _firstvisit;
@@ -146,6 +148,7 @@ namespace SAE101
             _ecranDeTitre = new Ecran_de_titre(this);
             _eventEtDial = new Event_et_dial(this);
             _blackJack = new Black_jack(this);
+            _joueur = new Joueur(this);
 
             // Par défaut, le 1er état flèche l'écran de menu
             Etat = Etats.Menu;
@@ -303,6 +306,8 @@ namespace SAE101
                 _graphics.PreferredBackBufferWidth = 514;
                 _graphics.PreferredBackBufferHeight = 448;
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                xE = (int)(xEcran * changement0);
+                yE = (int)(yEcran * changement0);
                 chan = changement0;
                 _graphics.ApplyChanges();
 

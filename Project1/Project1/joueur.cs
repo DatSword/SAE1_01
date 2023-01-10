@@ -21,10 +21,21 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
-    public class Joueur
+    public class Joueur : GameScreen
     {
-       public static void Spawnchato_int_chambres_couloir()
-       {
+        // défini dans Game1
+        private new Game1 Game => (Game1)base.Game;
+        private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
+
+        public Joueur(Game1 game) : base(game)
+        {
+            _myGame = game;
+            _eventEtDial = _myGame._eventEtDial;
+        }
+
+        public static void Spawnchato_int_chambres_couloir()
+        {
             if (Chato_int_chambres_nord._posX == 0)
                 Game1._positionPerso = new Vector2(104, 112);
 
@@ -94,7 +105,8 @@ namespace SAE101
 
             return mapLayerCollision;
         }
-        public static void Mouvement(GameTime gameTime)
+
+        public void Mouvement(GameTime gameTime)
         {
             if (Game1._stop == 1 && Game1._keyboardState.IsKeyUp(Keys.Down))
                 Game1._animationPlayer = "idle_down";
@@ -105,7 +117,7 @@ namespace SAE101
             else if (Game1._stop == 4 && Game1._keyboardState.IsKeyUp(Keys.Right))
                 Game1._animationPlayer = "idle_right";
 
-            if (Event_et_dial._dialTrue == false)
+            if (_eventEtDial._dialTrue == false)
             {
                 if (Game1._keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -162,5 +174,11 @@ namespace SAE101
                 return true;
             return false;
         }
+
+        public override void Update(GameTime gameTime)
+        {        }
+
+        public override void Draw(GameTime gameTime)
+        {        }
     }
 }

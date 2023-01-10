@@ -319,10 +319,10 @@ namespace SAE101
         public override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;           
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            Game1._camera.LookAt(Game1._cameraPosition);
+            _myGame._camera.LookAt(Game1._cameraPosition);
 
             //curseurs
             if (_animationEnCours == false)
@@ -342,13 +342,11 @@ namespace SAE101
                         _positionCursor.Y = _positionCursor.Y + 36;
                         _choixCursor = _choixCursor + 1;
                         _myGame.SetCoolDown();
-
                     }
 
                 }
                 else
                 {
-
                     if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < Chato_combat_contenu._nbEnnemy - 1 && _myGame._cooldownVerif == false)
                     {
                         _choixCursorD = _choixCursorD + 1;
@@ -638,7 +636,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
 
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);

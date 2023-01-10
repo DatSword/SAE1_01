@@ -38,12 +38,6 @@ namespace SAE101
 
         private AnimatedSprite _grand;
         private Vector2 _positionGrand;
-        private int _directionGrand;
-
-
-
-        public Chato_ext_cours_interieur(Game1 game) : base(game)
-
 
 
         public Chato_ext_cours(Game1 game) : base(game)
@@ -64,6 +58,7 @@ namespace SAE101
             Game1._numSalle = 2;
 
             _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
+
 
             base.Initialize();
         }
@@ -95,6 +90,7 @@ namespace SAE101
             //Camera
             Game1._camera.LookAt(_myGame._cameraPosition);
 
+            String animationGrand = null;
 
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
@@ -102,12 +98,12 @@ namespace SAE101
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
 
-            String animationGrand = null;
-            animationGrand = "idle_down";
+            animationGrand = "idle_up"; 
 
 
-            if (_myGame._cooldownVerif == false && Game1._positionPerso.X >= 20 && Game1._positionPerso.X <= 23 && Game1._positionPerso.Y == 34)
+            if (Game1._positionPerso.X >= 20 && Game1._positionPerso.X <= 23 && Game1._positionPerso.Y == 34)
             {
+                animationGrand = "idle_down";
                 _eventEtDial.Ninja();
             }
 

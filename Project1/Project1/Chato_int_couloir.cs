@@ -35,7 +35,6 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        private KeyboardState _keyboardState;
         public static int _vitessePerso;
         public static int _posX;
 

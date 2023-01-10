@@ -20,26 +20,40 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
-    internal class Chato_combat_contenu
+    public class Chato_combat_contenu : GameScreen
     {
-        public static int _nbAlly;
-        public static int _nbEnnemy;
 
-        public static String _special;
-        public static String _anim;
-        public static String[] _specialP;
-        public static String[] _descP;
-        public static String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
-        public static int _nbPersoJouable = 4;
-        public static String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
-        public static int _nbEnnJouable = 3;       
-        public static String[] _ordreJoueur;
-        public static String[] _ordreEnnemi;
-        public static int[] _stat; //PV, Attaque, Défense, Vitesse
+        // défini dans Game1
+        private new Game1 Game => (Game1)base.Game;
+        private Game1 _myGame;
 
-        public static void CombatTest()
+        public Chato_combat_contenu(Game1 game) : base(game)
         {
-            _nbAlly = 3;
+            _myGame = game;
+        }
+
+        public int _nbAlly;
+        public int _nbEnnemy;
+
+        public String _special;
+        public String _anim;
+        public String[] _specialP;
+        public String[] _descP;
+        public String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
+        public int _nbPersoJouable = 4;
+        public String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
+        public int _nbEnnJouable = 3;       
+        public String[] _ordreJoueur;
+        public String[] _ordreEnnemi;
+        public int[] _stat; //PV, Attaque, Défense, Vitesse
+
+        public Vector2 _lastPosition;
+
+        public void Combat()
+        {
+            _lastPosition = _myGame._positionPerso;
+
+            _nbAlly = 2;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 
             _nbEnnemy = 3;
@@ -47,7 +61,7 @@ namespace SAE101
         }
 
         //Personnages jouables
-        public static void Hein()
+        public void Hein()
         {
             _stat = new int[4] { 1, 1, 1, 1 };
             _anim = "anim/char/base_model_m/character_movement.sf";
@@ -55,24 +69,24 @@ namespace SAE101
             _specialP = new String[] { "_", "_", "_", "_" };
             _descP = new String[] { "_", "_", "_", "_" };
         }
-        public static void Hero()
+        public void Hero()
         {
-            _stat = new int[4] { 80, 50, 60, 70 };
+            _stat = new int[4] { 80, 100 ,60, 70 };//50
             _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
-            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
+            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour ", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 
         }
-        public static void Jon()
+        public void Jon()
         {
-            _stat = new int[4] { 100, 100, 40, 10 };
+            _stat = new int[4] { 100, 100, 40, 10 };//90
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Magie";
-            _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
-            _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
+            _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
+            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
-        public static void Ben()
+        public void Ben()
         {
             _stat = new int[4] { 50, 40, 90, 60 };
             _anim = "anim/char/base_model_m/character_movement.sf";
@@ -83,30 +97,41 @@ namespace SAE101
 
         //personnages non joueurs
 
-        public static void Grand()
+        public void Grand()
         {
-            _stat = new int[4] { 60, 20, 60, 100 };
+            _stat = new int[4] { 60, 0, 60, 100 };//20
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 
         }
-        public static void Mechant()
+        public void Mechant()
         {
-            _stat = new int[4] { 70, 70, 50, 50 };
+            _stat = new int[4] { 70, 0, 50, 50 };//70
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
-            _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
-            _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
+            _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
+            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
-        public static void Pabo()
+        public void Pabo()
         {
-            _stat = new int[4] { 70, 70, 50, 90 };
+            _stat = new int[4] { 70, 0, 50, 90 };//70
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
             String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
         }
+
+        public void Animation()
+        {
+
+        }
+
+        public override void Update(GameTime gameTime)
+        {        }
+
+        public override void Draw(GameTime gameTime)
+        {        }
     }
 }

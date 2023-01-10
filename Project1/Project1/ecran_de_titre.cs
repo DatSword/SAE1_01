@@ -18,7 +18,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace SAE101
 {
-    internal class Ecran_de_titre : GameScreen
+    public class Ecran_de_titre : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -28,31 +28,33 @@ namespace SAE101
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
         private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
 
-        // texture du menu avec 3 boutons
+        // texture menu
         private Texture2D _titleS;
         private Texture2D _start;
         private Texture2D _option;
         private Texture2D _quit;
-     
-        // contient les rectangles : position et taille des 3 boutons présents dans la texture 
-        private Rectangle[] lesBoutons;
+
+        // boutons 
+        public Rectangle[] lesBoutons;
 
         //Titre
         public SpriteFont _fontTitle;
 
-        public Ecran_de_titre(Game1 game) : base(game) 
+        public Ecran_de_titre(Game1 game) : base(game)
         {
             _myGame = game;
         }
 
         public override void Initialize()
         {
-            
+            _eventEtDial = _myGame._eventEtDial;
+
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3, 210, 63);
-            lesBoutons[1] = new Rectangle(Game1.xEcran / 2 - 210 / 2, (int)(Game1.yEcran / 3 * 1.5), 210, 63);
-            lesBoutons[2] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2, 210, 63);
+            lesBoutons[0] = new Rectangle(_myGame.xE / 2 - 210 / 2, _myGame.yE / 3 + 63, 210, 63);
+            lesBoutons[1] = new Rectangle(_myGame.xE / 2 - 210 / 2, (int)(_myGame.yE / 3 * 1.5 + 63), 210, 63);
+            lesBoutons[2] = new Rectangle(_myGame.xE / 2 - 210 / 2, _myGame.yE / 3 * 2 + 63, 210, 63);
 
             base.Initialize();
         }
@@ -74,6 +76,27 @@ namespace SAE101
         {
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1 + (63 * _myGame.chan) * _myGame.chan),
+                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
+
+            lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * _myGame.chan) * _myGame.chan),
+                (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
+
+            lesBoutons[2] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 2 + (63 * _myGame.chan) * _myGame.chan),
+                (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
+
+
+            for (int i = 0; i < lesBoutons.Length; i++)
+            {
+                if (i == 0)
+                    lesBoutons[i].Y = (int)(_myGame.yE / 3 * 1   + lesBoutons[i].Height);
+                else if (i == 1)
+                    lesBoutons[i].Y = (int)(_myGame.yE / 3 * 1.5 + lesBoutons[i].Height);
+                else
+                    lesBoutons[i].Y = (int)(_myGame.yE / 3 * 2   + lesBoutons[i].Height);
+            }
+
 
             //changements maps
 
@@ -97,37 +120,25 @@ namespace SAE101
 
                 }
             }
-
-            if (Game1.chan != 1)
-                for (int i = 0; i < lesBoutons.Length; i++)
-                {
-                    lesBoutons[i].Width *= (int) Game1.chan;
-                    lesBoutons[i].Height *= (int) Game1.chan;
-                }
-
-
-
-
-            /*if (keyboardState.IsKeyDown(Keys.Enter))
-            {
-                Game.LoadScreenblack_jack();
-            }*/
         }
 
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+            
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3), Color.White);
-            _spriteBatch.Draw(_option, new Vector2(Game1.xEcran / 2 - 210 / 2, (float)(Game1.yEcran / 3 * 1.5)), Color.White);
-            _spriteBatch.Draw(_quit, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2), Color.White);
+            _spriteBatch.Draw(_start, new Vector2(_myGame.xEcran / 2 - 210 / 2, _myGame.yEcran / 3 + 63), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(_myGame.xEcran / 2 - 210 / 2, (float)(_myGame.yEcran / 3 * 1.5 + 63)), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(_myGame.xEcran / 2 - 210 / 2, _myGame.yEcran / 3 * 2 + 63), Color.White);
+            
             _spriteBatch.End();
         }
     }
+
 
     internal record struct NewStruct(object Item1, int Item2)
     {

@@ -21,54 +21,76 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-    internal class Event_et_dial
+    public class Event_et_dial : GameScreen
     {
-        public static Texture2D _dialBox;
-        public static Vector2 _posDialBox;
-        public static String _text;
-        public static Vector2 _posText;
-        public static String _nom;
-        public static Vector2 _posNom;
-        public static bool _dialTrue;
-        public static Texture2D _choiceBox;
-        public static Vector2 _posChoiceBox;
-        public static Texture2D _cursor;
-        public static Vector2 _posCursor;
-        public static String _yes;
-        public static String _no;
-        public static Vector2 _posYes;
-        public static Vector2 _posNo;
-        public static bool _choiceTrue;
+        // défini dans Game1
+        private new Game1 Game => (Game1)base.Game;
+        private Game1 _myGame;
 
-        public static void toutDebut()
+        public Event_et_dial(Game1 game) : base(game)
         {
-            Game1.SetCoolDown();
+            _myGame = game;
+        }
+
+        public Texture2D _dialBox;
+        public Vector2 _posDialBox;
+        public String _text;
+        public Vector2 _posText;
+        public String _nom;
+        public Vector2 _posNom;
+        public bool _dialTrue;
+
+
+        public static int u;
+        public static int d;
+        public static int l;
+        public static int r;
+        public static int ud;
+        public static int dd;
+
+        //Boites de choix
+        public Texture2D _choiceBox;
+        public Vector2 _posChoiceBox;
+        public Texture2D _cursor;
+        public Vector2 _posCursor;
+        public String _yes;
+        public String _no;
+        public Vector2 _posYes;
+        public Vector2 _posNo;
+        public bool _choiceTrue;
+
+        public int _count = 0;
+
+        public void toutDebut()
+        {
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
                           "ENCORE LONGTEMPS?!";
-            _nom = "???";          
+            _nom = "???";
+            _count += 1;
         }
 
-        public static void Fren1()
+        public void Fren1()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = ":)";
             _nom = "Fren";
-            Game1._duck.Play();
+            _myGame._duck.Play();
         }
-        public static void Fren2()
+        public void Fren2()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = ":(";
             _nom = "Fren";
-            Game1._duck.Play();
+            _myGame._duck.Play();
         }
 
-        public static void Jon1()
+        public void Jon1()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
                     "tout le monde est déjà parti vers la salle du trône!\n" +
@@ -78,32 +100,47 @@ namespace SAE101
             _nom = "Jon";
         }
 
-        public static void Jon2()
+        public void Jon2()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
                     ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
             Game1._firstvisit = false;
         }
 
-        public static void Jon3()
+        public void Jon3()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
+            _dialTrue = true;
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
-
             _nom = "Jon";
         }
-        public static void FermeBoite()
+
+        public void Ninja()
         {
-            _dialTrue = false;
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Tu ne passera pas cet cour!\n" +
+                    "Du moins tant que je suis là.";
+
+            
+            _nom = "Ninja";
         }
 
-        public static void Fin1()
+
+
+
+        public void FermeBoite()
         {
-            Game1.SetCoolDown();
+            _dialTrue = false;
+            _myGame.SetCoolDown();
+        }
+
+        public void Fin1()
+        {
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _choiceTrue = true;
             _text = "Un lit décidemment très confortable. Voulez-vous\nvous rendormir?";
@@ -111,14 +148,32 @@ namespace SAE101
             _dialTrue = true;
         }
 
-        public static void Update(GameTime gameTime)
+        public void SetCollision()
         {
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _myGame.mapLayer = _myGame._tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            _myGame.mapLayerDoor = _myGame._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
+        }
+        public void BoiteDialogues()
+        {
+            //float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             KeyboardState _keyboardState = Keyboard.GetState();
-            if (_keyboardState.IsKeyDown(Keys.O))
-                Game1._duck.Play();
-                
+            u = _myGame.mapLayer.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight - 1)).GlobalIdentifier;
+            d = _myGame.mapLayer.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight + 1)).GlobalIdentifier;
+            l = _myGame.mapLayer.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth - 1), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight)).GlobalIdentifier;
+            r = _myGame.mapLayer.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth + 1), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight)).GlobalIdentifier;
+            dd = _myGame.mapLayerDoor.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight + 1)).GlobalIdentifier;
+            ud = _myGame.mapLayerDoor.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight - 1)).GlobalIdentifier;
+
+            Console.WriteLine("r = " + r);
+            Console.WriteLine("u = " + u);
+            Console.WriteLine("d = " + d);
+            Console.WriteLine("l = " + l);
+            Console.WriteLine("ud = " + ud);
+            Console.WriteLine("dd = " + dd);
         }
 
-       }
+        public override void Update(GameTime gameTime) {   }
+
+        public override void Draw(GameTime gameTime) {  }
+    }
 }

@@ -20,79 +20,104 @@ namespace SAE101
 {
     public class Game1 : Game
     {
-        //honnêtement j'en sais r
+        //Graphique
         private GraphicsDeviceManager _graphics;
-        public static SpriteBatch _spriteBatch;
+        public SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
-        public static KeyboardState _keyboardState;
+        public KeyboardState _keyboardState;
 
+        // on définit écrans
+        public Ecran_de_titre _ecranDeTitre;
+        public Black_jack _blackJack;
+        public Event_et_dial _eventEtDial;
+        public Joueur _joueur;
+        public Chato_int_couloir _chatoIntCouloir;
+        public Chato_int_chambres _chatoIntChambres;
+        public Chato_ext_cours _chatoExtCours;
+        public Chato_combat_contenu _chatoCombatContenu;
+        public Chato_combat _chatoCombat;
+        public Option _option;
 
-        // on définit les différents états possibles du jeu ( à compléter) 
+        //Ecran interactif
+        // états du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
-
-        // on définit un champ pour stocker l'état en cours du jeu
+        // stocker l'état en cours du jeu
         private Etats etat;
 
-        // on définit  2 écrans ( à compléter )
-        private Ecran_de_titre _ecranDeTitre;
-        private Black_jack _blackJack;
-
         //Ecran
-        public static int xEcran;
-        public static int yEcran;
-        public static int changement0 = 1;
-        public static double changement1 = 1.5;
-        public static int changement2 = 2;
-        public static double chan = 1;
+        public int xEcran;
+        public int yEcran;
+
+        public int xE;
+        public int yE;
+
+        public double chan = 1;
 
         //Camera
-        public static OrthographicCamera _camera;
-        public static OrthographicCamera _cameraDial;
-        public static Vector2 _cameraPosition;
-        public static int _numEcran;
+        public OrthographicCamera _camera;
+        public OrthographicCamera _cameraDial;
+        public Vector2 _cameraPosition;
+        public int _numEcran;
 
         //Musiques
         private Song _songChato;
         private Song _titleTheme;
-        public static Song _songCombat;
-        public static Song _songDodo;
+        public Song _songCombat;
+        public Song _songDodo;
 
         //ZoneMusique
         private bool _chato;
-        private bool _chatoCombat;
+        private bool _combatChato;
         private bool _ecranTitre;
 
         //SFX
-        public static SoundEffect _hit;
-        public static SoundEffect _hit2;
-        public static SoundEffect _lose;
-        public static SoundEffect _macron_1;
-        public static SoundEffect _menu;
-        public static SoundEffect _non;
-        public static SoundEffect _pelo;
-        public static SoundEffect _vic;
-        public static SoundEffect _duck;
-        public static SoundEffect _wbeg;
-        public static SoundEffect _wend;
-        public static SoundEffect _toink;
+        public SoundEffect _hit;
+        public SoundEffect _hit2;
+        public SoundEffect _lose;
+        public SoundEffect _macron_1;
+        public SoundEffect _menu;
+        public SoundEffect _non;
+        public SoundEffect _pelo;
+        public SoundEffect _vic;
+        public SoundEffect _duck;
+        public SoundEffect _wbeg;
+        public SoundEffect _wend;
+        public SoundEffect _toink;
+        public SoundEffect _death;
 
         //Combat?
         private bool _combatTest;
+        public bool _combatFini;
 
-        //Control cooldown
-        public static float _cooldown;
-        public static bool _cooldownVerif;
-        public static float deltaSeconds;
-        //Combat cooldown
-        public static float _cooldownC;
-        public static bool _cooldownVerifC;
+        //Control cooldown 0.2s
+        public float _cooldown;
+        public bool _cooldownVerif;
+        public float deltaSeconds;
+        //Combat cooldown 0.5s
+        public float _cooldownC;
+        public bool _cooldownVerifC;
+        //Combat cooldown 5.0s
+        public float _cooldownF;
+        public bool _cooldownVerifF;
 
         //font
-        public static SpriteFont _font;
+        public SpriteFont _font;
 
         //event
         public static bool _firstvisit;
         public static int _fin;
+
+        //pour évènements et déplacementss
+        public float _walkSpeed;
+        public float _speed;
+        public TiledMap _tiledMap;
+        public Vector2 _positionPerso;
+        public TiledMapTileLayer mapLayer;
+        public int _stop;
+        public String _animationPlayer;
+        public TiledMapTileLayer mapLayerDoor;
+        public int _numSalle;
+        //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat
         {
@@ -115,21 +140,35 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            xEcran = 514; //768
-            yEcran = 448; //672
+            xEcran = 514;
+            yEcran = 448;
+            xE = xEcran;
+            yE = yEcran;
+            
 
             _graphics.PreferredBackBufferWidth = xEcran;
             _graphics.PreferredBackBufferHeight = yEcran;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
-
-            // Par défaut, le 1er état flèche l'écran de menu
-            Etat = Etats.Menu;
-            // on charge les 2 écrans 
+            // variables écran
             _ecranDeTitre = new Ecran_de_titre(this);
+            _eventEtDial = new Event_et_dial(this);
             _blackJack = new Black_jack(this);
+            _chatoIntCouloir = new Chato_int_couloir(this);
+            _chatoIntChambres = new Chato_int_chambres(this);
+            _chatoExtCours = new Chato_ext_cours(this);
+            _joueur = new Joueur(this);
+            _chatoCombatContenu = new Chato_combat_contenu(this);
+            _chatoCombat = new Chato_combat(this);
+            _option = new Option(this);
 
+            Etat = Etats.Menu;
+
+            //Zone jeu
+            _chato = false;
+            _ecranTitre = false;
+            _combatChato = false;
 
             //Camera
 
@@ -139,21 +178,21 @@ namespace SAE101
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
             _cameraDial = new OrthographicCamera(viewportadapterDial);
 
-            _cameraPosition = Chato_int_chambres_nord._chambreCentre1;
+            _cameraPosition = _chatoIntChambres._chambreCentre1;
             _numEcran = 1;
 
 
             //Dialogue
-            Event_et_dial._posText = new Vector2(105, 360);
-            Event_et_dial._posNom = new Vector2(25, 360);
-            Event_et_dial._posDialBox = new Vector2(0, 348);
-            Event_et_dial._dialTrue = false;
-            Event_et_dial._posChoiceBox = new Vector2(450, 284);
-            Event_et_dial._posCursor = new Vector2(430, 316);
-            Event_et_dial._posYes = new Vector2(470, 300);
-            Event_et_dial._posNo = new Vector2(470, 315);
-            Event_et_dial._yes = "oui";
-            Event_et_dial._no = "non";
+            _eventEtDial._posText = new Vector2(105, 360);
+            _eventEtDial._posNom = new Vector2(25, 360);
+            _eventEtDial._posDialBox = new Vector2(0, 348);
+            _eventEtDial._dialTrue = false;
+            _eventEtDial._posChoiceBox = new Vector2(450, 284);
+            _eventEtDial._posCursor = new Vector2(430, 316);
+            _eventEtDial._posYes = new Vector2(470, 300);
+            _eventEtDial._posNo = new Vector2(470, 315);
+            _eventEtDial._yes = "oui";
+            _eventEtDial._no = "non";
 
 
             //Combat?
@@ -162,6 +201,9 @@ namespace SAE101
             //event
             _firstvisit = true;
             _fin = 0;
+            _speed = 100;
+            _animationPlayer = "idle_down";
+            
 
             base.Initialize();
         }
@@ -190,14 +232,17 @@ namespace SAE101
             _wbeg = Content.Load<SoundEffect>("sfx/wbeg");
             _wend = Content.Load<SoundEffect>("sfx/wend");
             _toink = Content.Load<SoundEffect>("sfx/toink");
+            _death = Content.Load<SoundEffect>("sfx/death");
 
             //Boite de dialogue
-            Event_et_dial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
-            Event_et_dial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
-            Event_et_dial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
+            _eventEtDial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
+            _eventEtDial._choiceBox = Content.Load<Texture2D>("img/dialogue/choice_box");
+            _eventEtDial._cursor = Content.Load<Texture2D>("img/dialogue/cursor");
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
+
+
 
             // on charge l'écran de menu par défaut 
             LoadScreenecran_de_titre();
@@ -208,12 +253,12 @@ namespace SAE101
 
         protected override void Update(GameTime gameTime)
         {
-            //Mannette?
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             _keyboardState = Keyboard.GetState();
             deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (_keyboardState.IsKeyDown(Keys.Escape))
+                Exit();
+
 
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
@@ -229,7 +274,7 @@ namespace SAE101
                     LoadScreenoption();
 
                 else
-                    Console.WriteLine("STOP");
+                    Console.WriteLine("");
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.X))
@@ -264,101 +309,84 @@ namespace SAE101
                 if (_cooldownC <= 0)
                     _cooldownVerifC = false;
             }
+
+            if (_cooldownVerifF == true)
+            {
+                _cooldownF = _cooldownF - deltaSeconds;
+                if (_cooldownF <= 0)
+                    _cooldownVerifF = false;
+            }
             //Console.WriteLine(_cooldownVerifC);
             //Console.WriteLine(_cooldownC);
 
-            if (_keyboardState.IsKeyDown(Keys.E))
-            {
-                _graphics.PreferredBackBufferWidth = 514;
-                _graphics.PreferredBackBufferHeight = 448;
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                chan = changement0;
-                _graphics.ApplyChanges();
-            }
-            if (_keyboardState.IsKeyDown(Keys.D))
-            {
-                _graphics.PreferredBackBufferWidth = (int)(xEcran * changement1);
-                _graphics.PreferredBackBufferHeight = (int)(yEcran * changement1);
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                chan = changement1;
-                _graphics.ApplyChanges();
-            }
-            if (_keyboardState.IsKeyDown(Keys.F))
-            {
-                _graphics.PreferredBackBufferWidth = xEcran * changement2;
-                _graphics.PreferredBackBufferHeight = yEcran * changement2;
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                chan = changement2;
-                _graphics.ApplyChanges();
-            }
 
             //Camera
 
             // chambres nord
-            if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
-                                && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentre1;
+            if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
+                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1
+                                && _positionPerso.X < _chatoIntChambres._limiteChambreGauche)
+                _cameraPosition = _chatoIntChambres._chambreCentre1;
 
-            else if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentreUn;
+            else if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
+                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1)
+                _cameraPosition = _chatoIntChambres._chambreCentreUn;
 
-            else if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1
-                                && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreDroite)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentreDeux;
+            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limiteChambreX2
+                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1
+                                && _positionPerso.X > _chatoIntChambres._limiteChambreDroite)
+                _cameraPosition = _chatoIntChambres._chambreCentreDeux;
 
-            else if (_numEcran == 1 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2 
-                                && Chato_int_chambres_nord._positionPerso.Y < Chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentre2;
+            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limiteChambreX2 
+                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1)
+                _cameraPosition = _chatoIntChambres._chambreCentre2;
 
-            else if (_numEcran == 1 && Chato_int_chambres_couloir._positionPerso.Y >= Chato_int_chambres_couloir._limiteCouloirY1)
-                _cameraPosition = new Vector2(Chato_int_chambres_couloir._positionPerso.X, Chato_int_chambres_couloir._positionPerso.Y);
+            else if (_numEcran == 1 && _positionPerso.Y >= _chatoIntCouloir._limiteCouloirY1)
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
 
             // couloir
-            if (_numEcran == 2 && (Chato_int_chambres_couloir._positionPerso.Y > 0
-                                && (Chato_int_chambres_couloir._positionPerso.X > Chato_int_chambres_couloir._limiteChambreX1 || 
-                                Chato_int_chambres_couloir._positionPerso.X < Chato_int_chambres_couloir._limiteChambreX2)))
-                _cameraPosition = new Vector2(Chato_int_chambres_couloir._positionPerso.X, Chato_int_chambres_couloir._positionPerso.Y);
+            if (_numEcran == 2 && (_positionPerso.Y > 0
+                                && (_positionPerso.X > _chatoIntCouloir._limiteChambreX1 ||
+                                _positionPerso.X < _chatoIntCouloir._limiteChambreX2)))
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1
-                                && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreGauche
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentre1;
+            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
+                                && _positionPerso.X < _chatoIntChambres._limiteChambreGauche
+                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+                _cameraPosition = _chatoIntChambres._chambreCentre1;
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreX1 
-                                && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreGauche
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentreUn;
+            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limiteChambreX1 
+                                && _positionPerso.X > _chatoIntChambres._limiteChambreGauche
+                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+                _cameraPosition = _chatoIntChambres._chambreCentreUn;
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
-                                && Chato_int_chambres_nord._positionPerso.X < Chato_int_chambres_nord._limiteChambreDroite
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentre2;
+            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limiteChambreX2
+                                && _positionPerso.X < _chatoIntChambres._limiteChambreDroite
+                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+                _cameraPosition = _chatoIntChambres._chambreCentre2;
 
-            else if (_numEcran == 2 && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreX2
-                                && Chato_int_chambres_nord._positionPerso.X > Chato_int_chambres_nord._limiteChambreDroite
-                                && Chato_int_chambres_nord._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
-                _cameraPosition = Chato_int_chambres_nord._chambreCentreDeux;
+            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limiteChambreX2
+                                && _positionPerso.X > _chatoIntChambres._limiteChambreDroite
+                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+                _cameraPosition = _chatoIntChambres._chambreCentreDeux;
 
-            else if (_numEcran == 2 && Chato_ext_cours_interieur._positionPerso.Y > 49*16)
-                _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
+            else if (_numEcran == 2 && _positionPerso.Y > 49*16)
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // cours
-            else if (_numEcran == 3 & Chato_int_chambres_nord._positionPerso.Y >= 1 * 16)
-                _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
+            else if (_numEcran == 3 & _positionPerso.Y >= 1 * 16)
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            else if (_numEcran == 3 && Chato_int_chambres_nord._positionPerso.Y < 1*16 )
-                _cameraPosition = new Vector2(Chato_ext_cours_interieur._positionPerso.X, Chato_ext_cours_interieur._positionPerso.Y);
+            else if (_numEcran == 3 && _positionPerso.Y < 1*16 )
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // combat
             else if (_numEcran == 4)
-                _cameraPosition = Chato_combat._centreCombat;
+                _cameraPosition = _chatoCombat._centreCombat;
 
-
-
+            _walkSpeed = _speed * deltaSeconds;
+            Console.WriteLine(_chatoIntChambres._posX);
             base.Update(gameTime);
         }
 
@@ -374,73 +402,125 @@ namespace SAE101
         //Chargements maps
         public void LoadScreenecran_de_titre()
         {
-            _screenManager.LoadScreen(new Ecran_de_titre(this), new FadeTransition(GraphicsDevice, Color.LightGray));
-            _ecranTitre = true;
+            _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.LightGray));
+            MusiqueTitre();
             this.Etat = Etats.Menu;
         }
 
         public void LoadScreenoption()
         {
-            _screenManager.LoadScreen(new Option(this), new FadeTransition(GraphicsDevice, Color.LightGray));
+            _screenManager.LoadScreen(_option, new FadeTransition(GraphicsDevice, Color.LightGray));
+            MusiqueTitre();
             this.Etat = Etats.Option;
-            _ecranTitre = true;
         }
 
         public void LoadScreenblack_jack()
         {
             MediaPlayer.Stop();
             _ecranTitre = false;
-            _screenManager.LoadScreen(new Black_jack(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_blackJack, new FadeTransition(GraphicsDevice, Color.Black));
             this.Etat = Etats.Play;
         }
 
         public void LoadScreenchato_int_chambres_nord()
         {
-            _screenManager.LoadScreen(new Chato_int_chambres_nord(this), new FadeTransition(GraphicsDevice, Color.Black));
-            _chato = true;
+            _screenManager.LoadScreen(_chatoIntChambres, new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
+            this.Etat = Etats.Play;
+            _ecranTitre =false;
             _numEcran = 1;
-            _chatoCombat = false;
+            _combatChato = false;
         }
 
         public void LoadScreenchato_int_chambres_couloir()
         {
-            _screenManager.LoadScreen(new Chato_int_chambres_couloir(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_chatoIntCouloir, new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
+            this.Etat = Etats.Play;
             _numEcran = 2;
-            _chato = true;
-            _chatoCombat = false;
+            _combatChato = false;
         }
 
         public void LoadScreenchato_ext_cours_interieur()
         {
-            _screenManager.LoadScreen(new Chato_ext_cours_interieur(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_chatoExtCours, new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
+            this.Etat = Etats.Play;
             _numEcran = 3;
-            _chato = true;
-            _chatoCombat = false;
+            _combatChato = false;
         }
 
         public void LoadScreenchato_combat()
         {
             MediaPlayer.Stop();
-            _screenManager.LoadScreen(new Chato_combat(this), new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_chatoCombat, new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChatoCombat();
             MediaPlayer.Play(_songCombat);
+            this.Etat = Etats.Play;
             _numEcran = 4;
             _chato = false;
-            _chatoCombat = true;
+            _combatChato = true;
         }
 
         //autre
-
-        public static void SetCoolDown()
+        public void SetCoolDown()
         {
             _cooldownVerif = true;
             _cooldown = 0.2f;
             _menu.Play();
         }
 
-        public static void SetCoolDownCombat()
+        public void SetCoolDownCombat()
         {
             _cooldownVerifC = true;
             _cooldownC = 0.5f;
+        }
+
+        public void SetCoolDownFive()
+        {
+            _cooldownVerifF = true;
+            _cooldownF = 5.0f;
+        }
+
+        public void MusiqueChatoCombat()
+        {
+            if (_combatChato == false)
+            {
+                MediaPlayer.Stop();
+                _combatChato = true;
+                MediaPlayer.Play(_songCombat);
+            }
+        }
+
+        public void MusiqueChato()
+        {
+            if (_chato == false)
+            {
+                MediaPlayer.Stop();
+                _chato = true;
+                MediaPlayer.Play(_songChato);
+            }
+        }
+
+        public void MusiqueTitre()
+        {
+            if (_ecranTitre == false)
+            {
+                MediaPlayer.Stop();
+                _ecranTitre = true;
+                MediaPlayer.Play(_titleTheme);
+            }
+        }
+
+        public void ChangementEcran(double changement)
+        {
+            _graphics.PreferredBackBufferWidth = (int)(xEcran * changement);
+            _graphics.PreferredBackBufferHeight = (int)(yEcran * changement);
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            xE = (int)(xEcran * changement);
+            yE = (int)(yEcran * changement);
+            chan = changement;
+            _graphics.ApplyChanges();
         }
     }
 }

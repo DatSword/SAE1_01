@@ -51,7 +51,7 @@ namespace SAE101
         public static double chan = 1;
 
         //Camera
-        public static OrthographicCamera _camera;
+        public OrthographicCamera _camera;
         public static OrthographicCamera _cameraDial;
         public static Vector2 _cameraPosition;
         public static int _numEcran;
@@ -93,7 +93,7 @@ namespace SAE101
         public static bool _cooldownVerifC;
 
         //font
-        public static SpriteFont _font;
+        public SpriteFont _font;
 
         //event
         public static bool _firstvisit;

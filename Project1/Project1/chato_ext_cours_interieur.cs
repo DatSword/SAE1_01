@@ -95,7 +95,7 @@ namespace SAE101
             _sensPersoY = 0;
 
             //Camera
-            Game1._camera.LookAt(Game1._cameraPosition);
+            _myGame._camera.LookAt(Game1._cameraPosition);
 
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
@@ -175,9 +175,9 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
             _spriteBatch.End();
 
@@ -186,8 +186,8 @@ namespace SAE101
             if (_eventEtDial._dialTrue == true)
             {
                 _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

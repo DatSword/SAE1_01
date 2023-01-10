@@ -107,17 +107,17 @@ namespace SAE101
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)
-            _spriteBatch.DrawString(Game1._font, _text , _textPos, Color.White);
+            _spriteBatch.DrawString(_myGame._font, _text , _textPos, Color.White);
 
             if (_eventEtDial._dialTrue == true)
             {
                 _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

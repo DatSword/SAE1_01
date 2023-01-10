@@ -103,40 +103,33 @@ namespace SAE101
             }
 
             if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40)
-            {
                 _myGame.ChangementEcran(1);
-            }
             else if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40 + _espaceText)
-            {
                 _myGame.ChangementEcran(1.5);
-            }
             else if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40 + _espaceText * 2)
-            {
                 _myGame.ChangementEcran(2);
-            }
-
         }
 
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(10, 0), Color.Gray);
             _spriteBatch.Draw(_optBox, _posOptBox, Color.White);
+            _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
 
             for (int i = 0; i < _textOpt.Length; i++)
-                _spriteBatch.DrawString(Game1._font, _textOpt[i], _posTextOpt[i], Color.White);
+                _spriteBatch.DrawString(_myGame._font, _textOpt[i], _posTextOpt[i], Color.White);
+
             for (int j = 0; j < _touchesOpt.Length; j++)
                 _spriteBatch.Draw(_touchesOpt[j], _posTouches[j], Color.White);
 
-            _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
-
             for (int k = 0; k < _textResEcran.Length; k++)
-                _spriteBatch.DrawString(Game1._font, _textResEcran[k], _posTextResEcran[k], Color.White);
+                _spriteBatch.DrawString(_myGame._font, _textResEcran[k], _posTextResEcran[k], Color.White);
 
             _spriteBatch.End();
 

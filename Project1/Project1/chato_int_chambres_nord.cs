@@ -29,6 +29,9 @@ namespace SAE101
         public static TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
 
+        // défini dans Game1
+        private Game1 _myGame;
+
         //sprites
         private AnimatedSprite _perso;
         public static Vector2 _positionPerso;
@@ -66,7 +69,10 @@ namespace SAE101
 
         int numDial;
 
-        public Chato_int_chambres_nord(Game1 game) : base(game) { }
+        public Chato_int_chambres_nord(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
@@ -215,27 +221,27 @@ namespace SAE101
 
             if(Event_et_dial._choiceTrue == true)
             {
-                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && Game1._cooldownVerif == false)
+                if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Event_et_dial._posCursor = new Vector2(430, 301);
                 }
-                else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Event_et_dial._posCursor = new Vector2(430, 301);
                 }
-                Console.WriteLine(Game1._cooldownVerif);
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                Console.WriteLine(_myGame._cooldownVerif);
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Game1._fin = 1;
                     Game.LoadScreenblack_jack();
                     
                 }
-                if ((keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false)
+                if ((keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || keyboardState.IsKeyDown(Keys.X) && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Event_et_dial._choiceTrue = false;
                     Event_et_dial._dialTrue = false;
                 }
@@ -251,17 +257,17 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && _myGame._cooldownVerif == false && Event_et_dial._dialTrue == true)
             {
                 Event_et_dial.FermeBoite();
             }
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && Game1._cooldownVerif == false
+            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
                 && _positionPerso.X < _limiteChambreDroite)
             {
                 Event_et_dial.Fren1();
                 _frenTrue = true;
             }        
-            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
+            else if (keyboardState.IsKeyDown(Keys.W) && (b == 70) && animationFren == "hi" && _myGame._cooldownVerif == false)
             {
                 Event_et_dial.Fren2();
                 _frenTrue = false;
@@ -287,19 +293,19 @@ namespace SAE101
 
             //EVENEMENTS
             
-            if(Game1._firstvisit == true && Game1._cooldownVerif == false && numDial == 0)
+            if(Game1._firstvisit == true && _myGame._cooldownVerif == false && numDial == 0)
             {
                 Event_et_dial.Jon1();
                 Game1._firstvisit = false;
                 numDial = 1;
                 _stop = 4;
             }
-            if (Game1._cooldownVerif == false && keyboardState.IsKeyDown(Keys.W) && numDial == 1)
+            if (_myGame._cooldownVerif == false && keyboardState.IsKeyDown(Keys.W) && numDial == 1)
             {
                 Event_et_dial.Jon2();
                 numDial = 2;
             }
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false &&  numDial == 2)
+            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false &&  numDial == 2)
             {
                 Event_et_dial.FermeBoite();
                 numDial = 3;
@@ -307,7 +313,7 @@ namespace SAE101
 
             //DODO
 
-            if (keyboardState.IsKeyDown(Keys.W) && (b == 72) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false && Game1._cooldownVerif == false)
+            if (keyboardState.IsKeyDown(Keys.W) && (b == 72) && _myGame._cooldownVerif == false && Event_et_dial._dialTrue == false && _myGame._cooldownVerif == false)
             {
                 //Event_et_dial.Fin1();
                 Game1._fin = 1;

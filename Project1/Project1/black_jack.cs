@@ -87,14 +87,14 @@ namespace SAE101
                 _text = "";
 
 
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && Event_et_dial._dialTrue == false)
             {
                 Game1._fin = 1;
                 Game1._toink.Play();
                 Event_et_dial.toutDebut();
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == true)
+            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && Event_et_dial._dialTrue == true)
             {
                 Event_et_dial.FermeBoite();
                 Game.LoadScreenchato_int_chambres_nord();              

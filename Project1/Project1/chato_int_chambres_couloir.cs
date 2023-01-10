@@ -20,6 +20,9 @@ namespace SAE101
 {
     public class Chato_int_chambres_couloir : GameScreen
     {
+        // défini dans Game1
+        private Game1 _myGame;
+
         //map
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;

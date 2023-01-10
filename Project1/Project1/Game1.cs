@@ -81,7 +81,7 @@ namespace SAE101
 
         //Control cooldown
         public static float _cooldown;
-        public static bool _cooldownVerif;
+        public bool _cooldownVerif;
         public static float deltaSeconds;
         //Combat cooldown
         public static float _cooldownC;
@@ -229,7 +229,7 @@ namespace SAE101
                     LoadScreenoption();
 
                 else
-                    Console.WriteLine("STOP");
+                    Console.WriteLine("");
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.X))
@@ -266,31 +266,6 @@ namespace SAE101
             }
             //Console.WriteLine(_cooldownVerifC);
             //Console.WriteLine(_cooldownC);
-
-            if (_keyboardState.IsKeyDown(Keys.E))
-            {
-                _graphics.PreferredBackBufferWidth = 514;
-                _graphics.PreferredBackBufferHeight = 448;
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                chan = changement0;
-                _graphics.ApplyChanges();
-            }
-            if (_keyboardState.IsKeyDown(Keys.D))
-            {
-                _graphics.PreferredBackBufferWidth = (int)(xEcran * changement1);
-                _graphics.PreferredBackBufferHeight = (int)(yEcran * changement1);
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                chan = changement1;
-                _graphics.ApplyChanges();
-            }
-            if (_keyboardState.IsKeyDown(Keys.F))
-            {
-                _graphics.PreferredBackBufferWidth = xEcran * changement2;
-                _graphics.PreferredBackBufferHeight = yEcran * changement2;
-                GraphicsDevice.BlendState = BlendState.AlphaBlend;
-                chan = changement2;
-                _graphics.ApplyChanges();
-            }
 
             //Camera
 
@@ -429,8 +404,7 @@ namespace SAE101
         }
 
         //autre
-
-        public static void SetCoolDown()
+        public void SetCoolDown()
         {
             _cooldownVerif = true;
             _cooldown = 0.2f;
@@ -441,6 +415,15 @@ namespace SAE101
         {
             _cooldownVerifC = true;
             _cooldownC = 0.5f;
+        }
+
+        public void ChangementEcran(double changement)
+        {
+            _graphics.PreferredBackBufferWidth = (int)(xEcran * changement);
+            _graphics.PreferredBackBufferHeight = (int)(yEcran * changement);
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            chan = changement1;
+            _graphics.ApplyChanges();
         }
     }
 }

@@ -28,6 +28,9 @@ namespace SAE101
         private TiledMapRenderer _tiledMapRenderer;
         public static TiledMapTileLayer mapLayer;
 
+        // défini dans Game1
+        private Game1 _myGame;
+
         //sprite
         private AnimatedSprite _perso;
         //public static Vector2 _positionPerso;
@@ -38,7 +41,10 @@ namespace SAE101
         public static int _posX;
         private int _stop;
 
-        public Chato_ext_cours_interieur(Game1 game) : base(game) { }
+        public Chato_ext_cours_interieur(Game1 game) : base(game)
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {

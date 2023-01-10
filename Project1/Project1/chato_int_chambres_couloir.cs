@@ -20,6 +20,10 @@ namespace SAE101
 {
     public class Chato_int_chambres_couloir : GameScreen
     {
+        // défini dans Game1
+        private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
+
         //map
         private new Game1 Game => (Game1)base.Game;
         private GraphicsDeviceManager _graphics;
@@ -44,10 +48,15 @@ namespace SAE101
         public static int _limiteCouloirY1;
         public static int _limiteCouloirY2;
 
-        public Chato_int_chambres_couloir(Game1 game) : base(game) { }
+        public Chato_int_chambres_couloir(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
+
             // Lieu Spawn
             _posX = 0;
 
@@ -127,11 +136,11 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Event_et_dial._dialTrue == true)
+            if (_eventEtDial._dialTrue == true)
             {
-                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
+                _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

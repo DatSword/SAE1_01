@@ -29,6 +29,10 @@ namespace SAE101
         public static TiledMapTileLayer mapLayer;
         private TiledMapTileLayer mapLayerIntersect;
 
+        // défini dans Game1
+        private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
+
         //sprites
         private AnimatedSprite _perso;
         //public static Vector2 _positionPerso;
@@ -66,10 +70,15 @@ namespace SAE101
 
         int numDial;
 
-        public Chato_int_chambres_nord(Game1 game) : base(game) { }
+        public Chato_int_chambres_nord(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
+
             // Lieu Spawn perso
             _posX = 0;
             numDial = 0;
@@ -158,22 +167,22 @@ namespace SAE101
                 }
                 else if (_keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && Game1._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
-                    Event_et_dial._posCursor = new Vector2(430, 301);
+                    _myGame.SetCoolDown();
+                    _eventEtDial._posCursor = new Vector2(430, 301);
                 }
-                Console.WriteLine(Game1._cooldownVerif);
-                if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false)
+                Console.WriteLine(_myGame._cooldownVerif);
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Game1._fin = 1;
                     Game.LoadScreenblack_jack();
                     
                 }
-                if ((_keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || _keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false)
+                if ((keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || keyboardState.IsKeyDown(Keys.X) && _myGame._cooldownVerif == false)
                 {
-                    Game1.SetCoolDown();
-                    Event_et_dial._choiceTrue = false;
-                    Event_et_dial._dialTrue = false;
+                    _myGame.SetCoolDown();
+                    _eventEtDial._choiceTrue = false;
+                    _eventEtDial._dialTrue = false;
                 }
             }
 
@@ -189,17 +198,17 @@ namespace SAE101
 
             if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && Game1._cooldownVerif == false && Event_et_dial._dialTrue == true)
             {
-                Event_et_dial.FermeBoite();
+                _eventEtDial.FermeBoite();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationFren == "idle" && Game1._cooldownVerif == false
                 && Game1._positionPerso.X < _limiteChambreDroite)
             {
-                Event_et_dial.Fren1();
+                _eventEtDial.Fren1();
                 _frenTrue = true;
             }        
             else if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.u == 70) && animationFren == "hi" && Game1._cooldownVerif == false)
             {
-                Event_et_dial.Fren2();
+                _eventEtDial.Fren2();
                 _frenTrue = false;
             }
             _fren.Play(animationFren);
@@ -223,21 +232,21 @@ namespace SAE101
 
             //EVENEMENTS
             
-            if(Game1._firstvisit == true && Game1._cooldownVerif == false && numDial == 0)
+            if(Game1._firstvisit == true && _myGame._cooldownVerif == false && numDial == 0)
             {
-                Event_et_dial.Jon1();
+                _eventEtDial.Jon1();
                 Game1._firstvisit = false;
                 numDial = 1;
                 _stop = 4;
             }
             if (Game1._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
             {
-                Event_et_dial.Jon2();
+                _eventEtDial.Jon2();
                 numDial = 2;
             }
             if (_keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false &&  numDial == 2)
             {
-                Event_et_dial.FermeBoite();
+                _eventEtDial.FermeBoite();
                 numDial = 3;
             }
 
@@ -274,19 +283,19 @@ namespace SAE101
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Event_et_dial._dialTrue == true)
+            if (_eventEtDial._dialTrue == true)
             {
-                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
+                _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
+                _spriteBatch.DrawString(Game1._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
+                _spriteBatch.DrawString(Game1._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
                 
             }
-            if (Event_et_dial._choiceTrue == true)
+            if (_eventEtDial._choiceTrue == true)
             {
-                _spriteBatch.Draw(Event_et_dial._choiceBox, Event_et_dial._posChoiceBox, Color.White);
-                _spriteBatch.Draw(Event_et_dial._cursor, Event_et_dial._posCursor, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._yes, Event_et_dial._posYes, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._no, Event_et_dial._posNo, Color.White);
+                _spriteBatch.Draw(_eventEtDial._choiceBox, _eventEtDial._posChoiceBox, Color.White);
+                _spriteBatch.Draw(_eventEtDial._cursor, _eventEtDial._posCursor, Color.White);
+                _spriteBatch.DrawString(Game1._font, _eventEtDial._yes, _eventEtDial._posYes, Color.White);
+                _spriteBatch.DrawString(Game1._font, _eventEtDial._no, _eventEtDial._posNo, Color.White);
             }
             _spriteBatch.End();
         }

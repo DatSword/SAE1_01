@@ -21,16 +21,24 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-    internal class Event_et_dial
+    public class Event_et_dial : GameScreen
     {
-        //Boites de dialogues
-        public static Texture2D _dialBox;
-        public static Vector2 _posDialBox;
-        public static String _text;
-        public static Vector2 _posText;
-        public static String _nom;
-        public static Vector2 _posNom;
-        public static bool _dialTrue;
+        // défini dans Game1
+        private new Game1 Game => (Game1)base.Game;
+        private Game1 _myGame;
+
+        public Event_et_dial(Game1 game) : base(game)
+        {
+            _myGame = game;
+        }
+
+        public Texture2D _dialBox;
+        public Vector2 _posDialBox;
+        public String _text;
+        public Vector2 _posText;
+        public String _nom;
+        public Vector2 _posNom;
+        public bool _dialTrue;
 
         //Boites de choix
         public static Texture2D _choiceBox;
@@ -49,36 +57,46 @@ namespace SAE101
         public static int r;
         public static int ud;
         public static int dd;
+        public Texture2D _choiceBox;
+        public Vector2 _posChoiceBox;
+        public Texture2D _cursor;
+        public Vector2 _posCursor;
+        public String _yes;
+        public String _no;
+        public Vector2 _posYes;
+        public Vector2 _posNo;
+        public bool _choiceTrue;
 
-        public static void toutDebut()
+
+        public void toutDebut()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
                           "ENCORE LONGTEMPS?!";
             _nom = "???";          
         }
 
-        public static void Fren1()
+        public void Fren1()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = ":)";
             _nom = "Fren";
             Game1._duck.Play();
         }
-        public static void Fren2()
+        public void Fren2()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = ":(";
             _nom = "Fren";
             Game1._duck.Play();
         }
 
-        public static void Jon1()
+        public void Jon1()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Ah voilà, enfin réveillé, désolé d'avoir hurler mais\n" +
                     "tout le monde est déjà parti vers la salle du trône!\n" +
@@ -88,32 +106,32 @@ namespace SAE101
             _nom = "Jon";
         }
 
-        public static void Jon2()
+        public void Jon2()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
                     ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
             Game1._firstvisit = false;
         }
 
-        public static void Jon3()
+        public void Jon3()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
 
             _nom = "Jon";
         }
-        public static void FermeBoite()
+        public void FermeBoite()
         {
             _dialTrue = false;
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
         }
 
-        public static void Fin1()
+        public void Fin1()
         {
-            Game1.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _choiceTrue = true;
             _text = "Un lit décidemment très confortable. Voulez-vous\nvous rendormir?";
@@ -145,5 +163,8 @@ namespace SAE101
             Console.WriteLine("dd = " + dd);
         }
 
-       }
+        public override void Update(GameTime gameTime) {   }
+
+        public override void Draw(GameTime gameTime) {  }
+    }
 }

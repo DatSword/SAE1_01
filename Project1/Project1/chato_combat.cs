@@ -21,8 +21,12 @@ using System.Runtime.InteropServices;
 
 namespace SAE101
 {
-    internal class Chato_combat : GameScreen
+    public class Chato_combat : GameScreen
     {
+        // défini dans Game1
+        private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
+
         //Constantes position pour animation;
         private const int POS_ALLIEX0 = 145;
         private const int POS_ALLIEX1 = 195;
@@ -138,10 +142,15 @@ namespace SAE101
         //Spécial
         private bool _zeuwerld;
 
-        public Chato_combat(Game1 game) : base(game) { }
+        public Chato_combat(Game1 game) : base(game) 
+        {
+            _myGame = game;
+        }
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
+
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
 
@@ -322,17 +331,17 @@ namespace SAE101
                 {
                     _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
 
-                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && Game1._cooldownVerif == false)
+                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && _myGame._cooldownVerif == false)
                     {
                         _positionCursor.Y = _positionCursor.Y - 36;
                         _choixCursor = _choixCursor - 1;
-                        Game1.SetCoolDown();
+                        _myGame.SetCoolDown();
                     }
-                    if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && Game1._cooldownVerif == false)
+                    if (keyboardState.IsKeyDown(Keys.Down) && _choixCursor < 3 && _myGame._cooldownVerif == false)
                     {
                         _positionCursor.Y = _positionCursor.Y + 36;
                         _choixCursor = _choixCursor + 1;
-                        Game1.SetCoolDown();
+                        _myGame.SetCoolDown();
 
                     }
 
@@ -340,20 +349,20 @@ namespace SAE101
                 else
                 {
 
-                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < Chato_combat_contenu._nbEnnemy - 1 && Game1._cooldownVerif == false)
+                    if (keyboardState.IsKeyDown(Keys.Up) && _choixCursorD < Chato_combat_contenu._nbEnnemy - 1 && _myGame._cooldownVerif == false)
                     {
                         _choixCursorD = _choixCursorD + 1;
-                        Game1.SetCoolDown();
+                        _myGame.SetCoolDown();
                     }
-                    else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursorD > 0 && Game1._cooldownVerif == false)
+                    else if (keyboardState.IsKeyDown(Keys.Down) && _choixCursorD > 0 && _myGame._cooldownVerif == false)
                     {
                         _choixCursorD = _choixCursorD - 1;
-                        Game1.SetCoolDown();
+                        _myGame.SetCoolDown();
                     }
 
-                    if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                    if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _sousMenuSpecial == false)
                     {
-                        Game1.SetCoolDown();
+                        _myGame.SetCoolDown();
                         Combat();
                         _selectionEnn = false;
                     }
@@ -363,40 +372,40 @@ namespace SAE101
 
                 //Selection dans le menu
 
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false && _sousMenuSpecial == false)
                 {
                     _selectionEnn = true;
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
 
                 }
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && Game1._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && _myGame._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     _sousMenuSpecial = true;
                 }
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && _myGame._cooldownVerif == false && _sousMenuSpecial == false)
                 {
                     Objects();
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                 }
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && Game1._cooldownVerif == false && _sousMenuSpecial == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && _myGame._cooldownVerif == false && _sousMenuSpecial == false)
                 {
                     Fuite();
                     _sousMenuObjects = true;
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                 }
 
-                if (keyboardState.IsKeyDown(Keys.X) && Game1._cooldownVerif == false && (_sousMenuSpecial == true || _selectionEnn))
+                if (keyboardState.IsKeyDown(Keys.X) && _myGame._cooldownVerif == false && (_sousMenuSpecial == true || _selectionEnn))
                 {
                     _sousMenuSpecial = false;
                     _selectionEnn = false;
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                 }
 
                 //test (ou pas)
-                if (keyboardState.IsKeyDown(Keys.W) && Game1._cooldownVerif == false && _sousMenuSpecial == true && _premierCombat == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _sousMenuSpecial == true && _premierCombat == false)
                 {
-                    Game1.SetCoolDown();
+                    _myGame.SetCoolDown();
                     Special();
                     _sousMenuSpecial = true;
                 }

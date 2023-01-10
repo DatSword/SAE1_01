@@ -107,8 +107,9 @@ namespace SAE101
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            //var transformMatrix = _myGame._camera.GetViewMatrix();
-            _spriteBatch.Begin(/*transformMatrix: transformMatrix*/);
+
+            var transformMatrix = _myGame._camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)
                 _spriteBatch.DrawString(_myGame._font, _text , _textPos, Color.White);

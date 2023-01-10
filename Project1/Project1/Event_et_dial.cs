@@ -40,16 +40,6 @@ namespace SAE101
         public Vector2 _posNom;
         public bool _dialTrue;
 
-        //Boites de choix
-        /*public static Texture2D _choiceBox;
-        public static Vector2 _posChoiceBox;
-        public static Texture2D _cursor;
-        public static Vector2 _posCursor;
-        public static String _yes;
-        public static String _no;
-        public static Vector2 _posYes;
-        public static Vector2 _posNo;
-        public static bool _choiceTrue;*/
 
         public static int u;
         public static int d;
@@ -57,6 +47,8 @@ namespace SAE101
         public static int r;
         public static int ud;
         public static int dd;
+
+        //Boites de choix
         public Texture2D _choiceBox;
         public Vector2 _posChoiceBox;
         public Texture2D _cursor;
@@ -141,12 +133,12 @@ namespace SAE101
             _dialTrue = true;
         }
 
-        public static void SetCollision()
+        public void SetCollision()
         {
             Game1.mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
             Game1.mapLayerDoor = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
         }
-        public static void BoiteDialogues()
+        public void BoiteDialogues()
         {
             //float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             KeyboardState _keyboardState = Keyboard.GetState();

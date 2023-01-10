@@ -26,13 +26,11 @@ namespace SAE101
         private readonly ScreenManager _screenManager;
         public static KeyboardState _keyboardState;
 
-
-        // on définit les différents états possibles du jeu ( à compléter) 
+        //Ecran interactif
+        // on définit les différents états possibles du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
-
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
-
         // on définit  2 écrans ( à compléter )
         private Ecran_de_titre _ecranDeTitre;
         private Black_jack _blackJack;
@@ -79,11 +77,11 @@ namespace SAE101
         //Combat?
         private bool _combatTest;
 
-        //Control cooldown
+        //Control cooldown 0.2s
         public static float _cooldown;
         public static bool _cooldownVerif;
         public static float deltaSeconds;
-        //Combat cooldown
+        //Combat cooldown 0.5s
         public static float _cooldownC;
         public static bool _cooldownVerifC;
 
@@ -97,6 +95,10 @@ namespace SAE101
         //pour évènements et déplacementss
         public static TiledMap _tiledMap;
         public static Vector2 _positionPerso;
+        public static TiledMapTileLayer mapLayerUp;
+        public static TiledMapTileLayer mapLayerDown;
+        public static TiledMapTileLayer mapLayerLeft;
+        public static TiledMapTileLayer mapLayerRight;
 
         public Etats Etat
         {
@@ -206,6 +208,8 @@ namespace SAE101
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
+
+
 
             // on charge l'écran de menu par défaut 
             LoadScreenecran_de_titre();

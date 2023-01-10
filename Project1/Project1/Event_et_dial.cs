@@ -116,12 +116,20 @@ namespace SAE101
             _dialTrue = true;
         }
 
-        public static void BoiteDialogues(GameTime gameTime)
+        public static void SetCollision()
         {
-            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            KeyboardState _keyboardState = Keyboard.GetState();
-            //int u = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1), (ushort)(Game1._positionPerso.Y / _tiledMap.TileHeight)).GlobalIdentifier;
+            Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
 
+        }
+        public static void BoiteDialogues()
+        {
+            //float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            KeyboardState _keyboardState = Keyboard.GetState();
+            int u = Game1.mapLayerUp.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight - 1)).GlobalIdentifier;
+            int d = Game1.mapLayerUp.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
+            int l = Game1.mapLayerUp.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth - 1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
+            int r = Game1.mapLayerUp.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth + 1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
+            Console.WriteLine(r);
         }
 
        }

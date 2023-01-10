@@ -84,7 +84,8 @@ namespace SAE101
 
             _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
             _chestTrue = false;
-
+            Event_et_dial.SetCollision();
+            Event_et_dial.BoiteDialogues();
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
             //_chambreCentre1 = new Vector2((float)8 * 16, 6 * 16);

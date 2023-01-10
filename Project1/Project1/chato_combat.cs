@@ -479,13 +479,17 @@ namespace SAE101
                 //ANIMATIONS
 
                 //Animation de sélection
-                for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
+
+                if (_gameOver == false && _victoire == false)
                 {
-                    if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
-                        _animationA[i] = "selected_right";
-                    else if (_animationEnCours == false && _animationA[i] != "ded")
-                        _animationA[i] = "idle_right";
-                }
+                    for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)
+                    {
+                        if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
+                            _animationA[i] = "selected_right";
+                        else if (_animationEnCours == false && _animationA[i] != "ded")
+                            _animationA[i] = "idle_right";
+                    }
+                }                
 
                 //Animation de combat (l'attaque de base)
                 if (_animationAttackA == true)
@@ -950,6 +954,7 @@ namespace SAE101
             {
                 kk = 0;
                 _victoire = true;
+                Game1._combatFini = true;
                 _myGame.SetCoolDownFive();
                 Game1._vic.Play();
                 for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)

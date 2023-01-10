@@ -37,8 +37,12 @@ namespace SAE101
         public static String[] _ordreEnnemi;
         public static int[] _stat; //PV, Attaque, Défense, Vitesse
 
+        public static Vector2 _lastPosition;
+
         public static void Combat()
         {
+            _lastPosition = Game1._positionPerso;
+
             _nbAlly = 2;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 

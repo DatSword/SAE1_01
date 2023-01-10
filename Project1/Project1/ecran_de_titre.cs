@@ -34,25 +34,25 @@ namespace SAE101
         private Texture2D _start;
         private Texture2D _option;
         private Texture2D _quit;
-     
+
         // contient les rectangles : position et taille des 3 boutons présents dans la texture 
-        private Rectangle[] lesBoutons;
+        public Rectangle[] lesBoutons;
 
         //Titre
         public SpriteFont _fontTitle;
 
-        public Ecran_de_titre(Game1 game) : base(game) 
+        public Ecran_de_titre(Game1 game) : base(game)
         {
             _myGame = game;
         }
 
         public override void Initialize()
         {
-            
+
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3, 210, 63);
-            lesBoutons[1] = new Rectangle(Game1.xEcran / 2 - 210 / 2, (int)(Game1.yEcran / 3 * 1.5), 210, 63);
-            lesBoutons[2] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2, 210, 63);
+            lesBoutons[0] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 + 63, 210, 63);
+            lesBoutons[1] = new Rectangle(Game1.xEcran / 2 - 210 / 2, (int)(Game1.yEcran / 3 * 1.5 + 63), 210, 63);
+            lesBoutons[2] = new Rectangle(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2 + 63, 210, 63);
 
             base.Initialize();
         }
@@ -74,6 +74,26 @@ namespace SAE101
         {
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            lesBoutons[0] = new Rectangle((int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 1   + (63 * Game1.chan) * Game1.chan), (int)Game1.chan * 210, (int)Game1.chan * 63);
+            lesBoutons[1] = new Rectangle((int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 1.5 + (63 * Game1.chan) * Game1.chan), (int)Game1.chan * 210, (int)Game1.chan * 63);
+            lesBoutons[2] = new Rectangle((int)(Game1.xE / 2 - 210 * Game1.chan / 2), (int)(Game1.yE/3 * 2   + (63 * Game1.chan) * Game1.chan), (int)Game1.chan * 210, (int)Game1.chan * 63);
+
+
+            for (int i = 0; i < lesBoutons.Length; i++)
+            {
+
+
+
+                if (i == 0)
+                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 1 + lesBoutons[i].Height);
+                else if (i == 1)
+                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 1.5 + lesBoutons[i].Height);
+                else
+                    lesBoutons[i].Y = (int)(Game1.yE / 3 * 2 + lesBoutons[i].Height);
+
+            }
+
 
             //changements maps
 
@@ -98,14 +118,6 @@ namespace SAE101
                 }
             }
 
-            if (Game1.chan != 1)
-                for (int i = 0; i < lesBoutons.Length; i++)
-                {
-                    lesBoutons[i].Width *= (int) Game1.chan;
-                    lesBoutons[i].Height *= (int) Game1.chan;
-                }
-
-
 
 
             /*if (keyboardState.IsKeyDown(Keys.Enter))
@@ -122,11 +134,14 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3), Color.White);
-            _spriteBatch.Draw(_option, new Vector2(Game1.xEcran / 2 - 210 / 2, (float)(Game1.yEcran / 3 * 1.5)), Color.White);
-            _spriteBatch.Draw(_quit, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2), Color.White);
+            _spriteBatch.Draw(_start, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 + 63), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(Game1.xEcran / 2 - 210 / 2, (float)(Game1.yEcran / 3 * 1.5 + 63)), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(Game1.xEcran / 2 - 210 / 2, Game1.yEcran / 3 * 2 + 63), Color.White);
             _spriteBatch.End();
         }
+
+
+
     }
 
     internal record struct NewStruct(object Item1, int Item2)

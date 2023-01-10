@@ -40,6 +40,10 @@ namespace SAE101
         //Ecran
         public static int xEcran;
         public static int yEcran;
+
+        public static int xE;
+        public static int yE;
+
         public static int changement0 = 1;
         public static double changement1 = 1.5;
         public static int changement2 = 2;
@@ -117,6 +121,9 @@ namespace SAE101
             // Definition écran
             xEcran = 514; //768
             yEcran = 448; //672
+            xE = xEcran;
+            yE = yEcran;
+            
 
             _graphics.PreferredBackBufferWidth = xEcran;
             _graphics.PreferredBackBufferHeight = yEcran;
@@ -267,6 +274,8 @@ namespace SAE101
             //Console.WriteLine(_cooldownVerifC);
             //Console.WriteLine(_cooldownC);
 
+
+            ///changement de dimension d'écran
             if (_keyboardState.IsKeyDown(Keys.E))
             {
                 _graphics.PreferredBackBufferWidth = 514;
@@ -274,23 +283,32 @@ namespace SAE101
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
                 chan = changement0;
                 _graphics.ApplyChanges();
+
             }
             if (_keyboardState.IsKeyDown(Keys.D))
             {
                 _graphics.PreferredBackBufferWidth = (int)(xEcran * changement1);
                 _graphics.PreferredBackBufferHeight = (int)(yEcran * changement1);
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                xE = (int)(xEcran * changement1);
+                yE = (int)(yEcran * changement1);
                 chan = changement1;
                 _graphics.ApplyChanges();
             }
+
             if (_keyboardState.IsKeyDown(Keys.F))
             {
                 _graphics.PreferredBackBufferWidth = xEcran * changement2;
                 _graphics.PreferredBackBufferHeight = yEcran * changement2;
                 GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                xE = (int)(xEcran * changement2);
+                yE = (int)(yEcran * changement2);
                 chan = changement2;
                 _graphics.ApplyChanges();
             }
+
+
+
 
             //Camera
 

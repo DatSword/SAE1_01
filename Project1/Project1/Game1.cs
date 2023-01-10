@@ -79,6 +79,7 @@ namespace SAE101
         public static SoundEffect _wbeg;
         public static SoundEffect _wend;
         public static SoundEffect _toink;
+        public static SoundEffect _death;
 
         //Combat?
         private bool _combatTest;
@@ -90,6 +91,9 @@ namespace SAE101
         //Combat cooldown 0.5s
         public static float _cooldownC;
         public static bool _cooldownVerifC;
+        //Combat cooldown 5.0s
+        public float _cooldownF;
+        public bool _cooldownVerifF;
 
         //font
         public SpriteFont _font;
@@ -218,6 +222,7 @@ namespace SAE101
             _wbeg = Content.Load<SoundEffect>("sfx/wbeg");
             _wend = Content.Load<SoundEffect>("sfx/wend");
             _toink = Content.Load<SoundEffect>("sfx/toink");
+            _death = Content.Load<SoundEffect>("sfx/death");
 
             //Boite de dialogue
             _eventEtDial._dialBox = Content.Load<Texture2D>("img/dialogue/dialogue_box");
@@ -294,6 +299,15 @@ namespace SAE101
                 if (_cooldownC <= 0)
                     _cooldownVerifC = false;
             }
+
+            if (_cooldownVerifF == true)
+            {
+                _cooldownF = _cooldownF - deltaSeconds;
+                if (_cooldownF <= 0)
+                    _cooldownVerifF = false;
+            }
+            //Console.WriteLine(_cooldownVerifC);
+            //Console.WriteLine(_cooldownC);
 
 
             //Camera
@@ -450,6 +464,12 @@ namespace SAE101
         {
             _cooldownVerifC = true;
             _cooldownC = 0.5f;
+        }
+
+        public void SetCoolDownFive()
+        {
+            _cooldownVerifF = true;
+            _cooldownF = 5.0f;
         }
 
         public void MusiqueChatoCombat()

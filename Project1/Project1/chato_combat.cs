@@ -628,6 +628,7 @@ namespace SAE101
                     _animationZeweurld = false;
                     EnnemiMort();
                     AllieMort();
+
                     if (_attackZeuwerld == true)
                     {
                         kk = Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy;
@@ -636,7 +637,6 @@ namespace SAE101
                     if (kk != Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy && _gameOver == false && _victoire == false)
                     {
                         Vitesse2();
-                    }
                     else
                     {
                         _animationOver = false;
@@ -647,7 +647,7 @@ namespace SAE101
 
 
                 if (_coolDownAnimation == true)
-                    Game1.SetCoolDownCombat();
+                    _myGame.SetCoolDownCombat();
                 _coolDownAnimation = false;
 
                 for (int i = 0; i < Chato_combat_contenu._nbAlly; i++)

@@ -30,13 +30,13 @@ namespace SAE101
         private Game1 _myGame;
         private Event_et_dial _eventEtDial;
 
-        // texture du menu avec 3 boutons
+        // texture menu
         private Texture2D _titleS;
         private Texture2D _start;
         private Texture2D _option;
         private Texture2D _quit;
 
-        // contient les rectangles : position et taille des 3 boutons présents dans la texture 
+        // boutons 
         public Rectangle[] lesBoutons;
 
         //Titre
@@ -77,15 +77,14 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * Game1.chan / 2), (int)(_myGame.yE/3 * 1   + (63 * Game1.chan) * Game1.chan),
-                 (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1 + (63 * _myGame.chan) * _myGame.chan),
+                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
 
-            lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * Game1.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * Game1.chan) * Game1.chan),
-                (int)(Game1.chan * 210), (int)(Game1.chan * 63));
+            lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * _myGame.chan) * _myGame.chan),
+                (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
 
-            lesBoutons[2] = new Rectangle( (int)(_myGame.xE / 2 - 210 * Game1.chan / 2), (int)(_myGame.yE/3 * 2   + (63 * Game1.chan) * Game1.chan),
-                (int)(Game1.chan * 210), (int)(Game1.chan * 63));
-
+            lesBoutons[2] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 2 + (63 * _myGame.chan) * _myGame.chan),
+                (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
 
 
             for (int i = 0; i < lesBoutons.Length; i++)

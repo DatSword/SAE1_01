@@ -18,7 +18,7 @@ using System;
 
 namespace SAE101
 {
-    public class Chato_int_chambres_couloir : GameScreen
+    public class Chato_int_couloir : GameScreen
     {
         // défini dans Game1
         private Game1 _myGame;
@@ -44,12 +44,12 @@ namespace SAE101
         public static int _posX;
         private int _stop;
 
-        public static int _limiteChambreX1;
-        public static int _limiteChambreX2;
-        public static int _limiteCouloirY1;
-        public static int _limiteCouloirY2;
+        public int _limiteChambreX1;
+        public int _limiteChambreX2;
+        public int _limiteCouloirY1;
+        public int _limiteCouloirY2;
 
-        public Chato_int_chambres_couloir(Game1 game) : base(game) 
+        public Chato_int_couloir(Game1 game) : base(game) 
         {
             _myGame = game;
         }
@@ -62,7 +62,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            Joueur.Spawnchato_int_chambres_couloir();
+            _joueur.Spawnchato_int_chambres_couloir();
 
             _stop = 1;
 
@@ -87,7 +87,7 @@ namespace SAE101
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
 
-            Event_et_dial.SetCollision();
+            _eventEtDial.SetCollision();
 
             base.LoadContent();
         }
@@ -106,7 +106,7 @@ namespace SAE101
             _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
-            Event_et_dial.BoiteDialogues();
+            _eventEtDial.BoiteDialogues();
 
             //Enclenchement evenment
 
@@ -114,14 +114,14 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Up) && (Event_et_dial.ud == 26))
             {
                 _posX = (int)Game1._positionPerso.X;
-                Game.LoadScreenchato_int_chambres_nord();
+                _myGame.LoadScreenchato_int_chambres_nord();
                 
             }        
             if (_keyboardState.IsKeyDown(Keys.Up) && (Event_et_dial.ud == 30))
             {
                 _posX = (int)Game1._positionPerso.X;
-                Game.LoadScreenchato_ext_cours_interieur();
-                Chato_int_chambres_nord._posX = 0;
+                _myGame.LoadScreenchato_ext_cours_interieur();
+                Chato_int_chambres._posX = 0;
             }
         }
 

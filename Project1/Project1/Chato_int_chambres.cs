@@ -18,7 +18,7 @@ using System;
 
 namespace SAE101
 {
-    public class Chato_int_chambres_nord : GameScreen
+    public class Chato_int_chambres : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -56,22 +56,23 @@ namespace SAE101
         private Vector2 _positionChest1;
         private bool _chestTrue;
 
-        public static Vector2 _chambreCentre1;
-        public static Vector2 _chambreCentreUn;
-        public static Vector2 _chambreCentre2;
-        public static Vector2 _chambreCentreDeux;
-        public static int _limiteChambreX1;
-        public static int _limiteChambreX2;
-        public static int _limiteChambreY1;
-        public static int _limiteChambreY2;
-        public static int _limiteChambreGauche;
-        public static int _limiteChambreDroite;
+        public Vector2 _chambreCentre1;
+        public Vector2 _chambreCentreUn;
+        public Vector2 _chambreCentre2;
+        public Vector2 _chambreCentreDeux;
+
+        public int _limiteChambreX1;
+        public int _limiteChambreX2;
+        public int _limiteChambreY1;
+        public int _limiteChambreY2;
+        public int _limiteChambreGauche;
+        public int _limiteChambreDroite;
 
         private int _choixCursor;
 
         int numDial;
 
-        public Chato_int_chambres_nord(Game1 game) : base(game) 
+        public Chato_int_chambres(Game1 game) : base(game) 
         {
             _myGame = game;
         }
@@ -85,7 +86,7 @@ namespace SAE101
             _posX = 0;
             numDial = 0;
 
-            Joueur.Spawnchato_int_chambres_nord();
+            _joueur.Spawnchato_int_chambres_nord();
 
             _stop = 1;
 
@@ -98,10 +99,9 @@ namespace SAE101
             
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)6.5 * 16, 6 * 16);
-            //_chambreCentre1 = new Vector2((float)8 * 16, 6 * 16);
             _chambreCentreUn = new Vector2((float)14.5 * 16, 6 * 16);
+
             _chambreCentre2 = new Vector2((float)30.5 * 16, 6 * 16);
-            //_chambreCentre2 = new Vector2((float)32.5 * 16, 6 * 16);
             _chambreCentreDeux = new Vector2((float)38.5 * 16, 6 * 16);
 
             _limiteChambreX1 = 16 * 16;
@@ -128,7 +128,7 @@ namespace SAE101
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
 
             mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
-            Event_et_dial.SetCollision();
+            _eventEtDial.SetCollision();
 
             //Load persos
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
@@ -140,6 +140,7 @@ namespace SAE101
 
             SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
             _chest1 = new AnimatedSprite(spriteSheet3);
+
 
             base.LoadContent();
         }
@@ -154,7 +155,7 @@ namespace SAE101
 
 
             _tiledMapRenderer.Update(gameTime);
-            Event_et_dial.BoiteDialogues();
+            _eventEtDial.BoiteDialogues();
             _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
@@ -173,11 +174,12 @@ namespace SAE101
                     _eventEtDial._posCursor = new Vector2(430, 301);
                 }
                 Console.WriteLine(_myGame._cooldownVerif);
+
                 if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
                     _myGame.SetCoolDown();
                     Game1._fin = 1;
-                    Game.LoadScreenblack_jack();
+                    _myGame.LoadScreenblack_jack();
                     
                 }
                 if ((_keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || _keyboardState.IsKeyDown(Keys.X) && _myGame._cooldownVerif == false)
@@ -253,7 +255,6 @@ namespace SAE101
             }
 
             //DODO
-
             if (_keyboardState.IsKeyDown(Keys.W) && (Event_et_dial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _myGame._cooldownVerif == false)
             {
                 //Event_et_dial.Fin1();
@@ -277,10 +278,12 @@ namespace SAE101
             var transformMatrix = _myGame._camera.GetViewMatrix();
             
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
             _spriteBatch.Draw(_perso, Game1._positionPerso);
+
             _spriteBatch.End();
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();

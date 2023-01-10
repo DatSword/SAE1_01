@@ -40,7 +40,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
 
-            _textPos = new Vector2(50, 50);
+            _textPos = new Vector2(50, 150);
             _text = "null";
 
             if (Game1._fin == 1)
@@ -70,29 +70,29 @@ namespace SAE101
                         "bien mérité de précieuses heures de repos dans le Chato, juste\n" +
                         "avant le couronnement de leur ami Julius, pour enfin boucler\n" +
                         "cette hist-";
-            if (Game1._fin == 1)
+            else if (Game1._fin == 10)
+                _text = "";
+            else if (Game1._fin == 1)
                 _text = "Hum hum, malgré cette petite interruption, notre héros décida\n" +
                         "qu'il n'allait pas être présent lors du courronnement. Même si\n" +
                         "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
                         "d'épreuves, le sommeil reste son ennemi le plus puissant.";
-            if (Game1._fin == 2)
+            else if (Game1._fin == 2)
                 _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
                         "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
                         "non?";
-            if (Game1._fin == 3)
+            else if (Game1._fin == 3)
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
                         "envoyé d'on-ne-sait-quand? Toutes ces réponses, vous les aurez...\n" +
                         "Peut-être un jour...?";
-            if (Game1._fin == 01)
-                _text = "";
 
 
-            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
+            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 )
             {
-                Game1._fin = 1;
+                Game1._fin = 10;
                 Game1._toink.Play();
                 _eventEtDial.toutDebut();
             }
@@ -107,11 +107,12 @@ namespace SAE101
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
             var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)
-            _spriteBatch.DrawString(_myGame._font, _text , _textPos, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _text , _textPos, Color.White);
 
             if (_eventEtDial._dialTrue == true)
             {

@@ -23,6 +23,7 @@ namespace SAE101
         // défini dans Game1
         private Game1 _myGame;
         private Event_et_dial _eventEtDial;
+        private Joueur _joueur;
 
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -56,6 +57,7 @@ namespace SAE101
         public override void Initialize()
         {
             _eventEtDial = _myGame._eventEtDial;
+            _joueur = _myGame._joueur;
 
             // Lieu Spawn
             _posX = 0;
@@ -101,7 +103,7 @@ namespace SAE101
 
             _tiledMapRenderer.Update(gameTime);
             
-            Joueur.Mouvement(gameTime);
+            _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
             Event_et_dial.BoiteDialogues();

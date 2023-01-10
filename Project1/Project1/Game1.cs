@@ -95,11 +95,8 @@ namespace SAE101
         //pour évènements et déplacementss
         public static TiledMap _tiledMap;
         public static Vector2 _positionPerso;
-        public static TiledMapTileLayer mapLayerUp;
-        public static TiledMapTileLayer mapLayerDown;
-        public static TiledMapTileLayer mapLayerLeft;
-        public static TiledMapTileLayer mapLayerRight;
         public static TiledMapTileLayer mapLayer;
+        //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat
         {

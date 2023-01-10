@@ -117,7 +117,7 @@ namespace SAE101
 
             Game1._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_chambres_nord");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, Game1._tiledMap);
-            mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            //mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
             mapLayerIntersect = Game1._tiledMap.GetLayer<TiledMapTileLayer>("element_interactif");
             Event_et_dial.SetCollision();
             //Load persos
@@ -140,7 +140,7 @@ namespace SAE101
             int a = mapLayerIntersect.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight + 1)).GlobalIdentifier;
             //Console.WriteLine(a);
             //debug autres collisions
-            int b = mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth-1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
+            int b = Game1.mapLayer.GetTile((ushort)(Game1._positionPerso.X / Game1._tiledMap.TileWidth-1), (ushort)(Game1._positionPerso.Y / Game1._tiledMap.TileHeight)).GlobalIdentifier;
             Console.WriteLine(b);
 
             Event_et_dial.BoiteDialogues();
@@ -360,7 +360,7 @@ namespace SAE101
         {
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
+            if (Game1.mapLayer.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;

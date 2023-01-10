@@ -119,9 +119,6 @@ namespace SAE101
         public static void SetCollision()
         {
             Game1.mapLayer = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
-            Game1.mapLayerDown = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
-            Game1.mapLayerUp = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
-            Game1.mapLayerUp = Game1._tiledMap.GetLayer<TiledMapTileLayer>("collision");
         }
         public static void BoiteDialogues()
         {

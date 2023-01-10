@@ -89,7 +89,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            Game1._camera.LookAt(_myGame._cameraPosition);
+            _myGame._camera.LookAt(_myGame._cameraPosition);
 
             String animationGrand = null;
 
@@ -124,10 +124,10 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
 
             _spriteBatch.Draw(_grand, _positionGrand);

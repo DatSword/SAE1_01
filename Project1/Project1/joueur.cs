@@ -36,10 +36,10 @@ namespace SAE101
 
         public void Spawnchato_int_chambres_couloir()
         {
-            if (Game1._combatFini == true)
+            if (_myGame._combatFini == true)
             {
                 _myGame._positionPerso = Chato_combat_contenu._lastPosition;
-                Game1._combatFini = false;
+                _myGame._combatFini = false;
             }
             else
             {
@@ -71,10 +71,10 @@ namespace SAE101
 
         public void Spawnchato_int_chambres_nord()
         {
-            if (Game1._combatFini == true)
+            if (_myGame._combatFini == true)
             {
                 _myGame._positionPerso = Chato_combat_contenu._lastPosition;
-                Game1._combatFini = false;
+                _myGame._combatFini = false;
             }
             else
             {
@@ -94,10 +94,10 @@ namespace SAE101
 
         public void Spawnchato_ext_cours_interieur()
         {
-            if (Game1._combatFini == true)
+            if (_myGame._combatFini == true)
             {
                 _myGame._positionPerso = Chato_combat_contenu._lastPosition;
-                Game1._combatFini = false;
+                _myGame._combatFini = false;
             }
             else
             {

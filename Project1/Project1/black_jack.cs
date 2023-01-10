@@ -44,7 +44,7 @@ namespace SAE101
             _text = "";
 
             if (Game1._fin == 1)
-                MediaPlayer.Play(Game1._songDodo);
+                MediaPlayer.Play(_myGame._songDodo);
 
             base.Initialize();
         }
@@ -108,7 +108,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)

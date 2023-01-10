@@ -328,7 +328,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            Game1._camera.LookAt(_myGame._cameraPosition);
+            _myGame._camera.LookAt(_myGame._cameraPosition);
 
             //curseurs
             if (_animationEnCours == false && _gameOver == false && _victoire == false)
@@ -425,7 +425,7 @@ namespace SAE101
             {
                 if (_nbTourZeuWerld == 2)
                 {
-                    MediaPlayer.Play(Game1._songCombat);
+                    MediaPlayer.Play(_myGame._songCombat);
                     _myGame._wend.Play();
                     _attackZeuwerld = false;
                     _nbTourZeuWerld = 0;
@@ -524,12 +524,12 @@ namespace SAE101
                         _animationA[_allyAnime] = "move_left";
                         _posAllie[_allyAnime].X -= 2;
                     }
-                    else if (_animationP1 == false && _animationP2 == false && Game1._cooldownVerifC == false && _animationP3 == false)
+                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                     {
                         _animationA[_allyAnime] = "move_right";
                         _posAllie[_allyAnime].X += 2;
                     }
-                    else if (Game1._cooldownVerifC == false && _animationP3 == true)
+                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
                     {
                         _animationP1 = false;
                         _animationP2 = true;
@@ -567,12 +567,12 @@ namespace SAE101
                         _animationE[_enemyAnime] = "move_right";
                         _posEnemy[_enemyAnime].X += 2;
                     }
-                    else if (_animationP1 == false && _animationP2 == false && Game1._cooldownVerifC == false && _animationP3 == false)
+                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                     {
                         _animationE[_enemyAnime] = "move_left";
                         _posEnemy[_enemyAnime].X -= 2;
                     }
-                    else if (Game1._cooldownVerifC == false && _animationP3 == true)
+                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
                     {
                         _animationP1 = false;
                         _animationP2 = true;
@@ -612,12 +612,12 @@ namespace SAE101
                         kk = Chato_combat_contenu._nbEnnemy + Chato_combat_contenu._nbAlly;
 
                     }
-                    else if (_animationP1 == false && _animationP2 == false && Game1._cooldownVerifC == false && _animationP3 == false)
+                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                     {
                         _animationA[_allyAnime] = "move_right";
                         _posAllie[_allyAnime].X += 2;
                     }
-                    else if (Game1._cooldownVerifC == false && _animationP3 == true)
+                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
                     {
                         _animationP1 = false;
                         _animationP2 = true;
@@ -686,7 +686,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
 
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
@@ -956,7 +956,7 @@ namespace SAE101
             {
                 kk = 0;
                 _victoire = true;
-                Game1._combatFini = true;
+                _myGame._combatFini = true;
                 _myGame.SetCoolDownFive();
                 _myGame._vic.Play();
                 for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)

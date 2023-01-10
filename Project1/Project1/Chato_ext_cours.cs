@@ -24,7 +24,7 @@ namespace SAE101
         private new Game1 Game => (Game1)base.Game;
         private SpriteBatch _spriteBatch;
         private TiledMapRenderer _tiledMapRenderer;
-        public static TiledMapTileLayer mapLayer;
+        public TiledMapTileLayer mapLayer;
 
         // défini dans Game1
         private Game1 _myGame;
@@ -34,7 +34,7 @@ namespace SAE101
         //sprite
         private AnimatedSprite _perso;
         private KeyboardState _keyboardState;
-        public static int _posX;
+        public int _posX;
 
         private AnimatedSprite _grand;
         private Vector2 _positionGrand;

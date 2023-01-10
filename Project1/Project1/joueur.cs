@@ -28,12 +28,14 @@ namespace SAE101
         public Game1 _myGame;
         private Event_et_dial _eventEtDial;
         private Chato_combat_contenu _chatoCombatContenu;
+        private Chato_ext_cours _chatoExtCours;
 
         public Joueur(Game1 game) : base(game)
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
             _chatoCombatContenu = _myGame._chatoCombatContenu;
+            _chatoExtCours = _myGame._chatoExtCours;
         }
 
         public void Spawnchato_int_chambres_couloir()
@@ -57,13 +59,13 @@ namespace SAE101
                 else if (Chato_int_chambres._posX >= 35 * 16 && Chato_int_chambres._posX < 37 * 16)
                     _myGame._positionPerso = new Vector2(38 * 16 + 8, 7 * 16);
 
-                else if (Chato_ext_cours._posX >= 19 * 16 && Chato_ext_cours._posX < 21 * 16)
+                else if (_chatoExtCours._posX >= 19 * 16 && _chatoExtCours._posX < 21 * 16)
                     _myGame._positionPerso = new Vector2((float)20.5 * 16 + 8, (float)1.5 * 16 + 8);
-                else if (Chato_ext_cours._posX >= 20 * 16 && Chato_ext_cours._posX < 22 * 16)
+                else if (_chatoExtCours._posX >= 20 * 16 && _chatoExtCours._posX < 22 * 16)
                     _myGame._positionPerso = new Vector2((float)21.5 * 16 + 8, (float)1.5 * 16 + 8);
-                else if (Chato_ext_cours._posX >= 21 * 16 && Chato_ext_cours._posX < 23 * 16)
+                else if (_chatoExtCours._posX >= 21 * 16 && _chatoExtCours._posX < 23 * 16)
                     _myGame._positionPerso = new Vector2((float)22.5 * 16 + 8, (float)1.5 * 16 + 8);
-                else if (Chato_ext_cours._posX >= 22 * 16 && Chato_ext_cours._posX < 24 * 16)
+                else if (_chatoExtCours._posX >= 22 * 16 && _chatoExtCours._posX < 24 * 16)
                     _myGame._positionPerso = new Vector2((float)23.5 * 16 + 8, (float)1.5 * 16 + 8);
             }
             

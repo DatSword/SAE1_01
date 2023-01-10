@@ -36,6 +36,13 @@ namespace SAE101
         private KeyboardState _keyboardState;
         public static int _posX;
 
+        private AnimatedSprite _grand;
+        private Vector2 _positionGrand;
+        private int _directionGrand;
+
+
+
+        public Chato_ext_cours_interieur(Game1 game) : base(game)
 
 
 
@@ -56,6 +63,8 @@ namespace SAE101
 
             Game1._numSalle = 2;
 
+            _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
+
             base.Initialize();
         }
 
@@ -69,6 +78,9 @@ namespace SAE101
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+
+            SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/enemy/grand/character_movement.sf", new JsonContentLoader());
+            _grand = new AnimatedSprite(spriteSheet2);
 
             _eventEtDial.SetCollision();
 
@@ -90,9 +102,17 @@ namespace SAE101
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
 
+            String animationGrand = null;
+            animationGrand = "idle_down";
 
 
+            if (_myGame._cooldownVerif == false && Game1._positionPerso.X >= 20 && Game1._positionPerso.X <= 23 && Game1._positionPerso.Y == 34)
+            {
+                _eventEtDial.Ninja();
+            }
 
+            _grand.Play(animationGrand);
+            _grand.Update(deltaSeconds);
 
             //changements maps
 
@@ -113,6 +133,8 @@ namespace SAE101
             _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
 
+            _spriteBatch.Draw(_grand, _positionGrand);
+
             _spriteBatch.End();
 
             var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
@@ -124,9 +146,13 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
+    
 
             _spriteBatch.End();
         }
+
+
+
 
         private bool IsCollision(ushort x, ushort y)
         {

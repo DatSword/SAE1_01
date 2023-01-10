@@ -116,6 +116,21 @@ namespace SAE101
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
             _nom = "Jon";
         }
+
+        public void Ninja()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Tu ne passera pas cet cour!\n" +
+                    "Du moins tant que je suis là.";
+
+            
+            _nom = "Ninja";
+        }
+
+
+
+
         public void FermeBoite()
         {
             _dialTrue = false;

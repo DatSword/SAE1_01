@@ -30,6 +30,7 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
+        private Event_et_dial _eventEtDial;
 
         //sprite
         private AnimatedSprite _perso;
@@ -48,6 +49,8 @@ namespace SAE101
 
         public override void Initialize()
         {
+            _eventEtDial = _myGame._eventEtDial;
+
             // Lieu Spawn
             _posX = 0;
 
@@ -92,7 +95,7 @@ namespace SAE101
             _sensPersoY = 0;
 
             //Camera
-            Game1._camera.LookAt(Game1._cameraPosition);
+            _myGame._camera.LookAt(Game1._cameraPosition);
 
             _keyboardState = Keyboard.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
@@ -115,7 +118,7 @@ namespace SAE101
             else if (_stop == 4 && keyboardState.IsKeyUp(Keys.Right))
                 animation = "idle_right";
 
-            if (Event_et_dial._dialTrue == false)
+            if (_eventEtDial._dialTrue == false)
             {
                 if (keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -172,19 +175,19 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = Game1._camera.GetViewMatrix();
+            var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
             _spriteBatch.End();
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-            if (Event_et_dial._dialTrue == true)
+            if (_eventEtDial._dialTrue == true)
             {
-                _spriteBatch.Draw(Event_et_dial._dialBox, Event_et_dial._posDialBox, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._text, Event_et_dial._posText, Color.White);
-                _spriteBatch.DrawString(Game1._font, Event_et_dial._nom, Event_et_dial._posNom, Color.White);
+                _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
+                _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
             _spriteBatch.End();
         }

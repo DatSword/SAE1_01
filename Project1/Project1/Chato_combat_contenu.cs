@@ -37,7 +37,7 @@ namespace SAE101
         public static String[] _ordreEnnemi;
         public static int[] _stat; //PV, Attaque, Défense, Vitesse
 
-        public static void CombatTest()
+        public static void Combat()
         {
             _nbAlly = 2;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};

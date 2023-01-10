@@ -90,22 +90,6 @@ namespace SAE101
                 Game1._positionPerso = new Vector2(23 * 16 + 8, 49 * 16);
         }
 
-        public static TiledMapTileLayer MapLayer()
-        {
-            TiledMapTileLayer mapLayerCollision = Chato_int_chambres.mapLayer;
-
-            if (Game1._numEcran == 1)
-                mapLayerCollision = Chato_int_chambres.mapLayer;
-            else if (Game1._numEcran == 2)
-                mapLayerCollision = Chato_int_couloir.mapLayer;
-            else if (Game1._numEcran == 3)
-                mapLayerCollision = Chato_ext_cours_interieur.mapLayer;
-            else
-                mapLayerCollision = Chato_int_chambres.mapLayer;
-
-            return mapLayerCollision;
-        }
-
         public void Mouvement(GameTime gameTime)
         {
             if (Game1._stop == 1 && Game1._keyboardState.IsKeyUp(Keys.Down))

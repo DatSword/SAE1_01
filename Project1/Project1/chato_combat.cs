@@ -183,7 +183,7 @@ namespace SAE101
             _random = new Random();
 
 
-            Chato_combat_contenu.CombatTest();
+            Chato_combat_contenu.Combat();
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
@@ -637,6 +637,7 @@ namespace SAE101
                     if (kk != Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy && _gameOver == false && _victoire == false)
                     {
                         Vitesse2();
+                    }
                     else
                     {
                         _animationOver = false;
@@ -668,9 +669,9 @@ namespace SAE101
                     Game1._fin = 2;
                     _myGame.LoadScreenblack_jack();
                 }
-                else if (_myGame._cooldownVerifF == false && _gameOver == true)
+                else if (_myGame._cooldownVerifF == false && _victoire == true)
                 {
-
+                    RetourChato();
                 }
             }
         }
@@ -949,6 +950,7 @@ namespace SAE101
             {
                 kk = 0;
                 _victoire = true;
+                _myGame.SetCoolDownFive();
                 Game1._vic.Play();
                 for (int j = 0; j < Chato_combat_contenu._nbAlly; j++)
                 {
@@ -983,6 +985,16 @@ namespace SAE101
                     _desc[1] = "Anihilé";
                 }
             }
+        }
+
+        public void RetourChato()
+        {
+            if (Game1._numSalle == 1)
+                _myGame.LoadScreenchato_int_chambres_couloir();
+            else if (Game1._numSalle == 2)
+                _myGame.LoadScreenchato_ext_cours_interieur();
+            /*if (Game1._numSalle == 3)
+                _myGame.LoadScreenchato_int_salle_courronnement();*/
         }
     }
 }

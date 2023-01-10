@@ -111,6 +111,7 @@ namespace SAE101
         public static int _stop;
         public static String _animationPlayer;
         public static TiledMapTileLayer mapLayerDoor;
+        public static int _numSalle;
         //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat

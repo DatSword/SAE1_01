@@ -32,22 +32,22 @@ namespace SAE101
             _myGame = game;
         }
 
-        public static int _nbAlly;
-        public static int _nbEnnemy;
+        public int _nbAlly;
+        public int _nbEnnemy;
 
-        public static String _special;
-        public static String _anim;
-        public static String[] _specialP;
-        public static String[] _descP;
-        public static String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
-        public static int _nbPersoJouable = 4;
-        public static String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
-        public static int _nbEnnJouable = 3;       
-        public static String[] _ordreJoueur;
-        public static String[] _ordreEnnemi;
-        public static int[] _stat; //PV, Attaque, Défense, Vitesse
+        public String _special;
+        public String _anim;
+        public String[] _specialP;
+        public String[] _descP;
+        public String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
+        public int _nbPersoJouable = 4;
+        public String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
+        public int _nbEnnJouable = 3;       
+        public String[] _ordreJoueur;
+        public String[] _ordreEnnemi;
+        public int[] _stat; //PV, Attaque, Défense, Vitesse
 
-        public static Vector2 _lastPosition;
+        public Vector2 _lastPosition;
 
         public void Combat()
         {

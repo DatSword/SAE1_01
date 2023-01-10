@@ -27,18 +27,20 @@ namespace SAE101
         private new Game1 Game => (Game1)base.Game;
         public Game1 _myGame;
         private Event_et_dial _eventEtDial;
+        private Chato_combat_contenu _chatoCombatContenu;
 
         public Joueur(Game1 game) : base(game)
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
+            _chatoCombatContenu = _myGame._chatoCombatContenu;
         }
 
         public void Spawnchato_int_chambres_couloir()
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = Chato_combat_contenu._lastPosition;
+                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -73,7 +75,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = Chato_combat_contenu._lastPosition;
+                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -96,7 +98,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = Chato_combat_contenu._lastPosition;
+                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else

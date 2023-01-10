@@ -41,15 +41,16 @@ namespace SAE101
 
 
         //Ecran
-        public static int xEcran;
-        public static int yEcran;
+        public int xEcran;
+        public int yEcran;
 
-        public static int xE;
-        public static int yE;
+        public int xE;
+        public int yE;
 
-        public static int changement0 = 1;
+       /* public static int changement0 = 1;
         public static double changement1 = 1.5;
-        public static int changement2 = 2;
+        public static int changement2 = 2;*/
+
         public static double chan = 1;
 
         //Camera
@@ -240,12 +241,12 @@ namespace SAE101
 
         protected override void Update(GameTime gameTime)
         {
-            //Mannette?
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             _keyboardState = Keyboard.GetState();
             deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (_keyboardState.IsKeyDown(Keys.Escape))
+                Exit();
+
 
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
@@ -322,11 +323,6 @@ namespace SAE101
                 chan = changement1;
                 _graphics.ApplyChanges();
             }*/
-
-            if (_keyboardState.IsKeyDown(Keys.F))
-            {
-                ChangementEcran(changement1);
-            }
 
 
             //Camera

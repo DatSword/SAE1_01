@@ -637,6 +637,7 @@ namespace SAE101
                     if (kk != Chato_combat_contenu._nbAlly + Chato_combat_contenu._nbEnnemy && _gameOver == false && _victoire == false)
                     {
                         Vitesse2();
+                    }
                     else
                     {
                         _animationOver = false;

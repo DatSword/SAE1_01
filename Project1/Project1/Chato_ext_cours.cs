@@ -18,7 +18,7 @@ using System;
 
 namespace SAE101
 {
-    public class Chato_ext_cours_interieur : GameScreen
+    public class Chato_ext_cours : GameScreen
     {
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -39,7 +39,7 @@ namespace SAE101
 
 
 
-        public Chato_ext_cours_interieur(Game1 game) : base(game)
+        public Chato_ext_cours(Game1 game) : base(game)
         {
             _myGame = game;
         }
@@ -81,7 +81,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._camera.LookAt(Game1._cameraPosition);
+            Game1._camera.LookAt(_myGame._cameraPosition);
 
 
             _tiledMapRenderer.Update(gameTime);
@@ -107,15 +107,15 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = Game1._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(Game1._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
 
             _spriteBatch.End();
 
-            var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
 
             if (_eventEtDial._dialTrue == true)

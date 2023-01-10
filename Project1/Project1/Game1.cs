@@ -372,7 +372,7 @@ namespace SAE101
                                 && Game1._positionPerso.Y >= Chato_int_chambres_nord._limiteChambreY1)
                 _cameraPosition = Chato_int_chambres_nord._chambreCentreDeux;
 
-            else if (_numEcran == 2 && Game1._positionPerso.Y > 49*16)
+            else if (_numEcran == 2 && Game1._positionPerso.Y >= 49*16)
                 _cameraPosition = new Vector2(Game1._positionPerso.X, Game1._positionPerso.Y);
 
             // cours

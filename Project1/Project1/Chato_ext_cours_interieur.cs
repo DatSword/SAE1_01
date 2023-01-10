@@ -43,6 +43,12 @@ namespace SAE101
         public static int _posX;
         private int _stop;
 
+        private AnimatedSprite _grand;
+        private Vector2 _positionGrand;
+        private int _directionGrand;
+
+
+
         public Chato_ext_cours_interieur(Game1 game) : base(game)
         {
             _myGame = game;
@@ -67,6 +73,8 @@ namespace SAE101
 
             _vitessePerso = 100;
 
+            _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
+
             base.Initialize();
         }
 
@@ -81,7 +89,10 @@ namespace SAE101
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
 
-            Event_et_dial.SetCollision();
+            SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/enemy/grand/character_movement.sf", new JsonContentLoader());
+            _grand = new AnimatedSprite(spriteSheet2);
+
+            _eventEtDial.SetCollision();
 
             base.LoadContent();
         }
@@ -96,19 +107,29 @@ namespace SAE101
 
 
             _tiledMapRenderer.Update(gameTime);
-            Event_et_dial.BoiteDialogues();
+            _eventEtDial.BoiteDialogues();
             _joueur.Mouvement(gameTime);
             _perso.Play(Game1._animationPlayer);
             _perso.Update(deltaSeconds);
 
+            String animationGrand = null;
+            animationGrand = "idle_down";
 
+
+            if (_myGame._cooldownVerif == false && Game1._positionPerso.X >= 20 && Game1._positionPerso.X <= 23 && Game1._positionPerso.Y == 34)
+            {
+                _eventEtDial.Ninja();
+            }
+
+            _grand.Play(animationGrand);
+            _grand.Update(deltaSeconds);
 
             //changements maps
 
             if (_keyboardState.IsKeyDown(Keys.Down) && (Event_et_dial.dd == 43) && Game1._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)Game1._positionPerso.X;
-                Game.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchato_int_chambres_couloir();
             }
         }
 
@@ -116,23 +137,34 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, Game1._positionPerso);
+
+            _spriteBatch.Draw(_grand, _positionGrand);
+
             _spriteBatch.End();
+
+
 
             var transformMatrixDial = Game1._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
+
             if (_eventEtDial._dialTrue == true)
             {
                 _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
+    
+
             _spriteBatch.End();
         }
+
+
+
 
         private bool IsCollision(ushort x, ushort y)
         {

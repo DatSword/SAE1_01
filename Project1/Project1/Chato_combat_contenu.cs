@@ -57,20 +57,20 @@ namespace SAE101
         }
         public static void Hero()
         {
-            _stat = new int[4] { 80, 50, 60, 70 };
+            _stat = new int[4] { 80, 100 ,60, 70 };//50
             _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
-            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
+            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour ", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 
         }
         public static void Jon()
         {
-            _stat = new int[4] { 100, 100, 40, 10 };
+            _stat = new int[4] { 100, 100, 40, 10 };//90
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Magie";
-            _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
-            _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
+            _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
+            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
         public static void Ben()
         {
@@ -85,7 +85,7 @@ namespace SAE101
 
         public static void Grand()
         {
-            _stat = new int[4] { 60, 20, 60, 100 };
+            _stat = new int[4] { 60, 0, 60, 100 };//20
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
@@ -94,15 +94,15 @@ namespace SAE101
         }
         public static void Mechant()
         {
-            _stat = new int[4] { 70, 70, 50, 50 };
+            _stat = new int[4] { 70, 0, 50, 50 };//70
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
-            _specialP = new String[] { "Boule de feu", "JSP", "_", "_" };
-            _descP = new String[] { "BRÛLEZZZZ", "MOURREZZZZZ", "_", "_" };
+            _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
+            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
         public static void Pabo()
         {
-            _stat = new int[4] { 70, 70, 50, 90 };
+            _stat = new int[4] { 70, 0, 50, 90 };//70
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };

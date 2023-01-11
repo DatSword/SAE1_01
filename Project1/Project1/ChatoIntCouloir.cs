@@ -70,7 +70,6 @@ namespace SAE101
             _limiteChambreX1 = 19 * 16;
             _limiteChambreX2 = 25 * 16;
             _limiteCouloirY1 = 6 * 16;
-            //_limiteCouloirY1 = 5 * 16;
 
             _vitessePerso = 100;
             _myGame._numSalle = 1;
@@ -124,16 +123,16 @@ namespace SAE101
             _Jon.Update(deltaSeconds);
             _eventEtDial.BoiteDialogues();
 
-            //Enclenchement evenment
+            //Enclenchement evenement
 
-            /*if (_myGame._positionPerso.X >= 19 * 16)
+            if (_myGame._positionPerso.X >= 19 * 16)
             {
                 _animationEnnemi = "idle_left";
                 _animationJon = "idle_right";
                 _eventEtDial.Jon3();
                 if (_keyboardState.IsKeyDown(Keys.W))
                     _myGame.LoadScreenchato_combat();
-            }*/
+            }
                 
             if (_myGame._positionPerso.X < 19 * 16)
             {
@@ -159,7 +158,6 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 

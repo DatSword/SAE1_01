@@ -47,6 +47,7 @@ namespace SAE101
         public String[] _ordreEnnemi;
         public int[] _stat; //PV, Attaque, Défense, Vitesse
 
+
         public Vector2 _lastPosition;
 
         public void Combat()

@@ -121,22 +121,28 @@ namespace SAE101
             _perso.Update(deltaSeconds);
             _ennemi.Play(_animationEnnemi);
             _ennemi.Update(deltaSeconds);
-            _Jon.Play(_animationEnnemi);
+            _Jon.Play(_animationJon);
             _Jon.Update(deltaSeconds);
             _eventEtDial.BoiteDialogues();
 
             //Enclenchement evenment
 
+            /*
             if (_myGame._positionPerso.X >= 19 * 16)
             {
                 _animationEnnemi = "idle_left";
+                _animationJon = "idle_right";
                 _eventEtDial.Jon3();
                 if (_keyboardState.IsKeyDown(Keys.W))
                     _myGame.LoadScreenchato_combat();
             }
-                
+            */
+
             if (_myGame._positionPerso.X < 19 * 16)
+            {
                 _animationEnnemi = "idle_down";
+                _animationJon = "idle_left";
+            }
 
             //Changement de map          
             if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 26))
@@ -163,6 +169,7 @@ namespace SAE101
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
             _spriteBatch.Draw(_ennemi, _positionEnnemi);
+            _spriteBatch.Draw(_Jon, _positionJon);
 
             _spriteBatch.End();
 

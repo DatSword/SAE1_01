@@ -34,6 +34,7 @@ namespace SAE101
         public ChatoIntCouloir _chatoIntCouloir;
         public ChatoIntChambres _chatoIntChambres;
         public ChatoExtCours _chatoExtCours;
+        public ChatoIntTrone _couronne;
         public ChatoCombatContenu _chatoCombatContenu;
         public ChatoCombat _chatoCombat;
         public Option _option;
@@ -159,6 +160,7 @@ namespace SAE101
             _chatoIntCouloir = new ChatoIntCouloir(this);
             _chatoIntChambres = new ChatoIntChambres(this);
             _chatoExtCours = new ChatoExtCours(this);
+            _couronne = new ChatoIntTrone(this);
             _joueur = new JoueurSpawn(this);
             _chatoCombatContenu = new ChatoCombatContenu(this);
             _chatoCombat = new ChatoCombat(this);
@@ -247,7 +249,9 @@ namespace SAE101
 
 
             // on charge l'écran de menu par défaut 
-            LoadScreenecran_de_titre();
+            //LoadScreenecran_de_titre();
+            //LoadScreenchato_ext_cours_interieur();
+            LoadScreenchato_couronne();
 
             base.LoadContent();
         }
@@ -377,7 +381,7 @@ namespace SAE101
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // cours
-            else if (_numEcran == 3 & _positionPerso.Y >= 1 * 16)
+            else if (_numEcran == 3 && _positionPerso.Y >= 1 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             else if (_numEcran == 3 && _positionPerso.Y < 1*16 )
@@ -386,6 +390,11 @@ namespace SAE101
             // combat
             else if (_numEcran == 4)
                 _cameraPosition = _chatoCombat._centreCombat;
+
+            // couronne
+            else if (_numEcran == 5)
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
+
 
             _walkSpeed = _speed * deltaSeconds;
             Console.WriteLine(_chatoIntChambres._posX);
@@ -462,6 +471,15 @@ namespace SAE101
             _numEcran = 4;
             _chato = false;
             _combatChato = true;
+        }
+
+        public void LoadScreenchato_couronne()
+        {
+            _screenManager.LoadScreen(_couronne, new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
+            this.Etat = Etats.Play;
+            _numEcran = 5;
+            _combatChato = false;
         }
 
         //autre

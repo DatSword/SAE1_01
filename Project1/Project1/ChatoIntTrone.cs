@@ -51,9 +51,9 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            _joueur.Spawnchato_ext_cours_interieur();
+            _joueur.Spawnchato_int_couronne();
 
-            _myGame._numSalle = 2;
+            _myGame._numSalle = 5;
 
 
             base.Initialize();
@@ -64,7 +64,7 @@ namespace SAE101
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_ext_cours_interieur");
+            _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_salle_courronnement");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
@@ -91,11 +91,10 @@ namespace SAE101
 
 
             //changements maps
-            //a changer
-            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 1) && _myGame._positionPerso.Y > 38 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchato_ext_cours_interieur();
             }
         }
 
@@ -109,7 +108,6 @@ namespace SAE101
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
 
-            _spriteBatch.Draw(_grand, _positionGrand);
 
             _spriteBatch.End();
 

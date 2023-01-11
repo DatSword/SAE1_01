@@ -104,13 +104,13 @@ namespace SAE101
             _eventEtDial.BoiteDialogues();
 
 
-            if ( _myGame._positionPerso.Y <= 34 * 16)
+            /*if ( _myGame._positionPerso.Y <= 34 * 16)
             {
                 _animationGrand = "idle_down";
                 _eventEtDial.Ninja();
                 if (_keyboardState.IsKeyDown(Keys.W))
                     _myGame.LoadScreenchato_combat();
-            }
+            } */
 
             if (_myGame._positionPerso.Y > 34 * 16)
                 _animationGrand = "idle_up";
@@ -121,6 +121,11 @@ namespace SAE101
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_couloir();
+            }
+            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
+            {
+                _posX = (int)_myGame._positionPerso.X;
+                _myGame.LoadScreenchato_couronne();
             }
         }
 

@@ -311,6 +311,11 @@
 /processor:TiledMapProcessor
 /build:map/chato/tmx/chato_int_chambres_nord.tmx
 
+#begin map/chato/tmx/chato_int_salle_courronnement.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:map/chato/tmx/chato_int_salle_courronnement.tmx
+
 #begin map/chato/tsx/Chato_int1.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor

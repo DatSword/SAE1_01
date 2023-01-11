@@ -158,7 +158,7 @@ namespace SAE101
                 if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
                     _myGame.SetCoolDown();
-                    Game1._fin = 1;
+                    _myGame._fin = 1;
                     _myGame.LoadScreenblack_jack();
                     
                 }
@@ -216,10 +216,10 @@ namespace SAE101
 
             //EVENEMENTS
             
-            if(Game1._firstvisit == true && _myGame._cooldownVerif == false && numDial == 0)
+            if(_myGame._firstvisit == true && _myGame._cooldownVerif == false && numDial == 0)
             {
                 _eventEtDial.Jon1();
-                Game1._firstvisit = false;
+                _myGame._firstvisit = false;
                 numDial = 1;
             }
             if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
@@ -237,7 +237,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _myGame._cooldownVerif == false)
             {
                 //Event_et_dial.Fin1();
-                Game1._fin = 1;
+                _myGame._fin = 1;
                 Game.LoadScreenblack_jack();
             }
 

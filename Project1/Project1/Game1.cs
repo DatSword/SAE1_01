@@ -41,17 +41,15 @@ namespace SAE101
         //Ecran interactif
         // états du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
-        // stocker l'état en cours du jeu
         private Etats etat;
 
         //Ecran
         public int xEcran;
         public int yEcran;
-
         public int xE;
         public int yE;
 
-        public double chan = 1;
+        public double chan;
 
         //Camera
         public OrthographicCamera _camera;
@@ -105,8 +103,8 @@ namespace SAE101
         public SpriteFont _font;
 
         //event
-        public static bool _firstvisit;
-        public static int _fin;
+        public bool _firstvisit;
+        public int _fin;
 
         //pour évènements et déplacementss
         public float _walkSpeed;
@@ -145,7 +143,8 @@ namespace SAE101
             yEcran = 448;
             xE = xEcran;
             yE = yEcran;
-            
+
+            chan = 1;
 
             _graphics.PreferredBackBufferWidth = xEcran;
             _graphics.PreferredBackBufferHeight = yEcran;
@@ -358,7 +357,7 @@ namespace SAE101
                                 && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
                 _cameraPosition = _chatoIntChambres._chambreCentre1;
 
-            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limiteChambreX1 
+            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
                                 && _positionPerso.X > _chatoIntChambres._limiteChambreGauche
                                 && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
                 _cameraPosition = _chatoIntChambres._chambreCentreUn;
@@ -373,19 +372,22 @@ namespace SAE101
                                 && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
                 _cameraPosition = _chatoIntChambres._chambreCentreDeux;
 
-            else if (_numEcran == 2 && _positionPerso.Y > 49*16)
+            else if (_numEcran == 2 && _positionPerso.Y > 49 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // cours
             else if (_numEcran == 3 & _positionPerso.Y >= 1 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            else if (_numEcran == 3 && _positionPerso.Y < 1*16 )
+            else if (_numEcran == 3 && _positionPerso.Y < 1 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // combat
             else if (_numEcran == 4)
-                _cameraPosition = _chatoCombat._centreCombat;
+                _cameraPosition = new Vector2(xEcran / 2, yEcran / 2);
+
+            //else if (_numEcran == 5)
+                
 
             _walkSpeed = _speed * deltaSeconds;
             Console.WriteLine(_chatoIntChambres._posX);
@@ -421,6 +423,7 @@ namespace SAE101
             MediaPlayer.Stop();
             _ecranTitre = false;
             _screenManager.LoadScreen(_blackJack, new FadeTransition(GraphicsDevice, Color.Black));
+            _numEcran = 4;
             this.Etat = Etats.Play;
         }
 

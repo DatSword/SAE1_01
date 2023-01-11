@@ -102,7 +102,7 @@ namespace SAE101
         public bool _victoire;
         public bool _gameOver;
 
-        //Personazes
+        //Personages
         private AnimatedSprite[] _allie;
         public static Vector2[] _posAllie;
         public String[] _fileA;
@@ -154,7 +154,7 @@ namespace SAE101
         public int _ordrefinal;
 
         //Camera
-        public Vector2 _centreCombat;
+        //public Vector2 _centreCombat;
 
         public ChatoCombat(Game1 game) : base(game) 
         {
@@ -211,7 +211,7 @@ namespace SAE101
             _attaqueEnnemy = new int[_chatoCombatContenu._nbEnnemy, 3];
 
             //Camera j'crois
-            _centreCombat = new Vector2(512 / 2, 448 / 2);
+            //_centreCombat = new Vector2(512 / 2, 448 / 2);
            
             //ordre allié
             _ordreA = new int[_chatoCombatContenu._nbAlly];
@@ -731,7 +731,7 @@ namespace SAE101
                 //Sortie du combat
                 if (_myGame._cooldownVerifF == false && _gameOver == true)
                 {
-                    Game1._fin = 2;
+                    _myGame._fin = 2;
                     _myGame.LoadScreenblack_jack();
                 }
                 else if (_myGame._cooldownVerifF == false && _victoire == true)

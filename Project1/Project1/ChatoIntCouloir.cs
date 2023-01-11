@@ -28,7 +28,6 @@ namespace SAE101
 
         //map
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private TiledMapRenderer _tiledMapRenderer;
 
@@ -50,7 +49,7 @@ namespace SAE101
         public int _limiteChambreX1;
         public int _limiteChambreX2;
         public int _limiteCouloirY1;
-        public int _limiteCouloirY2;
+        //public int _limiteCouloirY2;
 
         public ChatoIntCouloir(Game1 game) : base(game) 
         {
@@ -70,8 +69,8 @@ namespace SAE101
 
             _limiteChambreX1 = 19 * 16;
             _limiteChambreX2 = 25 * 16;
-            _limiteCouloirY1 = 5 * 16;
-            _limiteCouloirY1 = 5 * 16;
+            _limiteCouloirY1 = 6 * 16;
+            //_limiteCouloirY1 = 5 * 16;
 
             _vitessePerso = 100;
             _myGame._numSalle = 1;
@@ -79,7 +78,7 @@ namespace SAE101
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
             _animationEnnemi = "idle_down";
 
-            _positionJon = new Vector2(19 * 16, 7 * 16);
+            _positionJon = new Vector2(17 * 16, 7 * 16);
             _animationJon = "idle_down";
 
             base.Initialize();

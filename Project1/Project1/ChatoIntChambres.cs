@@ -100,7 +100,7 @@ namespace SAE101
 
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
-            _limiteChambreY1 = 7 * 16;
+            _limiteChambreY1 = 8 * 16;
 
             _limiteChambreGauche = 8 * 16;
             _limiteChambreDroite = 32 * 16;
@@ -242,11 +242,11 @@ namespace SAE101
 
             //EVENEMENTS
 
-            if (Game1._firstVisitBedroom == true && _myGame._cooldownVerif == false && numDial == 0)
+            if (_myGame._firstVisitBedroom == true && _myGame._cooldownVerif == false && numDial == 0)
             {
                 _eventEtDial.Jon1();
                 _posJon = new Vector2(4*16+8,4*16+8);
-                Game1._firstVisitBedroom = false;
+                _myGame._firstVisitBedroom = false;
                 numDial = 1;
             }
             if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)

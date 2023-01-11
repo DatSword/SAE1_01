@@ -104,7 +104,7 @@ namespace SAE101
         public SpriteFont _font;
 
         //event
-        public static bool _firstVisitBedroom;
+        public bool _firstVisitBedroom;
         public int _fin;
 
         //pour évènements et déplacementss
@@ -251,7 +251,6 @@ namespace SAE101
             _font = Content.Load<SpriteFont>("font/font_test");
 
 
-
             // on charge l'écran de menu par défaut 
             LoadScreenecran_de_titre();
             //LoadScreenchato_ext_cours_interieur();
@@ -395,13 +394,11 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = new Vector2(xEcran / 2, yEcran / 2);
 
-            //else if (_numEcran == 5)
-                
-
             // couronne
             else if (_numEcran == 5)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
+            Console.WriteLine(_numEcran);
 
             _walkSpeed = _speed * deltaSeconds;
             Console.WriteLine(ChatoCombatContenu._lastPosition);

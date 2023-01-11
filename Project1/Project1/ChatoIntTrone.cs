@@ -36,6 +36,9 @@ namespace SAE101
         private KeyboardState _keyboardState;
         public int _posX;
 
+        // ennemi
+        private AnimatedSprite _ennemiPabo;
+        private Vector2 _positionEnnemiPabo;
 
 
         public ChatoIntTrone(Game1 game) : base(game)
@@ -56,6 +59,7 @@ namespace SAE101
             _myGame._numSalle = 5;
 
 
+
             base.Initialize();
         }
 
@@ -67,8 +71,11 @@ namespace SAE101
             _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_salle_courronnement");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);
 
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
+            SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spriteSheetA);
+
+            SpriteSheet spriteSheetE = Content.Load<SpriteSheet>("anim/char/enemy/pabo/character_movement.sf", new JsonContentLoader());
+            _ennemiPabo = new AnimatedSprite(spriteSheetE);
 
             _eventEtDial.SetCollision();
 
@@ -107,6 +114,7 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
+
 
 
             _spriteBatch.End();

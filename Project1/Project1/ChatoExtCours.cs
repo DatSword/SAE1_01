@@ -116,10 +116,33 @@ namespace SAE101
             if (_myGame._positionPerso.Y > 34 * 16)
                 _animationGrand = "idle_up";
 
-            if ( _myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
+
+            /*if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial._dialTrue == true
+                && (EventEtDial.l == 101)
+                && _myGame._cooldownVerif == false
+                && (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
+                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16)))
+            {
+                _eventEtDial.FermeBoite();
+            }
+            else if ( _myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
                 && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16))
             {
                 _eventEtDial.OuVasTu();
+            }*/
+
+
+            if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
+                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16))
+            {
+               if (_eventEtDial._dialTrue == false)
+                    _eventEtDial.OuVasTu();
+
+                if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == true && _eventEtDial._dialTrue == true) 
+                {
+                    _eventEtDial.FermeBoite();
+
+                }
             }
 
             //changements maps

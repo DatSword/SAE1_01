@@ -47,6 +47,7 @@ namespace SAE101
         private Vector2[] _positionChest;
         private String _animationChest;
 
+        // camera
         public Vector2 _chambreCentre1;
         public Vector2 _chambreCentreUn;
         public Vector2 _chambreCentre2;
@@ -270,7 +271,7 @@ namespace SAE101
             }
 
             //DODO
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _myGame._cooldownVerif == false)
+            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
             {
                 //Event_et_dial.Fin1();
                 _myGame._fin = 1;

@@ -40,6 +40,8 @@ namespace SAE101
         private Vector2 _positionGrand;
         private String _animationGrand;
 
+        private bool _rencontre;
+
 
         public ChatoExtCours(Game1 game) : base(game)
         {
@@ -60,6 +62,8 @@ namespace SAE101
 
             _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
             _animationGrand = "idle_up";
+
+            _rencontre = false;
 
             base.Initialize();
         }
@@ -105,43 +109,30 @@ namespace SAE101
 
 
             //Evenements
-            /*if ( _myGame._positionPerso.Y <= 34 * 16)
+
+            // Ninja
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            {
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+                //_myGame.LoadScreenchato_combat();
+            }
+            else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {
                 _animationGrand = "idle_down";
                 _eventEtDial.Ninja();
-                if (_keyboardState.IsKeyDown(Keys.W))
-                    _myGame.LoadScreenchato_combat();
-            } */
-
-            if (_myGame._positionPerso.Y > 34 * 16)
-                _animationGrand = "idle_up";
+            }
 
 
-            /*if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial._dialTrue == true
-                && (EventEtDial.l == 101)
-                && _myGame._cooldownVerif == false
-                && (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
-                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16)))
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
+
                 _eventEtDial.FermeBoite();
             }
-            else if ( _myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
-                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16))
+            else if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
+                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16) && _myGame._cooldownVerif == false)
             {
                 _eventEtDial.OuVasTu();
-            }*/
-
-
-            if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
-                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16))
-            {
-                _eventEtDial.OuVasTu();
-                /*if (_keyboardState.IsKeyDown(Keys.W)) 
-                    _eventEtDial.FermeBoite();*/
-                if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
-                {
-                    _eventEtDial.FermeBoite();
-                }
             }
 
 
@@ -168,7 +159,8 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            _spriteBatch.Draw(_grand, _positionGrand);
+            if (_rencontre == false)
+                _spriteBatch.Draw(_grand, _positionGrand);
 
             _spriteBatch.End();
 

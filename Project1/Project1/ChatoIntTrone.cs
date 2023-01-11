@@ -104,7 +104,7 @@ namespace SAE101
 
             //Evenements
 
-            /// Battle final (mettre la bonne replique à ennemi)
+            // Battle final (mettre la bonne replique à ennemi)
             
             if ( _myGame._positionPerso.Y <= 31 * 16)
             {
@@ -114,7 +114,20 @@ namespace SAE101
                     _myGame.LoadScreenchato_combat();
             }
 
-            /// fin 
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            {
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+                //_myGame.LoadScreenchato_combat();
+            }
+            else if (_myGame._positionPerso.X >= 31 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
+            {
+                _animationPabo = "idle_left";
+                _eventEtDial.Ninja();
+            }
+
+
+            // fin 
             if (_myGame._positionPerso.Y <= 14 * 16)
             {
                 _myGame._fin = 3;

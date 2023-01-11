@@ -473,10 +473,8 @@ namespace SAE101
             if (konamiCount == 10)
             {
                 konami = true;
-                _pelo.Play();
                 konamiCount = 0;
             }
-            Console.WriteLine(konamiCount);
 
             base.Update(gameTime);
         }

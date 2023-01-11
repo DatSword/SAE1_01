@@ -89,6 +89,16 @@ namespace SAE101
             _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
 
+            //Evenements
+            if ( _myGame._positionPerso.Y <= 34 * 16)
+            {
+                _animationPabo = "idle_down";
+                _eventEtDial.Ninja();
+                if (_keyboardState.IsKeyDown(Keys.W))
+                    _myGame.LoadScreenchato_combat();
+            }
+
+
 
             //changements maps
             if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 1) && _myGame._positionPerso.Y > 38 * 16)

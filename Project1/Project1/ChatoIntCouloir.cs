@@ -127,14 +127,15 @@ namespace SAE101
 
             //Enclenchement evenment
 
-            /*if (_myGame._positionPerso.X >= 19 * 16)
+            /*
+           if (_myGame._positionPerso.X >= 19 * 16)
             {
                 _animationEnnemi = "idle_left";
                 _animationJon = "idle_right";
                 _eventEtDial.Jon3();
                 if (_keyboardState.IsKeyDown(Keys.W))
                     _myGame.LoadScreenchato_combat();
-            }*/
+            } */
                 
             if (_myGame._positionPerso.X < 19 * 16)
             {

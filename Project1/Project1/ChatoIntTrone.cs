@@ -96,7 +96,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._camera.LookAt(_myGame._cameraPosition);
+            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
 
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
@@ -149,10 +149,10 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(_myGame._cameraMap.GetViewMatrix());
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
             
             if (_rencontre == false)

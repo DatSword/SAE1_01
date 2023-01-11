@@ -1,20 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
-using MonoGame.Extended.Content;
-using MonoGame.Extended.Serialization;
-using MonoGame.Extended.Sprites;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace SAE101
 {
@@ -126,7 +114,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
@@ -140,7 +128,7 @@ namespace SAE101
     }
 
 
-    internal record struct NewStruct(object Item1, int Item2)
+    /*internal record struct NewStruct(object Item1, int Item2)
     {
         public static implicit operator (object, int)(NewStruct value)
         {
@@ -151,5 +139,5 @@ namespace SAE101
         {
             return new NewStruct(value.Item1, value.Item2);
         }
-    }
+    }*/
 }

@@ -123,7 +123,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)

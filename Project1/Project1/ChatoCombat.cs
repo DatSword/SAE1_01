@@ -331,7 +331,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._camera.LookAt(_myGame._cameraPosition);
+            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
 
             //curseurs
             if (_chatoCombatContenu._animationEnCours == false && _gameOver == false && _victoire == false)
@@ -598,7 +598,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
 
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);

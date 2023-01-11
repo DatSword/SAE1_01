@@ -105,7 +105,7 @@ namespace SAE101
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
                     ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
-            Game1._firstVisitBedroom = false;
+            _myGame._firstVisitBedroom = false;
         }
 
         public void Jon3()

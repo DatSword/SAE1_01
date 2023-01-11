@@ -104,7 +104,7 @@ namespace SAE101
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
-            _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(10, 0), Color.Gray);
+            _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(15, 0), Color.LightGray);
             _spriteBatch.Draw(_optBox, _posOptBox, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
 

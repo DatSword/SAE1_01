@@ -121,9 +121,9 @@ namespace SAE101
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour ", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
             if (_myGame._epee == true)
-                _stat[1] = _stat[1] + 20;
+                _stat[1] = 70;
             if (_myGame._boom == true)
-                _stat[1] = _stat[1] + 200000000;
+                _stat[1] = 200000000;
 
         }
         public void Jon()
@@ -134,7 +134,7 @@ namespace SAE101
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
             if (_myGame._boom == true)
-                _stat[1] = _stat[1] + 200000000;
+                _stat[1] = 200000000;
         }
         public void Ben()
         {
@@ -190,7 +190,7 @@ namespace SAE101
                         _animationA[_allyAnime] = "attack_right2";
                         _badabim = true;
                         _myGame._fire.Play();
-                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[1, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[1, 1]].Y);
+                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[ChatoCombat._playerAttacking, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[ChatoCombat._playerAttacking, 1]].Y);
                         
                     }
                     _coolDownAnimation = true;

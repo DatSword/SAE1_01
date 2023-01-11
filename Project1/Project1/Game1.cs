@@ -223,7 +223,7 @@ namespace SAE101
 
             //Musiques
             _songChato = Content.Load<Song>("music/chato/chato");
-            _titleTheme = Content.Load<Song>("music/title/title");
+            _titleTheme = Content.Load<Song>("music/title/titre");
             _songCombat = Content.Load<Song>("music/chato/combat");
             _songDodo = Content.Load<Song>("music/fins/sleep");
 

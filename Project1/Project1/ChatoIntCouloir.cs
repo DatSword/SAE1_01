@@ -76,16 +76,16 @@ namespace SAE101
             _limChambre_x2 = 25 * 16;
             _limCouloir = 6 * 16;
 
-
             _vitessePerso = 100;
             _myGame._numSalle = 1;
 
-            _positionEnnemi = new Vector2(26 * 16, 9 * 16);
+            _positionEnnemi = new Vector2(26 * 16 + 8, 9 * 16 + 8);
             _animationEnnemi = "idle_down";
 
             _rencontre = false;
+            _eventEtDial._numDial = 2;
 
-            _positionJon = new Vector2(17 * 16, 7 * 16);
+            _positionJon = new Vector2(18 * 16 +8, 8 * 16 +8);
             _animationJon = "idle_down";
 
             base.Initialize();
@@ -138,12 +138,14 @@ namespace SAE101
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
                 //_myGame.LoadScreenchato_combat();
+                _eventEtDial._numDial = 3;
             }
-            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
+            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2)
             {
                 _animationEnnemi = "idle_left";
                 _animationJon = "idle_right";
                 _eventEtDial.Jon3();
+                _eventEtDial._numDial = 1;
             }
             else if (_chatoCombat._victoire == true)
             {

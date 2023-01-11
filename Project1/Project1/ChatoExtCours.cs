@@ -47,6 +47,7 @@ namespace SAE101
         private String _animationGrand3;
 
         private bool _rencontre;
+        private bool _collisionPassage;
 
 
         public ChatoExtCours(Game1 game) : base(game)
@@ -74,6 +75,7 @@ namespace SAE101
             _animationGrand3 = "idle_right";
 
             _rencontre = false;
+            _collisionPassage = false;
 
             base.Initialize();
         }
@@ -145,12 +147,13 @@ namespace SAE101
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
-
                 _eventEtDial.FermeBoite();
+
             }
             else if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
-                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16) && _myGame._cooldownVerif == false)
+                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16) && _myGame._cooldownVerif == false && _collisionPassage == false)
             {
+                _collisionPassage = true;
                 _eventEtDial.OuVasTu();
             }
 

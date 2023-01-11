@@ -5,7 +5,7 @@
     "regionHeight": 32
   },
   "cycles": {
-    "animation0": {
+    "boom": {
       "frames": [0,1,2,3],
       "isLooping": false,
       "frameDuration": 0.2

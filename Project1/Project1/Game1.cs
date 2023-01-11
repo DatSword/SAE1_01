@@ -120,6 +120,8 @@ namespace SAE101
         public bool[] _chestTrue;
         public bool konami;
         public int konamiCount;
+        public bool _epee;
+        public bool _boom;
 
         public Etats Etat
         {
@@ -204,9 +206,11 @@ namespace SAE101
 
             //Combat?
             _combatTest = false;
+            _epee = false;
+            _boom = false;
 
-            //event
-            _firstVisitBedroom = true;
+        //event
+        _firstVisitBedroom = true;
             _fin = 0;
             _speed = 100;
             _animationPlayer = "idle_down";
@@ -405,24 +409,81 @@ namespace SAE101
 
 
 
-            if(_numEcran == 1)
+            if(_numEcran == 0)
             {
-                if (_keyboardState.IsKeyDown(Keys.Up) && konamiCount < 2)
-                    konamiCount++;
 
-                if (_keyboardState.IsKeyDown(Keys.Down) && konamiCount >= 2 && konamiCount < 4)
-                    konamiCount++;
+                if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount < 2)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
 
-                if (_keyboardState.IsKeyDown(Keys.Left) && konamiCount >= 2 && konamiCount < 4)
-                    konamiCount++;
+                if (_keyboardState.IsKeyDown(Keys.Down) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount >= 2 && konamiCount < 4)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
 
-                if (_keyboardState.IsKeyDown(Keys.Down) && konamiCount >= 2 && konamiCount < 4)
-                    konamiCount++;
+                if (_keyboardState.IsKeyDown(Keys.Left) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 4 || konamiCount == 6)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.Right) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 5 || konamiCount == 7)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 8)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 9)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
             }
+
+            if (konamiCount == 10)
+            {
+                konami = true;
+                _pelo.Play();
+                konamiCount = 0;
+            }
+            Console.WriteLine(konamiCount);
 
             base.Update(gameTime);
         }
-
+        
 
         protected override void Draw(GameTime gameTime)
         {
@@ -437,6 +498,7 @@ namespace SAE101
         {
             _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
+            _numEcran = 0;
             this.Etat = Etats.Menu;
         }
 
@@ -445,6 +507,7 @@ namespace SAE101
             _screenManager.LoadScreen(_option, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
             this.Etat = Etats.Option;
+            _numEcran = 11;
         }
 
         public void LoadScreenblack_jack()

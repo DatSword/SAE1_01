@@ -105,7 +105,7 @@ namespace SAE101
 
         //event
         public static bool _firstVisitBedroom;
-        public static int _fin;
+        public int _fin;
 
         //pour évènements et déplacementss
         public float _walkSpeed;

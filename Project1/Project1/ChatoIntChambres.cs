@@ -45,7 +45,6 @@ namespace SAE101
 
         private AnimatedSprite[] _chest;
         private Vector2[] _positionChest;
-        private bool[] _chestTrue;
 
         public Vector2 _chambreCentre1;
         public Vector2 _chambreCentreUn;
@@ -85,9 +84,13 @@ namespace SAE101
             _positionFren = new Vector2(28 * 16 + 8, 4 * 16 + 8);
             _frenTrue = false;
 
+            _chest = new AnimatedSprite[2];
+
+            _positionChest = new Vector2[2];
             _positionChest[0] = new Vector2(2 * 16 + 8, 4 * 16 + 8);
             _positionChest[1] = new Vector2(38 * 16 + 8, 4 * 16 + 8);
 
+            _myGame._chestTrue = new bool[2];
             _myGame._chestTrue[0] = false;
             _myGame._chestTrue[1] = false;
 
@@ -215,14 +218,14 @@ namespace SAE101
             for (int i = 0; i < _chest.Length; i++)
             {
                 String animationChest = null;
-                if (_chestTrue[i] == false)
+                if (_myGame._chestTrue[i] == false)
                     animationChest = "close";
                 else
                     animationChest = "open";
 
                 if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationChest == "close"
                     && _myGame._positionPerso.X > _limiteChambreDroite)
-                    _chestTrue[i] = true;
+                    _myGame._chestTrue[i] = true;
 
 
                 _chest[i].Play(animationChest);
@@ -290,8 +293,11 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_fren, _positionFren);
-            _spriteBatch.Draw(_chest1, _positionChest1);
-            _spriteBatch.Draw(_perso, _myGame._positionPerso);
+            for (int i = 0; i < _chest.Length; i++)
+            {
+                _spriteBatch.Draw(_chest[i], _positionChest[i]);
+                _spriteBatch.Draw(_perso, _myGame._positionPerso);
+            }          
             _spriteBatch.Draw(_jon, _posJon);
 
             _spriteBatch.End();

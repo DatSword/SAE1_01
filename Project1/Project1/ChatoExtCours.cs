@@ -38,7 +38,7 @@ namespace SAE101
 
         private AnimatedSprite _grand;
         private Vector2 _positionGrand;
-
+        private String _animationGrand;
 
 
         public ChatoExtCours(Game1 game) : base(game)
@@ -59,7 +59,7 @@ namespace SAE101
             _myGame._numSalle = 2;
 
             _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
-
+            _animationGrand = "idle_up";
 
             base.Initialize();
         }
@@ -91,7 +91,7 @@ namespace SAE101
             //Camera
             _myGame._camera.LookAt(_myGame._cameraPosition);
 
-            String animationGrand = null;
+     
 
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
@@ -99,17 +99,21 @@ namespace SAE101
             _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
 
-            animationGrand = "idle_up"; 
+            _grand.Play(_animationGrand);
+            _grand.Update(deltaSeconds);
+            _eventEtDial.BoiteDialogues();
 
 
-            if (_myGame._positionPerso.X >= 20 && _myGame._positionPerso.X <= 23 && _myGame._positionPerso.Y == 34)
+            if ( _myGame._positionPerso.Y <= 34 * 16)
             {
-                animationGrand = "idle_down";
+                _animationGrand = "idle_down";
                 _eventEtDial.Ninja();
+                if (_keyboardState.IsKeyDown(Keys.W))
+                    _myGame.LoadScreenchato_combat();
             }
 
-            _grand.Play(animationGrand);
-            _grand.Update(deltaSeconds);
+            if (_myGame._positionPerso.Y > 34 * 16)
+                _animationGrand = "idle_up";
 
             //changements maps
 
@@ -127,16 +131,14 @@ namespace SAE101
             var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-
             _spriteBatch.Draw(_grand, _positionGrand);
 
             _spriteBatch.End();
 
             var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-
             if (_eventEtDial._dialTrue == true)
             {
                 _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);

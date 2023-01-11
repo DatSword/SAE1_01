@@ -20,11 +20,10 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
-    public class ChatoCombatContenu : GameScreen
+    public class ChatoCombatContenu
     {
 
         // défini dans Game1
-        private new Game1 Game => (Game1)base.Game;
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private ChatoCombatContenu _chatoCombatContenu;
@@ -32,7 +31,7 @@ namespace SAE101
         private ChatoIntChambres _chatoIntChambres;
         private ChatoIntCouloir _chatoIntCouloir;
 
-        public ChatoCombatContenu(Game1 game) : base(game)
+        public ChatoCombatContenu(Game1 game)
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
@@ -310,11 +309,5 @@ namespace SAE101
                 }
             }
         }
-
-        public override void Update(GameTime gameTime)
-        {        }
-
-        public override void Draw(GameTime gameTime)
-        {        }
     }
 }

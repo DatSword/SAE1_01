@@ -21,10 +21,9 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
-    public class JoueurSpawn : GameScreen
+    public class JoueurSpawn
     {
         // défini dans Game1
-        private new Game1 Game => (Game1)base.Game;
         public Game1 _myGame;
         private EventEtDial _eventEtDial;
         private ChatoCombatContenu _chatoCombatContenu;
@@ -32,7 +31,7 @@ namespace SAE101
         private ChatoIntChambres _chatoIntChambres;
         private ChatoIntCouloir _chatoIntCouloir;
 
-        public JoueurSpawn(Game1 game) : base(game)
+        public JoueurSpawn(Game1 game)
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
@@ -191,11 +190,5 @@ namespace SAE101
                 return true;
             return false;
         }
-
-        public override void Update(GameTime gameTime)
-        {        }
-
-        public override void Draw(GameTime gameTime)
-        {        }
     }
 }

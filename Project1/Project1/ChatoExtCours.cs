@@ -104,6 +104,7 @@ namespace SAE101
             _eventEtDial.BoiteDialogues();
 
 
+            //Evenements
             /*if ( _myGame._positionPerso.Y <= 34 * 16)
             {
                 _animationGrand = "idle_down";
@@ -114,6 +115,12 @@ namespace SAE101
 
             if (_myGame._positionPerso.Y > 34 * 16)
                 _animationGrand = "idle_up";
+
+            if ( _myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
+                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16))
+            {
+                _eventEtDial.OuVasTu();
+            }
 
             //changements maps
 

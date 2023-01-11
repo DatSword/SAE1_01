@@ -127,6 +127,17 @@ namespace SAE101
             
             _nom = "Ninja";
         }
+
+        public void OuVasTu()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Mais où vas-tu ?\n" +
+                    "La salle du couronnement est au nord.";
+
+            _nom = "Jon";
+        } 
+
         public void Jon4()
         {
             _myGame.SetCoolDown();

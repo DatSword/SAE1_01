@@ -105,6 +105,7 @@ namespace SAE101
             //Evenements
 
             /// Battle final (mettre la bonne replique à ennemi)
+            
             if ( _myGame._positionPerso.Y <= 31 * 16)
             {
                 _animationPabo = "idle_down";

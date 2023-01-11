@@ -118,6 +118,7 @@ namespace SAE101
         public String _animationPlayer;
         public TiledMapTileLayer mapLayerDoor;
         public int _numSalle;
+        public bool[] _chestTrue;
 
         public Etats Etat
         {

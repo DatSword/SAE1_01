@@ -34,6 +34,7 @@ namespace SAE101
         public ChatoIntCouloir _chatoIntCouloir;
         public ChatoIntChambres _chatoIntChambres;
         public ChatoExtCours _chatoExtCours;
+        public ChatoIntTrone _couronne;
         public ChatoCombatContenu _chatoCombatContenu;
         public ChatoCombat _chatoCombat;
         public Option _option;
@@ -41,17 +42,15 @@ namespace SAE101
         //Ecran interactif
         // états du jeu
         public enum Etats { Menu, Start, Play, Quitter, Option };
-        // stocker l'état en cours du jeu
         private Etats etat;
 
         //Ecran
-        public int xEcran;
-        public int yEcran;
-
+        public int _xEcran = 514;
+        public int _yEcran = 448;  
         public int xE;
         public int yE;
 
-        public double chan = 1;
+        public double chan;
 
         //Camera
         public OrthographicCamera _camera;
@@ -105,12 +104,12 @@ namespace SAE101
         public SpriteFont _font;
 
         //event
-        public static bool _firstvisit;
-        public static int _fin;
+        public bool _firstVisitBedroom;
+        public int _fin;
 
         //pour évènements et déplacementss
         public float _walkSpeed;
-        public float _speed;
+        public const float SPEED = 100;
         public TiledMap _tiledMap;
         public Vector2 _positionPerso;
         public TiledMapTileLayer mapLayer;
@@ -118,7 +117,11 @@ namespace SAE101
         public String _animationPlayer;
         public TiledMapTileLayer mapLayerDoor;
         public int _numSalle;
-        //public static TiledMapTileLayer mapIntersect;
+        public bool[] _chestTrue;
+        public bool konami;
+        public int konamiCount;
+        public bool _epee;
+        public bool _boom;
 
         public Etats Etat
         {
@@ -141,14 +144,13 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            xEcran = 514;
-            yEcran = 448;
-            xE = xEcran;
-            yE = yEcran;
-            
+            xE = _xEcran;
+            yE = _yEcran;
 
-            _graphics.PreferredBackBufferWidth = xEcran;
-            _graphics.PreferredBackBufferHeight = yEcran;
+            chan = 1;
+
+            _graphics.PreferredBackBufferWidth = _xEcran;
+            _graphics.PreferredBackBufferHeight = _yEcran;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
 
@@ -159,6 +161,7 @@ namespace SAE101
             _chatoIntCouloir = new ChatoIntCouloir(this);
             _chatoIntChambres = new ChatoIntChambres(this);
             _chatoExtCours = new ChatoExtCours(this);
+            _couronne = new ChatoIntTrone(this);
             _joueur = new JoueurSpawn(this);
             _chatoCombatContenu = new ChatoCombatContenu(this);
             _chatoCombat = new ChatoCombat(this);
@@ -173,15 +176,18 @@ namespace SAE101
 
             //Camera
 
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _xEcran, _yEcran);
             _camera = new OrthographicCamera(viewportadapter);
 
-            var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, 514, 448);
+            var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, _xEcran, _yEcran);
             _cameraDial = new OrthographicCamera(viewportadapterDial);
 
             _cameraPosition = _chatoIntChambres._chambreCentre1;
-            _numEcran = 1;
+            _numEcran = 0;
 
+            _chestTrue = new bool[2];
+            for (int i = 0; i < _numEcran; i++)
+                _chestTrue[i] = false;
 
             //Dialogue
             _eventEtDial._posText = new Vector2(105, 360);
@@ -198,11 +204,12 @@ namespace SAE101
 
             //Combat?
             _combatTest = false;
+            _epee = false;
+            _boom = false;
 
-            //event
-            _firstvisit = true;
+        //event
+        _firstVisitBedroom = true;
             _fin = 0;
-            _speed = 100;
             _animationPlayer = "idle_down";
             
 
@@ -245,7 +252,6 @@ namespace SAE101
             _font = Content.Load<SpriteFont>("font/font_test");
 
 
-
             // on charge l'écran de menu par défaut 
             LoadScreenecran_de_titre();
 
@@ -261,7 +267,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
 
-
+            Console.WriteLine(_chestTrue[0] + " " + _chestTrue[1]);
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
@@ -325,73 +331,152 @@ namespace SAE101
             //Camera
 
             // chambres nord
-            if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
-                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1
-                                && _positionPerso.X < _chatoIntChambres._limiteChambreGauche)
+            if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
+                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1
+                                && _positionPerso.X < _chatoIntChambres._limChambre_Gauche)
                 _cameraPosition = _chatoIntChambres._chambreCentre1;
 
-            else if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
-                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1)
+            else if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
+                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1)
                 _cameraPosition = _chatoIntChambres._chambreCentreUn;
 
-            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limiteChambreX2
-                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1
-                                && _positionPerso.X > _chatoIntChambres._limiteChambreDroite)
+            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limChambre_x2
+                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1
+                                && _positionPerso.X > _chatoIntChambres._limChambre_Droite)
                 _cameraPosition = _chatoIntChambres._chambreCentreDeux;
 
-            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limiteChambreX2 
-                                && _positionPerso.Y < _chatoIntChambres._limiteChambreY1)
+            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limChambre_x2 
+                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1)
                 _cameraPosition = _chatoIntChambres._chambreCentre2;
 
-            else if (_numEcran == 1 && _positionPerso.Y >= _chatoIntCouloir._limiteCouloirY1)
+            else if (_numEcran == 1 && _positionPerso.Y >= _chatoIntCouloir._limCouloir)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
 
             // couloir
             if (_numEcran == 2 && (_positionPerso.Y > 0
-                                && (_positionPerso.X > _chatoIntCouloir._limiteChambreX1 ||
-                                _positionPerso.X < _chatoIntCouloir._limiteChambreX2)))
+                                && (_positionPerso.X > _chatoIntCouloir._limChambre_x1 ||
+                                _positionPerso.X < _chatoIntCouloir._limChambre_x2)))
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limiteChambreX1
-                                && _positionPerso.X < _chatoIntChambres._limiteChambreGauche
-                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limChambre_x1
+                                && _positionPerso.X < _chatoIntChambres._limChambre_Gauche
+                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
                 _cameraPosition = _chatoIntChambres._chambreCentre1;
 
-            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limiteChambreX1 
-                                && _positionPerso.X > _chatoIntChambres._limiteChambreGauche
-                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limChambre_x1
+                                && _positionPerso.X > _chatoIntChambres._limChambre_Gauche
+                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
                 _cameraPosition = _chatoIntChambres._chambreCentreUn;
 
-            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limiteChambreX2
-                                && _positionPerso.X < _chatoIntChambres._limiteChambreDroite
-                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limChambre_x2
+                                && _positionPerso.X < _chatoIntChambres._limChambre_Droite
+                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
                 _cameraPosition = _chatoIntChambres._chambreCentre2;
 
-            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limiteChambreX2
-                                && _positionPerso.X > _chatoIntChambres._limiteChambreDroite
-                                && _positionPerso.Y >= _chatoIntChambres._limiteChambreY1)
+            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limChambre_x2
+                                && _positionPerso.X > _chatoIntChambres._limChambre_Droite
+                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
                 _cameraPosition = _chatoIntChambres._chambreCentreDeux;
 
-            else if (_numEcran == 2 && _positionPerso.Y > 49*16)
+            else if (_numEcran == 2 && _positionPerso.Y > 49 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // cours
-            else if (_numEcran == 3 & _positionPerso.Y >= 1 * 16)
+            else if (_numEcran == 3 && _positionPerso.Y >= 1 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            else if (_numEcran == 3 && _positionPerso.Y < 1*16 )
+            else if (_numEcran == 3 && _positionPerso.Y < 1 * 16)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             // combat
             else if (_numEcran == 4)
-                _cameraPosition = _chatoCombat._centreCombat;
+                _cameraPosition = new Vector2(_xEcran / 2, _yEcran / 2);
 
-            _walkSpeed = _speed * deltaSeconds;
-            Console.WriteLine(_chatoIntChambres._posX);
+            // couronne
+            else if (_numEcran == 5)
+                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
+
+            Console.WriteLine(_numEcran);
+
+            _walkSpeed = SPEED * deltaSeconds;
+            Console.WriteLine(ChatoCombatContenu._lastPosition);
+
+
+
+            if(_numEcran == 0)
+            {
+
+                if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount < 2)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.Down) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount >= 2 && konamiCount < 4)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.Left) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 4 || konamiCount == 6)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.Right) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 5 || konamiCount == 7)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 8)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+
+                if (_keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false)
+                {
+                    SetCoolDown();
+                    if (konamiCount == 9)
+                        konamiCount++;
+                    else
+                        konamiCount = 0;
+                }
+                    
+            }
+
+            if (konamiCount == 10)
+            {
+                konami = true;
+                konamiCount = 0;
+            }
+
             base.Update(gameTime);
         }
-
+        
 
         protected override void Draw(GameTime gameTime)
         {
@@ -406,6 +491,7 @@ namespace SAE101
         {
             _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
+            _numEcran = 0;
             this.Etat = Etats.Menu;
         }
 
@@ -414,6 +500,7 @@ namespace SAE101
             _screenManager.LoadScreen(_option, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
             this.Etat = Etats.Option;
+            _numEcran = 11;
         }
 
         public void LoadScreenblack_jack()
@@ -421,6 +508,7 @@ namespace SAE101
             MediaPlayer.Stop();
             _ecranTitre = false;
             _screenManager.LoadScreen(_blackJack, new FadeTransition(GraphicsDevice, Color.Black));
+            _numEcran = 4;
             this.Etat = Etats.Play;
         }
 
@@ -464,6 +552,15 @@ namespace SAE101
             _combatChato = true;
         }
 
+        public void LoadScreenchato_couronne()
+        {
+            _screenManager.LoadScreen(_couronne, new FadeTransition(GraphicsDevice, Color.Black));
+            MusiqueChato();
+            this.Etat = Etats.Play;
+            _numEcran = 5;
+            _combatChato = false;
+        }
+
         //autre
         public void SetCoolDown()
         {
@@ -484,6 +581,8 @@ namespace SAE101
             _cooldownF = 5.0f;
         }
 
+
+        // Musique
         public void MusiqueChatoCombat()
         {
             if (_combatChato == false)
@@ -516,11 +615,11 @@ namespace SAE101
 
         public void ChangementEcran(double changement)
         {
-            _graphics.PreferredBackBufferWidth = (int)(xEcran * changement);
-            _graphics.PreferredBackBufferHeight = (int)(yEcran * changement);
+            _graphics.PreferredBackBufferWidth = (int)(_xEcran * changement);
+            _graphics.PreferredBackBufferHeight = (int)(_yEcran * changement);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            xE = (int)(xEcran * changement);
-            yE = (int)(yEcran * changement);
+            xE = (int)(_xEcran * changement);
+            yE = (int)(_yEcran * changement);
             chan = changement;
             _graphics.ApplyChanges();
         }

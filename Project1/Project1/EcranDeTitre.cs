@@ -78,7 +78,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1 + (63 * _myGame.chan) * _myGame.chan),
-                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
+                 (int)(_myGame.chan* 210), (int)(_myGame.chan * 63));
 
             lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * _myGame.chan) * _myGame.chan),
                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
@@ -131,9 +131,9 @@ namespace SAE101
             
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(_myGame.xEcran / 2 - 210 / 2, _myGame.yEcran / 3 + 63), Color.White);
-            _spriteBatch.Draw(_option, new Vector2(_myGame.xEcran / 2 - 210 / 2, (float)(_myGame.yEcran / 3 * 1.5 + 63)), Color.White);
-            _spriteBatch.Draw(_quit, new Vector2(_myGame.xEcran / 2 - 210 / 2, _myGame.yEcran / 3 * 2 + 63), Color.White);
+            _spriteBatch.Draw(_start, new Vector2(_myGame._xEcran / 2 - 210 / 2, _myGame._yEcran / 3 + 63), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(_myGame._xEcran / 2 - 210 / 2, (float)(_myGame._yEcran / 3 * 1.5 + 63)), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(_myGame._xEcran / 2 - 210 / 2, _myGame._yEcran / 3 * 2 + 63), Color.White);
             
             _spriteBatch.End();
         }

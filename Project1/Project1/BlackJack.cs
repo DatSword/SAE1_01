@@ -31,6 +31,7 @@ namespace SAE101
         public Vector2 _textPos;
         public String _text;
 
+        private String _credit;
         public BlackJack(Game1 game) : base(game) 
         {
             _myGame = game;
@@ -42,8 +43,18 @@ namespace SAE101
 
             _textPos = new Vector2(50, 150);
             _text = "";
+            _credit = "----TANTOPIE STAFF----" +
+                      "Scénario" +
+                      "Carte" +
+                      "Programmation" +
+                      "Sprites et images" +
+                      "Musiques" +
+                      "Compte rendu" +
+                      "Vidéo trailer" +
+                      "Système de combat" +
+                      "remerciments spéciaux";
 
-            if (Game1._fin == 1)
+            if (_myGame._fin == 1)
                 MediaPlayer.Play(_myGame._songDodo);
 
             base.Initialize();
@@ -61,28 +72,32 @@ namespace SAE101
             KeyboardState keyboardState = Keyboard.GetState();
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.Back))
                 _myGame.Etat = Game1.Etats.Menu;
 
             //changements maps, tout premier dialogue
-            if (Game1._fin == 0)
+            if (_myGame._fin == 0)
                 _text = "...et c'est ainsi qu'après cette grande aventure, nos héros ont\n" +
                         "bien mérité de précieuses heures de repos dans le Chato, juste\n" +
                         "avant le couronnement de leur ami Julius, pour enfin boucler\n" +
                         "cette hist-";
-            else if (Game1._fin == 10)
+            else if (_myGame._fin == 10)
                 _text = "";
-            else if (Game1._fin == 1)
+            else if (_myGame._fin == 1)
+            {
                 _text = "Hum hum, malgré cette petite interruption, notre héros décida\n" +
                         "qu'il n'allait pas être présent lors du courronnement. Même si\n" +
                         "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
                         "d'épreuves, le sommeil reste son ennemi le plus puissant.";
-            else if (Game1._fin == 2)
+            }
+            else if (_myGame._fin == 2)
                 _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
                         "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
                         "non?";
-            else if (Game1._fin == 3)
+            else if (_myGame._fin == 3)
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
@@ -90,9 +105,9 @@ namespace SAE101
                         "Peut-être un jour...?";
 
 
-            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 )
+            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 && _myGame._fin == 0)
             {
-                Game1._fin = 10;
+                _myGame._fin = 10;
                 _myGame._toink.Play();
                 _eventEtDial.toutDebut();
             }

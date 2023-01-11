@@ -21,18 +21,18 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace SAE101
 {
-    public class JoueurSpawn : GameScreen
+    public class JoueurSpawn
     {
         // défini dans Game1
-        private new Game1 Game => (Game1)base.Game;
         public Game1 _myGame;
         private EventEtDial _eventEtDial;
         private ChatoCombatContenu _chatoCombatContenu;
         private ChatoExtCours _chatoExtCours;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoIntCouloir _chatoIntCouloir;
+        public ChatoIntTrone _couronne;
 
-        public JoueurSpawn(Game1 game) : base(game)
+        public JoueurSpawn(Game1 game)
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
@@ -40,13 +40,14 @@ namespace SAE101
             _chatoExtCours = _myGame._chatoExtCours;
             _chatoIntChambres = _myGame._chatoIntChambres;
             _chatoIntCouloir = _myGame._chatoIntCouloir;
+            _couronne = _myGame._couronne;
         }
 
         public void Spawnchato_int_chambres_couloir()
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -81,7 +82,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -104,13 +105,13 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
             {
-                if (_chatoIntCouloir._posX == 0)
-                    _myGame._positionPerso = new Vector2(22 * 16, 49 * 16);
+                /*if (_chatoIntCouloir._posX == 0)
+                    _myGame._positionPerso = new Vector2(22 * 16, 49 * 16); */
 
                 if (_chatoIntCouloir._posX >= 19 * 16 && _chatoIntCouloir._posX < 21.5 * 16)
                     _myGame._positionPerso = new Vector2(20 * 16 + 8, 49 * 16);
@@ -120,6 +121,30 @@ namespace SAE101
                     _myGame._positionPerso = new Vector2(22 * 16 + 8, 49 * 16);
                 else if (_chatoIntCouloir._posX >= 23.5 * 16 && _chatoIntCouloir._posX < 25 * 16)
                     _myGame._positionPerso = new Vector2(23 * 16 + 8, 49 * 16);
+
+                if (_couronne._posX >= 8 * 16 && _couronne._posX < 9 * 16)
+                    _myGame._positionPerso = new Vector2(20 * 16, 10 * 16);
+                else if (_couronne._posX >= 9 * 16 && _couronne._posX < 10 * 16)
+                    _myGame._positionPerso = new Vector2(21 * 16, 10 * 16);
+                else if (_couronne._posX >= 10 * 16 && _couronne._posX < 11 * 16)
+                    _myGame._positionPerso = new Vector2(22 * 16, 10 * 16);
+                else if (_couronne._posX >= 11 * 16 && _couronne._posX < 12 * 16)
+                    _myGame._positionPerso = new Vector2(23 * 16, 10 * 16);
+                else if (_couronne._posX >= 12 * 16)
+                    _myGame._positionPerso = new Vector2(23 * 16, 10 * 16);
+            }
+        }
+
+        public void Spawnchato_int_couronne()
+        {
+            if (_myGame._combatFini == true)
+            {
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
+                _myGame._combatFini = false;
+            }
+            else
+            {
+                _myGame._positionPerso = new Vector2(11 * 16, 38 * 16);
             }
         }
 
@@ -191,11 +216,5 @@ namespace SAE101
                 return true;
             return false;
         }
-
-        public override void Update(GameTime gameTime)
-        {        }
-
-        public override void Draw(GameTime gameTime)
-        {        }
     }
 }

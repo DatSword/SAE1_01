@@ -21,13 +21,12 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-    public class EventEtDial : GameScreen
+    public class EventEtDial
     {
         // défini dans Game1
-        private new Game1 Game => (Game1)base.Game;
         private Game1 _myGame;
 
-        public EventEtDial(Game1 game) : base(game)
+        public EventEtDial(Game1 game)
         {
             _myGame = game;
         }
@@ -106,7 +105,7 @@ namespace SAE101
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
                     ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
-            Game1._firstvisit = false;
+            _myGame._firstVisitBedroom = false;
         }
 
         public void Jon3()
@@ -123,14 +122,58 @@ namespace SAE101
             _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Tu ne passera pas cet cour!\n" +
-                    "Du moins tant que je suis là.";
+                    "Du moins tant que on est là.";
 
             
             _nom = "Ninja";
         }
 
+        public void OuVasTu()
+        {
+            //_myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Mais où vas-tu ?\n" +
+                    "La salle du couronnement est au nord.";
+            _nom = "Jon";
+        } 
 
+        public void Jon4()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Des ninjas ici? Je savais qu'on avait attiré l'intention de\n" +
+                    "pas mal de monde, mais j'savais pas à ce point là!" +
+                    "Allons-y, et rappelle toi que chacun de nous possède des actions\n" +
+                    "spéciale";
+            _nom = "Jon";
+        }
 
+        public void Chest0()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous retrouvez votre épée !";
+            _nom = "";
+            _myGame._epee = true;
+        }
+
+        public void RPG()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous retrouvez... un lance missile!?;";
+            _nom = "";
+            _myGame._boom = true;
+        }
+
+        public void Chest1()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous obtenez de la Akdov!;";
+            _nom = "";
+
+        }
 
         public void FermeBoite()
         {
@@ -145,8 +188,9 @@ namespace SAE101
             _choiceTrue = true;
             _text = "Un lit décidemment très confortable. Voulez-vous\nvous rendormir?";
             _nom = " ";
-            _dialTrue = true;
         }
+
+    
 
         public void SetCollision()
         {
@@ -171,9 +215,5 @@ namespace SAE101
             Console.WriteLine("ud = " + ud);
             Console.WriteLine("dd = " + dd);
         }
-
-        public override void Update(GameTime gameTime) {   }
-
-        public override void Draw(GameTime gameTime) {  }
     }
 }

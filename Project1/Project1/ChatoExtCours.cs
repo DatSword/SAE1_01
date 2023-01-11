@@ -30,6 +30,7 @@ namespace SAE101
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
+        private ChatoCombat _chatoCombat;
 
         //sprite
         private AnimatedSprite _perso;
@@ -37,8 +38,17 @@ namespace SAE101
         public int _posX;
 
         private AnimatedSprite _grand;
+        private AnimatedSprite _grand2;
+        private AnimatedSprite _grand3;
         private Vector2 _positionGrand;
+        private Vector2 _positionGrand2;
+        private Vector2 _positionGrand3;
+        private String _animationGrand;
+        private String _animationGrand2;
+        private String _animationGrand3;
 
+        private bool _rencontre;
+        private bool _collisionPassage;
 
 
         public ChatoExtCours(Game1 game) : base(game)
@@ -50,6 +60,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
+            _chatoCombat = _myGame._chatoCombat;
 
             // Lieu Spawn
             _posX = 0;
@@ -58,8 +69,15 @@ namespace SAE101
 
             _myGame._numSalle = 2;
 
-            _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
+            _positionGrand = new Vector2(21 * 16 + 8, 25 * 16 +8);
+            _positionGrand2 = new Vector2(12 * 16 + 8, 21 * 16 + 8);
+            _positionGrand3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
+            _animationGrand = "idle_up";
+            _animationGrand2 = "idle_left";
+            _animationGrand3 = "idle_right";
 
+            _rencontre = false;
+            _collisionPassage = false;
 
             base.Initialize();
         }
@@ -77,6 +95,9 @@ namespace SAE101
 
             SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/enemy/grand/character_movement.sf", new JsonContentLoader());
             _grand = new AnimatedSprite(spriteSheet2);
+            _grand2 = new AnimatedSprite(spriteSheet2);
+            _grand3 = new AnimatedSprite(spriteSheet2);
+
 
             _eventEtDial.SetCollision();
 
@@ -91,7 +112,7 @@ namespace SAE101
             //Camera
             _myGame._camera.LookAt(_myGame._cameraPosition);
 
-            String animationGrand = null;
+     
 
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
@@ -99,17 +120,51 @@ namespace SAE101
             _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
 
-            animationGrand = "idle_up"; 
+            _grand.Play(_animationGrand);
+            _grand2.Play(_animationGrand2);
+            _grand3.Play(_animationGrand3);
+            _grand.Update(deltaSeconds);
+            _grand2.Update(deltaSeconds);
+            _grand3.Update(deltaSeconds);
+            _eventEtDial.BoiteDialogues();
 
 
-            if (_myGame._positionPerso.X >= 20 && _myGame._positionPerso.X <= 23 && _myGame._positionPerso.Y == 34)
+            //Evenements
+
+            // Ninja
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false)
             {
-                animationGrand = "idle_down";
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+                _myGame.LoadScreenchato_combat();
+            }
+            else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
+            {
+                _animationGrand = "idle_down";
+                _animationGrand2 = "idle_down";
+                _animationGrand3 = "idle_down";
                 _eventEtDial.Ninja();
             }
+            else if (_chatoCombat._victoire == true)
+            {
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+                _chatoCombat._victoire = false;
+            }
 
-            _grand.Play(animationGrand);
-            _grand.Update(deltaSeconds);
+
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == true)
+            {
+                _eventEtDial.FermeBoite();
+
+            }
+            else if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
+                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16) && _myGame._cooldownVerif == false && _collisionPassage == false)
+            {
+                _collisionPassage = true;
+                _eventEtDial.OuVasTu();
+            }
+
 
             //changements maps
 
@@ -117,6 +172,11 @@ namespace SAE101
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_couloir();
+            }
+            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
+            {
+                _posX = (int)_myGame._positionPerso.X;
+                _myGame.LoadScreenchato_couronne();
             }
         }
 
@@ -127,16 +187,19 @@ namespace SAE101
             var transformMatrix = _myGame._camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
+            _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-
-            _spriteBatch.Draw(_grand, _positionGrand);
+            if (_rencontre == false)
+            {
+                _spriteBatch.Draw(_grand, _positionGrand);
+                _spriteBatch.Draw(_grand2, _positionGrand2);
+                _spriteBatch.Draw(_grand3, _positionGrand3);
+            }
 
             _spriteBatch.End();
 
             var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
-
             if (_eventEtDial._dialTrue == true)
             {
                 _spriteBatch.Draw(_eventEtDial._dialBox, _eventEtDial._posDialBox, Color.White);
@@ -146,20 +209,6 @@ namespace SAE101
     
 
             _spriteBatch.End();
-        }
-
-
-
-
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
         }
     }
 }

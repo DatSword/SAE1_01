@@ -31,6 +31,7 @@ namespace SAE101
         public Vector2 _textPos;
         public String _text;
 
+        private String _credit;
         public BlackJack(Game1 game) : base(game) 
         {
             _myGame = game;
@@ -42,6 +43,16 @@ namespace SAE101
 
             _textPos = new Vector2(50, 150);
             _text = "";
+            _credit = "----TANTOPIE STAFF----" +
+                      "Scénario" +
+                      "Carte" +
+                      "Programmation" +
+                      "Sprites et images" +
+                      "Musiques" +
+                      "Compte rendu" +
+                      "Vidéo trailer" +
+                      "Système de combat" +
+                      "remerciments spéciaux";
 
             if (_myGame._fin == 1)
                 MediaPlayer.Play(_myGame._songDodo);

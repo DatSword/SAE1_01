@@ -54,12 +54,12 @@ namespace SAE101
         public Vector2 _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
 
 
-        public int _limChambre_x1 = 16 * 16;
-        public int _limChambre_x2 = 24 * 16;
-        public int _limChambre_y1 = 8 * 16;
-        public int _limChambre_y2 = 8 * 16;
-        public int _limChambre_Gauche = 8 * 16;
-        public int _limChambre_Droite = 32 * 16;
+        public int _limChambre_x1;
+        public int _limChambre_x2;
+        public int _limChambre_y1;
+        public int _limChambre_y2;
+        public int _limChambre_Gauche;
+        public int _limChambre_Droite;
 
         private int _choixCursor;
 
@@ -82,6 +82,14 @@ namespace SAE101
             numDial = 0;
 
             _joueur.Spawnchato_int_chambres_nord();
+
+            _limChambre_x1 = 16 * 16;
+            _limChambre_x2 = 24 * 16;
+            _limChambre_y1 = 8 * 16;
+            _limChambre_y2 = 8 * 16;
+            _limChambre_Gauche = 8 * 16;
+            _limChambre_Droite = 32 * 16;
+
 
             // Lieu Spawn objects
             _positionFren = new Vector2(28 * 16 + 8, 4 * 16 + 8);

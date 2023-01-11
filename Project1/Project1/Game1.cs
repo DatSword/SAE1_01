@@ -253,9 +253,9 @@ namespace SAE101
 
 
             // on charge l'écran de menu par défaut 
-            LoadScreenecran_de_titre();
-            //LoadScreenchato_ext_cours_interieur();
-            //LoadScreenchato_couronne();
+            // LoadScreenecran_de_titre();
+            // LoadScreenchato_ext_cours_interieur();
+             LoadScreenchato_couronne();
 
             base.LoadContent();
         }

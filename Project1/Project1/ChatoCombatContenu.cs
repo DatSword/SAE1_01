@@ -179,7 +179,7 @@ namespace SAE101
             {
                 if (_animationP1 == true)
                 {
-                    if (_myGame.konami != true)
+                    if (_myGame._boom != true)
                     {
                         _animationA[_allyAnime] = "attack_right1";
                         _myGame._hit.Play();

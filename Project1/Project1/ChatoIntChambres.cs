@@ -222,13 +222,21 @@ namespace SAE101
                     _animationChest = "open";
             }
 
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 71) && _animationChest == "close"
-                    && _myGame._positionPerso.X > _limiteChambreDroite)
+            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X > 20 * 16 && _myGame._cooldownVerif == false)
             {
                 _myGame._chestTrue[1] = true;
+                _eventEtDial.Chest1();
+            }
+
+            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X < 20 * 16 && _myGame._cooldownVerif == false)
+            {
+                _myGame._chestTrue[0] = true;
+                if (_myGame.konami == true)
+                    _eventEtDial.RPG();
+                else
+                    _eventEtDial.Chest0();
 
             }
-                
 
             for (int i = 0; i < _chest.Length; i++)
             {
@@ -239,7 +247,7 @@ namespace SAE101
 
             _jon.Play(_animJon);
             _jon.Update(deltaSeconds);
-
+            Console.WriteLine(numDial);
 
             //EVENEMENTS
 

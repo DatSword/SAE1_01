@@ -122,7 +122,7 @@ namespace SAE101
             _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Tu ne passera pas cet cour!\n" +
-                    "Du moins tant que je suis là.";
+                    "Du moins tant que on est là.";
 
             
             _nom = "Ninja";

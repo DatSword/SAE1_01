@@ -37,8 +37,14 @@ namespace SAE101
         public int _posX;
 
         private AnimatedSprite _grand;
+        private AnimatedSprite _grand2;
+        private AnimatedSprite _grand3;
         private Vector2 _positionGrand;
+        private Vector2 _positionGrand2;
+        private Vector2 _positionGrand3;
         private String _animationGrand;
+        private String _animationGrand2;
+        private String _animationGrand3;
 
         private bool _rencontre;
 
@@ -60,8 +66,12 @@ namespace SAE101
 
             _myGame._numSalle = 2;
 
-            _positionGrand = new Vector2(21 * 16 +8, 25 * 16 +8);
+            _positionGrand = new Vector2(21 * 16 + 8, 25 * 16 +8);
+            _positionGrand2 = new Vector2(12 * 16 + 8, 21 * 16 + 8);
+            _positionGrand3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
             _animationGrand = "idle_up";
+            _animationGrand2 = "idle_left";
+            _animationGrand3 = "idle_right";
 
             _rencontre = false;
 
@@ -81,6 +91,9 @@ namespace SAE101
 
             SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/enemy/grand/character_movement.sf", new JsonContentLoader());
             _grand = new AnimatedSprite(spriteSheet2);
+            _grand2 = new AnimatedSprite(spriteSheet2);
+            _grand3 = new AnimatedSprite(spriteSheet2);
+
 
             _eventEtDial.SetCollision();
 
@@ -104,7 +117,11 @@ namespace SAE101
             _perso.Update(deltaSeconds);
 
             _grand.Play(_animationGrand);
+            _grand2.Play(_animationGrand2);
+            _grand3.Play(_animationGrand3);
             _grand.Update(deltaSeconds);
+            _grand2.Update(deltaSeconds);
+            _grand3.Update(deltaSeconds);
             _eventEtDial.BoiteDialogues();
 
 
@@ -120,6 +137,8 @@ namespace SAE101
             else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {
                 _animationGrand = "idle_down";
+                _animationGrand2 = "idle_down";
+                _animationGrand3 = "idle_down";
                 _eventEtDial.Ninja();
             }
 
@@ -160,7 +179,11 @@ namespace SAE101
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
             if (_rencontre == false)
+            {
                 _spriteBatch.Draw(_grand, _positionGrand);
+                _spriteBatch.Draw(_grand2, _positionGrand2);
+                _spriteBatch.Draw(_grand3, _positionGrand3);
+            }
 
             _spriteBatch.End();
 

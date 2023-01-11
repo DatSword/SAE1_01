@@ -78,7 +78,7 @@ namespace SAE101
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
             _animationEnnemi = "idle_down";
 
-            _positionJon = new Vector2(19 * 16, 7 * 16);
+            _positionJon = new Vector2(17 * 16, 7 * 16);
             _animationJon = "idle_down";
 
             base.Initialize();

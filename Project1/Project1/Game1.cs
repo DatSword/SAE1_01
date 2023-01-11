@@ -181,7 +181,7 @@ namespace SAE101
             _cameraDial = new OrthographicCamera(viewportadapterDial);
 
             _cameraPosition = _chatoIntChambres._chambreCentre1;
-            _numEcran = 1;
+            _numEcran = 0;
 
 
             //Dialogue
@@ -244,7 +244,6 @@ namespace SAE101
 
             //font
             _font = Content.Load<SpriteFont>("font/font_test");
-
 
 
             // on charge l'écran de menu par défaut 
@@ -390,16 +389,14 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = new Vector2(xEcran / 2, yEcran / 2);
 
-            //else if (_numEcran == 5)
-                
-
             // couronne
             else if (_numEcran == 5)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
+            Console.WriteLine(_numEcran);
 
             _walkSpeed = _speed * deltaSeconds;
-            Console.WriteLine(_chatoIntChambres._posX);
+            //Console.WriteLine(_chatoIntChambres._posX);
             base.Update(gameTime);
         }
 

@@ -21,13 +21,12 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-    public class EventEtDial : GameScreen
+    public class EventEtDial
     {
         // défini dans Game1
-        private new Game1 Game => (Game1)base.Game;
         private Game1 _myGame;
 
-        public EventEtDial(Game1 game) : base(game)
+        public EventEtDial(Game1 game)
         {
             _myGame = game;
         }
@@ -143,7 +142,6 @@ namespace SAE101
 
 
 
-
         public void FermeBoite()
         {
             _dialTrue = false;
@@ -183,9 +181,5 @@ namespace SAE101
             Console.WriteLine("ud = " + ud);
             Console.WriteLine("dd = " + dd);
         }
-
-        public override void Update(GameTime gameTime) {   }
-
-        public override void Draw(GameTime gameTime) {  }
     }
 }

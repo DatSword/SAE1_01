@@ -41,6 +41,8 @@ namespace SAE101
         private Vector2 _positionEnnemiPabo;
         private String _animationPabo;
 
+        private bool _rencontre;
+
 
         public ChatoIntTrone(Game1 game) : base(game)
         {
@@ -61,6 +63,8 @@ namespace SAE101
 
             _positionEnnemiPabo = new Vector2(10 * 16 + 8, 24 * 16);
             _animationPabo = "idle_up";
+
+            _rencontre = false;
 
             base.Initialize();
         }
@@ -104,15 +108,7 @@ namespace SAE101
 
             //Evenements
 
-            // Battle final (mettre la bonne replique à ennemi)
-            
-            if ( _myGame._positionPerso.Y <= 31 * 16)
-            {
-                _animationPabo = "idle_down";
-                _eventEtDial.Ninja();
-                if (_keyboardState.IsKeyDown(Keys.W))
-                    _myGame.LoadScreenchato_combat();
-            }
+            /// Battle final (mettre la bonne replique à ennemi)
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
@@ -120,14 +116,13 @@ namespace SAE101
                 _eventEtDial.FermeBoite();
                 //_myGame.LoadScreenchato_combat();
             }
-            else if (_myGame._positionPerso.X >= 31 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
+            else if ( _myGame._positionPerso.Y <= 31 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {
-                _animationPabo = "idle_left";
+                _animationPabo = "idle_down";
                 _eventEtDial.Ninja();
             }
 
-
-            // fin 
+            /// fin 
             if (_myGame._positionPerso.Y <= 14 * 16)
             {
                 _myGame._fin = 3;
@@ -152,8 +147,9 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            _spriteBatch.Draw(_ennemiPabo, _positionEnnemiPabo);
-
+            
+            if (_rencontre == false)
+                _spriteBatch.Draw(_ennemiPabo, _positionEnnemiPabo);
 
             _spriteBatch.End();
 

@@ -43,6 +43,10 @@ namespace SAE101
         private Vector2 _positionEnnemi;
         private String _animationEnnemi;
 
+        private AnimatedSprite _Jon;
+        private Vector2 _positionJon;
+        private String _animationJon;
+
         public int _limiteChambreX1;
         public int _limiteChambreX2;
         public int _limiteCouloirY1;
@@ -75,6 +79,9 @@ namespace SAE101
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
             _animationEnnemi = "idle_down";
 
+            _positionJon = new Vector2(19 * 16, 7 * 16);
+            _animationJon = "idle_down";
+
             base.Initialize();
         }
 
@@ -89,6 +96,9 @@ namespace SAE101
 
             SpriteSheet spriteSheetE = Content.Load<SpriteSheet>("anim/char/enemy/mechant/character_movement.sf", new JsonContentLoader());
             _ennemi = new AnimatedSprite(spriteSheetE);
+
+            SpriteSheet spriteSheetJ = Content.Load<SpriteSheet>("anim/char/ally/Jon/character_movement.sf", new JsonContentLoader());
+            _Jon = new AnimatedSprite(spriteSheetJ);
 
             _eventEtDial.SetCollision();
 
@@ -111,6 +121,8 @@ namespace SAE101
             _perso.Update(deltaSeconds);
             _ennemi.Play(_animationEnnemi);
             _ennemi.Update(deltaSeconds);
+            _Jon.Play(_animationEnnemi);
+            _Jon.Update(deltaSeconds);
             _eventEtDial.BoiteDialogues();
 
             //Enclenchement evenment

@@ -236,11 +236,11 @@ namespace SAE101
 
             //EVENEMENTS
 
-            if (Game1._firstVisitBedroom == true && _myGame._cooldownVerif == false && numDial == 0)
+            if (_myGame._firstVisitBedroom == true && _myGame._cooldownVerif == false && numDial == 0)
             {
                 _eventEtDial.Jon1();
                 _posJon = new Vector2(4*16+8,4*16+8);
-                Game1._firstVisitBedroom = false;
+                _myGame._firstVisitBedroom = false;
                 numDial = 1;
             }
             if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
@@ -290,7 +290,7 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_fren, _positionFren);
-            _spriteBatch.Draw(_chest1, _positionChest1);
+            //_spriteBatch.Draw(_chest1, _positionChest1);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
             _spriteBatch.Draw(_jon, _posJon);
 

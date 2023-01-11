@@ -104,8 +104,8 @@ namespace SAE101
         public SpriteFont _font;
 
         //event
-        public static bool _firstVisitBedroom;
-        public static int _fin;
+        public bool _firstVisitBedroom;
+        public int _fin;
 
         //pour évènements et déplacementss
         public float _walkSpeed;

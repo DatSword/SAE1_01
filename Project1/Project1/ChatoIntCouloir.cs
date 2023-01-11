@@ -49,11 +49,9 @@ namespace SAE101
         private Vector2 _positionJon;
         private String _animationJon;
 
-        public const int LIMITE_CHAMBRE_X1 = 19 * 16;
-        public const int LIMITE_CHAMBRE_X2 = 25 * 16;
-        public const int LIMITE_COULOIR = 6 * 16;
-
-
+        public int _limChambre_x1 = 19 * 16;
+        public int _limChambre_x2 = 25 * 16;
+        public int _limCouloir = 6 * 16;
 
 
 

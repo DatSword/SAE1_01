@@ -54,12 +54,12 @@ namespace SAE101
         public Vector2 _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
 
 
-        public const int LIMITE_CHAMBRE_X1 = 16 * 16;
-        public const int LIMITE_CHAMBRE_X2 = 24 * 16;
-        public const int LIMITE_CHAMBRE_Y1 = 8 * 16;
-        public const int LIMITE_CHAMBRE_Y2 = 8 * 16;
-        public const int LIMITE_CHAMBRE_GAUCHE = 8 * 16;
-        public const int LIMITE_CHAMBRE_DROITE = 32 * 16;
+        public int _limChambre_x1 = 16 * 16;
+        public int _limChambre_x2 = 24 * 16;
+        public int _limChambre_y1 = 8 * 16;
+        public int _limChambre_y2 = 8 * 16;
+        public int _limChambre_Gauche = 8 * 16;
+        public int _limChambre_Droite = 32 * 16;
 
         private int _choixCursor;
 
@@ -188,7 +188,7 @@ namespace SAE101
                 _eventEtDial.FermeBoite();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
-                && _myGame._positionPerso.X < LIMITE_CHAMBRE_DROITE)
+                && _myGame._positionPerso.X < _limChambre_Droite)
             {
                 _eventEtDial.Fren1();
                 _frenTrue = true;

@@ -78,7 +78,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             lesBoutons[0] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1 + (63 * _myGame.chan) * _myGame.chan),
-                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));
+                 (int)(_myGame.chan* 210), (int)(_myGame.chan * 63));
 
             lesBoutons[1] = new Rectangle( (int)(_myGame.xE / 2 - 210 * _myGame.chan / 2), (int)(_myGame.yE/3 * 1.5 + (63 * _myGame.chan) * _myGame.chan),
                 (int)(_myGame.chan * 210), (int)(_myGame.chan * 63));

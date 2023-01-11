@@ -43,9 +43,9 @@ namespace SAE101
         private Vector2 _positionFren;
         private bool _frenTrue;
 
-        private AnimatedSprite _chest1;
-        private Vector2 _positionChest1;
-        private bool _chestTrue;
+        private AnimatedSprite[] _chest;
+        private Vector2[] _positionChest;
+        private bool[] _chestTrue;
 
         public Vector2 _chambreCentre1;
         public Vector2 _chambreCentreUn;
@@ -85,9 +85,12 @@ namespace SAE101
             _positionFren = new Vector2(28 * 16 + 8, 4 * 16 + 8);
             _frenTrue = false;
 
-            _positionChest1 = new Vector2(38 * 16 + 8, 4 * 16 + 8);
-            _chestTrue = false;
-            
+            _positionChest[0] = new Vector2(2 * 16 + 8, 4 * 16 + 8);
+            _positionChest[1] = new Vector2(38 * 16 + 8, 4 * 16 + 8);
+
+            _myGame._chestTrue[0] = false;
+            _myGame._chestTrue[1] = false;
+
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
             _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
@@ -128,7 +131,8 @@ namespace SAE101
             _fren = new AnimatedSprite(spriteSheet2);
 
             SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
-            _chest1 = new AnimatedSprite(spriteSheet3);
+            for (int i = 0; i < _chest.Length; i++)
+                _chest[i] = new AnimatedSprite(spriteSheet3);
 
 
             base.LoadContent();
@@ -167,7 +171,7 @@ namespace SAE101
                 if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
                 {
                     _myGame.SetCoolDown();
-                    Game1._fin = 1;
+                    _myGame._fin = 1;
                     _myGame.LoadScreenblack_jack();
                     
                 }
@@ -208,19 +212,23 @@ namespace SAE101
             _fren.Update(deltaSeconds);
 
             //Coffre(s?)
-            String animationChest = null;
-            if (_chestTrue == false)
-                animationChest = "close";
-            else
-                animationChest = "open";
+            for (int i = 0; i < _chest.Length; i++)
+            {
+                String animationChest = null;
+                if (_chestTrue[i] == false)
+                    animationChest = "close";
+                else
+                    animationChest = "open";
 
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationChest == "close" 
-                && _myGame._positionPerso.X > _limiteChambreDroite)
-                _chestTrue = true;
+                if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationChest == "close"
+                    && _myGame._positionPerso.X > _limiteChambreDroite)
+                    _chestTrue[i] = true;
+
+
+                _chest[i].Play(animationChest);
+                _chest[i].Update(deltaSeconds);
+            }
             
-
-            _chest1.Play(animationChest);
-            _chest1.Update(deltaSeconds);
 
             _jon.Play(_animJon);
             _jon.Update(deltaSeconds);
@@ -251,7 +259,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _myGame._cooldownVerif == false)
             {
                 //Event_et_dial.Fin1();
-                Game1._fin = 1;
+                _myGame._fin = 1;
                 Game.LoadScreenblack_jack();
             }
 

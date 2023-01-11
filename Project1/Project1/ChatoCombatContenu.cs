@@ -1,22 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
-using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
-using MonoGame.Extended.Content;
-using MonoGame.Extended.Serialization;
-using MonoGame.Extended.Sprites;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Net.Mime.MediaTypeNames;
-using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
@@ -113,6 +97,7 @@ namespace SAE101
             _specialP = new String[] { "_", "_", "_", "_" };
             _descP = new String[] { "_", "_", "_", "_" };
         }
+
         public void Hero()
         {
             _stat = new int[4] { 80, 100 ,60, 70 };//50
@@ -124,8 +109,8 @@ namespace SAE101
                 _stat[1] = _stat[1] + 20;
             if (_myGame._boom == true)
                 _stat[1] = _stat[1] + 200000000;
-
         }
+
         public void Jon()
         {
             _stat = new int[4] { 100, 100, 40, 10 };//90
@@ -136,6 +121,7 @@ namespace SAE101
             if (_myGame._boom == true)
                 _stat[1] = _stat[1] + 200000000;
         }
+
         public void Ben()
         {
             _stat = new int[4] { 50, 40, 90, 60 };
@@ -156,6 +142,7 @@ namespace SAE101
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 
         }
+
         public void Mechant()
         {
             _stat = new int[4] { 70, 0, 50, 50 };//70
@@ -164,6 +151,7 @@ namespace SAE101
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
         }
+
         public void Pabo()
         {
             _stat = new int[4] { 70, 0, 50, 90 };//70
@@ -182,8 +170,7 @@ namespace SAE101
                     if (_myGame._boom != true)
                     {
                         _animationA[_allyAnime] = "attack_right1";
-                        _myGame._hit.Play();
-                        
+                        _myGame._hit.Play(); 
                     }                   
                     else
                     {
@@ -199,9 +186,7 @@ namespace SAE101
 
                 }
                 else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
-                {
                     _animationP1 = true;
-                }
                 else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
                 {
                     _animationP2 = false;
@@ -227,7 +212,6 @@ namespace SAE101
                     _animationP2 = true;
                     _animationP3 = true;
                 }
-
             }
 
             //AttackEnnemi
@@ -242,9 +226,7 @@ namespace SAE101
                         _animationP3 = true;
                 }
                 else if (_posEnemy[_enemyAnime].X < _posEnnBaseX[_enemyAnime] - 80 && _animationP3 == false)
-                {
                     _animationP1 = true;
-                }
                 else if (_posEnemy[_enemyAnime].X > _posEnnBaseX[_enemyAnime])
                 {
                     _animationP2 = false;
@@ -255,7 +237,6 @@ namespace SAE101
                 }
                 else if (_animationP2 == true && _animationP3 == true)
                 {
-
                     _animationE[_enemyAnime] = "move_right";
                     _posEnemy[_enemyAnime].X += 2;
                 }
@@ -296,9 +277,7 @@ namespace SAE101
 
                 }
                 else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
-                {
                     _animationP1 = true;
-                }
                 else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
                 {
                     _animationP2 = false;
@@ -313,7 +292,6 @@ namespace SAE101
                     _posAllie[_allyAnime].X -= 2;
                     if (_animationZeweurld == true)
                         kk = _nbEnnemy + _nbAlly;
-
                 }
                 else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                 {

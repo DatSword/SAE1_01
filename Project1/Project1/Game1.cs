@@ -331,9 +331,9 @@ namespace SAE101
 
 
             //Camera
-            _camera.PositionCamera();
+            ///_camera.PositionCamera();
             // chambres nord
-            /*if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
+            if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
                                 && _positionPerso.Y < _chatoIntChambres._limChambre_y1
                                 && _positionPerso.X < _chatoIntChambres._limChambre_Gauche)
                 _cameraPosition = _chatoIntChambres._chambreCentre1;
@@ -399,7 +399,7 @@ namespace SAE101
             else if (_numEcran == 5)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            Console.WriteLine(_numEcran);*/
+            Console.WriteLine(_numEcran);
 
             _walkSpeed = SPEED * deltaSeconds;
             Console.WriteLine(ChatoCombatContenu._lastPosition);
@@ -408,7 +408,6 @@ namespace SAE101
 
             if(_numEcran == 0)
             {
-
                 if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerif == false)
                 {
                     SetCoolDown();
@@ -417,7 +416,6 @@ namespace SAE101
                     else
                         konamiCount = 0;
                 }
-                    
 
                 if (_keyboardState.IsKeyDown(Keys.Down) && _cooldownVerif == false)
                 {
@@ -427,7 +425,6 @@ namespace SAE101
                     else
                         konamiCount = 0;
                 }
-                    
 
                 if (_keyboardState.IsKeyDown(Keys.Left) && _cooldownVerif == false)
                 {
@@ -437,7 +434,6 @@ namespace SAE101
                     else
                         konamiCount = 0;
                 }
-                    
 
                 if (_keyboardState.IsKeyDown(Keys.Right) && _cooldownVerif == false)
                 {
@@ -446,8 +442,7 @@ namespace SAE101
                         konamiCount++;
                     else
                         konamiCount = 0;
-                }
-                    
+                } 
 
                 if (_keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false)
                 {
@@ -456,8 +451,7 @@ namespace SAE101
                         konamiCount++;
                     else
                         konamiCount = 0;
-                }
-                    
+                }  
 
                 if (_keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false)
                 {
@@ -466,8 +460,7 @@ namespace SAE101
                         konamiCount++;
                     else
                         konamiCount = 0;
-                }
-                    
+                }   
             }
 
             if (konamiCount == 10)

@@ -1,22 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
-using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
-using MonoGame.Extended.Content;
-using MonoGame.Extended.Serialization;
-using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Net.Mime.MediaTypeNames;
-using Microsoft.Xna.Framework.Audio;
 
 namespace SAE101
 {
@@ -130,7 +116,7 @@ namespace SAE101
 
         public void OuVasTu()
         {
-            //_myGame.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Mais où vas-tu ?\n" +
                     "La salle du couronnement est au nord.";

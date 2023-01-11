@@ -2,22 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
 using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Net.Mime.MediaTypeNames;
-using Microsoft.Xna.Framework.Audio;
-using System.Runtime.InteropServices;
 
 namespace SAE101
 {
@@ -90,7 +80,7 @@ namespace SAE101
         public SpriteSheet[] _sheetA;
         public int[] _ordreA;       
 
-        //Stats Personazes
+        //Stats Personages
         public int[] _vieAllie;
         public int[] _attAllie;
         public int[] _defAllie;
@@ -126,9 +116,6 @@ namespace SAE101
 
         //The Legend came to life
         public int _ordrefinal;
-
-        //Camera
-        //public Vector2 _centreCombat;
 
         public ChatoCombat(Game1 game) : base(game) 
         {
@@ -202,9 +189,7 @@ namespace SAE101
                 for (int j = 0; j < _chatoCombatContenu._nbPersoJouable; j++)
                 {
                     if (_chatoCombatContenu._ordreJoueur[i] == _chatoCombatContenu._nomPersoJouable[j])
-                    {
                         _ordreA[i] = ordrejA;                        
-                    }
                     ordrejA++;
                 }               
             }
@@ -257,9 +242,7 @@ namespace SAE101
                 for (int j = 0; j < _chatoCombatContenu._nbEnnJouable; j++)
                 {
                     if (_chatoCombatContenu._ordreEnnemi[i] == _chatoCombatContenu._nomEnnJouable[j])
-                    {
                         _ordreE[i] = ordrejE;
-                    }
                     ordrejE++;
                 }
             }
@@ -314,12 +297,12 @@ namespace SAE101
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
             _cursorD = Content.Load<Texture2D>("img/dialogue/cursord");
             _fontTest = Content.Load<SpriteFont>("font/font_test");
-            SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/objects/projectile1.sf", new JsonContentLoader());
-            _proj = new AnimatedSprite(spriteSheetA);
-            SpriteSheet spriteSheetB = Content.Load<SpriteSheet>("anim/objects/explosion.sf", new JsonContentLoader());
-            _explosion = new AnimatedSprite(spriteSheetB);
 
+            SpriteSheet spriteSheetProj = Content.Load<SpriteSheet>("anim/objects/projectile1.sf", new JsonContentLoader());
+            _proj = new AnimatedSprite(spriteSheetProj);
 
+            SpriteSheet spriteSheetExplo = Content.Load<SpriteSheet>("anim/objects/explosion.sf", new JsonContentLoader());
+            _explosion = new AnimatedSprite(spriteSheetExplo);
 
             base.LoadContent();
         }
@@ -372,7 +355,6 @@ namespace SAE101
                         Combat();
                         _selectionEnn = false;
                     }
-
                     _positionCursorD = _chatoCombatContenu._posEnemy[_choixCursorD] - new Vector2(8, 55);
                 }
 
@@ -501,19 +483,18 @@ namespace SAE101
                             _chatoCombatContenu._animationA[i] = "idle_right";
                     }
                 }                
-
                 
                 _myGame._chatoCombatContenu.Animation();
 
                 if (_chatoCombatContenu._animationOver == true)
                 {
-
                     _chatoCombatContenu._animationEnCours = false;
                     _chatoCombatContenu._animationSpe = false;
                     _chatoCombatContenu._animationAttackA = false;
                     _chatoCombatContenu._animationAttackE = false;
                     _chatoCombatContenu._animationZeweurld = false;
                     _chatoCombatContenu._animationBouleFeu = false;
+
                     EnnemiMort();
                     AllieMort();
 
@@ -523,9 +504,7 @@ namespace SAE101
                         _nbTourZeuWerld++;
                     }
                     if (_chatoCombatContenu.kk != _chatoCombatContenu._nbAlly + _chatoCombatContenu._nbEnnemy && _gameOver == false && _victoire == false)
-                    {
                         Vitesse2();
-                    }
                     else
                     {
                         _chatoCombatContenu._animationOver = false;
@@ -600,25 +579,29 @@ namespace SAE101
             var transformMatrix = _myGame._cameraMap.GetViewMatrix();
 
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
+
             _spriteBatch.Draw(_combatBox, _positionCombat, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
             _spriteBatch.Draw(_cursorD, _positionCursorD, Color.White);
+
             _spriteBatch.Draw(_proj, _chatoCombatContenu._posProj);
             _spriteBatch.Draw(_explosion, _chatoCombatContenu._posExplosion);
+
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
+
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
+
             for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
-            {
                 _spriteBatch.Draw(_allie[i], _chatoCombatContenu._posAllie[i]);              
-            }
+
             for (int i = 0; i < _chatoCombatContenu._nbEnnemy; i++)
-            {
                 _spriteBatch.Draw(_ennemy[i], _chatoCombatContenu._posEnemy[i]);
-            }
+
             _spriteBatch.End();
         }
 
@@ -671,7 +654,6 @@ namespace SAE101
                 _attaquePerso[_action, 2] = 4;
                 _sousMenuSpecial = false;
                 _action++;
-
             }
         }
 
@@ -734,13 +716,9 @@ namespace SAE101
                 if (_ordretour[_chatoCombatContenu.kk] == _ordretour2[i])
                 {
                     if (i >= _chatoCombatContenu._nbAlly)
-                    {
                         BastonE(i - _chatoCombatContenu._nbAlly);
-                    }
                     else
-                    {
-                        BastonA(i);
-                    }                                        
+                        BastonA(i);                                      
                 }               
             }
             _chatoCombatContenu.kk++;
@@ -791,10 +769,7 @@ namespace SAE101
                 }
             }
             else
-            {
-                _chatoCombatContenu._animationOver = true;
-            }
-            
+                _chatoCombatContenu._animationOver = true;            
         }
 
         //SI un ennemi se bat
@@ -819,9 +794,7 @@ namespace SAE101
                 Console.WriteLine(i);
             }
             else
-            {
                 _chatoCombatContenu._animationOver = true;
-            }
         }
 
         public void GenerationAllie()
@@ -851,27 +824,21 @@ namespace SAE101
         public void EnnemiMort()
         {
             for (int i = 0; i < _chatoCombatContenu._nbEnnemy; i++)
-            {
                 if (_vieEnn[i] <= 0)
                 {
                     _chatoCombatContenu._animationE[i] = "ded";
                     Victoire();
                 }
-
-            }
         }
 
         public void AllieMort()
         {
             for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
-            {
                 if (_vieAllie[i] <= 0)
                 {
                     _chatoCombatContenu._animationA[i] = "ded";
                     GameOver();
                 }
-
-            }
         }
 
         public void Victoire()
@@ -879,10 +846,8 @@ namespace SAE101
             int verif = 0;
 
             for (int i = 0; i < _chatoCombatContenu._nbEnnemy; i++)
-            {
                 if (_vieEnn[i] <= 0)
                     verif++;
-            }
 
             if (verif == _chatoCombatContenu._nbEnnemy)
             {
@@ -907,10 +872,8 @@ namespace SAE101
             int verif = 0;
 
             for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
-            {
                 if (_vieAllie[i] <= 0)
                     verif++;
-            }
 
             if (verif == _chatoCombatContenu._nbAlly)
             {

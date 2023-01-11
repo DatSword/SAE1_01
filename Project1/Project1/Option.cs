@@ -10,7 +10,6 @@ namespace SAE101
     {
         //map
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         // défini dans Game1

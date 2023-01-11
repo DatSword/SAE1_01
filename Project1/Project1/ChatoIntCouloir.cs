@@ -1,18 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
 
 
@@ -85,7 +80,7 @@ namespace SAE101
 
             _rencontre = false;
 
-            _positionJon = new Vector2(17 * 16, 7 * 16);
+            _positionJon = new Vector2(19 * 16 + 8, 7 * 16);
             _animationJon = "idle_down";
 
             base.Initialize();

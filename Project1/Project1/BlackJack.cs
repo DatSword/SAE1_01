@@ -2,17 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
-using MonoGame.Extended.Content;
-using MonoGame.Extended.Serialization;
-using MonoGame.Extended.Sprites;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
 
 namespace SAE101
@@ -21,7 +11,6 @@ namespace SAE101
     {
         //"map"
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         private Game1 _myGame;
@@ -86,23 +75,25 @@ namespace SAE101
             else if (_myGame._fin == 10)
                 _text = "";
             else if (_myGame._fin == 1)
-            {
                 _text = "Hum hum, malgré cette petite interruption, notre héros décida\n" +
                         "qu'il n'allait pas être présent lors du courronnement. Même si\n" +
-                        "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
-                        "d'épreuves, le sommeil reste son ennemi le plus puissant.";
-            }
+                        "cet évènement était ce pourquoi lui et ses amis avaient traversés\n" +
+                        "tant d'épreuves, le sommeil reste son ennemi le plus puissant.";
+
             else if (_myGame._fin == 2)
                 _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
-                        "courronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
+                        "couronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
                         "non?";
+
             else if (_myGame._fin == 3)
+            {
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
                         "envoyé d'on-ne-sait-quand? Toutes ces réponses, vous les aurez...\n" +
                         "Peut-être un jour...?";
+            }
 
 
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 && _myGame._fin == 0)

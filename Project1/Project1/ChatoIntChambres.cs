@@ -1,18 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Animations;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using AnimatedSprite = MonoGame.Extended.Sprites.AnimatedSprite;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 using System;
 
 
@@ -63,7 +58,7 @@ namespace SAE101
 
         private int _choixCursor;
 
-        int numDial;
+        public int numDial;
 
         public ChatoIntChambres(Game1 game) : base(game) 
         {
@@ -118,19 +113,18 @@ namespace SAE101
             _eventEtDial.SetCollision();
 
             //Load persos
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
-            SpriteSheet spriteSheet4 = Content.Load<SpriteSheet>("anim/char/ally/Jon/character_movement.sf", new JsonContentLoader());
-            _jon = new AnimatedSprite(spriteSheet4);
+            SpriteSheet spriteSheetPerso = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spriteSheetPerso);
+            SpriteSheet spriteSheetJon = Content.Load<SpriteSheet>("anim/char/ally/Jon/character_movement.sf", new JsonContentLoader());
+            _jon = new AnimatedSprite(spriteSheetJon);
 
 
             //Load objects
-            SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/Fren/Fren.sf", new JsonContentLoader());
-            _fren = new AnimatedSprite(spriteSheet2);
-
-            SpriteSheet spriteSheet3 = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
+            SpriteSheet spriteSheetFren = Content.Load<SpriteSheet>("anim/char/Fren/Fren.sf", new JsonContentLoader());
+            _fren = new AnimatedSprite(spriteSheetFren);
+            SpriteSheet spriteSheetChest = Content.Load<SpriteSheet>("anim/objects/chest1.sf", new JsonContentLoader());
             for (int i = 0; i < _chest.Length; i++)
-                _chest[i] = new AnimatedSprite(spriteSheet3);
+                _chest[i] = new AnimatedSprite(spriteSheetChest);
 
 
             base.LoadContent();

@@ -10,19 +10,17 @@ namespace SAE101
     {
         //map
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
         private Game1 _myGame;
-        private EventEtDial _eventEtDial;
 
         // texture menu
         private Texture2D _titleS;
         private Texture2D _start;
         private Texture2D _option;
-        private Texture2D _quit;
+        public Texture2D _quit;
 
         // boutons 
         public Rectangle[] lesBoutons;
@@ -37,12 +35,11 @@ namespace SAE101
 
         public override void Initialize()
         {
-            _eventEtDial = _myGame._eventEtDial;
-
             lesBoutons = new Rectangle[3];
             lesBoutons[0] = new Rectangle(_myGame.xE / 2 - 210 / 2, _myGame.yE / 3 + 63, 210, 63);
             lesBoutons[1] = new Rectangle(_myGame.xE / 2 - 210 / 2, (int)(_myGame.yE / 3 * 1.5 + 63), 210, 63);
             lesBoutons[2] = new Rectangle(_myGame.xE / 2 - 210 / 2, _myGame.yE / 3 * 2 + 63, 210, 63);
+            
 
             base.Initialize();
         }
@@ -105,7 +102,6 @@ namespace SAE101
                             _myGame.Etat = Game1.Etats.Quitter;
                         break;
                     }
-
                 }
             }
         }
@@ -126,18 +122,4 @@ namespace SAE101
             _spriteBatch.End();
         }
     }
-
-
-    /*internal record struct NewStruct(object Item1, int Item2)
-    {
-        public static implicit operator (object, int)(NewStruct value)
-        {
-            return (value.Item1, value.Item2);
-        }
-
-        public static implicit operator NewStruct((object, int) value)
-        {
-            return new NewStruct(value.Item1, value.Item2);
-        }
-    }*/
 }

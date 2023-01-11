@@ -46,7 +46,6 @@ namespace SAE101
         private int _espaceText;
         private String[] _textResEcran;
         private Vector2[] _posTextResEcran;
-        private double changement;
 
 
         public Option(Game1 game) : base(game) 

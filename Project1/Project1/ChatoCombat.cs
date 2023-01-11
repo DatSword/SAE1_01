@@ -932,8 +932,8 @@ namespace SAE101
                 _myGame.LoadScreenchato_int_chambres_couloir();
             else if (_myGame._numEcran == 2)
                 _myGame.LoadScreenchato_ext_cours_interieur();
-            /*if (Game1._numSalle == 3)
-                _myGame.LoadScreenchato_int_salle_courronnement();*/
+            else if (_myGame._numSalle == 3)
+                _myGame.LoadScreenchato_couronne();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace SAE101
         private Vector2[] _positionChest;
         private String _animationChest;
 
+        // camera
         public Vector2 _chambreCentre1;
         public Vector2 _chambreCentreUn;
         public Vector2 _chambreCentre2;

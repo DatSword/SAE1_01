@@ -169,8 +169,9 @@ namespace SAE101
             _choiceTrue = true;
             _text = "Un lit décidemment très confortable. Voulez-vous\nvous rendormir?";
             _nom = " ";
-            _dialTrue = true;
         }
+
+    
 
         public void SetCollision()
         {

@@ -21,13 +21,12 @@ using Microsoft.Xna.Framework.Audio;
 namespace SAE101
 {
 
-    public class EventEtDial : GameScreen
+    public class EventEtDial
     {
         // défini dans Game1
-        private new Game1 Game => (Game1)base.Game;
         private Game1 _myGame;
 
-        public EventEtDial(Game1 game) : base(game)
+        public EventEtDial(Game1 game)
         {
             _myGame = game;
         }
@@ -106,7 +105,7 @@ namespace SAE101
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
                     ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
-            Game1._firstvisit = false;
+            Game1._firstVisitBedroom = false;
         }
 
         public void Jon3()
@@ -140,7 +139,6 @@ namespace SAE101
 
             _nom = "Jon";
         }
-
 
 
 
@@ -183,9 +181,5 @@ namespace SAE101
             Console.WriteLine("ud = " + ud);
             Console.WriteLine("dd = " + dd);
         }
-
-        public override void Update(GameTime gameTime) {   }
-
-        public override void Draw(GameTime gameTime) {  }
     }
 }

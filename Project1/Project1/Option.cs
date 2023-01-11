@@ -31,7 +31,7 @@ namespace SAE101
         // taille écran
         private Texture2D _cursor;
         private Vector2 _positionCursor;
-        private int _espaceText;
+        private const int ESPACE_TEXT = 130;
         private String[] _textResEcran;
         private Vector2[] _posTextResEcran;
 
@@ -50,11 +50,9 @@ namespace SAE101
 
             _posTouches = new Vector2[6] { new Vector2(50, 280), new Vector2(50, 310), new Vector2(20, 370), new Vector2(50, 340), new Vector2(50, 370), new Vector2(80, 370) };
 
-            _espaceText = 130;
-
             _positionCursor = new Vector2(40, 250);
             _textResEcran = new String[3] { "514 x 448", "771 x 672", "1028 x 996" };
-            _posTextResEcran = new Vector2[3] { new Vector2(70, 250), new Vector2(70 + _espaceText, 250), new Vector2(70 + _espaceText * 2, 250) };
+            _posTextResEcran = new Vector2[3] { new Vector2(70, 250), new Vector2(70 + ESPACE_TEXT, 250), new Vector2(70 + ESPACE_TEXT * 2, 250) };
 
             base.Initialize();
         }
@@ -81,20 +79,20 @@ namespace SAE101
 
             if (_keyboardState.IsKeyDown(Keys.Right) && _myGame._cooldownVerif == false && _positionCursor.X < 300)
             {
-                _positionCursor.X += _espaceText;
+                _positionCursor.X += ESPACE_TEXT;
                 _myGame.SetCoolDown();
             }
             if (_keyboardState.IsKeyDown(Keys.Left) && _myGame._cooldownVerif == false && _positionCursor.X > 40)
             {
-                _positionCursor.X -= _espaceText;
+                _positionCursor.X -= ESPACE_TEXT;
                 _myGame.SetCoolDown();
             }
 
             if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40)
                 _myGame.ChangementEcran(1);
-            else if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40 + _espaceText)
+            else if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40 + ESPACE_TEXT)
                 _myGame.ChangementEcran(1.5);
-            else if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40 + _espaceText * 2)
+            else if (_keyboardState.IsKeyDown(Keys.W) && _positionCursor.X == 40 + ESPACE_TEXT * 2)
                 _myGame.ChangementEcran(2);
         }
 

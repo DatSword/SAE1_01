@@ -351,14 +351,14 @@ namespace SAE101
                                 && _positionPerso.Y < _chatoIntChambres.LIMITE_CHAMBRE_Y1)
                 _cameraPosition = _chatoIntChambres._chambreCentre2;
 
-            else if (_numEcran == 1 && _positionPerso.Y >= _chatoIntCouloir._limiteCouloirY1)
+            else if (_numEcran == 1 && _positionPerso.Y >= _chatoIntCouloir.LIMITE_COULOIR)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
 
             // couloir
             if (_numEcran == 2 && (_positionPerso.Y > 0
-                                && (_positionPerso.X > _chatoIntCouloir._limiteChambreX1 ||
-                                _positionPerso.X < _chatoIntCouloir._limiteChambreX2)))
+                                && (_positionPerso.X > _chatoIntCouloir.LIMITE_CHAMBRE_X1 ||
+                                _positionPerso.X < _chatoIntCouloir.LIMITE_CHAMBRE_X2)))
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
             else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres.LIMITE_CHAMBRE_X1

@@ -49,9 +49,13 @@ namespace SAE101
         private Vector2 _positionJon;
         private String _animationJon;
 
-        public int _limiteChambreX1;
-        public int _limiteChambreX2;
-        public int _limiteCouloirY1;
+        public const int LIMITE_CHAMBRE_X1 = 19 * 16;
+        public const int LIMITE_CHAMBRE_X2 = 25 * 16;
+        public const int LIMITE_COULOIR = 6 * 16;
+
+
+
+
 
         public ChatoIntCouloir(Game1 game) : base(game) 
         {
@@ -70,9 +74,7 @@ namespace SAE101
 
             _joueur.Spawnchato_int_chambres_couloir();
 
-            _limiteChambreX1 = 19 * 16;
-            _limiteChambreX2 = 25 * 16;
-            _limiteCouloirY1 = 6 * 16;
+            
 
             _vitessePerso = 100;
             _myGame._numSalle = 1;

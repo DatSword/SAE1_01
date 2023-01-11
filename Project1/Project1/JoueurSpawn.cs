@@ -47,7 +47,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -82,7 +82,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -105,7 +105,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else
@@ -139,7 +139,7 @@ namespace SAE101
         {
             if (_myGame._combatFini == true)
             {
-                _myGame._positionPerso = _chatoCombatContenu._lastPosition;
+                _myGame._positionPerso = ChatoCombatContenu._lastPosition;
                 _myGame._combatFini = false;
             }
             else

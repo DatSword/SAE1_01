@@ -147,8 +147,14 @@ namespace SAE101
                     "spéciale";
             _nom = "Jon";
         }
-
-
+        //COff
+        public void Coffre1()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous obtenez de la Akdov!;";
+            _nom = "";
+        }
 
         public void FermeBoite()
         {

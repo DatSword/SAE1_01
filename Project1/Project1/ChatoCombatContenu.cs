@@ -57,7 +57,7 @@ namespace SAE101
         public int[] _stat; //PV, Attaque, Défense, Vitesse
 
 
-        public Vector2 _lastPosition;
+        public static Vector2 _lastPosition;
 
         //animation
         public int _allyAnime;

@@ -146,12 +146,16 @@ namespace SAE101
                     "pas mal de monde, mais j'savais pas à ce point là!" +
                     "Allons-y, et rappelle toi que chacun de nous possède des actions\n" +
                     "spéciale";
-
-
             _nom = "Jon";
         }
-
-
+        //COff
+        public void Coffre1()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous obtenez de la Akdov!;";
+            _nom = "";
+        }
 
         public void FermeBoite()
         {

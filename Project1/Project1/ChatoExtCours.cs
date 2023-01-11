@@ -147,19 +147,5 @@ namespace SAE101
 
             _spriteBatch.End();
         }
-
-
-
-
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
-        }
     }
 }

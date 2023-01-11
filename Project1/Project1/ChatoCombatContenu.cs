@@ -210,50 +210,95 @@ namespace SAE101
                 }
             }
 
-            if (ChatoCombat._animationZeweurld == true)
+            /*if (_animationZeweurld == true)
             {
-                if (ChatoCombat._animationP1 == true)
+                if (_animationP1 == true)
                 {
-                    ChatoCombat._animationA[ChatoCombat._allyAnime] = "attack_right3";
+                    _animationA[_allyAnime] = "attack_right3";
                     _myGame._wbeg.Play();
                     MediaPlayer.Stop();
-                    ChatoCombat._attackZeuwerld = true;
-                    ChatoCombat._coolDownAnimation = true;
-                    ChatoCombat._animationP1 = false;
-                    ChatoCombat._animationP3 = true;
+                    _attackZeuwerld = true;
+                    _coolDownAnimation = true;
+                    _animationP1 = false;
+                    _animationP3 = true;
 
                 }
-                else if (ChatoCombat._posAllie[ChatoCombat._allyAnime].X > ChatoCombat._posAllieBaseX[ChatoCombat._allyAnime] + 80 && ChatoCombat._animationP3 == false)
+                else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
                 {
-                    ChatoCombat._animationP1 = true;
+                    _animationP1 = true;
                 }
-                else if (ChatoCombat._posAllie[ChatoCombat._allyAnime].X < ChatoCombat._posAllieBaseX[ChatoCombat._allyAnime])
+                else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
                 {
-                    ChatoCombat._animationP2 = false;
-                    ChatoCombat._animationP3 = false;
-                    ChatoCombat._posAllie[ChatoCombat._allyAnime].X = ChatoCombat._posAllieBaseX[ChatoCombat._allyAnime];
-                    ChatoCombat._animationOver = true;
-                    ChatoCombat._animationA[ChatoCombat._allyAnime] = "idle_right";
+                    _animationP2 = false;
+                    _animationP3 = false;
+                    _posAllie[_allyAnime].X = _posAllieBaseX[_allyAnime];
+                    _animationOver = true;
+                    _animationA[_allyAnime] = "idle_right";
                 }
-                else if (ChatoCombat._animationP2 == true && ChatoCombat._animationP3 == true)
+                else if (_animationP2 == true && _animationP3 == true)
                 {
-                    ChatoCombat._animationA[ChatoCombat._allyAnime] = "move_left";
-                    ChatoCombat._posAllie[ChatoCombat._allyAnime].X -= 2;
-                    ChatoCombat.kk = _nbEnnemy + _nbAlly;
+                    _animationA[_allyAnime] = "move_left";
+                    _posAllie[_allyAnime].X -= 2;
+                    kk = _chatoCombatContenu._nbEnnemy + _chatoCombatContenu._nbAlly;
 
                 }
-                else if (ChatoCombat._animationP1 == false && ChatoCombat._animationP2 == false && _myGame._cooldownVerifC == false && ChatoCombat._animationP3 == false)
+                else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                 {
-                    ChatoCombat._animationA[ChatoCombat._allyAnime] = "move_right";
-                    ChatoCombat._posAllie[ChatoCombat._allyAnime].X += 2;
+                    _animationA[_allyAnime] = "move_right";
+                    _posAllie[_allyAnime].X += 2;
                 }
-                else if (_myGame._cooldownVerifC == false && ChatoCombat._animationP3 == true)
+                else if (_myGame._cooldownVerifC == false && _animationP3 == true)
                 {
-                    ChatoCombat._animationP1 = false;
-                    ChatoCombat._animationP2 = true;
-                    ChatoCombat._animationP3 = true;
+                    _animationP1 = false;
+                    _animationP2 = true;
+                    _animationP3 = true;
                 }
             }
+
+            //boule de feu
+            if (_animationBouleFeu == true)
+            {
+                if (_animationP1 == true)
+                {
+                    _animationA[_allyAnime] = "attack_right2";
+                    _fireBall = true;
+                    _myGame._fire.Play();
+                    _posProj = new Vector2(_posEnemy[_attaquePerso[1, 1]].X - 80, _posEnemy[_attaquePerso[1, 1]].Y);
+                    _coolDownAnimation = true;
+                    _animationP1 = false;
+                    _animationP3 = true;
+
+                }
+                else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
+                {
+                    _animationP1 = true;
+                }
+                else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
+                {
+                    _animationP2 = false;
+                    _animationP3 = false;
+                    _posAllie[_allyAnime].X = _posAllieBaseX[_allyAnime];
+                    _animationOver = true;
+                    _animationA[_allyAnime] = "idle_right";
+                }
+                else if (_animationP2 == true && _animationP3 == true)
+                {
+                    _animationA[_allyAnime] = "move_left";
+                    _posAllie[_allyAnime].X -= 2;
+
+                }
+                else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
+                {
+                    _animationA[_allyAnime] = "move_right";
+                    _posAllie[_allyAnime].X += 2;
+                }
+                else if (_myGame._cooldownVerifC == false && _animationP3 == true)
+                {
+                    _animationP1 = false;
+                    _animationP2 = true;
+                    _animationP3 = true;
+                }
+            }*/
         }
 
         public override void Update(GameTime gameTime)

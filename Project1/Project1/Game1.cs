@@ -103,8 +103,8 @@ namespace SAE101
         public SpriteFont _font;
 
         //event
-        public bool _firstvisit;
-        public int _fin;
+        public static bool _firstVisitBedroom;
+        public static int _fin;
 
         //pour évènements et déplacementss
         public float _walkSpeed;
@@ -116,7 +116,6 @@ namespace SAE101
         public String _animationPlayer;
         public TiledMapTileLayer mapLayerDoor;
         public int _numSalle;
-        //public static TiledMapTileLayer mapIntersect;
 
         public Etats Etat
         {
@@ -199,7 +198,7 @@ namespace SAE101
             _combatTest = false;
 
             //event
-            _firstvisit = true;
+            _firstVisitBedroom = true;
             _fin = 0;
             _speed = 100;
             _animationPlayer = "idle_down";

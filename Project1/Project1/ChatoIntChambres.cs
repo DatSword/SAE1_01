@@ -35,6 +35,10 @@ namespace SAE101
         private KeyboardState _keyboardState;
         public int _posX;
 
+        private AnimatedSprite _jon;
+        private Vector2 _posJon;
+        private String _animJon;
+
         private AnimatedSprite _fren;
         private Vector2 _positionFren;
         private bool _frenTrue;
@@ -70,6 +74,8 @@ namespace SAE101
             _joueur = _myGame._joueur;
 
             // Lieu Spawn perso
+            _posJon = new Vector2(-10 * 16 + 8, -10 * 16 + 8);
+            _animJon = "idle_up";
             _posX = 0;
             numDial = 0;
 
@@ -113,6 +119,9 @@ namespace SAE101
             //Load persos
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+            SpriteSheet spriteSheet4 = Content.Load<SpriteSheet>("anim/char/ally/Jon/character_movement.sf", new JsonContentLoader());
+            _jon = new AnimatedSprite(spriteSheet4);
+
 
             //Load objects
             SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/Fren/Fren.sf", new JsonContentLoader());
@@ -213,13 +222,17 @@ namespace SAE101
             _chest1.Play(animationChest);
             _chest1.Update(deltaSeconds);
 
+            _jon.Play(_animJon);
+            _jon.Update(deltaSeconds);
+
 
             //EVENEMENTS
-            
-            if(_myGame._firstvisit == true && _myGame._cooldownVerif == false && numDial == 0)
+
+            if (Game1._firstVisitBedroom == true && _myGame._cooldownVerif == false && numDial == 0)
             {
                 _eventEtDial.Jon1();
-                _myGame._firstvisit = false;
+                _posJon = new Vector2(4*16+8,4*16+8);
+                Game1._firstVisitBedroom = false;
                 numDial = 1;
             }
             if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
@@ -230,6 +243,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false &&  numDial == 2)
             {
                 _eventEtDial.FermeBoite();
+                _animJon = "move_down";
                 numDial = 3;
             }
 
@@ -240,6 +254,14 @@ namespace SAE101
                 _myGame._fin = 1;
                 Game.LoadScreenblack_jack();
             }
+
+            if (numDial == 3)
+                _posJon.Y += _myGame._walkSpeed;
+            if (_posJon.Y > 8 * 16 + 8)
+            {
+                _posJon = new Vector2(-100 * 16 + 8, -10 * 16 + 8);
+            }
+                
 
             //changement de map
             if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 41))
@@ -262,6 +284,7 @@ namespace SAE101
             _spriteBatch.Draw(_fren, _positionFren);
             _spriteBatch.Draw(_chest1, _positionChest1);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
+            _spriteBatch.Draw(_jon, _posJon);
 
             _spriteBatch.End();
 
@@ -282,17 +305,6 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._no, _eventEtDial._posNo, Color.White);
             }
             _spriteBatch.End();
-        }
-
-        private bool IsCollision(ushort x, ushort y)
-        {
-            // définition de tile qui peut être null (?)
-            TiledMapTile? tile;
-            if (_myGame.mapLayer.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
         }
     }
 }

@@ -109,8 +109,6 @@ namespace SAE101
             _tiledMapRenderer.Draw(_myGame._camera.GetViewMatrix());
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
 
-            //_spriteBatch.Draw(_grand, _positionGrand);
-
             _spriteBatch.End();
 
             var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();

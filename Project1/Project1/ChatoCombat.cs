@@ -35,35 +35,17 @@ namespace SAE101
         private const int POS_ALLIEX3 = 95;
         private const int POS_ALLIEY0 = 230;
         private const int POS_ALLIEY1 = 175;
-        public static int[] _posAllieBaseX;
         private const int POS_ENNX0 = 365;
         private const int POS_ENNX1 = 315;
         private const int POS_ENNX2 = 465;
         private const int POS_ENNX3 = 415;
         private const int POS_ENNY0 = 230;
         private const int POS_ENNY1 = 175;
-        public static int[] _posEnnBaseX;
-
-        //ANIMATIONS
-        public static int _allyAnime;
-        public static int _enemyAnime;
-        public static bool _animationAttackA;
-        public static bool _animationAttackE;
-        public static bool _animationZeweurld;
-        public static bool _animationBouleFeu;
-        public static bool _animationSpe;
-        public static bool _animationEnCours;
-        public static bool _animationP1;
-        public static bool _animationP2;
-        public static bool _animationP3;
-        public static bool _animationOver;
-        public static bool _coolDownAnimation;      
-        
+             
 
         //Ordre en fonction de la vitesse
         private int[] _ordretour;
         private int[] _ordretour2;
-        public static int kk;
 
         //Fond d'écran
         private new Game1 Game => (Game1)base.Game;
@@ -102,13 +84,11 @@ namespace SAE101
         public bool _victoire;
         public bool _gameOver;
 
-        //Personages
-        private AnimatedSprite[] _allie;
-        public static Vector2[] _posAllie;
+        //Personazes
+        private AnimatedSprite[] _allie;      
         public String[] _fileA;
         public SpriteSheet[] _sheetA;
-        public int[] _ordreA;
-        public static String[] _animationA;
+        public int[] _ordreA;       
 
         //Stats Personazes
         public int[] _vieAllie;
@@ -121,11 +101,9 @@ namespace SAE101
 
         //Ennemies
         private AnimatedSprite[] _ennemy;      
-        public static Vector2[] _posEnemy;
         public String[] _fileE;
         public SpriteSheet[] _sheetE;        
         public int[] _ordreE;
-        public static String[] _animationE;
 
         //Stats Ennemies
         public int[] _vieEnn;
@@ -138,16 +116,13 @@ namespace SAE101
         private Random _random;
 
         //ATTAques spé
-        public static bool _attackZeuwerld;
         private int _nbTourZeuWerld;
-        public static bool _fireBall;
 
         //Attaque projectiles
-        private AnimatedSprite _proj;
-        public Vector2 _posProj;
+        private AnimatedSprite _proj;        
         public String _animationProj;
         private AnimatedSprite _explosion;
-        public Vector2 _posExplosion;
+        
         public String _animationExplosion;
 
         //The Legend came to life
@@ -171,30 +146,38 @@ namespace SAE101
 
             _choixCursor = 0;
             _choixCursorD = 0;
+
+            _selectionEnn = false;
             _sousMenuSpecial = false;
             _sousMenuObjects = false;
+
             _premierCombat = false;
-            _selectionEnn = false;
+            
             _action = 0;
+            _ordrefinal = 0;
+
             _victoire = false;
             _gameOver = false;
-            _allyAnime = 0;
-            _ordrefinal = 0;
-            _animationAttackA = false;
-            _animationAttackE = false;
-            _animationZeweurld = false;
-            _animationBouleFeu = false;
-            _animationSpe = false;
-            _fireBall = false;
-            _animationEnCours = false;
-            _coolDownAnimation = false;
-            _animationP1 = false;
-            _animationP2 = false;
-            _animationOver = false;
-            _animationP3 = false;
-            kk = 0;
-            _attackZeuwerld = false;
+            
+
+            _chatoCombatContenu._animationAttackA = false;
+            _chatoCombatContenu._animationAttackE = false;
+            _chatoCombatContenu._animationZeweurld = false;
+            _chatoCombatContenu._animationBouleFeu = false;
+            _chatoCombatContenu._animationEnCours = false;
+            _chatoCombatContenu._animationSpe = false;
+            _chatoCombatContenu._animationP1 = false;
+            _chatoCombatContenu._animationP2 = false;
+            _chatoCombatContenu._animationP3 = false;
+            _chatoCombatContenu._animationOver = false;
+
+            _chatoCombatContenu._fireBall = false;
+            _chatoCombatContenu._attackZeuwerld = false;
             _nbTourZeuWerld = 0;
+
+            _chatoCombatContenu._coolDownAnimation = false;
+                        
+            _chatoCombatContenu.kk = 0;                        
 
             _random = new Random();
 
@@ -234,13 +217,13 @@ namespace SAE101
             _fileA = new String[_chatoCombatContenu._nbAlly];
             _sheetA = new SpriteSheet[_chatoCombatContenu._nbAlly];
             _allie = new AnimatedSprite[_chatoCombatContenu._nbAlly];
-            _posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
-            _posAllieBaseX = new int[] { POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
+            _chatoCombatContenu._posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
+            _chatoCombatContenu._posAllieBaseX = new int[] { POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
             _vieAllie = new int[_chatoCombatContenu._nbAlly];
             _attAllie = new int[_chatoCombatContenu._nbAlly];
             _defAllie = new int[_chatoCombatContenu._nbAlly];
             _vitAllie = new int[_chatoCombatContenu._nbAlly];
-            _animationA = new String[] { "idle_right", "idle_right", "idle_right", "idle_right" };
+            _chatoCombatContenu._animationA = new String[] { "idle_right", "idle_right", "idle_right", "idle_right" };
 
             //génération allié
             for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
@@ -289,13 +272,13 @@ namespace SAE101
             _fileE = new String[_chatoCombatContenu._nbEnnemy];
             _sheetE = new SpriteSheet[_chatoCombatContenu._nbEnnemy];
             _ennemy = new AnimatedSprite[_chatoCombatContenu._nbEnnemy];
-            _posEnemy = new[] { new Vector2(POS_ENNX0, POS_ENNY0), new Vector2(POS_ENNX1, POS_ENNY1), new Vector2(POS_ENNX2, POS_ENNY0), new Vector2(POS_ENNX3, POS_ENNY1) };
-            _posEnnBaseX = new int[] { POS_ENNX0, POS_ENNX1, POS_ENNX2, POS_ENNX3 };                     
+            _chatoCombatContenu._posEnemy = new[] { new Vector2(POS_ENNX0, POS_ENNY0), new Vector2(POS_ENNX1, POS_ENNY1), new Vector2(POS_ENNX2, POS_ENNY0), new Vector2(POS_ENNX3, POS_ENNY1) };
+            _chatoCombatContenu._posEnnBaseX = new int[] { POS_ENNX0, POS_ENNX1, POS_ENNX2, POS_ENNX3 };                     
             _vieEnn = new int[_chatoCombatContenu._nbEnnemy];
             _attEnn = new int[_chatoCombatContenu._nbEnnemy];
             _defEnn = new int[_chatoCombatContenu._nbEnnemy];
             _vitEnn = new int[_chatoCombatContenu._nbEnnemy];
-            _animationE = new String[] { "idle_left", "idle_left", "idle_left", "idle_left" };
+            _chatoCombatContenu._animationE = new String[] { "idle_left", "idle_left", "idle_left", "idle_left" };
 
             //génération ennemy
             _ordrefinal = 0;
@@ -318,8 +301,8 @@ namespace SAE101
                 }
                 _ordrefinal++;
             }
-            _posProj = new Vector2(-16, 0);
-            _posExplosion = new Vector2(-32, 0);
+            _chatoCombatContenu._posProj = new Vector2(-16, 0);
+            _chatoCombatContenu._posExplosion = new Vector2(-32, 0);
             _animationProj = "fireball";
 
 
@@ -353,11 +336,11 @@ namespace SAE101
             _myGame._camera.LookAt(_myGame._cameraPosition);
 
             //curseurs
-            if (_animationEnCours == false && _gameOver == false && _victoire == false)
+            if (_chatoCombatContenu._animationEnCours == false && _gameOver == false && _victoire == false)
             {
                 if (_selectionEnn == false)
                 {
-                    _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
+                    _positionCursorD = _chatoCombatContenu._posAllie[_action] - new Vector2(8, 55);
 
                     if (keyboardState.IsKeyDown(Keys.Up) && _choixCursor > 0 && _myGame._cooldownVerif == false)
                     {
@@ -393,7 +376,7 @@ namespace SAE101
                         _selectionEnn = false;
                     }
 
-                    _positionCursorD = _posEnemy[_choixCursorD] - new Vector2(8, 55);
+                    _positionCursorD = _chatoCombatContenu._posEnemy[_choixCursorD] - new Vector2(8, 55);
                 }
 
                 //Selection dans le menu
@@ -409,7 +392,7 @@ namespace SAE101
                     _myGame.SetCoolDown();
                     _sousMenuSpecial = true;
                 }
-                if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _selectionEnn == false && _premierCombat == false && _sousMenuSpecial == true && _attackZeuwerld == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _selectionEnn == false && _premierCombat == false && _sousMenuSpecial == true && _chatoCombatContenu._attackZeuwerld == false)
                 {
                     _myGame.SetCoolDown();
                     _selectionEnn = true;
@@ -450,17 +433,17 @@ namespace SAE101
                 }
             }
 
-            if (_attackZeuwerld == true && _action > 0 && _animationEnCours == false)
+            if (_chatoCombatContenu._attackZeuwerld == true && _action > 0 && _chatoCombatContenu._animationEnCours == false)
             {
                 if (_nbTourZeuWerld == 2)
                 {
                     MediaPlayer.Play(_myGame._songCombat);
                     _myGame._wend.Play();
-                    _attackZeuwerld = false;
+                    _chatoCombatContenu._attackZeuwerld = false;
                     _nbTourZeuWerld = 0;
                     _action = 0;
-                    kk = 0;
-                    _animationOver = false;
+                    _chatoCombatContenu.kk = 0;
+                    _chatoCombatContenu._animationOver = false;
                 }
                 else
                     BastonA(0);
@@ -486,14 +469,14 @@ namespace SAE101
                 _chatoCombatContenu.Ben();
 
             //Si tel Perso est mort, alors pas d'action
-            if (_animationA[_action] == "ded")
+            if (_chatoCombatContenu._animationA[_action] == "ded")
                 _action++;
             Console.WriteLine(_action);
 
             //Qui est suivi par le curseur
             if (_selectionEnn == false)
             {
-                _positionCursorD = _posAllie[_action] - new Vector2(8, 55);
+                _positionCursorD = _chatoCombatContenu._posAllie[_action] - new Vector2(8, 55);
 
                 if (_sousMenuSpecial == true)
                 {
@@ -515,213 +498,71 @@ namespace SAE101
                 {
                     for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
                     {
-                        if (_positionCursorD == _posAllie[i] - new Vector2(8, 55) && _animationEnCours == false)
-                            _animationA[i] = "selected_right";
-                        else if (_animationEnCours == false && _animationA[i] != "ded")
-                            _animationA[i] = "idle_right";
+                        if (_positionCursorD == _chatoCombatContenu._posAllie[i] - new Vector2(8, 55) && _chatoCombatContenu._animationEnCours == false)
+                            _chatoCombatContenu._animationA[i] = "selected_right";
+                        else if (_chatoCombatContenu._animationEnCours == false && _chatoCombatContenu._animationA[i] != "ded")
+                            _chatoCombatContenu._animationA[i] = "idle_right";
                     }
                 }                
 
-                //Animation de combat (l'attaque de base)
-                if (_animationAttackA == true)
-                {
-                    if (_animationP1 == true)
-                    {
-                        _animationA[_allyAnime] = "attack_right1";
-                        _myGame._hit.Play();
-                        _coolDownAnimation = true;
-                        _animationP1 = false;
-                        _animationP3 = true;
+                
+                _myGame._chatoCombatContenu.Animation();
 
-                    }
-                    else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
-                    {
-                        _animationP1 = true;
-                    }
-                    else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
-                    {
-                        _animationP2 = false;
-                        _animationP3 = false;
-                        _animationOver = true;
-                        _posAllie[_allyAnime].X = _posAllieBaseX[_allyAnime];
-
-                        _animationA[_allyAnime] = "idle_right";
-                    }
-                    else if (_animationP2 == true && _animationP3 == true)
-                    {
-                        _animationA[_allyAnime] = "move_left";
-                        _posAllie[_allyAnime].X -= 2;
-                    }
-                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
-                    {
-                        _animationA[_allyAnime] = "move_right";
-                        _posAllie[_allyAnime].X += 2;
-                    }
-                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
-                    {
-                        _animationP1 = false;
-                        _animationP2 = true;
-                        _animationP3 = true;
-                    }
-
-                }
-
-                //AttackEnnemi
-                if (_animationAttackE == true)
-                {
-                    if (_animationP1 == true)
-                    {
-                        _animationE[_enemyAnime] = "attack_left1";
-                        _myGame._hit.Play();
-                        _coolDownAnimation = true;
-                        _animationP1 = false;
-                        _animationP3 = true;
-
-                    }
-                    else if (_posEnemy[_enemyAnime].X < _posEnnBaseX[_enemyAnime] - 80 && _animationP3 == false)
-                    {
-                        _animationP1 = true;
-                    }
-                    else if (_posEnemy[_enemyAnime].X > _posEnnBaseX[_enemyAnime])
-                    {
-                        _animationP2 = false;
-                        _animationP3 = false;
-                        _posEnemy[_enemyAnime].X = _posEnnBaseX[_enemyAnime];
-                        _animationOver = true;
-                        _animationE[_enemyAnime] = "idle_left";
-                    }
-                    else if (_animationP2 == true && _animationP3 == true)
-                    {
-                        
-                        _animationE[_enemyAnime] = "move_right";
-                        _posEnemy[_enemyAnime].X += 2;
-                    }
-                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
-                    {
-                        _animationE[_enemyAnime] = "move_left";
-                        _posEnemy[_enemyAnime].X -= 2;
-                    }
-                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
-                    {
-                        _animationP1 = false;
-                        _animationP2 = true;
-                        _animationP3 = true;
-                    }
-                }
-
-                //Zeuwerld
-                if (_animationSpe == true)
-                {
-                    if (_animationP1 == true)
-                    {
-                        if (_animationZeweurld == true)
-                        {
-                            _animationA[_allyAnime] = "attack_right3";
-                            _myGame._wbeg.Play();
-                            MediaPlayer.Stop();
-                            _attackZeuwerld = true;
-                        }
-                        if (_animationBouleFeu == true)
-                        {
-                            _animationA[_allyAnime] = "attack_right2";
-                            _fireBall = true;
-                            _myGame._fire.Play();
-                            _posProj = new Vector2(_posEnemy[_attaquePerso[1, 1]].X - 80, _posEnemy[_attaquePerso[1, 1]].Y);
-                        }
-                        _coolDownAnimation = true;
-                        _animationP1 = false;
-                        _animationP3 = true;
-
-                    }
-                    else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
-                    {
-                        _animationP1 = true;
-                    }
-                    else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
-                    {
-                        _animationP2 = false;
-                        _animationP3 = false;
-                        _posAllie[_allyAnime].X = _posAllieBaseX[_allyAnime];
-                        _animationOver = true;
-                        _animationA[_allyAnime] = "idle_right";
-                    }
-                    else if (_animationP2 == true && _animationP3 == true)
-                    {
-                        _animationA[_allyAnime] = "move_left";
-                        _posAllie[_allyAnime].X -= 2;
-                        if (_animationZeweurld == true)
-                            kk = _chatoCombatContenu._nbEnnemy + _chatoCombatContenu._nbAlly;
-
-                    }
-                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
-                    {
-                        _animationA[_allyAnime] = "move_right";
-                        _posAllie[_allyAnime].X += 2;
-                    }
-                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
-                    {
-                        _animationP1 = false;
-                        _animationP2 = true;
-                        _animationP3 = true;
-                    }
-                }
-                //_myGame.ChatoCombatContenu.Animation();
-
-                if (_animationOver == true)
+                if (_chatoCombatContenu._animationOver == true)
                 {
 
-                    _animationEnCours = false;
-                    _animationSpe = false;
-                    _animationAttackA = false;
-                    _animationAttackE = false;
-                    _animationZeweurld = false;
-                    _animationBouleFeu = false;
+                    _chatoCombatContenu._animationEnCours = false;
+                    _chatoCombatContenu._animationSpe = false;
+                    _chatoCombatContenu._animationAttackA = false;
+                    _chatoCombatContenu._animationAttackE = false;
+                    _chatoCombatContenu._animationZeweurld = false;
+                    _chatoCombatContenu._animationBouleFeu = false;
                     EnnemiMort();
                     AllieMort();
 
-                    if (_attackZeuwerld == true)
+                    if (_chatoCombatContenu._attackZeuwerld == true)
                     {
-                        kk = _chatoCombatContenu._nbAlly + _chatoCombatContenu._nbEnnemy;
+                        _chatoCombatContenu.kk = _chatoCombatContenu._nbAlly + _chatoCombatContenu._nbEnnemy;
                         _nbTourZeuWerld++;
                     }
-                    if (kk != _chatoCombatContenu._nbAlly + _chatoCombatContenu._nbEnnemy && _gameOver == false && _victoire == false)
+                    if (_chatoCombatContenu.kk != _chatoCombatContenu._nbAlly + _chatoCombatContenu._nbEnnemy && _gameOver == false && _victoire == false)
                     {
                         Vitesse2();
                     }
                     else
                     {
-                        _animationOver = false;
-                        kk = 0;
+                        _chatoCombatContenu._animationOver = false;
+                        _chatoCombatContenu.kk = 0;
                     }
                 }
 
-                if (_fireBall == true)
+                if (_chatoCombatContenu._fireBall == true)
                 {
-                    
-                    _posProj.X += 2;
+
+                    _chatoCombatContenu._posProj.X += 2;
                     _animationProj = "fireball";
-                    if (_posProj.X == _posEnemy[_attaquePerso[1, 1]].X)
+                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[1, 1]].X)
                     {
-                        _posProj = new Vector2(-16, 0);
-                        _fireBall = false;
+                        _chatoCombatContenu._posProj = new Vector2(-16, 0);
+                        _chatoCombatContenu._fireBall = false;
                     }
                 }
 
-                if (_coolDownAnimation == true)
+                if (_chatoCombatContenu._coolDownAnimation == true)
                     _myGame.SetCoolDownCombat();
-                _coolDownAnimation = false;
+                _chatoCombatContenu._coolDownAnimation = false;
 
                 //Animation update
 
                 for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
                 {
-                    _allie[i].Play(_animationA[i]);
+                    _allie[i].Play(_chatoCombatContenu._animationA[i]);
                     _allie[i].Update(deltaSeconds);
                 }
 
                 for (int i = 0; i < _chatoCombatContenu._nbEnnemy; i++)
                 {
-                    _ennemy[i].Play(_animationE[i]);
+                    _ennemy[i].Play(_chatoCombatContenu._animationE[i]);
                     _ennemy[i].Update(deltaSeconds);
                 }
 
@@ -752,8 +593,8 @@ namespace SAE101
             _spriteBatch.Draw(_combatBox, _positionCombat, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
             _spriteBatch.Draw(_cursorD, _positionCursorD, Color.White);
-            _spriteBatch.Draw(_proj, _posProj);
-            _spriteBatch.Draw(_proj, _posExplosion);
+            _spriteBatch.Draw(_proj, _chatoCombatContenu._posProj);
+            _spriteBatch.Draw(_proj, _chatoCombatContenu._posExplosion);
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
@@ -761,11 +602,11 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
             for (int i = 0; i < _chatoCombatContenu._nbAlly; i++)
             {
-                _spriteBatch.Draw(_allie[i], _posAllie[i]);              
+                _spriteBatch.Draw(_allie[i], _chatoCombatContenu._posAllie[i]);              
             }
             for (int i = 0; i < _chatoCombatContenu._nbEnnemy; i++)
             {
-                _spriteBatch.Draw(_ennemy[i], _posEnemy[i]);
+                _spriteBatch.Draw(_ennemy[i], _chatoCombatContenu._posEnemy[i]);
             }
             _spriteBatch.End();
         }
@@ -785,7 +626,7 @@ namespace SAE101
             //ZeuWerld
             if (_choixCursor == 0 && _ordreA[_action] == 1)
             {
-                if (_attackZeuwerld == true)
+                if (_chatoCombatContenu._attackZeuwerld == true)
                     _myGame._non.Play();
 
                 _attaquePerso[_action, 0] = 1;
@@ -879,7 +720,7 @@ namespace SAE101
         {
             for (int i = 0; i < _ordretour.Length; i++)
             {
-                if (_ordretour[kk] == _ordretour2[i])
+                if (_ordretour[_chatoCombatContenu.kk] == _ordretour2[i])
                 {
                     if (i >= _chatoCombatContenu._nbAlly)
                     {
@@ -891,56 +732,56 @@ namespace SAE101
                     }                                        
                 }               
             }
-            kk++;
+            _chatoCombatContenu.kk++;
         }
 
         //Si un allié se bat
         public void BastonA(int i)
         {
-            if (_animationA[i] != "ded")
+            if (_chatoCombatContenu._animationA[i] != "ded")
             {
-                _allyAnime = i;
-                _animationEnCours = true;
+                _chatoCombatContenu._allyAnime = i;
+                _chatoCombatContenu._animationEnCours = true;
                 if (_attaquePerso[i, 0] == 0)
                 {
-                    _animationAttackA = true;
-                    _animationP1 = false;
-                    _animationP2 = false;
-                    _animationOver = false;
+                    _chatoCombatContenu._animationAttackA = true;
+                    _chatoCombatContenu._animationP1 = false;
+                    _chatoCombatContenu._animationP2 = false;
+                    _chatoCombatContenu._animationOver = false;
                     _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
                     Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
                 {
-                    _animationSpe = true;
-                    _animationZeweurld = true;
-                    _animationP1 = false;
-                    _animationP2 = false;
-                    _animationOver = false;
+                    _chatoCombatContenu._animationSpe = true;
+                    _chatoCombatContenu._animationZeweurld = true;
+                    _chatoCombatContenu._animationP1 = false;
+                    _chatoCombatContenu._animationP2 = false;
+                    _chatoCombatContenu._animationOver = false;
                     Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 3)
                 {
-                    _animationSpe = true;
-                    _animationBouleFeu = true;
-                    _animationP1 = false;
-                    _animationP2 = false;
-                    _animationOver = false;
+                    _chatoCombatContenu._animationSpe = true;
+                    _chatoCombatContenu._animationBouleFeu = true;
+                    _chatoCombatContenu._animationP1 = false;
+                    _chatoCombatContenu._animationP2 = false;
+                    _chatoCombatContenu._animationOver = false;
                     Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 4)
                 {
-                    _animationSpe = true;
-                    _animationBouleFeu = true;
-                    _animationP1 = false;
-                    _animationP2 = false;
-                    _animationOver = false;
+                    _chatoCombatContenu._animationSpe = true;
+                    _chatoCombatContenu._animationBouleFeu = true;
+                    _chatoCombatContenu._animationP1 = false;
+                    _chatoCombatContenu._animationP2 = false;
+                    _chatoCombatContenu._animationOver = false;
                     Console.WriteLine(i);
                 }
             }
             else
             {
-                _animationOver = true;
+                _chatoCombatContenu._animationOver = true;
             }
             
         }
@@ -948,9 +789,9 @@ namespace SAE101
         //SI un ennemi se bat
         public void BastonE(int i)
         {
-            if (_animationE[i] != "ded")
+            if (_chatoCombatContenu._animationE[i] != "ded")
             {
-                _enemyAnime = i;
+                _chatoCombatContenu._enemyAnime = i;
                 int all = _random.Next(0, _chatoCombatContenu._nbAlly);
 
                 _attaqueEnnemy[i, 0] = 0;
@@ -958,17 +799,17 @@ namespace SAE101
                 _attaqueEnnemy[i, 2] = 0;
 
 
-                _animationAttackE = true;
-                _animationEnCours = true;
-                _animationP1 = false;
-                _animationP2 = false;
-                _animationOver = false;
+                _chatoCombatContenu._animationAttackE = true;
+                _chatoCombatContenu._animationEnCours = true;
+                _chatoCombatContenu._animationP1 = false;
+                _chatoCombatContenu._animationP2 = false;
+                _chatoCombatContenu._animationOver = false;
                 _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - _attEnn[i];
                 Console.WriteLine(i);
             }
             else
             {
-                _animationOver = true;
+                _chatoCombatContenu._animationOver = true;
             }
         }
 
@@ -1002,7 +843,7 @@ namespace SAE101
             {
                 if (_vieEnn[i] <= 0)
                 {
-                    _animationE[i] = "ded";
+                    _chatoCombatContenu._animationE[i] = "ded";
                     Victoire();
                 }
 
@@ -1015,7 +856,7 @@ namespace SAE101
             {
                 if (_vieAllie[i] <= 0)
                 {
-                    _animationA[i] = "ded";
+                    _chatoCombatContenu._animationA[i] = "ded";
                     GameOver();
                 }
 
@@ -1034,16 +875,16 @@ namespace SAE101
 
             if (verif == _chatoCombatContenu._nbEnnemy)
             {
-                kk = 0;
+                _chatoCombatContenu.kk = 0;
                 _victoire = true;
                 _myGame._combatFini = true;
                 _myGame.SetCoolDownFive();
                 _myGame._vic.Play();
                 for (int j = 0; j < _chatoCombatContenu._nbAlly; j++)
                 {
-                    if (_animationA[j] != "ded")
-                        _animationA[j] = "victory_right1";
-                    kk = _chatoCombatContenu._nbAlly;
+                    if (_chatoCombatContenu._animationA[j] != "ded")
+                        _chatoCombatContenu._animationA[j] = "victory_right1";
+                    _chatoCombatContenu.kk = _chatoCombatContenu._nbAlly;
                     _desc[0] = "Victoire Totale!";
                     _desc[1] = "Victoire Totale!";
                 }
@@ -1062,7 +903,7 @@ namespace SAE101
 
             if (verif == _chatoCombatContenu._nbAlly)
             {
-                kk = 0;
+                _chatoCombatContenu.kk = 0;
                 _gameOver = true;
                 _myGame.SetCoolDownFive();
                 _myGame._death.Play();

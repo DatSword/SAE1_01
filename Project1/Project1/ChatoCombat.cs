@@ -51,6 +51,7 @@ namespace SAE101
         public static bool _animationAttackE;
         public static bool _animationZeweurld;
         public static bool _animationBouleFeu;
+        public static bool _animationSpe;
         public static bool _animationEnCours;
         public static bool _animationP1;
         public static bool _animationP2;
@@ -183,6 +184,7 @@ namespace SAE101
             _animationAttackE = false;
             _animationZeweurld = false;
             _animationBouleFeu = false;
+            _animationSpe = false;
             _fireBall = false;
             _animationEnCours = false;
             _coolDownAnimation = false;
@@ -402,10 +404,15 @@ namespace SAE101
                     _myGame.SetCoolDown();
 
                 }
-                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && _myGame._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 1 && _myGame._cooldownVerif == false && _sousMenuSpecial == false && _premierCombat == false )
                 {
                     _myGame.SetCoolDown();
                     _sousMenuSpecial = true;
+                }
+                if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _selectionEnn == false && _premierCombat == false && _sousMenuSpecial == true && _attackZeuwerld == false)
+                {
+                    _myGame.SetCoolDown();
+                    _selectionEnn = true;
                 }
                 if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 2 && _myGame._cooldownVerif == false && _sousMenuSpecial == false)
                 {
@@ -433,11 +440,13 @@ namespace SAE101
                 }
 
                 //test (ou pas)
-                if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _sousMenuSpecial == true && _premierCombat == false)
+                if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _sousMenuSpecial == true && _premierCombat == false && _selectionEnn == true)
                 {
                     _myGame.SetCoolDown();
                     Special();
                     _sousMenuSpecial = false;
+                    _selectionEnn = false;
+
                 }
             }
 
@@ -601,14 +610,24 @@ namespace SAE101
                 }
 
                 //Zeuwerld
-                if (_animationZeweurld == true)
+                if (_animationSpe == true)
                 {
                     if (_animationP1 == true)
                     {
-                        _animationA[_allyAnime] = "attack_right3";
-                        _myGame._wbeg.Play();
-                        MediaPlayer.Stop();
-                        _attackZeuwerld = true;
+                        if (_animationZeweurld == true)
+                        {
+                            _animationA[_allyAnime] = "attack_right3";
+                            _myGame._wbeg.Play();
+                            MediaPlayer.Stop();
+                            _attackZeuwerld = true;
+                        }
+                        if (_animationBouleFeu == true)
+                        {
+                            _animationA[_allyAnime] = "attack_right2";
+                            _fireBall = true;
+                            _myGame._fire.Play();
+                            _posProj = new Vector2(_posEnemy[_attaquePerso[1, 1]].X - 80, _posEnemy[_attaquePerso[1, 1]].Y);
+                        }
                         _coolDownAnimation = true;
                         _animationP1 = false;
                         _animationP3 = true;
@@ -630,52 +649,8 @@ namespace SAE101
                     {
                         _animationA[_allyAnime] = "move_left";
                         _posAllie[_allyAnime].X -= 2;
-                        kk = _chatoCombatContenu._nbEnnemy + _chatoCombatContenu._nbAlly;
-
-                    }
-                    else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
-                    {
-                        _animationA[_allyAnime] = "move_right";
-                        _posAllie[_allyAnime].X += 2;
-                    }
-                    else if (_myGame._cooldownVerifC == false && _animationP3 == true)
-                    {
-                        _animationP1 = false;
-                        _animationP2 = true;
-                        _animationP3 = true;
-                    }
-                }
-
-                //boule de feu
-                if (_animationBouleFeu == true)
-                {
-                    if (_animationP1 == true)
-                    {
-                        _animationA[_allyAnime] = "attack_right2";
-                        _fireBall = true;
-                        _myGame._fire.Play();
-                        _posProj = new Vector2(_posEnemy[_attaquePerso[1, 1]].X - 80, _posEnemy[_attaquePerso[1, 1]].Y);
-                        _coolDownAnimation = true;
-                        _animationP1 = false;
-                        _animationP3 = true;
-
-                    }
-                    else if (_posAllie[_allyAnime].X > _posAllieBaseX[_allyAnime] + 80 && _animationP3 == false)
-                    {
-                        _animationP1 = true;
-                    }
-                    else if (_posAllie[_allyAnime].X < _posAllieBaseX[_allyAnime])
-                    {
-                        _animationP2 = false;
-                        _animationP3 = false;
-                        _posAllie[_allyAnime].X = _posAllieBaseX[_allyAnime];
-                        _animationOver = true;
-                        _animationA[_allyAnime] = "idle_right";
-                    }
-                    else if (_animationP2 == true && _animationP3 == true)
-                    {
-                        _animationA[_allyAnime] = "move_left";
-                        _posAllie[_allyAnime].X -= 2;
+                        if (_animationZeweurld == true)
+                            kk = _chatoCombatContenu._nbEnnemy + _chatoCombatContenu._nbAlly;
 
                     }
                     else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
@@ -696,6 +671,7 @@ namespace SAE101
                 {
 
                     _animationEnCours = false;
+                    _animationSpe = false;
                     _animationAttackA = false;
                     _animationAttackE = false;
                     _animationZeweurld = false;
@@ -814,7 +790,7 @@ namespace SAE101
 
                 _attaquePerso[_action, 0] = 1;
                 _attaquePerso[_action, 1] = -1;
-                _attaquePerso[_action, 2] = 1;
+                _attaquePerso[_action, 2] = 0;
                 _action++;
             }
             //Baïtzedeust
@@ -822,7 +798,7 @@ namespace SAE101
             {
                 _attaquePerso[_action, 0] = 1;
                 _attaquePerso[_action, 1] = -1;
-                _attaquePerso[_action, 2] = 1;
+                _attaquePerso[_action, 2] = 2;
                 _sousMenuSpecial = false;
                 _action++;
             }
@@ -831,16 +807,16 @@ namespace SAE101
             {
                 _attaquePerso[_action, 0] = 1;
                 _attaquePerso[_action, 1] = _choixCursorD;
-                _attaquePerso[_action, 2] = 1;
+                _attaquePerso[_action, 2] = 3;
                 _sousMenuSpecial = false;
                 _action++;
             }
-            //Boule de Feu
+            //Intimidation
             else if (_choixCursor == 1 && _ordreA[_action] == 2)
             {
                 _attaquePerso[_action, 0] = 1;
                 _attaquePerso[_action, 1] = -1;
-                _attaquePerso[_action, 2] = 1;
+                _attaquePerso[_action, 2] = 4;
                 _sousMenuSpecial = false;
                 _action++;
 
@@ -934,8 +910,27 @@ namespace SAE101
                     _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
                     Console.WriteLine(i);
                 }
-                else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 1)
+                else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
                 {
+                    _animationSpe = true;
+                    _animationZeweurld = true;
+                    _animationP1 = false;
+                    _animationP2 = false;
+                    _animationOver = false;
+                    Console.WriteLine(i);
+                }
+                else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 3)
+                {
+                    _animationSpe = true;
+                    _animationBouleFeu = true;
+                    _animationP1 = false;
+                    _animationP2 = false;
+                    _animationOver = false;
+                    Console.WriteLine(i);
+                }
+                else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 4)
+                {
+                    _animationSpe = true;
                     _animationBouleFeu = true;
                     _animationP1 = false;
                     _animationP2 = false;

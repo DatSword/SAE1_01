@@ -27,16 +27,17 @@ namespace SAE101
         public KeyboardState _keyboardState;
 
         // on définit écrans
-        public EcranDeTitre _ecranDeTitre;
         public BlackJack _blackJack;
+        public Camera _camera;
+        public ChatoCombat _chatoCombat;
+        public ChatoCombatContenu _chatoCombatContenu;
+        public ChatoExtCours _chatoExtCours;
+        public ChatoIntChambres _chatoIntChambres;
+        public ChatoIntCouloir _chatoIntCouloir;
+        public ChatoIntTrone _chatoIntTrone;
+        public EcranDeTitre _ecranDeTitre;
         public EventEtDial _eventEtDial;
         public JoueurSpawn _joueur;
-        public ChatoIntCouloir _chatoIntCouloir;
-        public ChatoIntChambres _chatoIntChambres;
-        public ChatoExtCours _chatoExtCours;
-        public ChatoIntTrone _couronne;
-        public ChatoCombatContenu _chatoCombatContenu;
-        public ChatoCombat _chatoCombat;
         public Option _option;
 
         //Ecran interactif
@@ -53,7 +54,7 @@ namespace SAE101
         public double chan;
 
         //Camera
-        public OrthographicCamera _camera;
+        public OrthographicCamera _cameraMap;
         public OrthographicCamera _cameraDial;
         public Vector2 _cameraPosition;
         public int _numEcran;
@@ -155,16 +156,17 @@ namespace SAE101
             _graphics.ApplyChanges();
 
             // variables écran
+            _blackJack = new BlackJack(this);
+            _camera = new Camera(this);
+            _chatoCombat = new ChatoCombat(this);
+            _chatoCombatContenu = new ChatoCombatContenu(this);
+            _chatoExtCours = new ChatoExtCours(this);
+            _chatoIntChambres = new ChatoIntChambres(this);
+            _chatoIntCouloir = new ChatoIntCouloir(this);
+            _chatoIntTrone = new ChatoIntTrone(this);
             _ecranDeTitre = new EcranDeTitre(this);
             _eventEtDial = new EventEtDial(this);
-            _blackJack = new BlackJack(this);
-            _chatoIntCouloir = new ChatoIntCouloir(this);
-            _chatoIntChambres = new ChatoIntChambres(this);
-            _chatoExtCours = new ChatoExtCours(this);
-            _couronne = new ChatoIntTrone(this);
             _joueur = new JoueurSpawn(this);
-            _chatoCombatContenu = new ChatoCombatContenu(this);
-            _chatoCombat = new ChatoCombat(this);
             _option = new Option(this);
 
             Etat = Etats.Menu;
@@ -177,7 +179,7 @@ namespace SAE101
             //Camera
 
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _xEcran, _yEcran);
-            _camera = new OrthographicCamera(viewportadapter);
+            _cameraMap = new OrthographicCamera(viewportadapter);
 
             var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, _xEcran, _yEcran);
             _cameraDial = new OrthographicCamera(viewportadapterDial);
@@ -329,9 +331,9 @@ namespace SAE101
 
 
             //Camera
-
+            _camera.PositionCamera();
             // chambres nord
-            if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
+            /*if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
                                 && _positionPerso.Y < _chatoIntChambres._limChambre_y1
                                 && _positionPerso.X < _chatoIntChambres._limChambre_Gauche)
                 _cameraPosition = _chatoIntChambres._chambreCentre1;
@@ -397,7 +399,7 @@ namespace SAE101
             else if (_numEcran == 5)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
-            Console.WriteLine(_numEcran);
+            Console.WriteLine(_numEcran);*/
 
             _walkSpeed = SPEED * deltaSeconds;
             Console.WriteLine(ChatoCombatContenu._lastPosition);
@@ -554,7 +556,7 @@ namespace SAE101
 
         public void LoadScreenchato_couronne()
         {
-            _screenManager.LoadScreen(_couronne, new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_chatoIntTrone, new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
             this.Etat = Etats.Play;
             _numEcran = 5;

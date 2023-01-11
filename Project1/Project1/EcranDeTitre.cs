@@ -114,7 +114,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
@@ -128,7 +128,7 @@ namespace SAE101
     }
 
 
-    internal record struct NewStruct(object Item1, int Item2)
+    /*internal record struct NewStruct(object Item1, int Item2)
     {
         public static implicit operator (object, int)(NewStruct value)
         {
@@ -139,5 +139,5 @@ namespace SAE101
         {
             return new NewStruct(value.Item1, value.Item2);
         }
-    }
+    }*/
 }

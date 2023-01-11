@@ -30,7 +30,7 @@ namespace SAE101
         private ChatoExtCours _chatoExtCours;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoIntCouloir _chatoIntCouloir;
-        public ChatoIntTrone _couronne;
+        private ChatoIntTrone _chatoIntTrone;
 
         public JoueurSpawn(Game1 game)
         {
@@ -40,7 +40,7 @@ namespace SAE101
             _chatoExtCours = _myGame._chatoExtCours;
             _chatoIntChambres = _myGame._chatoIntChambres;
             _chatoIntCouloir = _myGame._chatoIntCouloir;
-            _couronne = _myGame._couronne;
+            _chatoIntTrone = _myGame._chatoIntTrone;
         }
 
         public void Spawnchato_int_chambres_couloir()
@@ -122,15 +122,15 @@ namespace SAE101
                 else if (_chatoIntCouloir._posX >= 23.5 * 16 && _chatoIntCouloir._posX < 25 * 16)
                     _myGame._positionPerso = new Vector2(23 * 16 + 8, 49 * 16);
 
-                if (_couronne._posX >= 8 * 16 && _couronne._posX < 9 * 16)
+                if (_chatoIntTrone._posX >= 8 * 16 && _chatoIntTrone._posX < 9 * 16)
                     _myGame._positionPerso = new Vector2(20 * 16, 10 * 16);
-                else if (_couronne._posX >= 9 * 16 && _couronne._posX < 10 * 16)
+                else if (_chatoIntTrone._posX >= 9 * 16 && _chatoIntTrone._posX < 10 * 16)
                     _myGame._positionPerso = new Vector2(21 * 16, 10 * 16);
-                else if (_couronne._posX >= 10 * 16 && _couronne._posX < 11 * 16)
+                else if (_chatoIntTrone._posX >= 10 * 16 && _chatoIntTrone._posX < 11 * 16)
                     _myGame._positionPerso = new Vector2(22 * 16, 10 * 16);
-                else if (_couronne._posX >= 11 * 16 && _couronne._posX < 12 * 16)
+                else if (_chatoIntTrone._posX >= 11 * 16 && _chatoIntTrone._posX < 12 * 16)
                     _myGame._positionPerso = new Vector2(23 * 16, 10 * 16);
-                else if (_couronne._posX >= 12 * 16)
+                else if (_chatoIntTrone._posX >= 12 * 16)
                     _myGame._positionPerso = new Vector2(23 * 16, 10 * 16);
             }
         }

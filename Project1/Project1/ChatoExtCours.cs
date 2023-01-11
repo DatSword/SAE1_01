@@ -40,9 +40,11 @@ namespace SAE101
         private AnimatedSprite _grand;
         private AnimatedSprite _grand2;
         private AnimatedSprite _grand3;
+
         private Vector2 _positionGrand;
         private Vector2 _positionGrand2;
         private Vector2 _positionGrand3;
+
         private String _animationGrand;
         private String _animationGrand2;
         private String _animationGrand3;
@@ -110,8 +112,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._camera.LookAt(_myGame._cameraPosition);
-
+            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
      
 
             _tiledMapRenderer.Update(gameTime);
@@ -184,7 +185,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._camera.GetViewMatrix();
+            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
@@ -206,7 +207,6 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
-    
 
             _spriteBatch.End();
         }

@@ -132,7 +132,7 @@ namespace SAE101
             //Evenements
 
             // Ninja
-            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false)
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
@@ -153,10 +153,9 @@ namespace SAE101
             }
 
 
-            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == true)
             {
                 _eventEtDial.FermeBoite();
-                _collisionPassage = false;
 
             }
             else if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16

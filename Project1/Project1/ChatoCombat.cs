@@ -930,9 +930,9 @@ namespace SAE101
         {
             if (_myGame._numSalle == 1)
                 _myGame.LoadScreenchato_int_chambres_couloir();
-            if (_myGame._numSalle == 2)
+            else if (_myGame._numSalle == 2)
                 _myGame.LoadScreenchato_ext_cours_interieur();
-            if (_myGame._numSalle == 3)
+            else if (_myGame._numSalle == 3)
                 _myGame.LoadScreenchato_couronne();
         }
     }

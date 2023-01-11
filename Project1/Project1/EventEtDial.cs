@@ -43,9 +43,14 @@ namespace SAE101
         public Vector2 _posYes;
         public Vector2 _posNo;
         public bool _choiceTrue;
+        public int _choixCursor;
+
+        //Combien de textes pendant le dialogue
+        public int _numDial;
 
         public int _count = 0;
 
+        //Dialogue Chambre
         public void toutDebut()
         {
             _myGame.SetCoolDown();
@@ -53,11 +58,13 @@ namespace SAE101
             _text = "EH OH GAMIN, REVEIL - TOI! TU VAS M'FAIRE ATTENDRE\n" +
                           "ENCORE LONGTEMPS?!";
             _nom = "???";
+            _numDial = 3;
             _count += 1;
         }
 
         public void Fren1()
         {
+            _numDial = 0;
             _myGame.SetCoolDown();
             _dialTrue = true;
             _text = ":)";
@@ -84,16 +91,37 @@ namespace SAE101
                     "pour ce moment!";
             _nom = "Jon";
         }
-
         public void Jon2()
         {
             _myGame.SetCoolDown();
             _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
-                    ",ou j'vais croire que tu as décidé de prolonger ta nuit!";
+                    ", ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
             _myGame._firstVisitBedroom = false;
         }
 
+        //Coffre
+        public void Chest0()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous retrouvez votre épée !\n" +
+                    "(Votre attaque a augmenté !)";
+            _nom = "";
+            _myGame._epee = true;
+        }
+
+        public void RPG()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous retrouvez votre... lance missile!?\n" +
+                    "(L'attaque de tout le monde crêve le plafond !!!)";
+            _nom = "";
+            _myGame._boom = true;
+        }
+
+        //Couloir
         public void Jon3()
         {
             _myGame.SetCoolDown();
@@ -103,54 +131,38 @@ namespace SAE101
             _nom = "Jon";
         }
 
+        //Cours
         public void Ninja()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
-            _text = "Tu ne passera pas cet cour!\n" +
-                    "Du moins tant que on est là.";
-
+            _text = "Vous ne passerrez pas cet cour!\n" +
+                    "Du moins tant qu'on sera là.";
             
             _nom = "Ninja";
         }
-
-        public void OuVasTu()
-        {
-            _myGame.SetCoolDown();
-            _dialTrue = true;
-            _text = "Mais où vas-tu ?\n" +
-                    "La salle du couronnement est au nord.";
-            _nom = "Jon";
-        } 
-
         public void Jon4()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Des ninjas ici? Je savais qu'on avait attiré l'intention de\n" +
-                    "pas mal de monde, mais j'savais pas à ce point là!" +
-                    "Allons-y, et rappelle toi que chacun de nous possède des actions\n" +
-                    "spéciale";
+                    "pas mal de monde, mais j'savais pas à ce point là! Allons-y,\n" +
+                    "et rappelle toi que chacun de nous possède des actions" +
+                    "\nspéciale! Après tout, c'est en partie gràce à ta\n" +
+                    "manipulation du nommCoul qu'on est arrivé jusqu'ici!";
+
             _nom = "Jon";
         }
 
-        public void Chest0()
-        {
-            _myGame.SetCoolDown();
-            _dialTrue = true;
-            _text = "Vous retrouvez votre épée !";
-            _nom = "";
-            _myGame._epee = true;
-        }
 
-        public void RPG()
+        public void OuVasTu()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
-            _text = "Vous retrouvez... un lance missile!?;";
-            _nom = "";
-            _myGame._boom = true;
-        }
+            _text = "Mais qu'est-ce qu'tu fait, gamin? La salle de\n" +
+                    "couronnement c'est pas d'ce coté, c'est au nord!";
+            _nom = "Jon";
+        } 
 
         public void Chest1()
         {
@@ -164,6 +176,7 @@ namespace SAE101
         public void FermeBoite()
         {
             _dialTrue = false;
+            _choiceTrue = false;
             _myGame.SetCoolDown();
         }
 
@@ -176,7 +189,25 @@ namespace SAE101
             _nom = " ";
         }
 
-    
+        public void Choix()
+        {
+            if (_choiceTrue == true)
+            {
+                if (_myGame._keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && _myGame._cooldownVerif == false)
+                {
+                    _myGame.SetCoolDown();
+                    _posCursor = new Vector2(430, 301);
+                    _choixCursor--;
+                }
+                else if (_myGame._keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && _myGame._cooldownVerif == false)
+                {
+                    _myGame.SetCoolDown();
+                    _posCursor = new Vector2(430, 316);
+                    _choixCursor++;
+                }
+                Console.WriteLine(_myGame._cooldownVerif);
+            }
+        }
 
         public void SetCollision()
         {
@@ -194,12 +225,12 @@ namespace SAE101
             dd = _myGame.mapLayerDoor.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight + 1)).GlobalIdentifier;
             ud = _myGame.mapLayerDoor.GetTile((ushort)(_myGame._positionPerso.X / _myGame._tiledMap.TileWidth), (ushort)(_myGame._positionPerso.Y / _myGame._tiledMap.TileHeight - 1)).GlobalIdentifier;
 
-            Console.WriteLine("r = " + r);
+            /*Console.WriteLine("r = " + r);
             Console.WriteLine("u = " + u);
             Console.WriteLine("d = " + d);
             Console.WriteLine("l = " + l);
             Console.WriteLine("ud = " + ud);
-            Console.WriteLine("dd = " + dd);
+            Console.WriteLine("dd = " + dd);*/
         }
     }
 }

@@ -127,19 +127,35 @@ namespace SAE101
 
             //Evenements
 
-            // Ninja
-            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false)
+                // Ninja
+
+
+
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 0)
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
                 _myGame.LoadScreenchato_combat();
+                _eventEtDial._numDial = 2;
             }
-            else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
+            else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
+            {
+                _eventEtDial.FermeBoite();         
+                _eventEtDial._numDial = 0;
+                _myGame.LoadScreenchato_combat();
+            }
+            else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 2)
+            {
+                _eventEtDial.Jon4();
+                _eventEtDial._numDial = 1;
+            }
+            else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 3)
             {
                 _animationGrand = "idle_down";
                 _animationGrand2 = "idle_down";
                 _animationGrand3 = "idle_down";
                 _eventEtDial.Ninja();
+                _eventEtDial._numDial = 2;
             }
             else if (_chatoCombat._victoire == true)
             {

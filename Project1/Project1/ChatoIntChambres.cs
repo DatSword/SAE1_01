@@ -55,11 +55,6 @@ namespace SAE101
         public int _limChambre_y2;
         public int _limChambre_Gauche;
         public int _limChambre_Droite;
-
-        private int _choixCursor;
-
-        public int numDial;
-
         public ChatoIntChambres(Game1 game) : base(game) 
         {
             _myGame = game;
@@ -74,7 +69,6 @@ namespace SAE101
             _posJon = new Vector2(-10 * 16 + 8, -10 * 16 + 8);
             _animJon = "idle_up";
             _posX = 0;
-            numDial = 0;
 
             _joueur.Spawnchato_int_chambres_nord();
 
@@ -97,7 +91,7 @@ namespace SAE101
             _positionChest[1] = new Vector2(38 * 16 + 8, 4 * 16 + 8);
 
             
-            _choixCursor = 1;
+            _eventEtDial._choixCursor = 1;
             
             
             base.Initialize();
@@ -138,41 +132,38 @@ namespace SAE101
             //Camera
             _myGame._cameraMap.LookAt(_myGame._cameraPosition);
 
-
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
             _joueur.Mouvement(gameTime);
             _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
-            
+
+            //Choix 
+
+            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
+            {
+                _eventEtDial.Fin1();
+                _myGame._fin = 1;
+                //Game.LoadScreenblack_jack();
+            }
 
             if (_eventEtDial._choiceTrue == true)
-            {
-                if (_keyboardState.IsKeyDown(Keys.Up) && _choixCursor == 1 && _myGame._cooldownVerif == false)
-                {
-                    _myGame.SetCoolDown();
-                    _eventEtDial._posCursor = new Vector2(430, 301);
-                }
-                else if (_keyboardState.IsKeyDown(Keys.Down) && _choixCursor == 0 && _myGame._cooldownVerif == false)
-                {
-                    _myGame.SetCoolDown();
-                    _eventEtDial._posCursor = new Vector2(430, 301);
-                }
-                Console.WriteLine(_myGame._cooldownVerif);
+                _eventEtDial.Choix();
 
-                if (_keyboardState.IsKeyDown(Keys.W) && _choixCursor == 0 && _myGame._cooldownVerif == false)
-                {
-                    _myGame.SetCoolDown();
-                    _myGame._fin = 1;
-                    _myGame.LoadScreenblack_jack();
-                    
-                }
-                if ((_keyboardState.IsKeyDown(Keys.W) && _choixCursor ==1) || _keyboardState.IsKeyDown(Keys.X) && _myGame._cooldownVerif == false)
-                {
-                    _myGame.SetCoolDown();
-                    _eventEtDial._choiceTrue = false;
-                    _eventEtDial._dialTrue = false;
-                }
+            if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial._choixCursor == 0 && _myGame._cooldownVerif == false && _eventEtDial._choiceTrue == true)
+            {
+                _myGame.SetCoolDown();
+                _myGame._fin = 1;
+                _myGame.LoadScreenblack_jack();
+                _eventEtDial._choiceTrue = false;
+                _eventEtDial._dialTrue = false;
+
+            }
+            else if ((_keyboardState.IsKeyDown(Keys.W) && _eventEtDial._choixCursor == 1 || _keyboardState.IsKeyDown(Keys.X)) && _myGame._cooldownVerif == false && _eventEtDial._choiceTrue == true)
+            {
+                _myGame.SetCoolDown();
+                _eventEtDial._choiceTrue = false;
+                _eventEtDial._dialTrue = false;
             }
 
 
@@ -203,30 +194,34 @@ namespace SAE101
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
 
-            //Coffre(s?)
-            for (int i = 0; i < _chest.Length; i++)
-            {
-                
-                if (_myGame._chestTrue[i] == false)
-                    _animationChest = "close";
-                else
-                    _animationChest = "open";
-            }
+            //Coffres
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X > 20 * 16 && _myGame._cooldownVerif == false)
+            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X > 20 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[1] = true;
                 _eventEtDial.Chest1();
+                _eventEtDial._numDial = 1;
             }
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X < 20 * 16 && _myGame._cooldownVerif == false)
+            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X < 20 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[0] = true;
+                _eventEtDial._numDial = 1;
                 if (_myGame.konami == true)
                     _eventEtDial.RPG();
                 else
                     _eventEtDial.Chest0();
 
+            }
+
+
+            for (int i = 0; i < _chest.Length; i++)
+            {
+
+                if (_myGame._chestTrue[i] == false)
+                    _animationChest = "close";
+                else
+                    _animationChest = "open";
             }
 
             for (int i = 0; i < _chest.Length; i++)
@@ -235,47 +230,42 @@ namespace SAE101
                 _chest[i].Update(deltaSeconds);
             }
             
+            //Debut avec Jon
 
             _jon.Play(_animJon);
             _jon.Update(deltaSeconds);
-            Console.WriteLine(numDial);
+            Console.WriteLine(_eventEtDial._numDial);
 
-            //EVENEMENTS
-
-            if (_myGame._firstVisitBedroom == true && _myGame._cooldownVerif == false && numDial == 0)
+            if (_myGame._firstVisitBedroom == true && _myGame._cooldownVerif == false && _eventEtDial._numDial == 3)
             {
                 _eventEtDial.Jon1();
                 _posJon = new Vector2(4*16+8,4*16+8);
                 _myGame._firstVisitBedroom = false;
-                numDial = 1;
+                _eventEtDial._numDial = 2;
             }
-            if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && numDial == 1)
+            else if (_myGame._cooldownVerif == false && _keyboardState.IsKeyDown(Keys.W) && _eventEtDial._numDial == 2)
             {
                 _eventEtDial.Jon2();
-                numDial = 2;
+                _eventEtDial._numDial = 1;
             }
-            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false &&  numDial == 2)
+            
+            if (_eventEtDial._numDial == 0)
             {
-                _eventEtDial.FermeBoite();
-                _animJon = "move_down";
-                numDial = 3;
-            }
-
-            //DODO
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
-            {
-                //Event_et_dial.Fin1();
-                _myGame._fin = 1;
-                Game.LoadScreenblack_jack();
-            }
-
-            if (numDial == 3)
                 _posJon.Y += _myGame._walkSpeed;
+                _animJon = "move_down";
+            }             
             if (_posJon.Y > 8 * 16 + 8)
             {
+                _eventEtDial._numDial = 2;
                 _posJon = new Vector2(-100 * 16 + 8, -10 * 16 + 8);
             }
-                
+            
+
+            if (_eventEtDial._numDial == 1 && _keyboardState.IsKeyDown(Keys.W) && _eventEtDial._dialTrue == true && _myGame._cooldownVerif == false)
+            {
+                _eventEtDial.FermeBoite();
+                _eventEtDial._numDial = 0;
+            }
 
             //changement de map
             if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 41))

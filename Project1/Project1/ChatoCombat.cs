@@ -113,6 +113,7 @@ namespace SAE101
         public String _animationProj;
         private AnimatedSprite _explosion;       
         public String _animationExplosion;
+        public static int _playerAttacking;
 
         //The Legend came to life
         public int _ordrefinal;
@@ -469,7 +470,7 @@ namespace SAE101
                     _choix[1] = _chatoCombatContenu._special;
                 }
 
-                //ANIMATIONS
+                //ANIMATIONS (pas de combat)
 
                 //Animation de sélection
 
@@ -527,12 +528,12 @@ namespace SAE101
                 {
                     _chatoCombatContenu._posProj.X += 2;
                     _animationProj = "badaboom";
-                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[1, 1]].X)
+                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[_playerAttacking, 1]].X)
                     {
                         _myGame._pelo.Play();
                         _chatoCombatContenu._posProj = new Vector2(-16, 0);
                         _chatoCombatContenu._badabim = false;
-                        _chatoCombatContenu._posExplosion = _chatoCombatContenu._posEnemy[_attaquePerso[1, 1]];
+                        _chatoCombatContenu._posExplosion = _chatoCombatContenu._posEnemy[_attaquePerso[_playerAttacking, 1]];
                     }
                 }
 
@@ -727,6 +728,7 @@ namespace SAE101
         //Si un allié se bat
         public void BastonA(int i)
         {
+            _playerAttacking = i;
             if (_chatoCombatContenu._animationA[i] != "ded")
             {
                 _chatoCombatContenu._allyAnime = i;

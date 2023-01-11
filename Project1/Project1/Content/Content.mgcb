@@ -508,17 +508,17 @@
 /processorParam:Quality=Best
 /build:music/fins/sleep.mp3
 
-#begin music/fins/smb_dodo.mp3
+#begin music/fins/za_endo.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:music/fins/smb_dodo.mp3
+/build:music/fins/za_endo.mp3
 
-#begin music/title/title.mp3
+#begin music/title/titre.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:music/title/title.mp3
+/build:music/title/titre.mp3
 
 #begin sfx/back.wav
 /importer:WavImporter

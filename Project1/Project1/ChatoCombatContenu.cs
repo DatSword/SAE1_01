@@ -90,7 +90,7 @@ namespace SAE101
         public Vector2 _posProj;
         public Vector2 _posExplosion;
 
-        //El famoso variable qui permet de idre qui joue dans quel ordre
+        //El famoso variable qui permet de qui joue dans quel ordre
         public int kk;
 
         public void Combat()
@@ -179,7 +179,7 @@ namespace SAE101
             {
                 if (_animationP1 == true)
                 {
-                    if (_myGame.konami != true)
+                    if (_myGame._boom != true)
                     {
                         _animationA[_allyAnime] = "attack_right1";
                         _myGame._hit.Play();

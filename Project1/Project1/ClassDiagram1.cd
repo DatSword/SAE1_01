@@ -1,58 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SAE101.BlackJack" Collapsed="true">
-    <Position X="8" Y="1.25" Width="1.5" />
+    <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAACAAAAAAAwAAAAAAAAAAAAgAAAAKAIAACEAAAAQ=</HashCode>
       <FileName>BlackJack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoCombat" Collapsed="true">
-    <Position X="5.25" Y="2" Width="1.5" />
+    <Position X="7.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>qEQCpKIBafkII/NAyahBACAjhAqKQAkGQMYB4sDbVQ0=</HashCode>
       <FileName>ChatoCombat.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoCombatContenu" Collapsed="true">
-    <Position X="7.75" Y="2.5" Width="1.5" />
+    <Position X="7.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAQCAAAIAAQABqgCAACpEIAAgiEAAAAAAAAAEAAAg=</HashCode>
       <FileName>ChatoCombatContenu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoExtCours" Collapsed="true">
-    <Position X="6.75" Y="3.25" Width="1.5" />
+    <Position X="8.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYAQSAAAAAAAwAAABAAAAAAAQhAAAAAAIAAAEAIQgQ=</HashCode>
+      <HashCode>AAYAQCAAAAAAAwAAABAAAAAAAQhAACAAAIAAAEAIQgQ=</HashCode>
       <FileName>ChatoExtCours.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoIntChambres" Collapsed="true">
-    <Position X="5" Y="3" Width="1.5" />
+    <Position X="4.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAASECAAAhA0ACACAQAAAAAQhAAgAAAMACAGCIYgQ=</HashCode>
       <FileName>ChatoIntChambres.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoIntCouloir" Collapsed="true">
-    <Position X="5.25" Y="0.75" Width="1.5" />
+    <Position X="6.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQFACAAAAAAA0ACEgAAAAAAAQhAAAACAIBAAEAITwQ=</HashCode>
       <FileName>ChatoIntCouloir.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.EcranDeTitre" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
+    <Position X="1.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACQAACAAAAAAwwAAAAAAAAAQAgiAAAACAIAAAEAAAAQ=</HashCode>
       <FileName>EcranDeTitre.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.EventEtDial" Collapsed="true">
-    <Position X="2.5" Y="2.75" Width="1.5" />
+    <Position X="3" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAwEICEABAgAAgAEAABBwAESBAgI4CEsBAKBAETIIAQ=</HashCode>
+      <HashCode>AAgEICEABAgAAAAEAABBwAESBAAI4CEsBAKBAETIIAQ=</HashCode>
       <FileName>EventEtDial.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -64,10 +64,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.JoueurSpawn" Collapsed="true">
-    <Position X="0.5" Y="2.25" Width="1.5" />
+    <Position X="4.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAQABWAAAAABAgAAAAAAAEAAAAgAABAAAAAAAEAABAA=</HashCode>
+      <HashCode>CAAABWAAAAABAAAAAAAAAEAAAAAAABAAAAAAAEAABAA=</HashCode>
       <FileName>JoueurSpawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAE101.Option" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIigAAAAAQwAQAAAAAAAAACiAQABCQIAAcAAAAAQ=</HashCode>
+      <FileName>Option.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

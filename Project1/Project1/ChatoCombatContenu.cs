@@ -62,12 +62,14 @@ namespace SAE101
         //animation
         public int _allyAnime;
         public int _enemyAnime;
+
         public bool _animationAttackA;
         public bool _animationAttackE;
         public bool _animationZeweurld;
         public bool _animationBouleFeu;
         public bool _animationSpe;
         public bool _animationEnCours;
+
         public bool _animationP1;
         public bool _animationP2;
         public bool _animationP3;
@@ -84,10 +86,11 @@ namespace SAE101
 
         public bool _attackZeuwerld;
         public bool _fireBall;
+        public bool _badabim;
         public Vector2 _posProj;
         public Vector2 _posExplosion;
 
-        //El famoso variable qui permet de idre qui joue dans quel ordre
+        //El famoso variable qui permet de dire qui joue dans quel ordre
         public int kk;
 
         public void Combat()
@@ -117,6 +120,10 @@ namespace SAE101
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour ", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
+            if (_myGame._epee == true)
+                _stat[1] = _stat[1] + 20;
+            if (_myGame._boom == true)
+                _stat[1] = _stat[1] + 200000000;
 
         }
         public void Jon()
@@ -126,6 +133,8 @@ namespace SAE101
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
+            if (_myGame._boom == true)
+                _stat[1] = _stat[1] + 200000000;
         }
         public void Ben()
         {
@@ -133,7 +142,7 @@ namespace SAE101
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Cri";
             _specialP = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de 'blèmes", "_" };
-            _descP = new String[] { "_", "_", "Que des solutions!", "_" };         
+            _descP = new String[] { "Mais c'est trivial ça!", "_", "Que des solutions!", "_" };         
         }
 
         //personnages non joueurs
@@ -170,8 +179,20 @@ namespace SAE101
             {
                 if (_animationP1 == true)
                 {
-                    _animationA[_allyAnime] = "attack_right1";
-                    _myGame._hit.Play();
+                    if (_myGame.konami != true)
+                    {
+                        _animationA[_allyAnime] = "attack_right1";
+                        _myGame._hit.Play();
+                        
+                    }                   
+                    else
+                    {
+                        _animationA[_allyAnime] = "attack_right2";
+                        _badabim = true;
+                        _myGame._fire.Play();
+                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[1, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[1, 1]].Y);
+                        
+                    }
                     _coolDownAnimation = true;
                     _animationP1 = false;
                     _animationP3 = true;
@@ -214,12 +235,11 @@ namespace SAE101
             {
                 if (_animationP1 == true)
                 {
-                    _animationE[_enemyAnime] = "attack_left1";
-                    _myGame._hit.Play();
-                    _coolDownAnimation = true;
-                    _animationP1 = false;
-                    _animationP3 = true;
-
+                        _animationE[_enemyAnime] = "attack_left1";
+                        _myGame._hit.Play();
+                        _coolDownAnimation = true;
+                        _animationP1 = false;
+                        _animationP3 = true;
                 }
                 else if (_posEnemy[_enemyAnime].X < _posEnnBaseX[_enemyAnime] - 80 && _animationP3 == false)
                 {
@@ -252,7 +272,6 @@ namespace SAE101
                 }
             }
 
-            //Zeuwerld
             if (_animationSpe == true)
             {
                 if (_animationP1 == true)

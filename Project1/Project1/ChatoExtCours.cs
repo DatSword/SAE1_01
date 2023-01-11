@@ -30,6 +30,7 @@ namespace SAE101
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
+        private ChatoCombat _chatoCombat;
 
         //sprite
         private AnimatedSprite _perso;
@@ -59,6 +60,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
+            _chatoCombat = _myGame._chatoCombat;
 
             // Lieu Spawn
             _posX = 0;
@@ -134,7 +136,7 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenchato_combat();
             }
             else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {
@@ -143,11 +145,18 @@ namespace SAE101
                 _animationGrand3 = "idle_down";
                 _eventEtDial.Ninja();
             }
+            else if (_chatoCombat._victoire == true)
+            {
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+                _chatoCombat._victoire = false;
+            }
 
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
+                _collisionPassage = false;
 
             }
             else if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16

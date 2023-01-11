@@ -74,7 +74,7 @@ namespace SAE101
             _limiteCouloirY1 = 5 * 16;
 
             _vitessePerso = 100;
-            _myGame._numSalle = 2;
+            _myGame._numSalle = 1;
 
             _positionEnnemi = new Vector2(26 * 16, 9 * 16);
             _animationEnnemi = "idle_down";

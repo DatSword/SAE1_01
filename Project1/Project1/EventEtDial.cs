@@ -111,7 +111,7 @@ namespace SAE101
 
         public void Jon3()
         {
-            _myGame.SetCoolDown();
+            //_myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
@@ -127,6 +127,18 @@ namespace SAE101
 
             
             _nom = "Ninja";
+        }
+        public void Jon4()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Des ninjas ici? Je savais qu'on avait attiré l'intention de\n" +
+                    "pas mal de monde, mais j'savais pas à ce point là!" +
+                    "Allons-y, et rappelle toi que chacun de nous possède des actions\n" +
+                    "spéciale";
+
+
+            _nom = "Jon";
         }
 
 

@@ -110,7 +110,7 @@ namespace SAE101
 
         public void Jon3()
         {
-            //_myGame.SetCoolDown();
+            _myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Ah, rev'la des malfrats! J'croyais qu'on les avait fait tous\n" +
                     "déguerpir du Chato! On va devoir s'en débarrasser!";
@@ -130,11 +130,10 @@ namespace SAE101
 
         public void OuVasTu()
         {
-            _myGame.SetCoolDown();
+            //_myGame.SetCoolDown();
             _dialTrue = true;
             _text = "Mais où vas-tu ?\n" +
                     "La salle du couronnement est au nord.";
-
             _nom = "Jon";
         } 
 
@@ -146,12 +145,16 @@ namespace SAE101
                     "pas mal de monde, mais j'savais pas à ce point là!" +
                     "Allons-y, et rappelle toi que chacun de nous possède des actions\n" +
                     "spéciale";
-
-
             _nom = "Jon";
         }
-
-
+        //COff
+        public void Coffre1()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous obtenez de la Akdov!;";
+            _nom = "";
+        }
 
         public void FermeBoite()
         {

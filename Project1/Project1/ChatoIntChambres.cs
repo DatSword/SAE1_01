@@ -45,6 +45,7 @@ namespace SAE101
 
         private AnimatedSprite[] _chest;
         private Vector2[] _positionChest;
+        private String _animationChest;
 
         public Vector2 _chambreCentre1;
         public Vector2 _chambreCentreUn;
@@ -90,10 +91,6 @@ namespace SAE101
             _positionChest[0] = new Vector2(2 * 16 + 8, 4 * 16 + 8);
             _positionChest[1] = new Vector2(38 * 16 + 8, 4 * 16 + 8);
 
-            _myGame._chestTrue = new bool[2];
-            _myGame._chestTrue[0] = false;
-            _myGame._chestTrue[1] = false;
-
             // Emplacements pour camera
             _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
             _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
@@ -103,7 +100,7 @@ namespace SAE101
 
             _limiteChambreX1 = 16 * 16;
             _limiteChambreX2 = 24 * 16;
-            _limiteChambreY1 = 7 * 16;
+            _limiteChambreY1 = 8 * 16;
 
             _limiteChambreGauche = 8 * 16;
             _limiteChambreDroite = 32 * 16;
@@ -217,18 +214,24 @@ namespace SAE101
             //Coffre(s?)
             for (int i = 0; i < _chest.Length; i++)
             {
-                String animationChest = null;
+                
                 if (_myGame._chestTrue[i] == false)
-                    animationChest = "close";
+                    _animationChest = "close";
                 else
-                    animationChest = "open";
+                    _animationChest = "open";
+            }
 
-                if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationChest == "close"
+            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 71) && _animationChest == "close"
                     && _myGame._positionPerso.X > _limiteChambreDroite)
-                    _myGame._chestTrue[i] = true;
+            {
+                _myGame._chestTrue[1] = true;
 
+            }
+                
 
-                _chest[i].Play(animationChest);
+            for (int i = 0; i < _chest.Length; i++)
+            {
+                _chest[i].Play(_animationChest);
                 _chest[i].Update(deltaSeconds);
             }
             

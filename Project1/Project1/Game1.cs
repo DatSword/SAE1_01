@@ -118,6 +118,8 @@ namespace SAE101
         public TiledMapTileLayer mapLayerDoor;
         public int _numSalle;
         public bool[] _chestTrue;
+        public bool konami;
+        public int konamiCount;
 
         public Etats Etat
         {
@@ -181,8 +183,11 @@ namespace SAE101
             _cameraDial = new OrthographicCamera(viewportadapterDial);
 
             _cameraPosition = _chatoIntChambres._chambreCentre1;
-            _numEcran = 1;
+            _numEcran = 0;
 
+            _chestTrue = new bool[2];
+            for (int i = 0; i < _numEcran; i++)
+                _chestTrue[i] = false;
 
             //Dialogue
             _eventEtDial._posText = new Vector2(105, 360);
@@ -246,7 +251,6 @@ namespace SAE101
             _font = Content.Load<SpriteFont>("font/font_test");
 
 
-
             // on charge l'écran de menu par défaut 
             LoadScreenecran_de_titre();
             //LoadScreenchato_ext_cours_interieur();
@@ -264,7 +268,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
 
-
+            Console.WriteLine(_chestTrue[0] + " " + _chestTrue[1]);
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
@@ -390,16 +394,32 @@ namespace SAE101
             else if (_numEcran == 4)
                 _cameraPosition = new Vector2(xEcran / 2, yEcran / 2);
 
-            //else if (_numEcran == 5)
-                
-
             // couronne
             else if (_numEcran == 5)
                 _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
 
+            Console.WriteLine(_numEcran);
 
             _walkSpeed = _speed * deltaSeconds;
-            Console.WriteLine(_chatoIntChambres._posX);
+            Console.WriteLine(ChatoCombatContenu._lastPosition);
+
+
+
+            if(_numEcran == 1)
+            {
+                if (_keyboardState.IsKeyDown(Keys.Up) && konamiCount < 2)
+                    konamiCount++;
+
+                if (_keyboardState.IsKeyDown(Keys.Down) && konamiCount >= 2 && konamiCount < 4)
+                    konamiCount++;
+
+                if (_keyboardState.IsKeyDown(Keys.Left) && konamiCount >= 2 && konamiCount < 4)
+                    konamiCount++;
+
+                if (_keyboardState.IsKeyDown(Keys.Down) && konamiCount >= 2 && konamiCount < 4)
+                    konamiCount++;
+            }
+
             base.Update(gameTime);
         }
 

@@ -80,9 +80,6 @@ namespace SAE101
                         "qu'il n'allait pas être présent lors du courronnement. Même si\n" +
                         "cet évènement est ce pourquoi lui et ses amis ont traversés tant\n" +
                         "d'épreuves, le sommeil reste son ennemi le plus puissant.";
-
-                //Camera
-                _myGame._camera.LookAt(_myGame._cameraPosition);
             }
             else if (_myGame._fin == 2)
                 _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +

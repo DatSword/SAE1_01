@@ -25,6 +25,7 @@ namespace SAE101
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
+        private ChatoCombat _chatoCombat;
 
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -62,6 +63,7 @@ namespace SAE101
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
             _chatoIntChambres = _myGame._chatoIntChambres;
+            _chatoCombat = _myGame._chatoCombat;
 
             // Lieu Spawn
             _posX = 0;
@@ -132,7 +134,7 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenchato_combat();
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {
@@ -140,6 +142,13 @@ namespace SAE101
                 _animationJon = "idle_right";
                 _eventEtDial.Jon3();
             }
+            else if (_chatoCombat._victoire == true)
+            {
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+                _chatoCombat._victoire = false;
+            }
+
 
 
             //Changement de map          

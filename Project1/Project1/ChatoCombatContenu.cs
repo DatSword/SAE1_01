@@ -87,7 +87,7 @@ namespace SAE101
         public Vector2 _posProj;
         public Vector2 _posExplosion;
 
-        //El famoso variable qui permet de idre qui joue dans quel ordre
+        //El famoso variable qui permet de dire qui joue dans quel ordre
         public int kk;
 
         public void Combat()

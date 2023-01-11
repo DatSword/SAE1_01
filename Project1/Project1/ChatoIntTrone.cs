@@ -30,6 +30,7 @@ namespace SAE101
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
+        private ChatoCombat _chatoCombat;
 
         //sprite
         private AnimatedSprite _perso;
@@ -53,6 +54,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
+            _chatoCombat = _myGame._chatoCombat;
 
             // Lieu Spawn
             _posX = 0;
@@ -108,7 +110,7 @@ namespace SAE101
 
             //Evenements
 
-            /// Battle final (mettre la bonne replique à ennemi)
+            // Battle final (mettre la bonne replique à ennemi)
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
@@ -121,9 +123,14 @@ namespace SAE101
                 _animationPabo = "idle_down";
                 _eventEtDial.Ninja();
             }
+            else if (_chatoCombat._victoire == true)
+            {
+                _rencontre = true;
+                _eventEtDial.FermeBoite();
+            }
 
-            /// fin 
-            if (_myGame._positionPerso.Y <= 14 * 16)
+            // fin 
+            if (_myGame._positionPerso.Y <= 10 * 16)
             {
                 _myGame._fin = 3;
                 Game.LoadScreenblack_jack();

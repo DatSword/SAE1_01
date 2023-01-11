@@ -48,17 +48,18 @@ namespace SAE101
         private String _animationChest;
 
         // camera
-        public Vector2 _chambreCentre1;
-        public Vector2 _chambreCentreUn;
-        public Vector2 _chambreCentre2;
-        public Vector2 _chambreCentreDeux;
+        public Vector2 _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
+        public Vector2 _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
+        public Vector2 _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
+        public Vector2 _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
 
-        public int _limiteChambreX1;
-        public int _limiteChambreX2;
-        public int _limiteChambreY1;
-        public int _limiteChambreY2;
-        public int _limiteChambreGauche;
-        public int _limiteChambreDroite;
+
+        public const int LIMITE_CHAMBRE_X1 = 16 * 16;
+        public const int LIMITE_CHAMBRE_X2 = 24 * 16;
+        public const int LIMITE_CHAMBRE_Y1 = 8 * 16;
+        public const int LIMITE_CHAMBRE_Y2 = 8 * 16;
+        public const int LIMITE_CHAMBRE_GAUCHE = 8 * 16;
+        public const int LIMITE_CHAMBRE_DROITE = 32 * 16;
 
         private int _choixCursor;
 
@@ -92,19 +93,7 @@ namespace SAE101
             _positionChest[0] = new Vector2(2 * 16 + 8, 4 * 16 + 8);
             _positionChest[1] = new Vector2(38 * 16 + 8, 4 * 16 + 8);
 
-            // Emplacements pour camera
-            _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
-            _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
-
-            _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
-            _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
-
-            _limiteChambreX1 = 16 * 16;
-            _limiteChambreX2 = 24 * 16;
-            _limiteChambreY1 = 8 * 16;
-
-            _limiteChambreGauche = 8 * 16;
-            _limiteChambreDroite = 32 * 16;
+            
             _choixCursor = 1;
             
             
@@ -199,7 +188,7 @@ namespace SAE101
                 _eventEtDial.FermeBoite();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
-                && _myGame._positionPerso.X < _limiteChambreDroite)
+                && _myGame._positionPerso.X < LIMITE_CHAMBRE_DROITE)
             {
                 _eventEtDial.Fren1();
                 _frenTrue = true;
@@ -223,7 +212,7 @@ namespace SAE101
             }
 
             if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 71) && _animationChest == "close"
-                    && _myGame._positionPerso.X > _limiteChambreDroite)
+                    && _myGame._positionPerso.X > LIMITE_CHAMBRE_DROITE)
             {
                 _myGame._chestTrue[1] = true;
 

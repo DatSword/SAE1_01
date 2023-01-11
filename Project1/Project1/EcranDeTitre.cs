@@ -131,9 +131,9 @@ namespace SAE101
             
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(0,0), Color.White);
-            _spriteBatch.Draw(_start, new Vector2(_myGame.xEcran / 2 - 210 / 2, _myGame.yEcran / 3 + 63), Color.White);
-            _spriteBatch.Draw(_option, new Vector2(_myGame.xEcran / 2 - 210 / 2, (float)(_myGame.yEcran / 3 * 1.5 + 63)), Color.White);
-            _spriteBatch.Draw(_quit, new Vector2(_myGame.xEcran / 2 - 210 / 2, _myGame.yEcran / 3 * 2 + 63), Color.White);
+            _spriteBatch.Draw(_start, new Vector2(_myGame.X_ECRAN / 2 - 210 / 2, _myGame.Y_ECRAN / 3 + 63), Color.White);
+            _spriteBatch.Draw(_option, new Vector2(_myGame.X_ECRAN / 2 - 210 / 2, (float)(_myGame.Y_ECRAN / 3 * 1.5 + 63)), Color.White);
+            _spriteBatch.Draw(_quit, new Vector2(_myGame.X_ECRAN / 2 - 210 / 2, _myGame.Y_ECRAN / 3 * 2 + 63), Color.White);
             
             _spriteBatch.End();
         }

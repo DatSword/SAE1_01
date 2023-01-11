@@ -132,7 +132,7 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenchato_combat();
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {

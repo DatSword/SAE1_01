@@ -191,9 +191,6 @@ namespace SAE101
             _descBackup = new String[] { "_", "_", "_", "_" };
             _attaquePerso = new int[_chatoCombatContenu._nbAlly, 3];
             _attaqueEnnemy = new int[_chatoCombatContenu._nbEnnemy, 3];
-
-            //Camera j'crois
-            //_centreCombat = new Vector2(512 / 2, 448 / 2);
            
             //ordre allié
             _ordreA = new int[_chatoCombatContenu._nbAlly];

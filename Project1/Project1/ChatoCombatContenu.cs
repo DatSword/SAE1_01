@@ -82,7 +82,7 @@ namespace SAE101
 
         public void Hero()
         {
-            _stat = new int[4] { 80, 60 ,30, 70 };
+            _stat = new int[4] { 160, 60 ,30, 70 };
             _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", /*"Baïtzedeust"*/ "_", "_", "_" };
@@ -95,7 +95,7 @@ namespace SAE101
 
         public void Jon()
         {
-            _stat = new int[4] { 100, 90, 10, 10 };
+            _stat = new int[4] { 200, 90, 10, 10 };
             _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", /*"Sort d'intimidation"*/"_", "_", "_" };
@@ -117,7 +117,7 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 50, 70, 30, 100 };
+            _stat = new int[4] { 100, 70, 30, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
@@ -127,7 +127,7 @@ namespace SAE101
 
         public void Mechant()
         {
-            _stat = new int[4] { 70, 60, 20, 50 };
+            _stat = new int[4] { 130, 60, 20, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
@@ -136,7 +136,7 @@ namespace SAE101
 
         public void Pabo()
         {
-            _stat = new int[4] { 90, 70, 40, 80 };
+            _stat = new int[4] { 170, 70, 40, 80 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };

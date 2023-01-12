@@ -134,14 +134,14 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                _myGame.LoadScreenChatoCombat();
+                //_myGame.LoadScreenChatoCombat();
                 _eventEtDial._numDial = 2;
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
             {
                 _eventEtDial.FermeBoite();         
                 _eventEtDial._numDial = 0;
-                _myGame.LoadScreenChatoCombat();
+                //_myGame.LoadScreenChatoCombat();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 2)
             {
@@ -171,7 +171,7 @@ namespace SAE101
 
             }
             else if (_myGame._positionPerso.Y < 31 * 16 && _myGame._positionPerso.Y > 28 * 16
-                && (_myGame._positionPerso.X < 2 * 16 || _myGame._positionPerso.X > 41 * 16) && _myGame._cooldownVerif == false && _collisionPassage == false)
+                && (_myGame._positionPerso.X < 3 * 16 || _myGame._positionPerso.X > 41 * 16) && _myGame._cooldownVerif == false && _collisionPassage == false)
             {
                 _collisionPassage = true;
                 _eventEtDial.OuVasTu();

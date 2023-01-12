@@ -22,6 +22,7 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
+        private ChatoCombatContenu _chatoCombatContenu;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
         private Camera _camera;

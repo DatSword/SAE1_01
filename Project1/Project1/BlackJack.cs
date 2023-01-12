@@ -108,7 +108,7 @@ namespace SAE101
                 _fin = true;
             }
             else if (_myGame._fin == 3)
-            {
+            { 
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
@@ -118,19 +118,26 @@ namespace SAE101
             }
 
 
+            //Début
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 && _myGame._fin == 0)
             {
                 _myGame._fin = 10;
                 _myGame._toink.Play();
                 _eventEtDial.toutDebut();
             }
-
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
                 Game.LoadScreenchatoIntChambresNord();              
             }
 
+            //GameOver
+            if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <= 1 && _myGame._fin == 2)
+            {
+                _myGame.SetCoolDownS();
+                _myGame.LoadScreenecranDeTtitre();
+
+            }
 
             if (_fin == true)
             {

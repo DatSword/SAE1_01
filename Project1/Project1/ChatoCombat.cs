@@ -53,6 +53,8 @@ namespace SAE101
         //Ordre en fonction de la vitesse
         private int[] _ordretour;
         private int[] _ordretour2;
+        //pour éviter le problème avec des joueurs en double
+        private int[] _hasPlayed;
 
 
         //Menu
@@ -696,6 +698,8 @@ namespace SAE101
         {
             _ordretour = new int[_myGame._nbAlly + _myGame._nbEnemy];
             _ordretour2 = new int[_myGame._nbAlly + _myGame._nbEnemy];
+            _hasPlayed = new int[_myGame._nbAlly + _myGame._nbEnemy];
+
             for (int i = 0; i < _myGame._nbAlly + _myGame._nbEnemy; i++)
             {
                 if (i < _myGame._nbAlly) 
@@ -726,8 +730,11 @@ namespace SAE101
                     }
                 }
             }
-            //for (int i = 0; i < _ordretour.Length; i++)
-                //Console.WriteLine(_ordretour[i]);
+
+            for (int j = 0; j < _ordretour.Length; j++)
+            {
+                _hasPlayed[j] = -1;
+            }
 
             Vitesse2();
         }
@@ -739,16 +746,29 @@ namespace SAE101
             {
                 if (_ordretour[_chatoCombatContenu.kk] == _ordretour2[i])
                 {
-                    if (i >= _myGame._nbAlly)
-                    {
-                        BastonE(i - _myGame._nbAlly);
-                        break;
+                    //Pour savoir si tel joueur n'as pas joué avant
+                    int count = 0;
+
+                    for (int k = 0; k < _ordretour.Length; k++)
+                    {                        
+                        if (i != _hasPlayed[k])
+                            count++;
                     }
-                    else
+                    if (count == _ordretour.Length)
                     {
-                        BastonA(i);
-                        break;
-                    }                                        
+                        _hasPlayed[_chatoCombatContenu.kk] = i;
+
+                        if (i >= _myGame._nbAlly)
+                        {
+                            BastonE(i - _myGame._nbAlly);
+                            break;
+                        }
+                        else
+                        {
+                            BastonA(i);
+                            break;
+                        }
+                    }                                                        
                 }               
             }
             _chatoCombatContenu.kk++;

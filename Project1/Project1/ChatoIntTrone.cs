@@ -23,7 +23,6 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
-        private ChatoCombatContenu _chatoCombatContenu;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
         private ChatoCombat _chatoCombat;
@@ -136,8 +135,6 @@ namespace SAE101
             _elfBas = new AnimatedSprite(spriteSheetELF);
             _elfGauche = new AnimatedSprite(spriteSheetELF);
 
-
-
             _eventEtDial.SetCollision();
 
             base.LoadContent();
@@ -193,24 +190,27 @@ namespace SAE101
 
             _demonBleuDroite.Play(_animationDemonBleuDroite);
             _demonBleuDroite.Update(deltaSeconds);
+
             _demonBleuBas.Play(_animationBas);
             _demonBleuBas.Update(deltaSeconds);
+
             _femmeRouge.Play(_animationFemmeRouge);
             _femmeRouge.Update(deltaSeconds);
+
             _elfBas.Play(_animationBas);
             _elfBas.Update(deltaSeconds);
+
             _elfGauche.Play(_animationElfGauche);
             _elfGauche.Update(deltaSeconds);
+
             _demonRV.Play(_animationDemonRV);
             _demonRV.Update(deltaSeconds);
 
 
-
-
             _eventEtDial.BoiteDialogues();
 
-            //Evenements
 
+            //Evenements
             // Battle final (mettre la bonne replique à ennemi)
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
@@ -266,7 +266,6 @@ namespace SAE101
             _spriteBatch.Draw(_elfGauche, _positionElfGauche);
             _spriteBatch.Draw(_demonRV, _positionDemonRV);
 
-
             _spriteBatch.End();
 
             var transformMatrixDial = _camera._cameraDial.GetViewMatrix();
@@ -278,7 +277,6 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
-
 
             _spriteBatch.End();
         }

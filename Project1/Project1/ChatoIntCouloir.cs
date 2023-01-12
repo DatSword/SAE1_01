@@ -51,7 +51,6 @@ namespace SAE101
         public int _limCouloir;
 
 
-
         public ChatoIntCouloir(Game1 game) : base(game) 
         {
             _myGame = game;

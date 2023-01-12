@@ -205,7 +205,7 @@ namespace SAE101
                     _posCursor = new Vector2(430, 316);
                     _choixCursor++;
                 }
-                Console.WriteLine(_myGame._cooldownVerif);
+                //Console.WriteLine(_myGame._cooldownVerif);
             }
         }
 

@@ -245,7 +245,7 @@ namespace SAE101
 
             _jon.Play(_animJon);
             _jon.Update(deltaSeconds);
-            Console.WriteLine(_eventEtDial._numDial);
+            //Console.WriteLine(_eventEtDial._numDial);
 
             if (_myGame._firstVisitBedroom == true && _myGame._cooldownVerif == false && _eventEtDial._numDial == 3)
             {

@@ -114,7 +114,7 @@ namespace SAE101
                 _cameraPosition = new Vector2(_myGame._positionPerso.X, _myGame._positionPerso.Y);
 
 
-            Console.WriteLine(_myGame._numEcran);
+            //Console.WriteLine(_myGame._numEcran);
         }
     }
 }

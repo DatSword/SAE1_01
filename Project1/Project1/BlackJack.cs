@@ -58,7 +58,7 @@ namespace SAE101
                       "Vidéo trailer : \n" +
                       "remerciments spéciaux : Dylan MIFTARI\n";
 
-            _posCr = new Vector2(_myGame._xEcran / 4, _myGame._yEcran * (float)1.3);
+            _posCr = new Vector2(_myGame._xEcran / (float)3.5, _myGame._yEcran * (float)1.9);
 
             if (_myGame._fin == 1)
                 MediaPlayer.Play(_myGame._songDodo);
@@ -136,13 +136,12 @@ namespace SAE101
             {
                 _myGame.SetCoolDownS();
                 _myGame.LoadScreenecranDeTtitre();
-
             }
 
             if (_fin == true)
             {
-                _posTextFin.Y -= (float)0.11115;
-                _posCr.Y -= (float)0.11115;
+                _posTextFin.Y -= (float)0.25;
+                _posCr.Y -= (float)0.5;
             }
 
 
@@ -164,12 +163,10 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._text, _eventEtDial._posText, Color.White);
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
-
             else if (_fin == true)
             {
                 Thread.Sleep(40);
                 _spriteBatch.DrawString(_myGame._font, _credit, _posCr, Color.White);
-
             }
 
             _spriteBatch.End();

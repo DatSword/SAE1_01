@@ -481,7 +481,7 @@ namespace SAE101
             //Si tel Perso est mort, alors pas d'action
             if (_chatoCombatContenu._animationA[_action] == "ded")
                 _action++;
-            Console.WriteLine(_action);
+            //Console.WriteLine(_action);
 
             //Qui est suivi par le curseur
             if (_selectionEnn == false)
@@ -711,7 +711,7 @@ namespace SAE101
                 }
             }
             for (int i = 0; i < _ordretour.Length; i++)
-                Console.WriteLine(_ordretour[i]);
+                //Console.WriteLine(_ordretour[i]);
 
             Vitesse2();
         }
@@ -751,7 +751,7 @@ namespace SAE101
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
                     _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
-                    Console.WriteLine(i);
+                    //Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
                 {
@@ -760,7 +760,7 @@ namespace SAE101
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
-                    Console.WriteLine(i);
+                    //Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 3)
                 {
@@ -769,7 +769,7 @@ namespace SAE101
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
-                    Console.WriteLine(i);
+                    //Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 4)
                 {
@@ -778,7 +778,7 @@ namespace SAE101
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
-                    Console.WriteLine(i);
+                    //Console.WriteLine(i);
                 }
             }
             else
@@ -807,7 +807,7 @@ namespace SAE101
                 _chatoCombatContenu._animationP2 = false;
                 _chatoCombatContenu._animationOver = false;
                 _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - _attEnn[i];
-                Console.WriteLine(i);
+                //Console.WriteLine(i);
             }
             else
             {

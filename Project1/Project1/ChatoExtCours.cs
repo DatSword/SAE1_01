@@ -23,7 +23,6 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
-        private ChatoCombatContenu _chatoCombatContenu;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
         private ChatoCombat _chatoCombat;
@@ -34,17 +33,17 @@ namespace SAE101
         private KeyboardState _keyboardState;
         public int _posX;
 
-        private AnimatedSprite _grand;
-        private AnimatedSprite _grand2;
-        private AnimatedSprite _grand3;
+        private AnimatedSprite _ninja;
+        private AnimatedSprite _ninja2;
+        private AnimatedSprite _ninja3;
 
-        private Vector2 _positionGrand;
-        private Vector2 _positionGrand2;
-        private Vector2 _positionGrand3;
+        private Vector2 _positionNinja;
+        private Vector2 _positionNinja2;
+        private Vector2 _positionNinja3;
 
-        private String _animationGrand;
-        private String _animationGrand2;
-        private String _animationGrand3;
+        private String _animationNinja;
+        private String _animationNinja2;
+        private String _animationNinja3;
 
         private bool _rencontre;
         private bool _collisionPassage;
@@ -68,12 +67,12 @@ namespace SAE101
             _myGame._numSalle = 2;
 
             //Scénario
-            _positionGrand = new Vector2(21 * 16 + 8, 25 * 16 +8);
-            _positionGrand2 = new Vector2(12 * 16 + 8, 21 * 16 + 8);
-            _positionGrand3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
-            _animationGrand = "idle_up";
-            _animationGrand2 = "idle_left";
-            _animationGrand3 = "idle_right";     
+            _positionNinja = new Vector2(21 * 16 + 8, 25 * 16 +8);
+            _positionNinja2 = new Vector2(12 * 16 + 8, 21 * 16 + 8);
+            _positionNinja3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
+            _animationNinja = "idle_up";
+            _animationNinja2 = "idle_left";
+            _animationNinja3 = "idle_right";     
             _rencontre = false;
             _collisionPassage = false;
             _eventEtDial._numDial = 3;
@@ -93,9 +92,9 @@ namespace SAE101
             _perso = new AnimatedSprite(spriteSheet);
 
             SpriteSheet spriteSheet2 = Content.Load<SpriteSheet>("anim/char/enemy/grand/character_movement.sf", new JsonContentLoader());
-            _grand = new AnimatedSprite(spriteSheet2);
-            _grand2 = new AnimatedSprite(spriteSheet2);
-            _grand3 = new AnimatedSprite(spriteSheet2);
+            _ninja = new AnimatedSprite(spriteSheet2);
+            _ninja2 = new AnimatedSprite(spriteSheet2);
+            _ninja3 = new AnimatedSprite(spriteSheet2);
 
 
             _eventEtDial.SetCollision();
@@ -118,12 +117,12 @@ namespace SAE101
             _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
 
-            _grand.Play(_animationGrand);
-            _grand2.Play(_animationGrand2);
-            _grand3.Play(_animationGrand3);
-            _grand.Update(deltaSeconds);
-            _grand2.Update(deltaSeconds);
-            _grand3.Update(deltaSeconds);
+            _ninja.Play(_animationNinja);
+            _ninja2.Play(_animationNinja2);
+            _ninja3.Play(_animationNinja3);
+            _ninja.Update(deltaSeconds);
+            _ninja2.Update(deltaSeconds);
+            _ninja3.Update(deltaSeconds);
             _eventEtDial.BoiteDialogues();
 
 
@@ -151,9 +150,9 @@ namespace SAE101
             }
             else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 3)
             {
-                _animationGrand = "idle_down";
-                _animationGrand2 = "idle_down";
-                _animationGrand3 = "idle_down";
+                _animationNinja = "idle_down";
+                _animationNinja2 = "idle_down";
+                _animationNinja3 = "idle_down";
                 _eventEtDial.Ninja();
                 _eventEtDial._numDial = 2;
             }
@@ -204,9 +203,9 @@ namespace SAE101
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
             if (_rencontre == false && _myGame._firstVisitCorridor == true)
             {
-                _spriteBatch.Draw(_grand, _positionGrand);
-                _spriteBatch.Draw(_grand2, _positionGrand2);
-                _spriteBatch.Draw(_grand3, _positionGrand3);
+                _spriteBatch.Draw(_ninja, _positionNinja);
+                _spriteBatch.Draw(_ninja2, _positionNinja2);
+                _spriteBatch.Draw(_ninja3, _positionNinja3);
             }
 
             _spriteBatch.End();

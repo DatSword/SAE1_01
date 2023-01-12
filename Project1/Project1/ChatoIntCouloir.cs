@@ -21,7 +21,6 @@ namespace SAE101
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoCombat _chatoCombat;
-        private ChatoCombatContenu _chatoCombatContenu;
         private Camera _camera;
 
         //map
@@ -33,7 +32,6 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        public int _vitessePerso;
         public int _posX;
 
         private AnimatedSprite _ennemi;
@@ -49,7 +47,6 @@ namespace SAE101
         public int _limChambre_x1;
         public int _limChambre_x2;
         public int _limCouloir;
-
 
 
         public ChatoIntCouloir(Game1 game) : base(game) 
@@ -74,7 +71,6 @@ namespace SAE101
             _limChambre_x2 = 25 * 16;
             _limCouloir = 6 * 16;
 
-            _vitessePerso = 100;
             _myGame._numSalle = 1;
 
             _positionEnnemi = new Vector2(26 * 16 + 8, 9 * 16 + 8);
@@ -134,8 +130,8 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _rencontre = true;
-                //_eventEtDial.FermeBoite();
-                _myGame.LoadScreenChatoCombat();
+                _eventEtDial.FermeBoite();
+                //_myGame.LoadScreenChatoCombat();
 
                 //contenu du combat
                 _myGame._nbAlly = 2;

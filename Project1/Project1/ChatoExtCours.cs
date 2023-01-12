@@ -45,7 +45,6 @@ namespace SAE101
         private String _animationNinja2;
         private String _animationNinja3;
 
-        private bool _rencontre;
         private bool _collisionPassage;
 
 
@@ -72,8 +71,7 @@ namespace SAE101
             _positionNinja3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
             _animationNinja = "idle_up";
             _animationNinja2 = "idle_left";
-            _animationNinja3 = "idle_right";     
-            _rencontre = false;
+            _animationNinja3 = "idle_right";
             _collisionPassage = false;
             _eventEtDial._numDial = 3;
 
@@ -132,7 +130,6 @@ namespace SAE101
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 0)
             {
-                _rencontre = true;
                 _eventEtDial.FermeBoite();
                 //_myGame.LoadScreenChatoCombat();
                 _eventEtDial._numDial = 2;
@@ -155,7 +152,7 @@ namespace SAE101
                 _eventEtDial.Jon4();
                 _eventEtDial._numDial = 1;
             }
-            else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 3)
+            else if (_myGame._positionPerso.Y <= 34 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 3)
             {
                 _animationNinja = "idle_down";
                 _animationNinja2 = "idle_down";
@@ -165,7 +162,6 @@ namespace SAE101
             }
             else if (_chatoCombat._victoire == true)
             {
-                _rencontre = true;
                 _eventEtDial.FermeBoite();
                 _chatoCombat._victoire = false;
                 _myGame._firstVisitCorridor = false;
@@ -208,7 +204,7 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            if (_rencontre == false && _myGame._firstVisitCorridor == true)
+            if ( _myGame._firstVisitCorridor == true)
             {
                 _spriteBatch.Draw(_ninja, _positionNinja);
                 _spriteBatch.Draw(_ninja2, _positionNinja2);

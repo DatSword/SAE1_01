@@ -3,35 +3,35 @@
   <Class Name="SAE101.ChatoCombat" Collapsed="true">
     <Position X="7" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>KEQApKABCfkAI/MAwaABACAjhAiKQAEGQMYA6uBLFS0=</HashCode>
+      <HashCode>KEQApKABCfkAI/MAwaABACAjhAiKQAEEQMYA6uBLFS0=</HashCode>
       <FileName>ChatoCombat.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoCombatContenu" Collapsed="true">
     <Position X="7" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>oEACQGJAYIAIQABqiKhACpEIAAoiEAgAAAABAAGYQAg=</HashCode>
+      <HashCode>oEACAGJAYIAIQABiiKhACpEIAAoCEAgAAAABAAGYQAA=</HashCode>
       <FileName>ChatoCombatContenu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoExtCours" Collapsed="true">
     <Position X="8" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYAR2AAAIAAAwAAABAAAAAAAQhAACAAAIAAGGAJQgQ=</HashCode>
+      <HashCode>gAwAAGAAAAAAAwAIABAwAAAAAQhAAAAAAICAAWAJQgQ=</HashCode>
       <FileName>ChatoExtCours.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoIntChambres" Collapsed="true">
     <Position X="4.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EASABCACAAAhAwAAACAAAAAAAShAAgAAArAAAGQIYp0=</HashCode>
+      <HashCode>EASAACACAAAhAwAAACAAAAAAAShAAgAAArAAAGQIYp0=</HashCode>
       <FileName>ChatoIntChambres.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAE101.ChatoIntCouloir" Collapsed="true">
     <Position X="6.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQFBGAAAIAAAwACEoAAAAAAAQhAAAAAAJBAAGAIRgw=</HashCode>
+      <HashCode>AAQFAGAAAAAAAwACAoAAAAAAAQhAAAAAAJBAAGAIRgw=</HashCode>
       <FileName>ChatoIntCouloir.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -51,15 +51,8 @@
   </Class>
   <Class Name="SAE101.Game1" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="SAE101.Game1.Etats" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Game1.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>jAQoBHaIQDQACwQAABEBKZEAZ6mQYEgiwqqKHHQAjgQ=</HashCode>
+      <HashCode>jAQoBHaIQDQECwQIABEBKZEAZ6mwYEgiwqqKHHQAjgw=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +80,7 @@
   <Class Name="SAE101.ChatoIntTrone" Collapsed="true">
     <Position X="9.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>kAwABGAAAIQRIyAAAJACAAAEAQhIBACAAJACIOIIQgQ=</HashCode>
+      <HashCode>kAwAAGAAAIQRIyAAAJACAAAEAQhIBACAAJACIOIIQgQ=</HashCode>
       <FileName>ChatoIntTrone.cs</FileName>
     </TypeIdentifier>
   </Class>

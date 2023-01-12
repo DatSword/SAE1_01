@@ -9,7 +9,6 @@ namespace SAE101
         // défini dans Game1
         public Game1 _myGame;
         private EventEtDial _eventEtDial;
-        private ChatoCombatContenu _chatoCombatContenu;
         private ChatoExtCours _chatoExtCours;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoIntCouloir _chatoIntCouloir;
@@ -19,7 +18,6 @@ namespace SAE101
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
-            _chatoCombatContenu = _myGame._chatoCombatContenu;
             _chatoExtCours = _myGame._chatoExtCours;
             _chatoIntChambres = _myGame._chatoIntChambres;
             _chatoIntCouloir = _myGame._chatoIntCouloir;

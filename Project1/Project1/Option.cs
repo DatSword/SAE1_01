@@ -14,6 +14,7 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
+        private Camera _camera;
 
         //Titre
         private Texture2D _titleS;
@@ -42,6 +43,8 @@ namespace SAE101
 
         public override void Initialize()
         {
+            _camera = _myGame._camera;
+
             _posOptBox = new Vector2(0, 224);
 
             _textOpt = new String[3] { "pour valider", "pour revenir en arrière", "pour les déplacements"};
@@ -99,7 +102,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);

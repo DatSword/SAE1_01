@@ -15,6 +15,7 @@ namespace SAE101
 
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
+        private Camera _camera;
 
         //Début/Fin
         public Vector2 _textPos;
@@ -29,6 +30,7 @@ namespace SAE101
         public override void Initialize()
         {
             _eventEtDial = _myGame._eventEtDial;
+            _camera = _myGame._camera;
 
             _textPos = new Vector2(50, 150);
             _text = "";
@@ -114,7 +116,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             if (_eventEtDial._dialTrue == false)

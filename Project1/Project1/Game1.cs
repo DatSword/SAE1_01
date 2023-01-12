@@ -54,9 +54,9 @@ namespace SAE101
         public double chan;
 
         //Camera
-        public OrthographicCamera _cameraMap;
+        /*public OrthographicCamera _cameraMap;
         public OrthographicCamera _cameraDial;
-        public Vector2 _cameraPosition;
+        public Vector2 _cameraPosition;*/
         public int _numEcran;
 
         //Musiques
@@ -74,7 +74,7 @@ namespace SAE101
         public SoundEffect _hit;
         public SoundEffect _hit2;
         public SoundEffect _lose;
-        public SoundEffect _macron_1;
+        public SoundEffect _explo;
         public SoundEffect _menu;
         public SoundEffect _non;
         public SoundEffect _pelo;
@@ -161,7 +161,6 @@ namespace SAE101
 
             // variables écran
             _blackJack = new BlackJack(this);
-            _camera = new Camera(this);
             _chatoCombat = new ChatoCombat(this);
             _chatoCombatContenu = new ChatoCombatContenu(this);
             _chatoExtCours = new ChatoExtCours(this);
@@ -172,6 +171,7 @@ namespace SAE101
             _eventEtDial = new EventEtDial(this);
             _joueur = new JoueurSpawn(this);
             _option = new Option(this);
+            _camera = new Camera(this);
 
             Etat = Etats.Menu;
 
@@ -180,15 +180,8 @@ namespace SAE101
             _ecranTitre = false;
             _combatChato = false;
 
-            //Camera
+            _camera.InitialisationCamera();
 
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _xEcran, _yEcran);
-            _cameraMap = new OrthographicCamera(viewportadapter);
-
-            var viewportadapterDial = new BoxingViewportAdapter(Window, GraphicsDevice, _xEcran, _yEcran);
-            _cameraDial = new OrthographicCamera(viewportadapterDial);
-
-            _cameraPosition = _chatoIntChambres._chambreCentre1;
             _numEcran = 0;
 
             _chestTrue = new bool[2];
@@ -213,9 +206,9 @@ namespace SAE101
             _epee = false;
             _boom = false;
 
-        //event
-        _firstVisitBedroom = true;
-        _firstVisitCorridor = true;
+            //event
+            _firstVisitBedroom = true;
+            _firstVisitCorridor = true;
             _fin = 0;
             _animationPlayer = "idle_down";
             
@@ -239,7 +232,7 @@ namespace SAE101
             _non = Content.Load<SoundEffect>("sfx/non");
             _hit = Content.Load<SoundEffect>("sfx/hit");
             _hit2 = Content.Load<SoundEffect>("sfx/hit2");
-            _macron_1 = Content.Load<SoundEffect>("sfx/macron_1");
+            _explo = Content.Load<SoundEffect>("sfx/explo");
             _pelo = Content.Load<SoundEffect>("sfx/pelo");
             _vic = Content.Load<SoundEffect>("sfx/vic");
             _non = Content.Load<SoundEffect>("sfx/non");
@@ -341,75 +334,8 @@ namespace SAE101
 
 
             //Camera
-            ///_camera.PositionCamera();
-            // chambres nord
-            if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
-                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1
-                                && _positionPerso.X < _chatoIntChambres._limChambre_Gauche)
-                _cameraPosition = _chatoIntChambres._chambreCentre1;
-
-            else if (_numEcran == 1 && _positionPerso.X < _chatoIntChambres._limChambre_x1
-                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1)
-                _cameraPosition = _chatoIntChambres._chambreCentreUn;
-
-            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limChambre_x2
-                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1
-                                && _positionPerso.X > _chatoIntChambres._limChambre_Droite)
-                _cameraPosition = _chatoIntChambres._chambreCentreDeux;
-
-            else if (_numEcran == 1 && _positionPerso.X > _chatoIntChambres._limChambre_x2 
-                                && _positionPerso.Y < _chatoIntChambres._limChambre_y1)
-                _cameraPosition = _chatoIntChambres._chambreCentre2;
-
-            else if (_numEcran == 1 && _positionPerso.Y >= _chatoIntCouloir._limCouloir)
-                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
-
-
-            // couloir
-            if (_numEcran == 2 && (_positionPerso.Y > 0
-                                && (_positionPerso.X > _chatoIntCouloir._limChambre_x1 ||
-                                _positionPerso.X < _chatoIntCouloir._limChambre_x2)))
-                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
-
-            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limChambre_x1
-                                && _positionPerso.X < _chatoIntChambres._limChambre_Gauche
-                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
-                _cameraPosition = _chatoIntChambres._chambreCentre1;
-
-            else if (_numEcran == 2 && _positionPerso.X < _chatoIntChambres._limChambre_x1
-                                && _positionPerso.X > _chatoIntChambres._limChambre_Gauche
-                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
-                _cameraPosition = _chatoIntChambres._chambreCentreUn;
-
-            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limChambre_x2
-                                && _positionPerso.X < _chatoIntChambres._limChambre_Droite
-                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
-                _cameraPosition = _chatoIntChambres._chambreCentre2;
-
-            else if (_numEcran == 2 && _positionPerso.X > _chatoIntChambres._limChambre_x2
-                                && _positionPerso.X > _chatoIntChambres._limChambre_Droite
-                                && _positionPerso.Y >= _chatoIntChambres._limChambre_y1)
-                _cameraPosition = _chatoIntChambres._chambreCentreDeux;
-
-            else if (_numEcran == 2 && _positionPerso.Y > 49 * 16)
-                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
-
-            // cours
-            else if (_numEcran == 3 && _positionPerso.Y >= 1 * 16)
-                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
-
-            else if (_numEcran == 3 && _positionPerso.Y < 1 * 16)
-                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
-
-            // combat
-            else if (_numEcran == 4)
-                _cameraPosition = new Vector2(_xEcran / 2, _yEcran / 2);
-
-            // couronne
-            else if (_numEcran == 5)
-                _cameraPosition = new Vector2(_positionPerso.X, _positionPerso.Y);
-
-            Console.WriteLine(_numEcran);
+            _camera.PositionCamera();
+ 
 
             _walkSpeed = SPEED * deltaSeconds;
             Console.WriteLine(ChatoCombatContenu._lastPosition);

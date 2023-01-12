@@ -90,7 +90,7 @@ namespace SAE101
             ///NPC
             _positionDemonBleuDroite = new Vector2(3 * 16 + 8, 6 * 16);
             _animationDemonBleuDroite = "idle_right";
-            _positionDemonBleuBas = new Vector2(5 * 16 + 8, 6 * 16);
+            _positionDemonBleuBas = new Vector2(15 * 16 + 8, 4 * 16);
             _animationBas = "idle_down";
             _positionFemmeRouge = new Vector2(6 * 16 + 8, 3 * 16);
             _animationFemmeRouge = "idle_right";
@@ -169,9 +169,9 @@ namespace SAE101
 
 
             if (_animationBas == "idle_down")
-                _animationDemonBleuDroite = "baisse_down";
+                _animationBas = "baisse_down";
             else
-                _animationDemonBleuDroite = "idle_down";
+                _animationBas = "idle_down";
 
 
             if (_animationFemmeRouge == "idle_right")
@@ -186,10 +186,10 @@ namespace SAE101
                 _animationElfGauche = "idle_left";
 
 
-            if (_animationDemonRV == "idle_right")
-                _animationDemonRV = "mains_right";
+            if (_animationDemonRV == "idle_left")
+                _animationDemonRV = "mains_left";
             else
-                _animationDemonRV = "idle_right";
+                _animationDemonRV = "idle_left";
 
             _demonBleuDroite.Play(_animationDemonBleuDroite);
             _demonBleuDroite.Update(deltaSeconds);

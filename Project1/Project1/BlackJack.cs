@@ -44,6 +44,7 @@ namespace SAE101
 
             _credit = "----TANTOPIE STAFF----\n\n" +
                       "Scénario : Quentin BASTARD\n" +
+                      "\n" +
                       "Cartes   : Quentin BASTARD\n" +
                       "           Anna KOMPANIETS\n" +
                       "\n " +
@@ -62,8 +63,11 @@ namespace SAE101
                       "Chato          : SilvaGunner\n" +
                       "fin \"dodo\"   : SilvaGunner\n" +
                       "\n " +                     
-                      "Compte rendu : \n" +
-                      "Vidéo trailer : \n" +
+                      "Compte rendu   Marine GIMENEZ\n" +
+                      "               Anna KOMPANIETS\n" +
+                      "               Quentin BASTARD\n" +
+                      "\n" +
+                      "Vidéo trailer : Marine GIMENEZ\n" +
                       "\n" +
                       "remerciments spéciaux : Dylan MIFTARI\n";
 

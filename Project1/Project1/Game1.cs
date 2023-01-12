@@ -317,7 +317,12 @@ namespace SAE101
                 if (_cooldown <= 0)
                     _cooldownVerif = false;
             }
-
+            if (_cooldownVerifS == true)
+            {
+                _cooldownS = _cooldownS - deltaSeconds;
+                if (_cooldownS <= 0)
+                    _cooldownVerifS = false;
+            }
             if (_cooldownVerifC == true)
             {
                 _cooldownC = _cooldownC - deltaSeconds;
@@ -413,6 +418,7 @@ namespace SAE101
 
             if(_numEcran == 0)
             {
+                Console.WriteLine(konamiCount);
                 if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerifS == false)
                 {
                     SetCoolDownS();

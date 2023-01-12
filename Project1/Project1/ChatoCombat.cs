@@ -162,7 +162,7 @@ namespace SAE101
 
             _chatoCombatContenu._animationAttackA = false;
             _chatoCombatContenu._animationAttackE = false;
-            _chatoCombatContenu._animationZeweurld = false;
+            _chatoCombatContenu._animationZeuwerld = false;
             _chatoCombatContenu._animationBouleFeu = false;
             _chatoCombatContenu._animationEnCours = false;
             _chatoCombatContenu._animationSpe = false;
@@ -519,7 +519,7 @@ namespace SAE101
                     _chatoCombatContenu._animationSpe = false;
                     _chatoCombatContenu._animationAttackA = false;
                     _chatoCombatContenu._animationAttackE = false;
-                    _chatoCombatContenu._animationZeweurld = false;
+                    _chatoCombatContenu._animationZeuwerld = false;
                     _chatoCombatContenu._animationBouleFeu = false;
                     EnnemiMort();
                     AllieMort();
@@ -796,7 +796,7 @@ namespace SAE101
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
                 {
                     _chatoCombatContenu._animationSpe = true;
-                    _chatoCombatContenu._animationZeweurld = true;
+                    _chatoCombatContenu._animationZeuwerld = true;
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;

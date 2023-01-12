@@ -37,7 +37,7 @@ namespace SAE101
 
         public bool _animationAttackA;
         public bool _animationAttackE;
-        public bool _animationZeweurld;
+        public bool _animationZeuwerld;
         public bool _animationBouleFeu;
         public bool _animationSpe;
         public bool _animationEnCours;
@@ -239,7 +239,7 @@ namespace SAE101
             {
                 if (_animationP1 == true)
                 {
-                    if (_animationZeweurld == true)
+                    if (_animationZeuwerld == true)
                     {
                         _animationA[_allyAnime] = "attack_right3";
                         _myGame._wbeg.Play();
@@ -272,7 +272,7 @@ namespace SAE101
                 {
                     _animationA[_allyAnime] = "move_left";
                     _posAllie[_allyAnime].X -= 2;
-                    if (_animationZeweurld == true)
+                    if (_animationZeuwerld == true)
                         whosPlaying = _myGame._nbEnemy + _myGame._nbAlly;
                 }
                 else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)

@@ -44,16 +44,27 @@ namespace SAE101
 
             _credit = "----TANTOPIE STAFF----\n\n" +
                       "Scénario : Quentin BASTARD\n" +
-                      "Carte : \n" +
+                      "Cartes   : Quentin BASTARD\n" +
+                      "           Anna KOMPANIETS\n" +
+                      "\n " +
                       "Programmation : Quentin BASTARD,\n " +
                       "                Marine GIMENEZ,\n " +
                       "                Anna KOMPANIETS\n" +
+                      "\n " +
                       "Sprites et images : Anna KOMPANIETS,\n" +
                       "                    Marine GIMENEZ,\n" +
                       "                    Quentin BASTARD\n" +
-                      "Musiques : Quentin BASTARD\n" +
+                      "\n " +
+                      "Musiques \n"+
+                      "Ecran de Titre : Bit By Bit Sound \n" +
+                      "fin \"canon\"  : Bit By Bit Sound\n" +
+                      "Combat         : SilvaGunner\n" +
+                      "Chato          : SilvaGunner\n" +
+                      "fin \"dodo\"   : SilvaGunner\n" +
+                      "\n " +                     
                       "Compte rendu : \n" +
                       "Vidéo trailer : \n" +
+                      "\n" +
                       "remerciments spéciaux : Dylan MIFTARI\n";
 
             _posCr = new Vector2(_myGame._xEcran / (float)3.5, _myGame._yEcran * (float)1.9);

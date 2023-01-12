@@ -179,7 +179,7 @@ namespace SAE101
 
             _chatoCombatContenu._coolDownAnimation = false;
                         
-            _chatoCombatContenu.kk = 0;                        
+            _chatoCombatContenu.whosPlaying = 0;                        
 
             _random = new Random();
 
@@ -187,7 +187,7 @@ namespace SAE101
             _chatoCombatContenu.Combat();
 
             //Menu
-            _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
+            _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };                      
             _choix = new String[] { "Combat", "???", "Objets","Fuite"};
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
@@ -201,7 +201,6 @@ namespace SAE101
             {
                 _vie[i] = " ";
             }
-
 
             //Camera j'crois
             //_centreCombat = new Vector2(512 / 2, 448 / 2);
@@ -461,7 +460,7 @@ namespace SAE101
                     _chatoCombatContenu._attackZeuwerld = false;
                     _nbTourZeuWerld = 0;
                     _action = 0;
-                    _chatoCombatContenu.kk = 0;
+                    _chatoCombatContenu.whosPlaying = 0;
                     _chatoCombatContenu._animationOver = false;
                 }
                 else
@@ -549,17 +548,17 @@ namespace SAE101
 
                     if (_chatoCombatContenu._attackZeuwerld == true)
                     {
-                        _chatoCombatContenu.kk = _myGame._nbAlly + _myGame._nbEnemy;
+                        _chatoCombatContenu.whosPlaying = _myGame._nbAlly + _myGame._nbEnemy;
                         _nbTourZeuWerld++;
                     }
-                    if (_chatoCombatContenu.kk != _myGame._nbAlly + _myGame._nbEnemy && _gameOver == false && _victoire == false)
+                    if (_chatoCombatContenu.whosPlaying != _myGame._nbAlly + _myGame._nbEnemy && _gameOver == false && _victoire == false)
                     {
                         Vitesse2();
                     }
                     else
                     {
                         _chatoCombatContenu._animationOver = false;
-                        _chatoCombatContenu.kk = 0;
+                        _chatoCombatContenu.whosPlaying = 0;
                     }
                 }
 
@@ -744,7 +743,7 @@ namespace SAE101
         {
             for (int i = 0; i < _ordretour.Length; i++)
             {
-                if (_ordretour[_chatoCombatContenu.kk] == _ordretour2[i])
+                if (_ordretour[_chatoCombatContenu.whosPlaying] == _ordretour2[i])
                 {
                     //Pour savoir si tel joueur n'as pas joué avant
                     int count = 0;
@@ -756,7 +755,7 @@ namespace SAE101
                     }
                     if (count == _ordretour.Length)
                     {
-                        _hasPlayed[_chatoCombatContenu.kk] = i;
+                        _hasPlayed[_chatoCombatContenu.whosPlaying] = i;
 
                         if (i >= _myGame._nbAlly)
                         {
@@ -771,7 +770,7 @@ namespace SAE101
                     }                                                        
                 }               
             }
-            _chatoCombatContenu.kk++;
+            _chatoCombatContenu.whosPlaying++;
         }
 
         //Si un allié se bat
@@ -784,11 +783,12 @@ namespace SAE101
                 _chatoCombatContenu._animationEnCours = true;
                 if (_attaquePerso[i, 0] == 0)
                 {
+                    int damage = _attAllie[i] - _defEnn[_attaqueEnnemy[i, 1]];
                     _chatoCombatContenu._animationAttackA = true;
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
-                    _vieEnn[_attaqueEnnemy[i, 1]] = _vieEnn[_attaqueEnnemy[i, 1]] - (_attAllie[i] - _defEnn[_attaqueEnnemy[i, 1]]);
+                    _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - damage;
                     //Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
@@ -804,7 +804,7 @@ namespace SAE101
                 {
                     _chatoCombatContenu._animationSpe = true;
                     _chatoCombatContenu._animationBouleFeu = true;
-                    _vieEnn[_attaqueEnnemy[i, 1]] = _vieEnn[_attaqueEnnemy[i, 1]] - _attAllie[i];
+                    _vieEnn[_attaquePerso[i, 1]] = _vieEnn[_attaquePerso[i, 1]] - _attAllie[i];
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
@@ -917,7 +917,7 @@ namespace SAE101
 
             if (verif == _myGame._nbEnemy)
             {
-                _chatoCombatContenu.kk = 0;
+                _chatoCombatContenu.whosPlaying = 0;
                 _victoire = true;
                 _myGame._combatFini = true;
                 _myGame.SetCoolDownF();
@@ -926,7 +926,7 @@ namespace SAE101
                 {
                     if (_chatoCombatContenu._animationA[j] != "ded")
                         _chatoCombatContenu._animationA[j] = "victory_right1";
-                    _chatoCombatContenu.kk = _myGame._nbAlly;
+                    _chatoCombatContenu.whosPlaying = _myGame._nbAlly;
                     _desc[0] = "Victoire Totale!";
                     _desc[1] = "Victoire Totale!";
                 }
@@ -945,7 +945,7 @@ namespace SAE101
 
             if (verif == _myGame._nbAlly)
             {
-                _chatoCombatContenu.kk = 0;
+                _chatoCombatContenu.whosPlaying = 0;
                 _gameOver = true;
                 _myGame._combatFini = true;
                 _myGame.SetCoolDownF();

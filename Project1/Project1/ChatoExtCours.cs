@@ -129,8 +129,6 @@ namespace SAE101
 
                 // Ninja
 
-
-
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 0)
             {
                 _rencontre = true;
@@ -180,12 +178,12 @@ namespace SAE101
 
             //changements maps
 
-            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_couloir();
             }
-            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_couronne();

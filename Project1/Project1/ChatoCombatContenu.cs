@@ -9,20 +9,12 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
-        private EventEtDial _eventEtDial;
-        private ChatoCombatContenu _chatoCombatContenu;
-        private ChatoExtCours _chatoExtCours;
-        private ChatoIntChambres _chatoIntChambres;
-        private ChatoIntCouloir _chatoIntCouloir;
+        private ChatoCombat _chatoCombat;
 
         public ChatoCombatContenu(Game1 game)
         {
             _myGame = game;
-            _eventEtDial = _myGame._eventEtDial;
-            _chatoCombatContenu = _myGame._chatoCombatContenu;
-            _chatoExtCours = _myGame._chatoExtCours;
-            _chatoIntChambres = _myGame._chatoIntChambres;
-            _chatoIntCouloir = _myGame._chatoIntCouloir;
+            _chatoCombat = _myGame._chatoCombat;
         }
 
         public int _nbAlly;
@@ -177,7 +169,7 @@ namespace SAE101
                         _animationA[_allyAnime] = "attack_right2";
                         _badabim = true;
                         _myGame._fire.Play();
-                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[ChatoCombat._playerAttacking, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[ChatoCombat._playerAttacking, 1]].Y);
+                        _posProj = new Vector2(_posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]].X - 80, _posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]].Y);
                         
                     }
                     _coolDownAnimation = true;
@@ -269,7 +261,7 @@ namespace SAE101
                         _animationA[_allyAnime] = "attack_right2";
                         _fireBall = true;
                         _myGame._fire.Play();
-                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[1, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[1, 1]].Y);
+                        _posProj = new Vector2(_posEnemy[_chatoCombat._attaquePerso[1, 1]].X - 80, _posEnemy[_chatoCombat._attaquePerso[1, 1]].Y);
                     }
                     _coolDownAnimation = true;
                     _animationP1 = false;

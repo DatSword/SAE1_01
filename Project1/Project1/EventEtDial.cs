@@ -26,12 +26,12 @@ namespace SAE101
         public bool _dialTrue;
 
 
-        public static int u;
-        public static int d;
-        public static int l;
-        public static int r;
-        public static int ud;
-        public static int dd;
+        public int u;
+        public int d;
+        public int l;
+        public int r;
+        public int ud;
+        public int dd;
 
         //Boites de choix
         public Texture2D _choiceBox;

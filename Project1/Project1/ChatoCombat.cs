@@ -73,6 +73,7 @@ namespace SAE101
         private String[] _desc;
         private String[] _descBackup;
         private Vector2[] _posText;
+        private String[] _vie;
         private Vector2 _posVie;
 
         //Spécial
@@ -187,8 +188,7 @@ namespace SAE101
             _chatoCombatContenu.Combat();
 
             //Menu
-            _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
-            _posVie = new Vector2(25, 300);
+            _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };                      
             _choix = new String[] { "Combat", "???", "Objets","Fuite"};
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
@@ -196,9 +196,16 @@ namespace SAE101
             _attaquePerso = new int[_myGame._nbAlly, 3];
             _attaqueEnnemy = new int[_myGame._nbEnemy, 3];
 
+            _posVie = new Vector2(25, 260);
+            _vie = new String[_myGame._nbAlly];
+            for (int i = 0; i < _myGame._nbAlly; i++)
+            {
+                _vie[i] = " ";
+            }
+
             //Camera j'crois
             //_centreCombat = new Vector2(512 / 2, 448 / 2);
-           
+
             //ordre allié
             _ordreA = new int[_myGame._nbAlly];
             int ordrejA = 0;
@@ -478,7 +485,11 @@ namespace SAE101
             //Si tel Perso est mort, alors pas d'action
             if (_chatoCombatContenu._animationA[_action] == "ded")
                 _action++;
-            Console.WriteLine(_action);
+            //Console.WriteLine(_action);
+
+            //vie
+            for (int i = 0; i < _myGame._nbAlly; i++)
+                _vie[i] = _vieAllie[i].ToString() + " / " + _vieMax[i].ToString();
 
             //Qui est suivi par le curseur
             if (_selectionEnn == false)
@@ -598,6 +609,7 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
+            _spriteBatch.DrawString(_fontTest, _vie[_action], _posVie, Color.White);
             for (int i = 0; i < _myGame._nbAlly; i++)
             {
                 _spriteBatch.Draw(_allie[i], _chatoCombatContenu._posAllie[i]);              
@@ -708,7 +720,7 @@ namespace SAE101
                 }
             }
             for (int i = 0; i < _ordretour.Length; i++)
-                Console.WriteLine(_ordretour[i]);
+                //Console.WriteLine(_ordretour[i]);
 
             Vitesse2();
         }
@@ -798,13 +810,14 @@ namespace SAE101
                 _attaqueEnnemy[i, 1] = all;
                 _attaqueEnnemy[i, 2] = 0;
 
-
+                int damage = _attEnn[i] - _defAllie[_attaqueEnnemy[i, 1]];
                 _chatoCombatContenu._animationAttackE = true;
                 _chatoCombatContenu._animationEnCours = true;
                 _chatoCombatContenu._animationP1 = false;
                 _chatoCombatContenu._animationP2 = false;
                 _chatoCombatContenu._animationOver = false;
-                _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - (_attEnn[i]-_defAllie[_attaqueEnnemy[i, 1]]);
+                //_vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - (_attEnn[i]-_defAllie[_attaqueEnnemy[i, 1]]);
+                _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - damage;
                 Console.WriteLine(i);
             }
             else

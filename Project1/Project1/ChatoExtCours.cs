@@ -61,20 +61,19 @@ namespace SAE101
 
             // Lieu Spawn
             _posX = 0;
-
             _joueur.Spawnchato_ext_cours_interieur();
-
             _myGame._numSalle = 2;
 
+            //Scénario
             _positionGrand = new Vector2(21 * 16 + 8, 25 * 16 +8);
             _positionGrand2 = new Vector2(12 * 16 + 8, 21 * 16 + 8);
             _positionGrand3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
             _animationGrand = "idle_up";
             _animationGrand2 = "idle_left";
-            _animationGrand3 = "idle_right";
-
+            _animationGrand3 = "idle_right";     
             _rencontre = false;
             _collisionPassage = false;
+            _eventEtDial._numDial = 3;
 
             base.Initialize();
         }

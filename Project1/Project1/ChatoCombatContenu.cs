@@ -117,7 +117,7 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 100, 60, 30, 100 };
+            _stat = new int[4] { 70, 60, 30, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "";
             _specialP = new String[] { "", "", "", "" };
@@ -127,7 +127,7 @@ namespace SAE101
 
         public void Mechant()
         {
-            _stat = new int[4] { 130, 70, 20, 50 };
+            _stat = new int[4] { 100, 70, 20, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "";
             _specialP = new String[] { "", "", "", "" };
@@ -136,7 +136,7 @@ namespace SAE101
 
         public void Pabo()
         {
-            _stat = new int[4] { 170, 80, 40, 80 };
+            _stat = new int[4] { 140, 80, 40, 80 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "";
             String[] _specialJ = new String[] { "", "", "", "" };

@@ -72,6 +72,7 @@ namespace SAE101
         private String[] _desc;
         private String[] _descBackup;
         private Vector2[] _posText;
+        private Vector2 _posVie;
 
         //Spécial
         private bool _premierCombat;
@@ -93,6 +94,7 @@ namespace SAE101
 
         //Stats Personazes
         public int[] _vieAllie;
+        public int[] _vieMax;
         public int[] _attAllie;
         public int[] _defAllie;
         public int[] _vitAllie;
@@ -187,6 +189,7 @@ namespace SAE101
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
+            _posVie = new Vector2(25, 300);
             _choix = new String[] { "Combat", "???", "Objets","Fuite"};
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
@@ -221,6 +224,7 @@ namespace SAE101
             _chatoCombatContenu._posAllie = new[] { new Vector2(POS_ALLIEX0, POS_ALLIEY0), new Vector2(POS_ALLIEX1, POS_ALLIEY1), new Vector2(POS_ALLIEX2, POS_ALLIEY0), new Vector2(POS_ALLIEX3, POS_ALLIEY1) };
             _chatoCombatContenu._posAllieBaseX = new int[] { POS_ALLIEX0, POS_ALLIEX1, POS_ALLIEX2, POS_ALLIEX3 };
             _vieAllie = new int[_chatoCombatContenu._nbAlly];
+            _vieMax = new int[_chatoCombatContenu._nbAlly];
             _attAllie = new int[_chatoCombatContenu._nbAlly];
             _defAllie = new int[_chatoCombatContenu._nbAlly];
             _vitAllie = new int[_chatoCombatContenu._nbAlly];
@@ -811,6 +815,7 @@ namespace SAE101
             _allie[_ordrefinal] = new AnimatedSprite(_sheetA[_ordrefinal]);
 
             _vieAllie[_ordrefinal] = _chatoCombatContenu._stat[0];
+            _vieMax[_ordrefinal] = _chatoCombatContenu._stat[0];
             _attAllie[_ordrefinal] = _chatoCombatContenu._stat[1];
             _defAllie[_ordrefinal] = _chatoCombatContenu._stat[2];
             _vitAllie[_ordrefinal] = _chatoCombatContenu._stat[3];

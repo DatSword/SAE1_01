@@ -95,7 +95,7 @@ namespace SAE101
 
         public void Jon()
         {
-            _stat = new int[4] { 200, 90, 10, 10 };
+            _stat = new int[4] { 200, 90, 20, 10 };
             _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", /*"Sort d'intimidation"*/"_", "_", "_" };
@@ -117,30 +117,30 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 100, 70, 30, 100 };
+            _stat = new int[4] { 100, 60, 30, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "";
-            _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
-            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
+            _specialP = new String[] { "", "", "", "" };
+            _descP = new String[] { "", "", "" , ""};
 
         }
 
         public void Mechant()
         {
-            _stat = new int[4] { 130, 60, 20, 50 };
+            _stat = new int[4] { 130, 70, 20, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
-            _special = "Magie";
-            _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
-            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
+            _special = "";
+            _specialP = new String[] { "", "", "", "" };
+            _descP = new String[] { "", "", "", "" };
         }
 
         public void Pabo()
         {
-            _stat = new int[4] { 170, 70, 40, 80 };
+            _stat = new int[4] { 170, 80, 40, 80 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
-            _special = "Cri";
-            String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
-            String[] _descJ = new String[] { "_", "_", "Que des solutions!", "_" };
+            _special = "";
+            String[] _specialJ = new String[] { "", "", "", "" };
+            String[] _descJ = new String[] { "", "", "", "" };
         }
 
         public void Animation()

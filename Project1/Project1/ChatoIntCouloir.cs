@@ -138,7 +138,7 @@ namespace SAE101
                 _myGame._ordreJoueur = new String[] { "Hero", "Jon"};
                 _chatoCombat._premierCombat = true;
                 _myGame._nbEnemy = 3;
-                _myGame._ordreEnnemi = new String[] {"Mechant","Grand","Pabo"};
+                _myGame._ordreEnnemi = new String[] {"Mechant","Mechant","Mechant"};
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {

@@ -48,6 +48,9 @@ namespace SAE101
         private AnimatedSprite _elfGauche;
         private AnimatedSprite _demonRV;
 
+        private SpriteSheet[] _NPC;
+        private AnimatedSprite[] _spriteNPC;
+
         private Vector2 _positionDemonBleuDroite;
         private Vector2 _positionDemonBleuBas;
         private Vector2 _positionFemmeRouge;
@@ -55,11 +58,15 @@ namespace SAE101
         private Vector2 _positionElfGauche;
         private Vector2 _positionDemonRV;
 
+        private Vector2[] _posNPC;
+
         private String _animationDemonBleuDroite;
         private String _animationBas;
         private String _animationFemmeRouge;
         private String _animationElfGauche;
         private String _animationDemonRV;
+
+        private String[] _animNPC;
 
 
         public ChatoIntTrone(Game1 game) : base(game)
@@ -87,7 +94,7 @@ namespace SAE101
             _animationPabo = "idle_up";
 
             ///NPC
-            _positionDemonBleuDroite = new Vector2(3 * 16 + 8, 6 * 16);
+            /*_positionDemonBleuDroite = new Vector2(3 * 16 + 8, 6 * 16);
             _animationDemonBleuDroite = "idle_right";
             _positionDemonBleuBas = new Vector2(5 * 16 + 8, 6 * 16);
             _animationBas = "idle_down";
@@ -97,7 +104,13 @@ namespace SAE101
             _positionElfGauche = new Vector2(18 * 16 + 8, 6 * 16);
             _animationElfGauche = "idle_left";
             _positionDemonRV = new Vector2(17 * 16 + 8, 10 * 16);
-            _animationDemonRV = "idle_left";
+            _animationDemonRV = "idle_left";*/
+
+            _posNPC = new Vector2[6] { new Vector2(3 * 16 + 8, 6 * 16), new Vector2(5 * 16 + 8, 6 * 16), 
+                                       new Vector2(6 * 16 + 8, 3 * 16), new Vector2(4 * 16 + 8, 9 * 16), 
+                                       new Vector2(18 * 16 + 8, 6 * 16), new Vector2(17 * 16 + 8, 10 * 16) };
+
+            _animNPC = new String[6] { "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left" };
 
             _rencontre = false;
 
@@ -112,28 +125,22 @@ namespace SAE101
             _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_salle_courronnement");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);
 
-            /// héro
+            // héro
             SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheetA);
 
-            /// ennemi
+            // ennemi
             SpriteSheet spriteSheetE = Content.Load<SpriteSheet>("anim/char/enemy/pabo/character_movement.sf", new JsonContentLoader());
             _ennemiPabo = new AnimatedSprite(spriteSheetE);
 
-            /// NPC
-            SpriteSheet spriteSheetDB = Content.Load<SpriteSheet>("anim/char/NPC/bleuDemon/NPC.sf", new JsonContentLoader());
-            _demonBleuDroite = new AnimatedSprite(spriteSheetDB);
-            _demonBleuBas = new AnimatedSprite(spriteSheetDB);
+            _NPC = new SpriteSheet[4] { Content.Load<SpriteSheet>("anim/char/NPC/bleuDemon/NPC.sf", new JsonContentLoader()), 
+                                        Content.Load<SpriteSheet>("anim/char/NPC/verougeDemon/NPC.sf", new JsonContentLoader()),
+                                        Content.Load<SpriteSheet>("anim/char/NPC/rougeF/NPC_rouge_F.sf", new JsonContentLoader()), 
+                                        Content.Load<SpriteSheet>("anim/char/NPC/vertElf/NPC.sf", new JsonContentLoader())};
 
-            SpriteSheet spriteSheetDVR = Content.Load<SpriteSheet>("anim/char/NPC/verougeDemon/NPC.sf", new JsonContentLoader());
-            _demonRV = new AnimatedSprite(spriteSheetDVR);
-
-            SpriteSheet spriteSheetFR = Content.Load<SpriteSheet>("anim/char/NPC/rougeF/NPC_rouge_F.sf", new JsonContentLoader());
-            _femmeRouge = new AnimatedSprite(spriteSheetFR);
-
-            SpriteSheet spriteSheetELF = Content.Load<SpriteSheet>("anim/char/NPC/vertElf/NPC.sf", new JsonContentLoader());
-            _elfBas = new AnimatedSprite(spriteSheetELF);
-            _elfGauche = new AnimatedSprite(spriteSheetELF);
+            _spriteNPC = new AnimatedSprite[6] { new AnimatedSprite(_NPC[0]), new AnimatedSprite(_NPC[0]),
+                                                 new AnimatedSprite(_NPC[1]), new AnimatedSprite(_NPC[2]),
+                                                 new AnimatedSprite(_NPC[3]), new AnimatedSprite(_NPC[3])};
 
             _eventEtDial.SetCollision();
 
@@ -159,36 +166,38 @@ namespace SAE101
             _ennemiPabo.Update(deltaSeconds);
 
             /// NPC
-            if (_animationDemonBleuDroite == "idle_right")
+            /*if (_animationDemonBleuDroite == "idle_right")
                 _animationDemonBleuDroite = "main_right";
             else
                 _animationDemonBleuDroite = "idle_right";
-
 
             if (_animationBas == "idle_down")
                 _animationDemonBleuDroite = "baisse_down";
             else
                 _animationDemonBleuDroite = "idle_down";
 
-
             if (_animationFemmeRouge == "idle_right")
                 _animationFemmeRouge = "baisse_right";
             else
                 _animationFemmeRouge = "idle_right";
-
 
             if (_animationElfGauche == "idle_left")
                 _animationElfGauche = "main_left";
             else
                 _animationElfGauche = "idle_left";
 
-
             if (_animationDemonRV == "idle_right")
                 _animationDemonRV = "mains_right";
             else
-                _animationDemonRV = "idle_right";
+                _animationDemonRV = "idle_right";*/
 
-            _demonBleuDroite.Play(_animationDemonBleuDroite);
+            for (int i = 0; i < _spriteNPC.Length; i++)
+            {
+                _spriteNPC[i].Play(_animNPC[i]);
+                _spriteNPC[i].Update(deltaSeconds);
+            }
+
+            /*_demonBleuDroite.Play(_animationDemonBleuDroite);
             _demonBleuDroite.Update(deltaSeconds);
 
             _demonBleuBas.Play(_animationBas);
@@ -204,7 +213,7 @@ namespace SAE101
             _elfGauche.Update(deltaSeconds);
 
             _demonRV.Play(_animationDemonRV);
-            _demonRV.Update(deltaSeconds);
+            _demonRV.Update(deltaSeconds);*/
 
 
             _eventEtDial.BoiteDialogues();
@@ -217,7 +226,7 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenchato_combat();
+                //_myGame.LoadScreenChatoCombat();
             }
             else if ( _myGame._positionPerso.Y <= 31 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
             {
@@ -259,12 +268,16 @@ namespace SAE101
             if (_rencontre == false)
                 _spriteBatch.Draw(_ennemiPabo, _positionEnnemiPabo);
 
-            _spriteBatch.Draw(_demonBleuDroite, _positionDemonBleuDroite);
+            for (int i = 0; i < _spriteNPC.Length; i++)
+            {
+                _spriteBatch.Draw(_spriteNPC[i], _posNPC[i]);
+            }
+            /*_spriteBatch.Draw(_demonBleuDroite, _positionDemonBleuDroite);
             _spriteBatch.Draw(_demonBleuBas, _positionDemonBleuBas);
             _spriteBatch.Draw(_femmeRouge, _positionFemmeRouge);
             _spriteBatch.Draw(_elfBas, _positionElfBas);
             _spriteBatch.Draw(_elfGauche, _positionElfGauche);
-            _spriteBatch.Draw(_demonRV, _positionDemonRV);
+            _spriteBatch.Draw(_demonRV, _positionDemonRV);*/
 
             _spriteBatch.End();
 

@@ -53,6 +53,8 @@ namespace SAE101
         //Ordre en fonction de la vitesse
         private int[] _ordretour;
         private int[] _ordretour2;
+        //pour éviter le problème avec des joueurs en double
+        private int[] _hasPlayed;
 
 
         //Menu
@@ -72,10 +74,11 @@ namespace SAE101
         private String[] _desc;
         private String[] _descBackup;
         private Vector2[] _posText;
+        private String[] _vie;
         private Vector2 _posVie;
 
         //Spécial
-        private bool _premierCombat;
+        public bool _premierCombat;
 
         //Tours
         private bool _sousMenuSpecial;
@@ -151,8 +154,6 @@ namespace SAE101
             _selectionEnn = false;
             _sousMenuSpecial = false;
             _sousMenuObjects = false;
-
-            _premierCombat = false;
             
             _action = 0;
             _ordrefinal = 0;
@@ -187,7 +188,6 @@ namespace SAE101
 
             //Menu
             _posText = new[] { new Vector2(40, 300), new Vector2(40, 336), new Vector2(40, 372), new Vector2(40, 408), new Vector2(180, 265) };
-            _posVie = new Vector2(25, 300);
             _choix = new String[] { "Combat", "???", "Objets","Fuite"};
             _choixBackup = new String[] { "Combat", "???", "Objets", "Fuite" };
             _desc = new String[] { "_", "_", "_", "_" };
@@ -195,9 +195,17 @@ namespace SAE101
             _attaquePerso = new int[_myGame._nbAlly, 3];
             _attaqueEnnemy = new int[_myGame._nbEnemy, 3];
 
+            _posVie = new Vector2(25, 260);
+            _vie = new String[_myGame._nbAlly];
+            for (int i = 0; i < _myGame._nbAlly; i++)
+            {
+                _vie[i] = " ";
+            }
+
+
             //Camera j'crois
             //_centreCombat = new Vector2(512 / 2, 448 / 2);
-           
+
             //ordre allié
             _ordreA = new int[_myGame._nbAlly];
             int ordrejA = 0;
@@ -337,6 +345,15 @@ namespace SAE101
 
             //Camera
             _camera._cameraMap.LookAt(_camera._cameraPosition);
+
+            //Vie
+            for (int i = 0; i < _myGame._nbAlly ; i++)
+            {
+                if (_vieAllie[i] <= 0)
+                    _vieAllie[i] = 0;
+                _vie[i] = _vieAllie[i].ToString() + " / " + _vieMax[i].ToString();
+                
+            }
 
             //curseurs
             if (_chatoCombatContenu._animationEnCours == false && _gameOver == false && _victoire == false)
@@ -484,7 +501,11 @@ namespace SAE101
             {
                 _positionCursorD = _chatoCombatContenu._posAllie[_action] - new Vector2(8, 55);
 
-                if (_sousMenuSpecial == true)
+                if(_premierCombat == true)
+                {
+                    _choix = _choix;
+                }
+                else if (_sousMenuSpecial == true)
                 {
                     _choix = _chatoCombatContenu._specialP;
                     _desc = _chatoCombatContenu._descP;
@@ -596,6 +617,7 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
+            _spriteBatch.DrawString(_fontTest, _vie[_action], _posVie, Color.White);
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
             for (int i = 0; i < _myGame._nbAlly; i++)
             {
@@ -676,6 +698,8 @@ namespace SAE101
         {
             _ordretour = new int[_myGame._nbAlly + _myGame._nbEnemy];
             _ordretour2 = new int[_myGame._nbAlly + _myGame._nbEnemy];
+            _hasPlayed = new int[_myGame._nbAlly + _myGame._nbEnemy];
+
             for (int i = 0; i < _myGame._nbAlly + _myGame._nbEnemy; i++)
             {
                 if (i < _myGame._nbAlly) 
@@ -706,8 +730,11 @@ namespace SAE101
                     }
                 }
             }
-            for (int i = 0; i < _ordretour.Length; i++)
-                //Console.WriteLine(_ordretour[i]);
+
+            for (int j = 0; j < _ordretour.Length; j++)
+            {
+                _hasPlayed[j] = -1;
+            }
 
             Vitesse2();
         }
@@ -719,14 +746,29 @@ namespace SAE101
             {
                 if (_ordretour[_chatoCombatContenu.kk] == _ordretour2[i])
                 {
-                    if (i >= _myGame._nbAlly)
-                    {
-                        BastonE(i - _myGame._nbAlly);
+                    //Pour savoir si tel joueur n'as pas joué avant
+                    int count = 0;
+
+                    for (int k = 0; k < _ordretour.Length; k++)
+                    {                        
+                        if (i != _hasPlayed[k])
+                            count++;
                     }
-                    else
+                    if (count == _ordretour.Length)
                     {
-                        BastonA(i);
-                    }                                        
+                        _hasPlayed[_chatoCombatContenu.kk] = i;
+
+                        if (i >= _myGame._nbAlly)
+                        {
+                            BastonE(i - _myGame._nbAlly);
+                            break;
+                        }
+                        else
+                        {
+                            BastonA(i);
+                            break;
+                        }
+                    }                                                        
                 }               
             }
             _chatoCombatContenu.kk++;
@@ -796,14 +838,14 @@ namespace SAE101
                 _attaqueEnnemy[i, 0] = 0;
                 _attaqueEnnemy[i, 1] = all;
                 _attaqueEnnemy[i, 2] = 0;
-
+                int damage = _attEnn[i] - _defAllie[_attaqueEnnemy[i, 1]];
 
                 _chatoCombatContenu._animationAttackE = true;
                 _chatoCombatContenu._animationEnCours = true;
                 _chatoCombatContenu._animationP1 = false;
                 _chatoCombatContenu._animationP2 = false;
                 _chatoCombatContenu._animationOver = false;
-                _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - (_attEnn[i]-_defAllie[_attaqueEnnemy[i, 1]]);
+                _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - damage;
                 //Console.WriteLine(i);
             }
             else

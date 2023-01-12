@@ -139,6 +139,13 @@ namespace SAE101
                 _eventEtDial.FermeBoite();         
                 _eventEtDial._numDial = 0;
                 //_myGame.LoadScreenChatoCombat();
+
+                //contenu du combat
+                _myGame._nbAlly = 2;
+                _myGame._ordreJoueur = new String[] { "Hero", "Jon" };
+                _chatoCombat._premierCombat = false;
+                _myGame._nbEnemy = 3;
+                _myGame._ordreEnnemi = new String[] { "Grand", "Grand", "Grand" };
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 2)
             {

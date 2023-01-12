@@ -11,14 +11,14 @@
       "frameDuration": 0.2
     },
     "baisse_right": {
-      "frames": [1],
+      "frames": [ 0, 1 ],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.4
     },
     "main_right": {
-      "frames": [2],
+      "frames": [ 0, 2 ],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.4
     },
     "mains_right": {
       "frames": [3],
@@ -31,9 +31,9 @@
       "frameDuration": 0.2
     },
     "baisse_down": {
-      "frames": [5],
+      "frames": [ 4, 5 ],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.4
     },
     "idle_left": {
       "frames": [6],
@@ -41,14 +41,14 @@
       "frameDuration": 0.2
     },
     "baisse_left": {
-      "frames": [7],
+      "frames": [ 6, 7 ],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.4
     },
     "main_left": {
-      "frames": [8],
+      "frames": [ 6, 8 ],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.4
     },
     "mains_left": {
       "frames": [9],

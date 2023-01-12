@@ -54,9 +54,6 @@ namespace SAE101
         public double chan;
 
         //Camera
-        /*public OrthographicCamera _cameraMap;
-        public OrthographicCamera _cameraDial;
-        public Vector2 _cameraPosition;*/
         public int _numEcran;
 
         //Musiques
@@ -266,7 +263,8 @@ namespace SAE101
 
 
             // on charge l'écran de menu par défaut 
-            LoadScreenecranDeTtitre();
+            //LoadScreenecranDeTtitre();
+            LoadScreenChatoCouronne();
 
             base.LoadContent();
         }

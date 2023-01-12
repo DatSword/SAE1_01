@@ -38,7 +38,6 @@ namespace SAE101
         private Vector2 _positionEnnemi;
         private String _animationEnnemi;
 
-        private bool _rencontre;
 
         private AnimatedSprite _Jon;
         private Vector2 _positionJon;
@@ -76,7 +75,6 @@ namespace SAE101
             _positionEnnemi = new Vector2(26 * 16 + 8, 9 * 16 + 8);
             _animationEnnemi = "idle_down";
 
-            _rencontre = false;
             _eventEtDial._numDial = 2;
 
             _positionJon = new Vector2(19 * 16 + 8, 7 * 16);
@@ -129,7 +127,6 @@ namespace SAE101
 
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
-                _rencontre = true;
                 _eventEtDial.FermeBoite();
                 //_myGame.LoadScreenChatoCombat();
 
@@ -140,7 +137,7 @@ namespace SAE101
                 _myGame._nbEnemy = 3;
                 _myGame._ordreEnnemi = new String[] {"Mechant","Mechant","Mechant"};
             }
-            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
+            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {
                 _animationEnnemi = "idle_left";
                 _animationJon = "idle_right";
@@ -150,7 +147,6 @@ namespace SAE101
             else if (_chatoCombat._victoire == true)
             {
                 _myGame._firstVisitCorridor = false;
-                _rencontre = true;
                 _eventEtDial.FermeBoite();
                 _chatoCombat._victoire = false;
                 _eventEtDial._numDial = 3;
@@ -181,7 +177,7 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            if (_rencontre == false && _myGame._firstVisitCorridor == true)
+            if (_myGame._firstVisitCorridor == true)
                 _spriteBatch.Draw(_ennemi, _positionEnnemi);
             if (_myGame._firstVisitCorridor == true)
                 _spriteBatch.Draw(_Jon, _positionJon);

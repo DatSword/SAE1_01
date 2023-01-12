@@ -24,6 +24,7 @@ namespace SAE101
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
+        private Camera _camera;
 
         //sprites
         private AnimatedSprite _perso;
@@ -43,10 +44,10 @@ namespace SAE101
         private String[] _animationChest;
 
         // camera
-        public Vector2 _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
-        public Vector2 _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
-        public Vector2 _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
-        public Vector2 _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
+        public Vector2 _chambreCentre1;
+        public Vector2 _chambreCentreUn;
+        public Vector2 _chambreCentre2;
+        public Vector2 _chambreCentreDeux;
 
 
         public int _limChambre_x1;
@@ -55,6 +56,7 @@ namespace SAE101
         public int _limChambre_y2;
         public int _limChambre_Gauche;
         public int _limChambre_Droite;
+
         public ChatoIntChambres(Game1 game) : base(game) 
         {
             _myGame = game;
@@ -64,13 +66,14 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
+            _camera = _myGame._camera;
 
             // Lieu Spawn perso
             _posJon = new Vector2(-10 * 16 + 8, -10 * 16 + 8);
             _animJon = "idle_up";
             _posX = 0;
 
-            _joueur.Spawnchato_int_chambres_nord();
+            _joueur.SpawnChatoIntChambresNord();
 
             _limChambre_x1 = 16 * 16;
             _limChambre_x2 = 24 * 16;
@@ -78,6 +81,11 @@ namespace SAE101
             _limChambre_y2 = 8 * 16;
             _limChambre_Gauche = 8 * 16;
             _limChambre_Droite = 32 * 16;
+
+            _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
+            _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
+            _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
+            _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
 
 
             // Lieu Spawn objects
@@ -131,7 +139,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
 
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
@@ -141,7 +149,7 @@ namespace SAE101
 
             //Choix 
 
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
+            if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
             {
                 _eventEtDial.Fin1();
                 _myGame._fin = 1;
@@ -155,7 +163,7 @@ namespace SAE101
             {
                 _myGame.SetCoolDown();
                 _myGame._fin = 1;
-                _myGame.LoadScreenblack_jack();
+                _myGame.LoadScreenBlackJack();
                 _eventEtDial._choiceTrue = false;
                 _eventEtDial._dialTrue = false;
 
@@ -177,17 +185,17 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.u == 70) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
             }
-            else if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
+            else if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
                 && _myGame._positionPerso.X < _limChambre_Droite)
             {
                 _eventEtDial.Fren1();
                 _frenTrue = true;
             }        
-            else if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationFren == "hi" && _myGame._cooldownVerif == false)
+            else if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.u == 70) && animationFren == "hi" && _myGame._cooldownVerif == false)
             {
                 _eventEtDial.Fren2();
                 _frenTrue = false;
@@ -195,16 +203,17 @@ namespace SAE101
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
 
+
             //Coffres
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest[1] == "close" && _myGame._positionPerso.X > 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial.u == 71 && _animationChest[1] == "close" && _myGame._positionPerso.X > 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[1] = true;
                 _eventEtDial.Chest1();
                 _eventEtDial._numDial = 1;
             }
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest[0] == "close" && _myGame._positionPerso.X < 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial.u == 71 && _animationChest[0] == "close" && _myGame._positionPerso.X < 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[0] = true;
                 _eventEtDial._numDial = 1;
@@ -269,10 +278,10 @@ namespace SAE101
             }
 
             //changement de map
-            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 41))
+            if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 41))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                Game.LoadScreenchato_int_couloir();
+                Game.LoadScreenchatoIntChambresCouloir();
             }
         }
 
@@ -281,7 +290,7 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
@@ -296,7 +305,7 @@ namespace SAE101
 
             _spriteBatch.End();
 
-            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _camera._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (_eventEtDial._dialTrue == true)
             {

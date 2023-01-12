@@ -26,6 +26,7 @@ namespace SAE101
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
         private ChatoCombat _chatoCombat;
+        private Camera _camera;
 
         //sprite
         private AnimatedSprite _perso;
@@ -58,23 +59,23 @@ namespace SAE101
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
             _chatoCombat = _myGame._chatoCombat;
+            _camera = _myGame._camera;
 
             // Lieu Spawn
             _posX = 0;
-
-            _joueur.Spawnchato_ext_cours_interieur();
-
+            _joueur.SpawnchatoExtCoursInterieur();
             _myGame._numSalle = 2;
 
+            //Scénario
             _positionGrand = new Vector2(21 * 16 + 8, 25 * 16 +8);
             _positionGrand2 = new Vector2(12 * 16 + 8, 21 * 16 + 8);
             _positionGrand3 = new Vector2(31 * 16 + 8, 23 * 16 + 8);
             _animationGrand = "idle_up";
             _animationGrand2 = "idle_left";
-            _animationGrand3 = "idle_right";
-
+            _animationGrand3 = "idle_right";     
             _rencontre = false;
             _collisionPassage = false;
+            _eventEtDial._numDial = 3;
 
             base.Initialize();
         }
@@ -107,7 +108,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
      
 
             _tiledMapRenderer.Update(gameTime);
@@ -129,20 +130,18 @@ namespace SAE101
 
                 // Ninja
 
-
-
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 0)
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                _myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenChatoCombat();
                 _eventEtDial._numDial = 2;
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
             {
                 _eventEtDial.FermeBoite();         
                 _eventEtDial._numDial = 0;
-                _myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenChatoCombat();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 2)
             {
@@ -180,15 +179,15 @@ namespace SAE101
 
             //changements maps
 
-            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_couloir();
+                _myGame.LoadScreenchatoIntChambresCouloir();
             }
-            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_couronne();
+                _myGame.LoadScreenChatoCouronne();
             }
         }
 
@@ -196,7 +195,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
@@ -210,7 +209,7 @@ namespace SAE101
 
             _spriteBatch.End();
 
-            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _camera._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (_eventEtDial._dialTrue == true)
             {

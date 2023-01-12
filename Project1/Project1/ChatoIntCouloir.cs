@@ -21,6 +21,7 @@ namespace SAE101
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoCombat _chatoCombat;
+        private Camera _camera;
 
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -61,11 +62,12 @@ namespace SAE101
             _joueur = _myGame._joueur;
             _chatoIntChambres = _myGame._chatoIntChambres;
             _chatoCombat = _myGame._chatoCombat;
+            _camera = _myGame._camera;
 
             // Lieu Spawn
             _posX = 0;
 
-            _joueur.Spawnchato_int_chambres_couloir();
+            _joueur.SpawnChatoIntChambresCouloir();
 
             _limChambre_x1 = 19 * 16;
             _limChambre_x2 = 25 * 16;
@@ -112,7 +114,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
 
 
             _tiledMapRenderer.Update(gameTime);
@@ -131,11 +133,10 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _rencontre = true;
-                _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenchato_combat();
-                _eventEtDial._numDial = 3;
+                //_eventEtDial.FermeBoite();
+                _myGame.LoadScreenChatoCombat();            
             }
-            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2)
+            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {
                 _animationEnnemi = "idle_left";
                 _animationJon = "idle_right";
@@ -144,23 +145,25 @@ namespace SAE101
             }
             else if (_chatoCombat._victoire == true)
             {
+                _myGame._firstVisitCorridor = false;
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
                 _chatoCombat._victoire = false;
+                _eventEtDial._numDial = 3;
             }
 
 
 
             //Changement de map          
-            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 26))
+            if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 26))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_chambres();
+                _myGame.LoadScreenchatoIntChambresNord();
             }        
-            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 30))
+            if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 30))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_ext_cours();
+                _myGame.LoadScreenchatoExtCoursInterieur();
                 _chatoIntChambres._posX = 0;
             }
         }
@@ -169,18 +172,20 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            if (_rencontre == false)
+            if (_rencontre == false && _myGame._firstVisitCorridor == true)
                 _spriteBatch.Draw(_ennemi, _positionEnnemi);
-            _spriteBatch.Draw(_Jon, _positionJon);
+            if (_myGame._firstVisitCorridor == true)
+                _spriteBatch.Draw(_Jon, _positionJon);
+
 
             _spriteBatch.End();
 
-            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _camera._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (_eventEtDial._dialTrue == true)
             {

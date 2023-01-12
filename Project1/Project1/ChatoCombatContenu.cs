@@ -9,20 +9,12 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
-        private EventEtDial _eventEtDial;
-        private ChatoCombatContenu _chatoCombatContenu;
-        private ChatoExtCours _chatoExtCours;
-        private ChatoIntChambres _chatoIntChambres;
-        private ChatoIntCouloir _chatoIntCouloir;
+        private ChatoCombat _chatoCombat;
 
         public ChatoCombatContenu(Game1 game)
         {
             _myGame = game;
-            _eventEtDial = _myGame._eventEtDial;
-            _chatoCombatContenu = _myGame._chatoCombatContenu;
-            _chatoExtCours = _myGame._chatoExtCours;
-            _chatoIntChambres = _myGame._chatoIntChambres;
-            _chatoIntCouloir = _myGame._chatoIntCouloir;
+            _chatoCombat = _myGame._chatoCombat;
         }
 
         public int _nbAlly;
@@ -100,11 +92,11 @@ namespace SAE101
 
         public void Hero()
         {
-            _stat = new int[4] { 80, 100 ,60, 70 };//50
+            _stat = new int[4] { 80, 40 ,60, 70 };
             _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
-            _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
-            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour ", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
+            _specialP = new String[] { "Zeuwerld", /*"Baïtzedeust"*/ "_", "_", "_" };
+            _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour gagner un peu de temps", /*"Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies."*/ "_", "_", "_" };
             if (_myGame._epee == true)
                 _stat[1] = 70;
             if (_myGame._boom == true)
@@ -113,7 +105,7 @@ namespace SAE101
 
         public void Jon()
         {
-            _stat = new int[4] { 100, 100, 40, 10 };//90
+            _stat = new int[4] { 100, 80, 40, 10 };
             _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
@@ -135,7 +127,7 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 60, 0, 60, 100 };//20
+            _stat = new int[4] { 60, 30, 60, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
@@ -145,7 +137,7 @@ namespace SAE101
 
         public void Mechant()
         {
-            _stat = new int[4] { 70, 0, 50, 50 };//70
+            _stat = new int[4] { 70, 60, 50, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
@@ -154,7 +146,7 @@ namespace SAE101
 
         public void Pabo()
         {
-            _stat = new int[4] { 70, 0, 50, 90 };//70
+            _stat = new int[4] { 70, 70, 50, 90 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
@@ -177,7 +169,7 @@ namespace SAE101
                         _animationA[_allyAnime] = "attack_right2";
                         _badabim = true;
                         _myGame._fire.Play();
-                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[ChatoCombat._playerAttacking, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[ChatoCombat._playerAttacking, 1]].Y);
+                        _posProj = new Vector2(_posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]].X - 80, _posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]].Y);
                         
                     }
                     _coolDownAnimation = true;
@@ -269,7 +261,7 @@ namespace SAE101
                         _animationA[_allyAnime] = "attack_right2";
                         _fireBall = true;
                         _myGame._fire.Play();
-                        _posProj = new Vector2(_posEnemy[ChatoCombat._attaquePerso[1, 1]].X - 80, _posEnemy[ChatoCombat._attaquePerso[1, 1]].Y);
+                        _posProj = new Vector2(_posEnemy[_chatoCombat._attaquePerso[1, 1]].X - 80, _posEnemy[_chatoCombat._attaquePerso[1, 1]].Y);
                     }
                     _coolDownAnimation = true;
                     _animationP1 = false;
@@ -303,6 +295,32 @@ namespace SAE101
                     _animationP1 = false;
                     _animationP2 = true;
                     _animationP3 = true;
+                }
+            }
+
+            if (_fireBall == true)
+            {
+
+                _posProj.X += 2;
+                _chatoCombat._animationProj = "fireball";
+                if (_posProj.X == _posEnemy[_chatoCombat._attaquePerso[1, 1]].X)
+                {
+                    _posProj = new Vector2(-32, -16);
+                    _fireBall = false;
+                }
+            }
+
+            if (_badabim == true)
+            {
+
+                _posProj.X += 2;
+                _chatoCombat._animationProj = "badaboom";
+                if (_posProj.X == _posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]].X)
+                {
+                    _myGame._pelo.Play();
+                    _posProj = new Vector2(-32, -16);
+                    _fireBall = false;
+                    _posExplosion = _posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]];
                 }
             }
         }

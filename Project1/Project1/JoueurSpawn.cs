@@ -9,7 +9,6 @@ namespace SAE101
         // défini dans Game1
         public Game1 _myGame;
         private EventEtDial _eventEtDial;
-        private ChatoCombatContenu _chatoCombatContenu;
         private ChatoExtCours _chatoExtCours;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoIntCouloir _chatoIntCouloir;
@@ -19,14 +18,13 @@ namespace SAE101
         {
             _myGame = game;
             _eventEtDial = _myGame._eventEtDial;
-            _chatoCombatContenu = _myGame._chatoCombatContenu;
             _chatoExtCours = _myGame._chatoExtCours;
             _chatoIntChambres = _myGame._chatoIntChambres;
             _chatoIntCouloir = _myGame._chatoIntCouloir;
             _chatoIntTrone = _myGame._chatoIntTrone;
         }
 
-        public void Spawnchato_int_chambres_couloir()
+        public void SpawnChatoIntChambresCouloir()
         {
             if (_myGame._combatFini == true)
             {
@@ -61,7 +59,7 @@ namespace SAE101
             //x = casex * 16 + 8, y = casey * 16 + 8
         }
 
-        public void Spawnchato_int_chambres_nord()
+        public void SpawnChatoIntChambresNord()
         {
             if (_myGame._combatFini == true)
             {
@@ -84,7 +82,7 @@ namespace SAE101
             }
         }
 
-        public void Spawnchato_ext_cours_interieur()
+        public void SpawnchatoExtCoursInterieur()
         {
             if (_myGame._combatFini == true)
             {
@@ -118,7 +116,7 @@ namespace SAE101
             }
         }
 
-        public void Spawnchato_int_couronne()
+        public void SpawnchatoIntCouronne()
         {
             if (_myGame._combatFini == true)
             {

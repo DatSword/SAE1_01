@@ -23,10 +23,18 @@ namespace SAE101
 {
     public class ChatoCombat : GameScreen
     {
+        //Fond d'écran
+        private new Game1 Game => (Game1)base.Game;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Texture2D _chatoCombatDecor;
+
         // défini dans Game1
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private ChatoCombatContenu _chatoCombatContenu;
+        private Camera _camera;
+
 
         //Constantes position pour animation;
         private const int POS_ALLIEX0 = 145;
@@ -47,11 +55,6 @@ namespace SAE101
         private int[] _ordretour;
         private int[] _ordretour2;
 
-        //Fond d'écran
-        private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Texture2D _chatoCombatDecor;
 
         //Menu
         private Texture2D _combatBox;
@@ -96,8 +99,8 @@ namespace SAE101
         public int[] _vitAllie;
 
         //Attaque Personnages
-        public static int[,] _attaquePerso;
-        public static int _playerAttacking;
+        public int[,] _attaquePerso;
+        public int _playerAttacking;
 
         //Ennemies
         private AnimatedSprite[] _ennemy;      
@@ -121,8 +124,7 @@ namespace SAE101
         //Attaque projectiles
         private AnimatedSprite _proj;        
         public String _animationProj;
-        private AnimatedSprite _explosion;
-        
+        private AnimatedSprite _explosion;       
         public String _animationExplosion;
 
         //The Legend came to life
@@ -140,6 +142,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _chatoCombatContenu = _myGame._chatoCombatContenu;
+            _camera = _myGame._camera;
 
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
@@ -301,10 +304,10 @@ namespace SAE101
                 }
                 _ordrefinal++;
             }
-            _chatoCombatContenu._posProj = new Vector2(-16, 0);
+            _chatoCombatContenu._posProj = new Vector2(-32, 0);
             _chatoCombatContenu._posExplosion = new Vector2(-32, 0);
             _animationProj = "fireball";
-
+            _animationExplosion = "boom";
 
             base.Initialize();
         }
@@ -320,7 +323,7 @@ namespace SAE101
             SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/objects/projectile1.sf", new JsonContentLoader());
             _proj = new AnimatedSprite(spriteSheetA);
             SpriteSheet spriteSheetB = Content.Load<SpriteSheet>("anim/objects/explosion.sf", new JsonContentLoader());
-            _explosion = new AnimatedSprite(spriteSheetA);
+            _explosion = new AnimatedSprite(spriteSheetB);
 
 
 
@@ -333,7 +336,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
 
             //curseurs
             if (_chatoCombatContenu._animationEnCours == false && _gameOver == false && _victoire == false)
@@ -535,18 +538,6 @@ namespace SAE101
                     }
                 }
 
-                if (_chatoCombatContenu._fireBall == true)
-                {
-
-                    _chatoCombatContenu._posProj.X += 2;
-                    _animationProj = "fireball";
-                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[1, 1]].X)
-                    {
-                        _chatoCombatContenu._posProj = new Vector2(-16, 0);
-                        _chatoCombatContenu._fireBall = false;
-                    }
-                }
-
                 if (_chatoCombatContenu._coolDownAnimation == true)
                     _myGame.SetCoolDownC();
                 _chatoCombatContenu._coolDownAnimation = false;
@@ -567,12 +558,14 @@ namespace SAE101
 
                 _proj.Play(_animationProj);
                 _proj.Update(deltaSeconds);
+                _explosion.Play(_animationExplosion);
+                _explosion.Update(deltaSeconds);
 
                 //Sortie du combat
                 if (_myGame._cooldownVerifF == false && _gameOver == true)
                 {
                     _myGame._fin = 2;
-                    _myGame.LoadScreenblack_jack();
+                    _myGame.LoadScreenBlackJack();
                 }
                 else if (_myGame._cooldownVerifF == false && _victoire == true)
                 {
@@ -585,7 +578,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
 
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);
@@ -593,7 +586,7 @@ namespace SAE101
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
             _spriteBatch.Draw(_cursorD, _positionCursorD, Color.White);
             _spriteBatch.Draw(_proj, _chatoCombatContenu._posProj);
-            _spriteBatch.Draw(_proj, _chatoCombatContenu._posExplosion);
+            _spriteBatch.Draw(_explosion, _chatoCombatContenu._posExplosion);
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
@@ -918,11 +911,11 @@ namespace SAE101
         public void RetourChato()
         {
             if (_myGame._numSalle == 1)
-                _myGame.LoadScreenchato_int_couloir();
-            else if (_myGame._numEcran == 2)
-                _myGame.LoadScreenchato_ext_cours();
-            /*if (Game1._numSalle == 3)
-                _myGame.LoadScreenchato_int_salle_courronnement();*/
+                _myGame.LoadScreenchatoIntChambresCouloir();
+            else if (_myGame._numSalle == 2)
+                _myGame.LoadScreenchatoExtCoursInterieur();
+            if (_myGame._numSalle == 3)
+                _myGame.LoadScreenChatoCouronne();
         }
     }
 }

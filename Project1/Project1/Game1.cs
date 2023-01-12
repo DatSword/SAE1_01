@@ -216,10 +216,10 @@ namespace SAE101
             _fin = 0;
             _animationPlayer = "idle_down";
 
-            _nbAlly = 0;
-            _nbEnemy = 0;
-            _ordreJoueur = new String[1];
-            _ordreEnnemi = new String[1];
+            _nbAlly = 1;
+            _nbEnemy = 1;
+            _ordreJoueur = new String[1] {"Hein"};
+            _ordreEnnemi = new String[1] {"Grand"};
 
 
 
@@ -263,8 +263,8 @@ namespace SAE101
 
 
             // on charge l'écran de menu par défaut 
-            //LoadScreenecranDeTtitre();
-            LoadScreenChatoCouronne();
+            LoadScreenecranDeTtitre();
+            // LoadScreenChatoCouronne();
 
             base.LoadContent();
         }

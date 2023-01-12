@@ -63,7 +63,7 @@ namespace SAE101
         public Vector2 _posExplosion;
 
         //El famoso variable qui permet de dire qui joue dans quel ordre
-        public int kk;
+        public int whosPlaying;
 
         public void Combat()
         {
@@ -273,7 +273,7 @@ namespace SAE101
                     _animationA[_allyAnime] = "move_left";
                     _posAllie[_allyAnime].X -= 2;
                     if (_animationZeweurld == true)
-                        kk = _myGame._nbEnemy + _myGame._nbAlly;
+                        whosPlaying = _myGame._nbEnemy + _myGame._nbAlly;
                 }
                 else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                 {

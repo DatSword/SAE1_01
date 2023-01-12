@@ -128,6 +128,13 @@ namespace SAE101
         public bool _epee;
         public bool _boom;
 
+        //Pour les combats
+        public int _nbAlly;
+        public int _nbEnemy;
+        public String[] _ordreJoueur;
+        public String[] _ordreEnnemi;
+
+
         public Etats Etat
         {
             get
@@ -211,7 +218,13 @@ namespace SAE101
             _firstVisitCorridor = true;
             _fin = 0;
             _animationPlayer = "idle_down";
-            
+
+            _nbAlly = 0;
+            _nbEnemy = 0;
+            _ordreJoueur = new String[1];
+            _ordreEnnemi = new String[1];
+
+
 
             base.Initialize();
         }

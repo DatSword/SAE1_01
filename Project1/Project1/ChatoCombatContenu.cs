@@ -17,9 +17,6 @@ namespace SAE101
             _chatoCombat = _myGame._chatoCombat;
         }
 
-        public int _nbAlly = 0;
-        public int _nbEnnemy = 0;
-
         public String _special;
         public String _anim;
         public String[] _specialP;
@@ -28,9 +25,8 @@ namespace SAE101
         public int _nbPersoJouable = 4;
         public String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
         public int _nbEnnJouable = 3;       
-        public String[] _ordreJoueur;
-        public String[] _ordreEnnemi;
-        public int[] _stat; //PV, Attaque, Défense, Vitesse
+        
+        public int[] _stat; //PV, Attaque, Défense, Vitesse //PV : au pif, Attaque >= 50, Défense <= 50, Vitesse : entre 1 et 100
 
 
         public static Vector2 _lastPosition;
@@ -72,12 +68,6 @@ namespace SAE101
         public void Combat()
         {
             _lastPosition = _myGame._positionPerso;
-
-            /*_nbAlly = 2;
-            _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
-
-            _nbEnnemy = 3;
-            _ordreEnnemi = new String[] {"Grand","Mechant","Pabo"};*/
         }
 
         //Personnages jouables
@@ -92,7 +82,7 @@ namespace SAE101
 
         public void Hero()
         {
-            _stat = new int[4] { 80, 40 ,60, 70 };
+            _stat = new int[4] { 80, 60 ,30, 70 };
             _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", /*"Baïtzedeust"*/ "_", "_", "_" };
@@ -105,18 +95,18 @@ namespace SAE101
 
         public void Jon()
         {
-            _stat = new int[4] { 100, 80, 40, 10 };
+            _stat = new int[4] { 100, 90, 10, 10 };
             _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
-            _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
-            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" };
+            _specialP = new String[] { "Boule de feu", /*"Sort d'intimidation"*/"_", "_", "_" };
+            _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", /*"Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis"*/"_", "_", "_" };
             if (_myGame._boom == true)
                 _stat[1] = 200000000;
         }
 
         public void Ben()
         {
-            _stat = new int[4] { 50, 40, 90, 60 };
+            _stat = new int[4] { 1000, 100, 50, 100 };
             _anim = "anim/char/base_model_m/character_movement.sf";
             _special = "Cri";
             _specialP = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de 'blèmes", "_" };
@@ -127,7 +117,7 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 60, 30, 60, 100 };
+            _stat = new int[4] { 50, 70, 30, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
@@ -137,7 +127,7 @@ namespace SAE101
 
         public void Mechant()
         {
-            _stat = new int[4] { 70, 60, 50, 50 };
+            _stat = new int[4] { 70, 60, 20, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
@@ -146,7 +136,7 @@ namespace SAE101
 
         public void Pabo()
         {
-            _stat = new int[4] { 70, 70, 50, 90 };
+            _stat = new int[4] { 90, 70, 40, 80 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
@@ -283,7 +273,7 @@ namespace SAE101
                     _animationA[_allyAnime] = "move_left";
                     _posAllie[_allyAnime].X -= 2;
                     if (_animationZeweurld == true)
-                        kk = _nbEnnemy + _nbAlly;
+                        kk = _myGame._nbEnemy + _myGame._nbAlly;
                 }
                 else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)
                 {

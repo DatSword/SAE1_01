@@ -63,7 +63,7 @@ namespace SAE101
                       "Chato          : SilvaGunner\n" +
                       "fin \"dodo\"   : SilvaGunner\n" +
                       "\n " +                     
-                      "Compte rendu   Marine GIMENEZ\n" +
+                      "Compte rendu : Marine GIMENEZ\n" +
                       "               Anna KOMPANIETS\n" +
                       "               Quentin BASTARD\n" +
                       "\n" +

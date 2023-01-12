@@ -128,7 +128,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenChatoCombat();
+                _myGame.LoadScreenChatoCombat();
 
                 //contenu du combat
                 _myGame._nbAlly = 2;

@@ -17,8 +17,9 @@ namespace SAE101
         private Camera _camera;
 
         //Titre
-        private Texture2D _titleS;
+        private Texture2D _fondTantopie;
         private SpriteFont _fontTitle;
+        private Vector2 _posTitle;
 
         // dialbox
         private Texture2D _optBox;
@@ -31,6 +32,7 @@ namespace SAE101
         // taille écran
         private Texture2D _cursor;
         private Vector2 _positionCursor;
+
         private const int ESPACE_TEXT = 130;
         private String[] _textResEcran;
         private Vector2[] _posTextResEcran;
@@ -45,6 +47,7 @@ namespace SAE101
         {
             _camera = _myGame._camera;
 
+            _posTitle = new Vector2(15, 0);
             _posOptBox = new Vector2(0, 224);
 
             _textOpt = new String[3] { "pour valider", "pour revenir en arrière", "pour les déplacements"};
@@ -66,7 +69,7 @@ namespace SAE101
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _titleS = Content.Load<Texture2D>("menu/tantopie");
+            _fondTantopie = Content.Load<Texture2D>("menu/tantopie");
             _fontTitle = Content.Load<SpriteFont>("font/fonttitle");
 
             _optBox = Content.Load<Texture2D>("menu/options_box");
@@ -110,8 +113,8 @@ namespace SAE101
             var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-            _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
-            _spriteBatch.DrawString(_fontTitle, "Tantopie", new Vector2(15, 0), Color.LightGray);
+            _spriteBatch.Draw(_fondTantopie, new Vector2(0, 0), Color.White);
+            _spriteBatch.DrawString(_fontTitle, "Tantopie", _posTitle, Color.LightGray);
             _spriteBatch.Draw(_optBox, _posOptBox, Color.White);
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
 

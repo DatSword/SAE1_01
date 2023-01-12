@@ -61,6 +61,7 @@ namespace SAE101
         private Song _titleTheme;
         public Song _songCombat;
         public Song _songDodo;
+        private Song _songEnd;
 
         //ZoneMusique
         private bool _chato;
@@ -107,6 +108,7 @@ namespace SAE101
         //event
         public bool _firstVisitBedroom;
         public bool _firstVisitCorridor;
+        public bool _firstVisitCourt;
         public int _fin;
 
         //pour évènements et déplacementss
@@ -153,15 +155,15 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            xE = _xEcran;
-            yE = _yEcran;
-
-            chan = 1;
-
             _graphics.PreferredBackBufferWidth = _xEcran;
             _graphics.PreferredBackBufferHeight = _yEcran;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
+
+            xE = _xEcran;
+            yE = _yEcran;
+
+            chan = 1;
 
             // variables écran
             _blackJack = new BlackJack(this);
@@ -213,6 +215,7 @@ namespace SAE101
             //event
             _firstVisitBedroom = true;
             _firstVisitCorridor = true;
+            _firstVisitCourt = true;
             _fin = 0;
             _animationPlayer = "idle_down";
 
@@ -236,6 +239,7 @@ namespace SAE101
             _titleTheme = Content.Load<Song>("music/title/titre");
             _songCombat = Content.Load<Song>("music/chato/combat");
             _songDodo = Content.Load<Song>("music/fins/sleep");
+            _songEnd = Content.Load<Song>("music/fins/za_endo");
 
             //SFX
             _menu = Content.Load<SoundEffect>("sfx/menu");
@@ -264,7 +268,7 @@ namespace SAE101
 
             // on charge l'écran de menu par défaut 
             LoadScreenecranDeTtitre();
-            // LoadScreenChatoCouronne();
+            //LoadScreenChatoCouronne();
 
             base.LoadContent();
         }
@@ -279,6 +283,7 @@ namespace SAE101
                 Exit();
 
             //Console.WriteLine(_chestTrue[0] + " " + _chestTrue[1]);
+
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
@@ -302,7 +307,7 @@ namespace SAE101
 
             //Console.WriteLine(_cooldownVerif);
 
-            if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
+            /*if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
                 LoadScreenChatoCombat();
                 _combatTest = true;
@@ -313,7 +318,7 @@ namespace SAE101
                 LoadScreenchatoIntChambresNord();
                 _combatTest = false;
                 SetCoolDown();
-            }
+            }*/
 
             if (_cooldownVerif == true)
             {
@@ -448,7 +453,8 @@ namespace SAE101
 
         public void LoadScreenBlackJack()
         {
-            MediaPlayer.Stop();
+            if (_fin != 3)
+                MediaPlayer.Stop();
             _ecranTitre = false;
             _screenManager.LoadScreen(_blackJack, new FadeTransition(GraphicsDevice, Color.Black));
             _numEcran = 4;
@@ -563,6 +569,11 @@ namespace SAE101
             }
         }
 
+        public void Victoire()
+        {
+            MediaPlayer.Stop();
+            MediaPlayer.Play(_songEnd);
+        }
         public void ChangementEcran(double changement)
         {
             _graphics.PreferredBackBufferWidth = (int)(_xEcran * changement);

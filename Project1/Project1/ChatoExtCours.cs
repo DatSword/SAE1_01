@@ -62,7 +62,7 @@ namespace SAE101
 
             // Lieu Spawn
             _posX = 0;
-            _joueur.SpawnchatoExtCoursInterieur();
+            _joueur.SpawnChatoExtCours();
             _myGame._numSalle = 2;
 
             //Scénario
@@ -128,13 +128,7 @@ namespace SAE101
 
                 // Ninja
 
-            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 0)
-            {
-                _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenChatoCombat();
-                _eventEtDial._numDial = 2;
-            }
-            else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
             {
                 _eventEtDial.FermeBoite();         
                 _eventEtDial._numDial = 0;
@@ -164,7 +158,7 @@ namespace SAE101
             {
                 _eventEtDial.FermeBoite();
                 _chatoCombat._victoire = false;
-                _myGame._firstVisitCorridor = false;
+                _myGame._firstVisitCourt = false;
             }
 
 
@@ -204,7 +198,7 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            if ( _myGame._firstVisitCorridor == true)
+            if ( _myGame._firstVisitCourt == true)
             {
                 _spriteBatch.Draw(_ninja, _positionNinja);
                 _spriteBatch.Draw(_ninja2, _positionNinja2);

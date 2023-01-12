@@ -64,7 +64,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            _joueur.SpawnChatoIntChambresCouloir();
+            _joueur.SpawnChatoIntCouloir();
 
             _limChambre_x1 = 19 * 16;
             _limChambre_x2 = 25 * 16;
@@ -128,7 +128,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenChatoCombat();
+                _myGame.LoadScreenChatoCombat();
 
                 //contenu du combat
                 _myGame._nbAlly = 2;

@@ -18,7 +18,7 @@ namespace SAE101
         private Camera _camera;
 
         // texture menu
-        private Texture2D _titleS;
+        private Texture2D _fondTantopie;
         private Texture2D _start;
         private Texture2D _option;
         public Texture2D _quit;
@@ -54,7 +54,7 @@ namespace SAE101
             _start = Content.Load<Texture2D>("menu/start");
             _option = Content.Load<Texture2D>("menu/options");
             _quit = Content.Load<Texture2D>("menu/quit");
-            _titleS = Content.Load<Texture2D>("menu/tantopie");
+            _fondTantopie = Content.Load<Texture2D>("menu/tantopie");
             _fontTitle = Content.Load<SpriteFont>("font/fonttitle");
 
             base.LoadContent();
@@ -116,7 +116,7 @@ namespace SAE101
             var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             
-            _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(_fondTantopie, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(_fontTitle, "Tantopie",new Vector2(15,0), Color.LightGray);
             _spriteBatch.Draw(_start, new Vector2(_myGame._xEcran / 2 - 210 / 2, _myGame._yEcran / 3 + 63), Color.White);
             _spriteBatch.Draw(_option, new Vector2(_myGame._xEcran / 2 - 210 / 2, (float)(_myGame._yEcran / 3 * 1.5 + 63)), Color.White);

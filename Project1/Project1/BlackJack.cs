@@ -44,6 +44,7 @@ namespace SAE101
 
             _credit = "----TANTOPIE STAFF----\n\n" +
                       "Scénario : Quentin BASTARD\n" +
+                      "\n" +
                       "Cartes   : Quentin BASTARD\n" +
                       "           Anna KOMPANIETS\n" +
                       "\n " +
@@ -62,8 +63,11 @@ namespace SAE101
                       "Chato          : SilvaGunner\n" +
                       "fin \"dodo\"   : SilvaGunner\n" +
                       "\n " +                     
-                      "Compte rendu : \n" +
-                      "Vidéo trailer : \n" +
+                      "Compte rendu : Marine GIMENEZ\n" +
+                      "               Anna KOMPANIETS\n" +
+                      "               Quentin BASTARD\n" +
+                      "\n" +
+                      "Vidéo trailer : Marine GIMENEZ\n" +
                       "\n" +
                       "remerciments spéciaux : Dylan MIFTARI\n";
 
@@ -113,19 +117,22 @@ namespace SAE101
                 _text = "Malheureusement, après avoir traversés tant d'obstacles, il\n" +
                         "fallut que deux de nos héros périssent juste avant le\n" +
                         "couronnement de leur ami. Vous ne voudriez pas d'une fin pareil,\n" +
-                        "non?";
-                _fin = true;
+                        "n'est-ce pas?";
             }
             else if (_myGame._fin == 3)
-            { 
-                _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
-                        "même qu'elle vient tout juste de commencer! Que va t-il\n" +
-                        "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
-                        "envoyé d'on-ne-sait-quand? Toutes ces réponses, vous les aurez...\n" +
-                        "Peut-être un jour...?";
+            {
+                _text = "Et voilà, le couronnement débuta, ce qui marqua la fin de\n" +
+                        "notre histoire. On pourra dire que nos héros auront bien\n" +
+                        "mérité tout ce repos.";
                 _fin = true;
             }
 
+            /* Gros Cliffanger???
+             * "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
+                        "même qu'elle vient tout juste de commencer! Que va t-il\n" +
+                        "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
+                        "envoyé d'on-ne-sait-quand? Toutes ces réponses, vous les aurez...\n" +
+                        "Peut-être un jour...?";*/
 
             //Début
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <=1 && _myGame._fin == 0)
@@ -143,6 +150,7 @@ namespace SAE101
             //GameOver
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false && _eventEtDial._count <= 1 && _myGame._fin == 2)
             {
+                _myGame._fin = 1;
                 _myGame.SetCoolDownS();
                 _myGame.LoadScreenecranDeTtitre();
             }

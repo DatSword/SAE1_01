@@ -22,7 +22,6 @@ namespace SAE101
 
         // défini dans Game1
         private Game1 _myGame;
-        private ChatoCombatContenu _chatoCombatContenu;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
         private Camera _camera;
@@ -245,7 +244,7 @@ namespace SAE101
 
             _jon.Play(_animJon);
             _jon.Update(deltaSeconds);
-            Console.WriteLine(_eventEtDial._numDial);
+            //Console.WriteLine(_eventEtDial._numDial);
 
             if (_myGame._firstVisitBedroom == true && _myGame._cooldownVerif == false && _eventEtDial._numDial == 3)
             {

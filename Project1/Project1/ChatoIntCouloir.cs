@@ -21,7 +21,6 @@ namespace SAE101
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoCombat _chatoCombat;
-        private ChatoCombatContenu _chatoCombatContenu;
         private Camera _camera;
 
         //map
@@ -49,7 +48,6 @@ namespace SAE101
         public int _limChambre_x1;
         public int _limChambre_x2;
         public int _limCouloir;
-
 
 
         public ChatoIntCouloir(Game1 game) : base(game) 

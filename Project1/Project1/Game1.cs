@@ -280,7 +280,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
 
-            Console.WriteLine(_chestTrue[0] + " " + _chestTrue[1]);
+            //Console.WriteLine(_chestTrue[0] + " " + _chestTrue[1]);
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
@@ -351,13 +351,13 @@ namespace SAE101
  
 
             _walkSpeed = SPEED * deltaSeconds;
-            Console.WriteLine(ChatoCombatContenu._lastPosition);
+            //Console.WriteLine(ChatoCombatContenu._lastPosition);
 
 
 
             if(_numEcran == 0)
             {
-                Console.WriteLine(konamiCount);
+                //Console.WriteLine(konamiCount);
                 if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerifS == false)
                 {
                     SetCoolDownS();

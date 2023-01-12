@@ -50,11 +50,14 @@ namespace SAE101
             _textOpt = new String[3] { "pour valider", "pour revenir en arrière", "pour les déplacements"};
             _posTextOpt = new Vector2[3] { new Vector2(125, 285), new Vector2(125, 320), new Vector2(125, 355) };
 
-            _posTouches = new Vector2[6] { new Vector2(50, 280), new Vector2(50, 310), new Vector2(20, 370), new Vector2(50, 340), new Vector2(50, 370), new Vector2(80, 370) };
+            _posTouches = new Vector2[6] { new Vector2(50, 280), new Vector2(50, 310), new Vector2(20, 370), 
+                                           new Vector2(50, 340), new Vector2(50, 370), new Vector2(80, 370) };
 
             _positionCursor = new Vector2(40, 250);
             _textResEcran = new String[3] { "514 x 448", "771 x 672", "1028 x 996" };
-            _posTextResEcran = new Vector2[3] { new Vector2(70, 250), new Vector2(70 + ESPACE_TEXT, 250), new Vector2(70 + ESPACE_TEXT * 2, 250) };
+            _posTextResEcran = new Vector2[3] { new Vector2(70, 250), 
+                                                new Vector2(70 + ESPACE_TEXT, 250), 
+                                                new Vector2(70 + ESPACE_TEXT * 2, 250) };
 
             base.Initialize();
         }
@@ -68,7 +71,9 @@ namespace SAE101
 
             _optBox = Content.Load<Texture2D>("menu/options_box");
 
-            _touchesOpt = new Texture2D[6] { Content.Load<Texture2D>("menu/toucheW"), Content.Load<Texture2D>("menu/toucheX"), Content.Load<Texture2D>("menu/toucheG"), Content.Load<Texture2D>("menu/toucheH"), Content.Load<Texture2D>("menu/toucheB"), Content.Load<Texture2D>("menu/toucheD")};
+            _touchesOpt = new Texture2D[6] { Content.Load<Texture2D>("menu/toucheW"), Content.Load<Texture2D>("menu/toucheX"), 
+                                             Content.Load<Texture2D>("menu/toucheG"), Content.Load<Texture2D>("menu/toucheH"), 
+                                             Content.Load<Texture2D>("menu/toucheB"), Content.Load<Texture2D>("menu/toucheD")};
 
             _cursor = Content.Load<Texture2D>("img/dialogue/cursor");
 

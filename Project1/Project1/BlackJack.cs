@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using System;
+using System.Threading;
 
 namespace SAE101
 {
@@ -22,6 +23,7 @@ namespace SAE101
         public String _text;
 
         public bool _fin;
+        private bool _defilement;
 
         private String _credit;
         public Vector2 _posCr;
@@ -40,12 +42,17 @@ namespace SAE101
             _text = "";
 
             _fin = false;
+            _defilement = false;
 
             _credit = "----TANTOPIE STAFF----\n\n" +
                       "Scénario : Quentin BASTARD\n" +
                       "Carte : \n" +
-                      "Programmation : Quentin BASTARD, Marine GIMENEZ, Anna KOMPANIETS\n" +
-                      "Sprites et images : Anna KOMPANIETS, Marine GIMENEZ, Quentin BASTARD\n" +
+                      "Programmation : Quentin BASTARD,\n " +
+                      "                Marine GIMENEZ,\n " +
+                      "                Anna KOMPANIETS\n" +
+                      "Sprites et images : Anna KOMPANIETS,\n" +
+                      "                    Marine GIMENEZ,\n" +
+                      "                    Quentin BASTARD\n" +
                       "Musiques : Quentin BASTARD\n" +
                       "Compte rendu : \n" +
                       "Vidéo trailer : \n" +
@@ -101,7 +108,7 @@ namespace SAE101
                 _fin = true;
             }
             else if (_myGame._fin == 3)
-            {
+            { 
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +
@@ -134,9 +141,11 @@ namespace SAE101
 
             if (_fin == true)
             {
-                _posTextFin.Y -= (float)0.7;
-                _posCr.Y -= (float)0.7;
+                _posTextFin.Y -= (float)0.11115;
+                _posCr.Y -= (float)0.11115;
             }
+
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -156,11 +165,17 @@ namespace SAE101
                 _spriteBatch.DrawString(_myGame._font, _eventEtDial._nom, _eventEtDial._posNom, Color.White);
             }
 
-            if (_fin == true)
+            else if (_fin == true)
             {
+                Thread.Sleep(40);
                 _spriteBatch.DrawString(_myGame._font, _credit, _posCr, Color.White);
+
             }
+
             _spriteBatch.End();
         }
+
+      
+
     }
 }

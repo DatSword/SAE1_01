@@ -62,7 +62,7 @@ namespace SAE101
 
             // Lieu Spawn
             _posX = 0;
-            _joueur.SpawnchatoExtCoursInterieur();
+            _joueur.SpawnChatoExtCours();
             _myGame._numSalle = 2;
 
             //Scénario

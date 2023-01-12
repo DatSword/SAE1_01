@@ -64,7 +64,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            _joueur.SpawnChatoIntChambresCouloir();
+            _joueur.SpawnChatoIntCouloir();
 
             _limChambre_x1 = 19 * 16;
             _limChambre_x2 = 25 * 16;

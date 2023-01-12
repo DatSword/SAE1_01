@@ -64,7 +64,7 @@ namespace SAE101
             _myGame._numSalle = 3;
             _eventEtDial._numDial = 2;
 
-            _joueur.SpawnchatoIntCouronne();
+            _joueur.SpawnChatoIntCouronne();
 
             // ennemi
             _positionEnnemiPabo = new Vector2(10 * 16 + 8, 24 * 16);

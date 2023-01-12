@@ -73,7 +73,7 @@ namespace SAE101
             _animJon = "idle_up";
             _posX = 0;
 
-            _joueur.SpawnChatoIntChambresNord();
+            _joueur.SpawnChatoIntChambres();
 
             _limChambre_x1 = 16 * 16;
             _limChambre_x2 = 24 * 16;

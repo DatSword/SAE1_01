@@ -95,7 +95,7 @@ namespace SAE101
 
         public void Jon()
         {
-            _stat = new int[4] { 200, 90, 10, 10 };
+            _stat = new int[4] { 200, 90, 20, 10 };
             _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", /*"Sort d'intimidation"*/"_", "_", "_" };

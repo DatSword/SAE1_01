@@ -152,8 +152,6 @@ namespace SAE101
             _selectionEnn = false;
             _sousMenuSpecial = false;
             _sousMenuObjects = false;
-
-            _premierCombat = false;
             
             _action = 0;
             _ordrefinal = 0;
@@ -349,7 +347,10 @@ namespace SAE101
             //Vie
             for (int i = 0; i < _myGame._nbAlly ; i++)
             {
+                if (_vieAllie[i] <= 0)
+                    _vieAllie[i] = 0;
                 _vie[i] = _vieAllie[i].ToString() + " / " + _vieMax[i].ToString();
+                
             }
 
             //curseurs
@@ -498,7 +499,11 @@ namespace SAE101
             {
                 _positionCursorD = _chatoCombatContenu._posAllie[_action] - new Vector2(8, 55);
 
-                if (_sousMenuSpecial == true)
+                if(_premierCombat == true)
+                {
+                    _choix = _choix;
+                }
+                else if (_sousMenuSpecial == true)
                 {
                     _choix = _chatoCombatContenu._specialP;
                     _desc = _chatoCombatContenu._descP;

@@ -124,8 +124,7 @@ namespace SAE101
         //Attaque projectiles
         private AnimatedSprite _proj;        
         public String _animationProj;
-        private AnimatedSprite _explosion;
-        
+        private AnimatedSprite _explosion;       
         public String _animationExplosion;
 
         //The Legend came to life
@@ -305,10 +304,10 @@ namespace SAE101
                 }
                 _ordrefinal++;
             }
-            _chatoCombatContenu._posProj = new Vector2(-16, 0);
+            _chatoCombatContenu._posProj = new Vector2(-32, 0);
             _chatoCombatContenu._posExplosion = new Vector2(-32, 0);
             _animationProj = "fireball";
-
+            _animationExplosion = "boom";
 
             base.Initialize();
         }
@@ -324,7 +323,7 @@ namespace SAE101
             SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/objects/projectile1.sf", new JsonContentLoader());
             _proj = new AnimatedSprite(spriteSheetA);
             SpriteSheet spriteSheetB = Content.Load<SpriteSheet>("anim/objects/explosion.sf", new JsonContentLoader());
-            _explosion = new AnimatedSprite(spriteSheetA);
+            _explosion = new AnimatedSprite(spriteSheetB);
 
 
 
@@ -539,18 +538,6 @@ namespace SAE101
                     }
                 }
 
-                if (_chatoCombatContenu._fireBall == true)
-                {
-
-                    _chatoCombatContenu._posProj.X += 2;
-                    _animationProj = "fireball";
-                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[1, 1]].X)
-                    {
-                        _chatoCombatContenu._posProj = new Vector2(-16, 0);
-                        _chatoCombatContenu._fireBall = false;
-                    }
-                }
-
                 if (_chatoCombatContenu._coolDownAnimation == true)
                     _myGame.SetCoolDownC();
                 _chatoCombatContenu._coolDownAnimation = false;
@@ -571,12 +558,14 @@ namespace SAE101
 
                 _proj.Play(_animationProj);
                 _proj.Update(deltaSeconds);
+                _explosion.Play(_animationExplosion);
+                _explosion.Update(deltaSeconds);
 
                 //Sortie du combat
                 if (_myGame._cooldownVerifF == false && _gameOver == true)
                 {
                     _myGame._fin = 2;
-                    _myGame.LoadScreenblack_jack();
+                    _myGame.LoadScreenBlackJack();
                 }
                 else if (_myGame._cooldownVerifF == false && _victoire == true)
                 {
@@ -597,7 +586,7 @@ namespace SAE101
             _spriteBatch.Draw(_cursor, _positionCursor, Color.White);
             _spriteBatch.Draw(_cursorD, _positionCursorD, Color.White);
             _spriteBatch.Draw(_proj, _chatoCombatContenu._posProj);
-            _spriteBatch.Draw(_proj, _chatoCombatContenu._posExplosion);
+            _spriteBatch.Draw(_explosion, _chatoCombatContenu._posExplosion);
             _spriteBatch.DrawString(_fontTest, _choix[0], _posText[0], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
@@ -922,11 +911,11 @@ namespace SAE101
         public void RetourChato()
         {
             if (_myGame._numSalle == 1)
-                _myGame.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchatoIntChambresCouloir();
             else if (_myGame._numSalle == 2)
-                _myGame.LoadScreenchato_ext_cours_interieur();
-            /*if (Game1._numSalle == 3)
-                _myGame.LoadScreenchato_int_salle_courronnement();*/
+                _myGame.LoadScreenchatoExtCoursInterieur();
+            if (_myGame._numSalle == 3)
+                _myGame.LoadScreenChatoCouronne();
         }
     }
 }

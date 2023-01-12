@@ -24,7 +24,7 @@ namespace SAE101
             _chatoIntTrone = _myGame._chatoIntTrone;
         }
 
-        public void Spawnchato_int_chambres_couloir()
+        public void SpawnChatoIntChambresCouloir()
         {
             if (_myGame._combatFini == true)
             {
@@ -59,7 +59,7 @@ namespace SAE101
             //x = casex * 16 + 8, y = casey * 16 + 8
         }
 
-        public void Spawnchato_int_chambres_nord()
+        public void SpawnChatoIntChambresNord()
         {
             if (_myGame._combatFini == true)
             {
@@ -82,7 +82,7 @@ namespace SAE101
             }
         }
 
-        public void Spawnchato_ext_cours_interieur()
+        public void SpawnchatoExtCoursInterieur()
         {
             if (_myGame._combatFini == true)
             {
@@ -116,7 +116,7 @@ namespace SAE101
             }
         }
 
-        public void Spawnchato_int_couronne()
+        public void SpawnchatoIntCouronne()
         {
             if (_myGame._combatFini == true)
             {

@@ -55,8 +55,9 @@ namespace SAE101
 
             // Lieu Spawn
             _posX = 0;
+            _myGame._numSalle = 3;
 
-            _joueur.Spawnchato_int_couronne();
+            _joueur.SpawnchatoIntCouronne();
 
             _myGame._numSalle = 5;
 
@@ -130,7 +131,7 @@ namespace SAE101
             if (_myGame._positionPerso.Y <= 10 * 16)
             {
                 _myGame._fin = 3;
-                Game.LoadScreenblack_jack();
+                Game.LoadScreenBlackJack();
             }
 
 
@@ -138,7 +139,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 1) && _myGame._positionPerso.Y > 38 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_ext_cours_interieur();
+                _myGame.LoadScreenchatoExtCoursInterieur();
             }
         }
 

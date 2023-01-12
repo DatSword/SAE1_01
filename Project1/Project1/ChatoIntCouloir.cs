@@ -67,7 +67,7 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
 
-            _joueur.Spawnchato_int_chambres_couloir();
+            _joueur.SpawnChatoIntChambresCouloir();
 
             _limChambre_x1 = 19 * 16;
             _limChambre_x2 = 25 * 16;
@@ -134,7 +134,7 @@ namespace SAE101
             {
                 _rencontre = true;
                 //_eventEtDial.FermeBoite();
-                _myGame.LoadScreenchato_combat();            
+                _myGame.LoadScreenChatoCombat();            
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {
@@ -158,12 +158,12 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 26))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_chambres_nord();
+                _myGame.LoadScreenchatoIntChambresNord();
             }        
             if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 30))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_ext_cours_interieur();
+                _myGame.LoadScreenchatoExtCoursInterieur();
                 _chatoIntChambres._posX = 0;
             }
         }

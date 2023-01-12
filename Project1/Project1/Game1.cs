@@ -253,7 +253,7 @@ namespace SAE101
 
 
             // on charge l'écran de menu par défaut 
-            LoadScreenecran_de_titre();
+            LoadScreenecranDeTtitre();
 
             base.LoadContent();
         }
@@ -276,10 +276,10 @@ namespace SAE101
                     Exit();
 
                 else if (this.Etat == Etats.Start)
-                    LoadScreenblack_jack();
+                    LoadScreenBlackJack();
 
                 else if (this.Etat == Etats.Option)
-                    LoadScreenoption();
+                    LoadScreenOption();
 
                 else
                     Console.WriteLine("");
@@ -287,19 +287,19 @@ namespace SAE101
 
             if (Keyboard.GetState().IsKeyDown(Keys.X))
                 if (this.Etat == Etats.Start || this.Etat == Etats.Option || this.Etat == Etats.Menu)
-                    LoadScreenecran_de_titre();
+                    LoadScreenecranDeTtitre();
 
             //Console.WriteLine(_cooldownVerif);
 
             if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
-                LoadScreenchato_combat();
+                LoadScreenChatoCombat();
                 _combatTest = true;
                 SetCoolDown();
             }
             else if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == true && _cooldownVerif == false)
             {
-                LoadScreenchato_int_chambres_nord();
+                LoadScreenchatoIntChambresNord();
                 _combatTest = false;
                 SetCoolDown();
             }
@@ -310,7 +310,12 @@ namespace SAE101
                 if (_cooldown <= 0)
                     _cooldownVerif = false;
             }
-
+            if (_cooldownVerifS == true)
+            {
+                _cooldownS = _cooldownS - deltaSeconds;
+                if (_cooldownS <= 0)
+                    _cooldownVerifS = false;
+            }
             if (_cooldownVerifC == true)
             {
                 _cooldownC = _cooldownC - deltaSeconds;
@@ -339,6 +344,7 @@ namespace SAE101
 
             if(_numEcran == 0)
             {
+                Console.WriteLine(konamiCount);
                 if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerifS == false)
                 {
                     SetCoolDownS();
@@ -413,7 +419,7 @@ namespace SAE101
 
 
         //Chargements maps
-        public void LoadScreenecran_de_titre()
+        public void LoadScreenecranDeTtitre()
         {
             _screenManager.LoadScreen(_ecranDeTitre, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
@@ -421,7 +427,7 @@ namespace SAE101
             this.Etat = Etats.Menu;
         }
 
-        public void LoadScreenoption()
+        public void LoadScreenOption()
         {
             _screenManager.LoadScreen(_option, new FadeTransition(GraphicsDevice, Color.LightGray));
             MusiqueTitre();
@@ -429,7 +435,7 @@ namespace SAE101
             _numEcran = 11;
         }
 
-        public void LoadScreenblack_jack()
+        public void LoadScreenBlackJack()
         {
             MediaPlayer.Stop();
             _ecranTitre = false;
@@ -438,7 +444,7 @@ namespace SAE101
             this.Etat = Etats.Play;
         }
 
-        public void LoadScreenchato_int_chambres_nord()
+        public void LoadScreenchatoIntChambresNord()
         {
             _screenManager.LoadScreen(_chatoIntChambres, new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
@@ -448,7 +454,7 @@ namespace SAE101
             _combatChato = false;
         }
 
-        public void LoadScreenchato_int_chambres_couloir()
+        public void LoadScreenchatoIntChambresCouloir()
         {
             _screenManager.LoadScreen(_chatoIntCouloir, new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
@@ -457,7 +463,7 @@ namespace SAE101
             _combatChato = false;
         }
 
-        public void LoadScreenchato_ext_cours_interieur()
+        public void LoadScreenchatoExtCoursInterieur()
         {
             _screenManager.LoadScreen(_chatoExtCours, new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();
@@ -466,7 +472,7 @@ namespace SAE101
             _combatChato = false;
         }
 
-        public void LoadScreenchato_combat()
+        public void LoadScreenChatoCombat()
         {
             MediaPlayer.Stop();
             _screenManager.LoadScreen(_chatoCombat, new FadeTransition(GraphicsDevice, Color.Black));
@@ -478,7 +484,7 @@ namespace SAE101
             _combatChato = true;
         }
 
-        public void LoadScreenchato_couronne()
+        public void LoadScreenChatoCouronne()
         {
             _screenManager.LoadScreen(_chatoIntTrone, new FadeTransition(GraphicsDevice, Color.Black));
             MusiqueChato();

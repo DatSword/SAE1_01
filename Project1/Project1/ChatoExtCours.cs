@@ -162,6 +162,7 @@ namespace SAE101
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
                 _chatoCombat._victoire = false;
+                _myGame._firstVisitCorridor = false;
             }
 
 
@@ -201,7 +202,7 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            if (_rencontre == false)
+            if (_rencontre == false && _myGame._firstVisitCorridor == true)
             {
                 _spriteBatch.Draw(_grand, _positionGrand);
                 _spriteBatch.Draw(_grand2, _positionGrand2);

@@ -102,6 +102,54 @@
 /processorParam:TextureFormat=Color
 /build:anim/char/fren/objects1.png
 
+#begin anim/char/NPC/bleuDemon/NPC_bleu_DEMON.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/NPC/bleuDemon/NPC_bleu_DEMON.png
+
+#begin anim/char/NPC/rougeF/NPC_rouge_F.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/NPC/rougeF/NPC_rouge_F.png
+
+#begin anim/char/NPC/verougeDemon/NPC_verouge_DEMON.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/NPC/verougeDemon/NPC_verouge_DEMON.png
+
+#begin anim/char/NPC/vertElf/NPC_vert_ELF.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:anim/char/NPC/vertElf/NPC_vert_ELF.png
+
 #begin anim/objects/explosion.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -106,11 +106,15 @@ namespace SAE101
             _positionDemonRV = new Vector2(17 * 16 + 8, 10 * 16);
             _animationDemonRV = "idle_left";*/
 
-            _posNPC = new Vector2[6] { new Vector2(3 * 16 + 8, 6 * 16), new Vector2(5 * 16 + 8, 6 * 16), 
-                                       new Vector2(6 * 16 + 8, 3 * 16), new Vector2(4 * 16 + 8, 9 * 16), 
-                                       new Vector2(18 * 16 + 8, 6 * 16), new Vector2(17 * 16 + 8, 10 * 16) };
+            _posNPC = new Vector2[12] { new Vector2(5 * 16 + 8, 7 * 16), new Vector2(9 * 16 + 8, 3 * 16), 
+                                       new Vector2(5 * 16 + 8, 4 * 16), new Vector2(6 * 16 + 8, 3 * 16), 
+                                       new Vector2(15 * 16 + 8, 4 * 16), new Vector2(15 * 16 + 8, 12 * 16),
+                                       new Vector2(5 * 16 + 8, 9 * 16), new Vector2(11 * 16 + 8, 3 * 16),
+                                       new Vector2(5 * 16 + 8, 12 * 16), new Vector2(14 * 16 + 8, 3 * 16),
+                                       new Vector2(15 * 16 + 8, 9 * 16), new Vector2(15 * 16 + 8, 7 * 16)};
 
-            _animNPC = new String[6] { "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left" };
+            _animNPC = new String[12] { "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left",
+                                        "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left"};
 
             _rencontre = false;
 
@@ -138,8 +142,11 @@ namespace SAE101
                                         Content.Load<SpriteSheet>("anim/char/NPC/rougeF/NPC_rouge_F.sf", new JsonContentLoader()), 
                                         Content.Load<SpriteSheet>("anim/char/NPC/vertElf/NPC.sf", new JsonContentLoader())};
 
-            _spriteNPC = new AnimatedSprite[6] { new AnimatedSprite(_NPC[0]), new AnimatedSprite(_NPC[0]),
-                                                 new AnimatedSprite(_NPC[1]), new AnimatedSprite(_NPC[2]),
+            _spriteNPC = new AnimatedSprite[12] { new AnimatedSprite(_NPC[0]), new AnimatedSprite(_NPC[0]),
+                                                 new AnimatedSprite(_NPC[0]), new AnimatedSprite(_NPC[1]),
+                                                 new AnimatedSprite(_NPC[1]), new AnimatedSprite(_NPC[1]),
+                                                 new AnimatedSprite(_NPC[2]), new AnimatedSprite(_NPC[2]),
+                                                 new AnimatedSprite(_NPC[2]), new AnimatedSprite(_NPC[3]),
                                                  new AnimatedSprite(_NPC[3]), new AnimatedSprite(_NPC[3])};
 
             _eventEtDial.SetCollision();

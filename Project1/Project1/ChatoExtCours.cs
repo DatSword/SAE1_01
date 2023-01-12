@@ -141,7 +141,7 @@ namespace SAE101
             {
                 _eventEtDial.FermeBoite();         
                 _eventEtDial._numDial = 0;
-                //_myGame.LoadScreenChatoCombat();
+                _myGame.LoadScreenChatoCombat();
 
                 //contenu du combat
                 _myGame._nbAlly = 2;

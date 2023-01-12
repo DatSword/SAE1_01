@@ -133,8 +133,8 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _rencontre = true;
-                //_eventEtDial.FermeBoite();
-                _myGame.LoadScreenChatoCombat();            
+                _eventEtDial.FermeBoite();
+                //_myGame.LoadScreenChatoCombat();            
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {

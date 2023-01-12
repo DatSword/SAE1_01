@@ -134,14 +134,14 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                _myGame.LoadScreenChatoCombat();
-                _eventEtDial._numDial = 2;
+                //_myGame.LoadScreenChatoCombat();
+               // _eventEtDial._numDial = 2;
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
             {
                 _eventEtDial.FermeBoite();         
-                _eventEtDial._numDial = 0;
-                _myGame.LoadScreenChatoCombat();
+                //_eventEtDial._numDial = 0;
+                //_myGame.LoadScreenChatoCombat();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 2)
             {

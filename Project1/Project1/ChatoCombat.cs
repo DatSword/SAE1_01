@@ -536,32 +536,6 @@ namespace SAE101
                     }
                 }
 
-                if (_chatoCombatContenu._fireBall == true)
-                {
-
-                    _chatoCombatContenu._posProj.X += 2;
-                    _animationProj = "fireball";
-                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[1, 1]].X)
-                    {
-                        _chatoCombatContenu._posProj = new Vector2(-32, -16);
-                        _chatoCombatContenu._fireBall = false;
-                    }
-                }
-
-                if (_chatoCombatContenu._badabim == true)
-                {
-
-                    _chatoCombatContenu._posProj.X += 2;
-                    _animationProj = "badaboom";
-                    if (_chatoCombatContenu._posProj.X == _chatoCombatContenu._posEnemy[_attaquePerso[_playerAttacking, 1]].X)
-                    {
-                        _myGame._pelo.Play();
-                        _chatoCombatContenu._posProj = new Vector2(-32, -16);
-                        _chatoCombatContenu._fireBall = false;
-                        _chatoCombatContenu._posExplosion = _chatoCombatContenu._posEnemy[_attaquePerso[_playerAttacking, 1]];
-                    }
-                }
-
                 if (_chatoCombatContenu._coolDownAnimation == true)
                     _myGame.SetCoolDownC();
                 _chatoCombatContenu._coolDownAnimation = false;
@@ -589,7 +563,7 @@ namespace SAE101
                 if (_myGame._cooldownVerifF == false && _gameOver == true)
                 {
                     _myGame._fin = 2;
-                    _myGame.LoadScreenblack_jack();
+                    _myGame.LoadScreenBlackJack();
                 }
                 else if (_myGame._cooldownVerifF == false && _victoire == true)
                 {
@@ -935,11 +909,11 @@ namespace SAE101
         public void RetourChato()
         {
             if (_myGame._numSalle == 1)
-                _myGame.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchatoIntChambresCouloir();
             else if (_myGame._numSalle == 2)
-                _myGame.LoadScreenchato_ext_cours_interieur();
-            /*if (Game1._numSalle == 3)
-                _myGame.LoadScreenchato_int_salle_courronnement();*/
+                _myGame.LoadScreenchatoExtCoursInterieur();
+            if (_myGame._numSalle == 3)
+                _myGame.LoadScreenChatoCouronne();
         }
     }
 }

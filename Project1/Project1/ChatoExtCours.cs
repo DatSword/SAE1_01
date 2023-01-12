@@ -61,7 +61,7 @@ namespace SAE101
 
             // Lieu Spawn
             _posX = 0;
-            _joueur.Spawnchato_ext_cours_interieur();
+            _joueur.SpawnchatoExtCoursInterieur();
             _myGame._numSalle = 2;
 
             //Scénario
@@ -132,14 +132,14 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                _myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenChatoCombat();
                 _eventEtDial._numDial = 2;
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 1)
             {
                 _eventEtDial.FermeBoite();         
                 _eventEtDial._numDial = 0;
-                _myGame.LoadScreenchato_combat();
+                _myGame.LoadScreenChatoCombat();
             }
             else if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _collisionPassage == false && _eventEtDial._numDial == 2)
             {
@@ -180,12 +180,12 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchatoIntChambresCouloir();
             }
             if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_couronne();
+                _myGame.LoadScreenChatoCouronne();
             }
         }
 

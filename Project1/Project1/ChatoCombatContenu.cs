@@ -92,7 +92,7 @@ namespace SAE101
 
         public void Hero()
         {
-            _stat = new int[4] { 80, 100 ,60, 70 };//50
+            _stat = new int[4] { 80, 40 ,60, 70 };
             _anim = "anim/char/ally/hero/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", /*"Baïtzedeust"*/ "_", "_", "_" };
@@ -105,7 +105,7 @@ namespace SAE101
 
         public void Jon()
         {
-            _stat = new int[4] { 100, 100, 40, 10 };//90
+            _stat = new int[4] { 100, 80, 40, 10 };
             _anim = "anim/char/ally/Jon/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
@@ -127,7 +127,7 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 60, 0, 60, 100 };//20
+            _stat = new int[4] { 60, 30, 60, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "NommCoul";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
@@ -137,7 +137,7 @@ namespace SAE101
 
         public void Mechant()
         {
-            _stat = new int[4] { 70, 0, 50, 50 };//70
+            _stat = new int[4] { 70, 60, 50, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "Magie";
             _specialP = new String[] { "Boule de feu", "Sort d'intimidation", "_", "_" };
@@ -146,7 +146,7 @@ namespace SAE101
 
         public void Pabo()
         {
-            _stat = new int[4] { 70, 0, 50, 90 };//70
+            _stat = new int[4] { 70, 70, 50, 90 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "Cri";
             String[] _specialJ = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de Problèmes", "_" };
@@ -295,6 +295,32 @@ namespace SAE101
                     _animationP1 = false;
                     _animationP2 = true;
                     _animationP3 = true;
+                }
+            }
+
+            if (_fireBall == true)
+            {
+
+                _posProj.X += 2;
+                _chatoCombat._animationProj = "fireball";
+                if (_posProj.X == _posEnemy[_chatoCombat._attaquePerso[1, 1]].X)
+                {
+                    _posProj = new Vector2(-32, -16);
+                    _fireBall = false;
+                }
+            }
+
+            if (_badabim == true)
+            {
+
+                _posProj.X += 2;
+                _chatoCombat._animationProj = "badaboom";
+                if (_posProj.X == _posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]].X)
+                {
+                    _myGame._pelo.Play();
+                    _posProj = new Vector2(-32, -16);
+                    _fireBall = false;
+                    _posExplosion = _posEnemy[_chatoCombat._attaquePerso[_chatoCombat._playerAttacking, 1]];
                 }
             }
         }

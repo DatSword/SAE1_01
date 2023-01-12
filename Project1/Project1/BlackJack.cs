@@ -106,7 +106,7 @@ namespace SAE101
             if (keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
-                Game.LoadScreenchato_int_chambres_nord();              
+                Game.LoadScreenchatoIntChambresNord();              
             }
         }
 

@@ -71,7 +71,7 @@ namespace SAE101
             _animJon = "idle_up";
             _posX = 0;
 
-            _joueur.Spawnchato_int_chambres_nord();
+            _joueur.SpawnChatoIntChambresNord();
 
             _limChambre_x1 = 16 * 16;
             _limChambre_x2 = 24 * 16;
@@ -156,7 +156,7 @@ namespace SAE101
             {
                 _myGame.SetCoolDown();
                 _myGame._fin = 1;
-                _myGame.LoadScreenblack_jack();
+                _myGame.LoadScreenBlackJack();
                 _eventEtDial._choiceTrue = false;
                 _eventEtDial._dialTrue = false;
 
@@ -274,7 +274,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 41))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                Game.LoadScreenchato_int_chambres_couloir();
+                Game.LoadScreenchatoIntChambresCouloir();
             }
         }
 

@@ -39,6 +39,27 @@ namespace SAE101
 
         private bool _rencontre;
 
+        //NPC
+        private AnimatedSprite _demonBleuDroite;
+        private AnimatedSprite _demonBleuBas;
+        private AnimatedSprite _femmeRouge;
+        private AnimatedSprite _elfBas;
+        private AnimatedSprite _elfGauche;
+        private AnimatedSprite _demonRV;
+
+        private Vector2 _positionDemonBleuDroite;
+        private Vector2 _positionDemonBleuBas;
+        private Vector2 _positionFemmeRouge;
+        private Vector2 _positionElfBas;
+        private Vector2 _positionElfGauche;
+        private Vector2 _positionDemonRV;
+
+        private String _animationDemonBleuDroite;
+        private String _animationBas;
+        private String _animationFemmeRouge;
+        private String _animationElfGauche;
+        private String _animationDemonRV;
+
 
         public ChatoIntTrone(Game1 game) : base(game)
         {
@@ -58,8 +79,22 @@ namespace SAE101
 
             _myGame._numSalle = 5;
 
+            ///ennemi
             _positionEnnemiPabo = new Vector2(10 * 16 + 8, 24 * 16);
             _animationPabo = "idle_up";
+
+            ///NPC
+            _positionDemonBleuDroite = new Vector2(3 * 16 + 8, 6 * 16);
+            _animationDemonBleuDroite = "idle_right";
+            _positionDemonBleuBas = new Vector2(5 * 16 + 8, 6 * 16);
+            _animationBas = "idle_down";
+            _positionFemmeRouge = new Vector2(6 * 16 + 8, 3 * 16);
+            _animationFemmeRouge = "idle_right";
+            _positionElfBas = new Vector2(4 * 16 + 8, 9 * 16);
+            _positionElfGauche = new Vector2(18 * 16 + 8, 6 * 16);
+            _animationElfGauche = "idle_left";
+            _positionDemonRV = new Vector2(17 * 16 + 8, 10 * 16);
+            _animationDemonRV = "idle_left";
 
             _rencontre = false;
 
@@ -74,11 +109,30 @@ namespace SAE101
             _myGame._tiledMap = Content.Load<TiledMap>("map/chato/tmx/chato_int_salle_courronnement");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _myGame._tiledMap);
 
+            /// héro
             SpriteSheet spriteSheetA = Content.Load<SpriteSheet>("anim/char/ally/hero/character_movement.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheetA);
 
+            /// ennemi
             SpriteSheet spriteSheetE = Content.Load<SpriteSheet>("anim/char/enemy/pabo/character_movement.sf", new JsonContentLoader());
             _ennemiPabo = new AnimatedSprite(spriteSheetE);
+
+            /// NPC
+            SpriteSheet spriteSheetDB = Content.Load<SpriteSheet>("anim/char/NPC/bleuDemon/NPC.sf", new JsonContentLoader());
+            _demonBleuDroite = new AnimatedSprite(spriteSheetDB);
+            _demonBleuBas = new AnimatedSprite(spriteSheetDB);
+
+            SpriteSheet spriteSheetDVR = Content.Load<SpriteSheet>("anim/char/NPC/verougeDemon/NPC.sf", new JsonContentLoader());
+            _demonRV = new AnimatedSprite(spriteSheetDVR);
+
+            SpriteSheet spriteSheetFR = Content.Load<SpriteSheet>("anim/char/NPC/rougeF/NPC_rouge_F.sf", new JsonContentLoader());
+            _femmeRouge = new AnimatedSprite(spriteSheetFR);
+
+            SpriteSheet spriteSheetELF = Content.Load<SpriteSheet>("anim/char/NPC/vertElf/NPC.sf", new JsonContentLoader());
+            _elfBas = new AnimatedSprite(spriteSheetELF);
+            _elfGauche = new AnimatedSprite(spriteSheetELF);
+
+
 
             _eventEtDial.SetCollision();
 
@@ -99,8 +153,56 @@ namespace SAE101
             _perso.Play(_myGame._animationPlayer);
             _perso.Update(deltaSeconds);
 
+            /// ennemi
             _ennemiPabo.Play(_animationPabo);
             _ennemiPabo.Update(deltaSeconds);
+
+            /// NPC
+            if (_animationDemonBleuDroite == "idle_right")
+                _animationDemonBleuDroite = "main_right";
+            else
+                _animationDemonBleuDroite = "idle_right";
+
+
+            if (_animationBas == "idle_down")
+                _animationDemonBleuDroite = "baisse_down";
+            else
+                _animationDemonBleuDroite = "idle_down";
+
+
+            if (_animationFemmeRouge == "idle_right")
+                _animationFemmeRouge = "baisse_right";
+            else
+                _animationFemmeRouge = "idle_right";
+
+
+            if (_animationElfGauche == "idle_left")
+                _animationElfGauche = "main_left";
+            else
+                _animationElfGauche = "idle_left";
+
+
+            if (_animationDemonRV == "idle_right")
+                _animationDemonRV = "mains_right";
+            else
+                _animationDemonRV = "idle_right";
+
+            _demonBleuDroite.Play(_animationDemonBleuDroite);
+            _demonBleuDroite.Update(deltaSeconds);
+            _demonBleuBas.Play(_animationBas);
+            _demonBleuBas.Update(deltaSeconds);
+            _femmeRouge.Play(_animationFemmeRouge);
+            _femmeRouge.Update(deltaSeconds);
+            _elfBas.Play(_animationBas);
+            _elfBas.Update(deltaSeconds);
+            _elfGauche.Play(_animationElfGauche);
+            _elfGauche.Update(deltaSeconds);
+            _demonRV.Play(_animationDemonRV);
+            _demonRV.Update(deltaSeconds);
+
+
+
+
             _eventEtDial.BoiteDialogues();
 
             //Evenements
@@ -136,7 +238,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 1) && _myGame._positionPerso.Y > 38 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_ext_cours_interieur();
+                _myGame.LoadScreenchato_ext_cours();
             }
         }
 
@@ -152,6 +254,14 @@ namespace SAE101
             
             if (_rencontre == false)
                 _spriteBatch.Draw(_ennemiPabo, _positionEnnemiPabo);
+
+            _spriteBatch.Draw(_demonBleuDroite, _positionDemonBleuDroite);
+            _spriteBatch.Draw(_demonBleuBas, _positionDemonBleuBas);
+            _spriteBatch.Draw(_femmeRouge, _positionFemmeRouge);
+            _spriteBatch.Draw(_elfBas, _positionElfBas);
+            _spriteBatch.Draw(_elfGauche, _positionElfGauche);
+            _spriteBatch.Draw(_demonRV, _positionDemonRV);
+
 
             _spriteBatch.End();
 

@@ -155,12 +155,12 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 26))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_chambres_nord();
+                _myGame.LoadScreenchato_int_chambres();
             }        
             if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 30))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_ext_cours_interieur();
+                _myGame.LoadScreenchato_ext_cours();
                 _chatoIntChambres._posX = 0;
             }
         }

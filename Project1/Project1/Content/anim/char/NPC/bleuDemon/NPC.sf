@@ -1,0 +1,64 @@
+{
+  "textureAtlas": {
+    "texture": "NPC_bleu_DEMON.png",
+    "regionWidth": 16,
+    "regionHeight": 32
+  },
+  "cycles": {
+    "idle_right": {
+      "frames": [0],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "baisse_right": {
+      "frames": [1],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "main_right": {
+      "frames": [2],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "mains_right": {
+      "frames": [3],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idle_down": {
+      "frames": [4],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "baisse_down": {
+      "frames": [5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idle_left": {
+      "frames": [6],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "baisse_left": {
+      "frames": [7],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "main_left": {
+      "frames": [8],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "mains_left": {
+      "frames": [9],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "animation10": {
+      "frames": [],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}

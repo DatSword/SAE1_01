@@ -272,7 +272,7 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 41))
             {
                 _posX = (int)_myGame._positionPerso.X;
-                Game.LoadScreenchato_int_chambres_couloir();
+                Game.LoadScreenchato_int_couloir();
             }
         }
 

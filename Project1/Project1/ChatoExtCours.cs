@@ -183,12 +183,12 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 43) && _myGame._positionPerso.Y > 49 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchato_int_couloir();
             }
             if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 43) && _myGame._positionPerso.Y < 12 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
-                _myGame.LoadScreenchato_couronne();
+                _myGame.LoadScreenchato_int_couronne();
             }
         }
 

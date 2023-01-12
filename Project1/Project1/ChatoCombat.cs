@@ -918,9 +918,9 @@ namespace SAE101
         public void RetourChato()
         {
             if (_myGame._numSalle == 1)
-                _myGame.LoadScreenchato_int_chambres_couloir();
+                _myGame.LoadScreenchato_int_couloir();
             else if (_myGame._numEcran == 2)
-                _myGame.LoadScreenchato_ext_cours_interieur();
+                _myGame.LoadScreenchato_ext_cours();
             /*if (Game1._numSalle == 3)
                 _myGame.LoadScreenchato_int_salle_courronnement();*/
         }

@@ -101,6 +101,7 @@ namespace SAE101
                 _fin = true;
             }
             else if (_myGame._fin == 3)
+            {
                 _text = "Et non! Il semble donc que l'histoire n'est pas fini! On dirait\n" +
                         "même qu'elle vient tout juste de commencer! Que va t-il\n" +
                         "arriver à nos personnages? Qui est ce mystérieux jeune homme\n" +

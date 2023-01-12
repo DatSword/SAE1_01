@@ -138,11 +138,11 @@ namespace SAE101
                 _myGame.LoadScreenChatoCombat();
 
                 //contenu du combat
-                _chatoCombatContenu._nbAlly = 2;
-                _chatoCombatContenu._ordreJoueur = new String[] { "Hero", "Jon"};
+                _myGame._nbAlly = 2;
+                _myGame._ordreJoueur = new String[] { "Hero", "Jon"};
 
-                _chatoCombatContenu._nbEnnemy = 3;
-                _chatoCombatContenu._ordreEnnemi = new String[] {"Grand","Grand","Grand"};
+                _myGame._nbEnemy = 3;
+                _myGame._ordreEnnemi = new String[] {"Mechant","Mechant","Mechant"};
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {

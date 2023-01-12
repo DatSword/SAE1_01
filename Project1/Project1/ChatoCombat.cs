@@ -919,7 +919,7 @@ namespace SAE101
         {
             if (_myGame._numSalle == 1)
                 _myGame.LoadScreenchato_int_chambres_couloir();
-            else if (_myGame._numEcran == 2)
+            else if (_myGame._numSalle == 2)
                 _myGame.LoadScreenchato_ext_cours_interieur();
             /*if (Game1._numSalle == 3)
                 _myGame.LoadScreenchato_int_salle_courronnement();*/

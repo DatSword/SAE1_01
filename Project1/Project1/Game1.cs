@@ -109,6 +109,7 @@ namespace SAE101
 
         //event
         public bool _firstVisitBedroom;
+        public bool _firstVisitCorridor;
         public int _fin;
 
         //pour évènements et déplacementss
@@ -214,6 +215,7 @@ namespace SAE101
 
         //event
         _firstVisitBedroom = true;
+        _firstVisitCorridor = true;
             _fin = 0;
             _animationPlayer = "idle_down";
             

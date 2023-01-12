@@ -131,11 +131,10 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _rencontre = true;
-                _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenchato_combat();
-                _eventEtDial._numDial = 3;
+                //_eventEtDial.FermeBoite();
+                _myGame.LoadScreenchato_combat();            
             }
-            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2)
+            else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {
                 _animationEnnemi = "idle_left";
                 _animationJon = "idle_right";
@@ -144,9 +143,11 @@ namespace SAE101
             }
             else if (_chatoCombat._victoire == true)
             {
+                _myGame._firstVisitCorridor = false;
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
                 _chatoCombat._victoire = false;
+                _eventEtDial._numDial = 3;
             }
 
 
@@ -174,9 +175,11 @@ namespace SAE101
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _myGame._positionPerso);
-            if (_rencontre == false)
+            if (_rencontre == false && _myGame._firstVisitCorridor == true)
                 _spriteBatch.Draw(_ennemi, _positionEnnemi);
-            _spriteBatch.Draw(_Jon, _positionJon);
+            if (_myGame._firstVisitCorridor == true)
+                _spriteBatch.Draw(_Jon, _positionJon);
+
 
             _spriteBatch.End();
 

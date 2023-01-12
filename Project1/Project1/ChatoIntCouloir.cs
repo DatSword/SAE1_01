@@ -21,6 +21,7 @@ namespace SAE101
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoCombat _chatoCombat;
+        private Camera _camera;
 
         //map
         private new Game1 Game => (Game1)base.Game;
@@ -61,6 +62,7 @@ namespace SAE101
             _joueur = _myGame._joueur;
             _chatoIntChambres = _myGame._chatoIntChambres;
             _chatoCombat = _myGame._chatoCombat;
+            _camera = _myGame._camera;
 
             // Lieu Spawn
             _posX = 0;
@@ -112,7 +114,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
 
 
             _tiledMapRenderer.Update(gameTime);
@@ -170,7 +172,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
@@ -183,7 +185,7 @@ namespace SAE101
 
             _spriteBatch.End();
 
-            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _camera._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (_eventEtDial._dialTrue == true)
             {

@@ -15,6 +15,7 @@ namespace SAE101
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
         private Game1 _myGame;
+        private Camera _camera;
 
         // texture menu
         private Texture2D _titleS;
@@ -35,6 +36,8 @@ namespace SAE101
 
         public override void Initialize()
         {
+            _camera = _myGame._camera;
+
             lesBoutons = new Rectangle[3];
             lesBoutons[0] = new Rectangle(_myGame.xE / 2 - 210 / 2, _myGame.yE / 3 + 63, 210, 63);
             lesBoutons[1] = new Rectangle(_myGame.xE / 2 - 210 / 2, (int)(_myGame.yE / 3 * 1.5 + 63), 210, 63);
@@ -110,7 +113,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.LightGray);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             
             _spriteBatch.Draw(_titleS, new Vector2(0, 0), Color.White);

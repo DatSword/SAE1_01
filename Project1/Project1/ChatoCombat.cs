@@ -33,6 +33,7 @@ namespace SAE101
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private ChatoCombatContenu _chatoCombatContenu;
+        private Camera _camera;
 
 
         //Constantes position pour animation;
@@ -142,6 +143,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _chatoCombatContenu = _myGame._chatoCombatContenu;
+            _camera = _myGame._camera;
 
             _positionCombat = new Vector2(0, 248);
             _positionCursor = new Vector2(16,300);
@@ -335,7 +337,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
 
             //curseurs
             if (_chatoCombatContenu._animationEnCours == false && _gameOver == false && _victoire == false)
@@ -587,7 +589,7 @@ namespace SAE101
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
 
             _spriteBatch.Begin(transformMatrix: transformMatrix);
             _spriteBatch.Draw(_chatoCombatDecor, new Vector2(0, -75), Color.White);

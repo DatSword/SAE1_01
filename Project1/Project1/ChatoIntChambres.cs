@@ -24,6 +24,7 @@ namespace SAE101
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private JoueurSpawn _joueur;
+        private Camera _camera;
 
         //sprites
         private AnimatedSprite _perso;
@@ -43,10 +44,10 @@ namespace SAE101
         private String[] _animationChest;
 
         // camera
-        public Vector2 _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
-        public Vector2 _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
-        public Vector2 _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
-        public Vector2 _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
+        public Vector2 _chambreCentre1;
+        public Vector2 _chambreCentreUn;
+        public Vector2 _chambreCentre2;
+        public Vector2 _chambreCentreDeux;
 
 
         public int _limChambre_x1;
@@ -65,6 +66,7 @@ namespace SAE101
         {
             _eventEtDial = _myGame._eventEtDial;
             _joueur = _myGame._joueur;
+            _camera = _myGame._camera;
 
             // Lieu Spawn perso
             _posJon = new Vector2(-10 * 16 + 8, -10 * 16 + 8);
@@ -79,6 +81,11 @@ namespace SAE101
             _limChambre_y2 = 8 * 16;
             _limChambre_Gauche = 8 * 16;
             _limChambre_Droite = 32 * 16;
+
+            _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
+            _chambreCentreUn = new Vector2((float)12.6 * 16, 7 * 16);
+            _chambreCentre2 = new Vector2((float)28.6 * 16, 7 * 16);
+            _chambreCentreDeux = new Vector2((float)36.6 * 16, 7 * 16);
 
 
             // Lieu Spawn objects
@@ -132,7 +139,7 @@ namespace SAE101
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Camera
-            _myGame._cameraMap.LookAt(_myGame._cameraPosition);
+            _camera._cameraMap.LookAt(_camera._cameraPosition);
 
             _tiledMapRenderer.Update(gameTime);
             _eventEtDial.BoiteDialogues();
@@ -283,7 +290,7 @@ namespace SAE101
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            var transformMatrix = _myGame._cameraMap.GetViewMatrix();
+            var transformMatrix = _camera._cameraMap.GetViewMatrix();
             
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
@@ -298,7 +305,7 @@ namespace SAE101
 
             _spriteBatch.End();
 
-            var transformMatrixDial = _myGame._cameraDial.GetViewMatrix();
+            var transformMatrixDial = _camera._cameraDial.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrixDial);
             if (_eventEtDial._dialTrue == true)
             {

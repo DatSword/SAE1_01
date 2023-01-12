@@ -94,8 +94,8 @@ namespace SAE101
         public void Jon2()
         {
             _myGame.SetCoolDown();
-            _text = "J't'attend dans le couloir donc récupère vite tes affaires\n" +
-                    ", ou j'vais croire que tu as décidé de prolonger ta nuit!";
+            _text = "J't'attend dans le couloir donc récupère vite tes affaires,\n" +
+                    "ou j'vais croire que tu as décidé de prolonger ta nuit!";
             _nom = "Jon";
             _myGame._firstVisitBedroom = false;
         }
@@ -119,6 +119,16 @@ namespace SAE101
                     "(L'attaque de tout le monde crêve le plafond !!!)";
             _nom = "";
             _myGame._boom = true;
+        }
+
+        public void Chest1()
+        {
+            _myGame.SetCoolDown();
+            _dialTrue = true;
+            _text = "Vous obtenez de la Akdov! ...Ah?\n" +
+                    "On dirait que la boisson est périmé, dommage...";
+            _nom = "";
+
         }
 
         //Couloir
@@ -159,18 +169,22 @@ namespace SAE101
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
-            _text = "Mais qu'est-ce qu'tu fait, gamin? La salle de\n" +
+            _text = "Mais qu'est-ce qu'tu fait, gamin? La salle du\n" +
                     "couronnement c'est pas d'ce coté, c'est au nord!";
             _nom = "Jon";
-        } 
+        }
 
-        public void Chest1()
+
+        //Couronnement
+
+        public void Jon5()
         {
             _myGame.SetCoolDown();
             _dialTrue = true;
-            _text = "Vous obtenez de la Akdov!;";
-            _nom = "";
+            _text = "Eh bien, celui-ci m'a l'air plus coriace que les autres,\n" +
+                    "restons sur nos gardes gamin!\n";
 
+            _nom = "Jon";
         }
 
         public void FermeBoite()

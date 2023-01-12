@@ -118,6 +118,7 @@ namespace SAE101
 
         public void SpawnChatoIntCouronne()
         {
+
             if (_myGame._combatFini == true)
             {
                 _myGame._positionPerso = ChatoCombatContenu._lastPosition;

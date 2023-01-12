@@ -37,7 +37,7 @@ namespace SAE101
 
         public bool _animationAttackA;
         public bool _animationAttackE;
-        public bool _animationZeweurld;
+        public bool _animationZeuwerld;
         public bool _animationBouleFeu;
         public bool _animationSpe;
         public bool _animationEnCours;
@@ -117,7 +117,7 @@ namespace SAE101
 
         public void Grand()
         {
-            _stat = new int[4] { 100, 60, 30, 100 };
+            _stat = new int[4] { 70, 60, 30, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
             _special = "";
             _specialP = new String[] { "", "", "", "" };
@@ -127,7 +127,7 @@ namespace SAE101
 
         public void Mechant()
         {
-            _stat = new int[4] { 130, 70, 20, 50 };
+            _stat = new int[4] { 100, 70, 20, 50 };
             _anim = "anim/char/enemy/mechant/character_movement.sf";
             _special = "";
             _specialP = new String[] { "", "", "", "" };
@@ -136,7 +136,7 @@ namespace SAE101
 
         public void Pabo()
         {
-            _stat = new int[4] { 170, 80, 40, 80 };
+            _stat = new int[4] { 140, 80, 40, 80 };
             _anim = "anim/char/enemy/pabo/character_movement.sf";
             _special = "";
             String[] _specialJ = new String[] { "", "", "", "" };
@@ -239,7 +239,7 @@ namespace SAE101
             {
                 if (_animationP1 == true)
                 {
-                    if (_animationZeweurld == true)
+                    if (_animationZeuwerld == true)
                     {
                         _animationA[_allyAnime] = "attack_right3";
                         _myGame._wbeg.Play();
@@ -272,7 +272,7 @@ namespace SAE101
                 {
                     _animationA[_allyAnime] = "move_left";
                     _posAllie[_allyAnime].X -= 2;
-                    if (_animationZeweurld == true)
+                    if (_animationZeuwerld == true)
                         whosPlaying = _myGame._nbEnemy + _myGame._nbAlly;
                 }
                 else if (_animationP1 == false && _animationP2 == false && _myGame._cooldownVerifC == false && _animationP3 == false)

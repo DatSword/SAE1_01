@@ -62,10 +62,9 @@ namespace SAE101
             // Lieu Spawn
             _posX = 0;
             _myGame._numSalle = 3;
+            _eventEtDial._numDial = 2;
 
             _joueur.SpawnChatoIntCouronne();
-
-            _myGame._numSalle = 5;
 
             // ennemi
             _positionEnnemiPabo = new Vector2(10 * 16 + 8, 24 * 16);
@@ -80,9 +79,14 @@ namespace SAE101
                                        new Vector2(15 * 16 + 8, 9 * 16), new Vector2(15 * 16 + 8, 7 * 16)};
 
             _animNPC = new String[12] { "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left",
-                                        "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left"};
-
+                                        "main_right", "baisse_down", "baisse_right", "baisse_down", "main_left", "baisse_left"};          
+                
             _rencontre = false;
+
+            if (_chatoCombat._victoire == true)
+            {
+                _myGame.Victoire();
+            }
 
             base.Initialize();
         }
@@ -151,21 +155,29 @@ namespace SAE101
             //Evenements
             // Battle final (mettre la bonne replique à ennemi)
 
-            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true && _eventEtDial._numDial == 1)
             {
                 _rencontre = true;
-                _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenChatoCombat();
+                //_eventEtDial.FermeBoite();
+                _myGame.LoadScreenChatoCombat();
+
+                //contenu du combat
+                _myGame._nbAlly = 2;
+                _myGame._ordreJoueur = new String[] { "Hero", "Jon" };
+                _chatoCombat._premierCombat = false;
+                _myGame._nbEnemy = 3;
+                _myGame._ordreEnnemi = new String[] { "Grand", "Mechant", "Pabo"};
             }
-            else if ( _myGame._positionPerso.Y <= 31 * 16 && _myGame._cooldownVerif == false && _rencontre == false)
+            else if ( _myGame._positionPerso.Y <= 31 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2)
             {
                 _animationPabo = "idle_down";
-                _eventEtDial.Ninja();
+                _eventEtDial.Jon5();
+                _eventEtDial._numDial = 1;
             }
             else if (_chatoCombat._victoire == true)
             {
                 _rencontre = true;
-                _eventEtDial.FermeBoite();
+                _eventEtDial._dialTrue = false;
             }
 
             // fin 

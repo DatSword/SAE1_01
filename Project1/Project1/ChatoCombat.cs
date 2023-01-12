@@ -82,7 +82,6 @@ namespace SAE101
 
         //Tours
         private bool _sousMenuSpecial;
-        private bool _sousMenuObjects;
         private bool _selectionEnn;
         private int _action;
         private bool _tourFini;
@@ -153,7 +152,6 @@ namespace SAE101
 
             _selectionEnn = false;
             _sousMenuSpecial = false;
-            _sousMenuObjects = false;
             
             _action = 0;
             _ordrefinal = 0;
@@ -164,7 +162,7 @@ namespace SAE101
 
             _chatoCombatContenu._animationAttackA = false;
             _chatoCombatContenu._animationAttackE = false;
-            _chatoCombatContenu._animationZeweurld = false;
+            _chatoCombatContenu._animationZeuwerld = false;
             _chatoCombatContenu._animationBouleFeu = false;
             _chatoCombatContenu._animationEnCours = false;
             _chatoCombatContenu._animationSpe = false;
@@ -424,7 +422,6 @@ namespace SAE101
                 if (keyboardState.IsKeyDown(Keys.W) && _choixCursor == 3 && _myGame._cooldownVerif == false && _sousMenuSpecial == false)
                 {
                     Fuite();
-                    _sousMenuObjects = true;
                     _myGame.SetCoolDown();
                 }
 
@@ -467,32 +464,13 @@ namespace SAE101
                     BastonA(0);
             }
 
-            //Fin du tour (à mettre juste avant choix action sinon plantage)
-            if (_myGame._nbAlly == _action && _gameOver == false)
-            {
-                _tourFini = true;
-                Vitesse();
-                _action = 0;
-                _tourFini = false;
-            }
-
-            //Perso choisissant son action
-            if (_gameOver == false)
-            {
-                if (_ordreA[_action] == 0)
-                    _chatoCombatContenu.Hein();
-                else if (_ordreA[_action] == 1)
-                    _chatoCombatContenu.Hero();
-                else if (_ordreA[_action] == 2)
-                    _chatoCombatContenu.Jon();
-                else if (_ordreA[_action] == 3)
-                    _chatoCombatContenu.Ben();
-            }
-            
-
             //Si tel Perso est mort, alors pas d'action
             if (_chatoCombatContenu._animationA[_action] == "ded")
+            {
                 _action++;
+
+            }
+                
             //Console.WriteLine(_action);
 
             //Qui est suivi par le curseur
@@ -541,7 +519,7 @@ namespace SAE101
                     _chatoCombatContenu._animationSpe = false;
                     _chatoCombatContenu._animationAttackA = false;
                     _chatoCombatContenu._animationAttackE = false;
-                    _chatoCombatContenu._animationZeweurld = false;
+                    _chatoCombatContenu._animationZeuwerld = false;
                     _chatoCombatContenu._animationBouleFeu = false;
                     EnnemiMort();
                     AllieMort();
@@ -596,6 +574,29 @@ namespace SAE101
                 {
                     RetourChato();
                 }
+
+                //Fin du tour (à mettre juste avant choix action sinon plantage)
+                if (_myGame._nbAlly == _action && _gameOver == false)
+                {
+                    _tourFini = true;
+                    Vitesse();
+                    _action = 0;
+                    _tourFini = false;
+                }
+
+                //Perso choisissant son action
+                if (_gameOver == false)
+                {
+                    if (_ordreA[_action] == 0)
+                        _chatoCombatContenu.Hein();
+                    else if (_ordreA[_action] == 1)
+                        _chatoCombatContenu.Hero();
+                    else if (_ordreA[_action] == 2)
+                        _chatoCombatContenu.Jon();
+                    else if (_ordreA[_action] == 3)
+                        _chatoCombatContenu.Ben();
+                }
+
             }
         }
 
@@ -616,7 +617,8 @@ namespace SAE101
             _spriteBatch.DrawString(_fontTest, _choix[1], _posText[1], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[2], _posText[2], Color.White);
             _spriteBatch.DrawString(_fontTest, _choix[3], _posText[3], Color.White);
-            _spriteBatch.DrawString(_fontTest, _vie[_action], _posVie, Color.White);
+            if (_gameOver == false)
+                _spriteBatch.DrawString(_fontTest, _vie[_action], _posVie, Color.White);
             _spriteBatch.DrawString(_fontTest, _desc[_choixCursor], _posText[4], Color.White);
             for (int i = 0; i < _myGame._nbAlly; i++)
             {
@@ -794,7 +796,7 @@ namespace SAE101
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
                 {
                     _chatoCombatContenu._animationSpe = true;
-                    _chatoCombatContenu._animationZeweurld = true;
+                    _chatoCombatContenu._animationZeuwerld = true;
                     _chatoCombatContenu._animationP1 = false;
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
@@ -952,8 +954,8 @@ namespace SAE101
                 _myGame._death.Play();
                 for (int j = 0; j < _myGame._nbAlly; j++)
                 {
-                    _desc[0] = "Anihilé";
-                    _desc[1] = "Anihilé";
+                    _desc[0] = "Anihilé...";
+                    _desc[1] = "Anihilé...";
                 }
             }
         }
@@ -964,7 +966,7 @@ namespace SAE101
                 _myGame.LoadScreenchatoIntChambresCouloir();
             else if (_myGame._numSalle == 2)
                 _myGame.LoadScreenchatoExtCoursInterieur();
-            if (_myGame._numSalle == 3)
+            else if (_myGame._numSalle == 3)
                 _myGame.LoadScreenChatoCouronne();
         }
     }

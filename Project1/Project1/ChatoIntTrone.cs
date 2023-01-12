@@ -63,7 +63,7 @@ namespace SAE101
             _posX = 0;
             _myGame._numSalle = 3;
 
-            _joueur.SpawnchatoIntCouronne();
+            _joueur.SpawnChatoIntCouronne();
 
             _myGame._numSalle = 5;
 

@@ -153,15 +153,15 @@ namespace SAE101
         protected override void Initialize()
         {
             // Definition écran
-            xE = _xEcran;
-            yE = _yEcran;
-
-            chan = 1;
-
             _graphics.PreferredBackBufferWidth = _xEcran;
             _graphics.PreferredBackBufferHeight = _yEcran;
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _graphics.ApplyChanges();
+
+            xE = _xEcran;
+            yE = _yEcran;
+
+            chan = 1;
 
             // variables écran
             _blackJack = new BlackJack(this);
@@ -279,6 +279,7 @@ namespace SAE101
                 Exit();
 
             //Console.WriteLine(_chestTrue[0] + " " + _chestTrue[1]);
+
             // Test clic de souris + Etat 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)

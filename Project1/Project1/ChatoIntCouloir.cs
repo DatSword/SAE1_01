@@ -32,7 +32,6 @@ namespace SAE101
 
         //sprite
         private AnimatedSprite _perso;
-        public int _vitessePerso;
         public int _posX;
 
         private AnimatedSprite _ennemi;
@@ -72,7 +71,6 @@ namespace SAE101
             _limChambre_x2 = 25 * 16;
             _limCouloir = 6 * 16;
 
-            _vitessePerso = 100;
             _myGame._numSalle = 1;
 
             _positionEnnemi = new Vector2(26 * 16 + 8, 9 * 16 + 8);

@@ -131,14 +131,14 @@ namespace SAE101
             {
                 _rencontre = true;
                 _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenChatoCombat();
+                _myGame.LoadScreenChatoCombat();
 
                 //contenu du combat
                 _myGame._nbAlly = 2;
                 _myGame._ordreJoueur = new String[] { "Hero", "Jon"};
-
+                _chatoCombat._premierCombat = true;
                 _myGame._nbEnemy = 3;
-                _myGame._ordreEnnemi = new String[] {"Mechant","Mechant","Mechant"};
+                _myGame._ordreEnnemi = new String[] {"Mechant","Grand","Pabo"};
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {

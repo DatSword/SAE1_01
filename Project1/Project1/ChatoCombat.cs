@@ -456,7 +456,7 @@ namespace SAE101
             }
 
             //Fin du tour (à mettre juste avant choix action sinon plantage)
-            if (_chatoCombatContenu._nbAlly == _action)
+            if (_chatoCombatContenu._nbAlly == _action && _gameOver == false)
             {
                 _tourFini = true;
                 Vitesse();
@@ -465,14 +465,18 @@ namespace SAE101
             }
 
             //Perso choisissant son action
-            if (_ordreA[_action] == 0)
-                _chatoCombatContenu.Hein();
-            else if (_ordreA[_action] == 1)
-                _chatoCombatContenu.Hero();
-            else if (_ordreA[_action] == 2)
-                _chatoCombatContenu.Jon();
-            else if (_ordreA[_action] == 3)
-                _chatoCombatContenu.Ben();
+            if (_gameOver == false)
+            {
+                if (_ordreA[_action] == 0)
+                    _chatoCombatContenu.Hein();
+                else if (_ordreA[_action] == 1)
+                    _chatoCombatContenu.Hero();
+                else if (_ordreA[_action] == 2)
+                    _chatoCombatContenu.Jon();
+                else if (_ordreA[_action] == 3)
+                    _chatoCombatContenu.Ben();
+            }
+            
 
             //Si tel Perso est mort, alors pas d'action
             if (_chatoCombatContenu._animationA[_action] == "ded")
@@ -570,6 +574,7 @@ namespace SAE101
                 {
                     _myGame._fin = 2;
                     _myGame.LoadScreenBlackJack();
+                    _eventEtDial._dialTrue = false;
                 }
                 else if (_myGame._cooldownVerifF == false && _victoire == true)
                 {
@@ -903,6 +908,7 @@ namespace SAE101
             {
                 _chatoCombatContenu.kk = 0;
                 _gameOver = true;
+                _myGame._combatFini = true;
                 _myGame.SetCoolDownF();
                 _myGame._death.Play();
                 for (int j = 0; j < _chatoCombatContenu._nbAlly; j++)

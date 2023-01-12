@@ -17,8 +17,8 @@ namespace SAE101
             _chatoCombat = _myGame._chatoCombat;
         }
 
-        public int _nbAlly;
-        public int _nbEnnemy;
+        public int _nbAlly = 0;
+        public int _nbEnnemy = 0;
 
         public String _special;
         public String _anim;
@@ -73,11 +73,11 @@ namespace SAE101
         {
             _lastPosition = _myGame._positionPerso;
 
-            _nbAlly = 2;
+            /*_nbAlly = 2;
             _ordreJoueur = new String[] { "Hero", "Jon" , "Hein", "Ben"};
 
             _nbEnnemy = 3;
-            _ordreEnnemi = new String[] {"Grand","Mechant","Pabo"};
+            _ordreEnnemi = new String[] {"Grand","Mechant","Pabo"};*/
         }
 
         //Personnages jouables
@@ -129,7 +129,7 @@ namespace SAE101
         {
             _stat = new int[4] { 60, 30, 60, 100 };
             _anim = "anim/char/enemy/grand/character_movement.sf";
-            _special = "NommCoul";
+            _special = "";
             _specialP = new String[] { "Zeuwerld", "Baïtzedeust", "_", "_" };
             _descP = new String[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" };
 

@@ -21,6 +21,7 @@ namespace SAE101
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoCombat _chatoCombat;
+        private ChatoCombatContenu _chatoCombatContenu;
         private Camera _camera;
 
         //map
@@ -133,8 +134,15 @@ namespace SAE101
             if (_keyboardState.IsKeyDown(Keys.W) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _rencontre = true;
-                _eventEtDial.FermeBoite();
-                //_myGame.LoadScreenChatoCombat();            
+                //_eventEtDial.FermeBoite();
+                _myGame.LoadScreenChatoCombat();
+
+                //contenu du combat
+                _chatoCombatContenu._nbAlly = 2;
+                _chatoCombatContenu._ordreJoueur = new String[] { "Hero", "Jon"};
+
+                _chatoCombatContenu._nbEnnemy = 3;
+                _chatoCombatContenu._ordreEnnemi = new String[] {"Grand","Grand","Grand"};
             }
             else if (_myGame._positionPerso.X >= 19 * 16 && _myGame._cooldownVerif == false && _rencontre == false && _eventEtDial._numDial == 2 && _myGame._firstVisitCorridor == true)
             {

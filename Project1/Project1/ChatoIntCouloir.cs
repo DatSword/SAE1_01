@@ -153,12 +153,12 @@ namespace SAE101
 
 
             //Changement de map          
-            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 26))
+            if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 26))
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_int_chambres_nord();
             }        
-            if (_keyboardState.IsKeyDown(Keys.Up) && (EventEtDial.ud == 30))
+            if (_keyboardState.IsKeyDown(Keys.Up) && (_eventEtDial.ud == 30))
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_ext_cours_interieur();

@@ -133,7 +133,7 @@ namespace SAE101
 
 
             //changements maps
-            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 1) && _myGame._positionPerso.Y > 38 * 16)
+            if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 1) && _myGame._positionPerso.Y > 38 * 16)
             {
                 _posX = (int)_myGame._positionPerso.X;
                 _myGame.LoadScreenchato_ext_cours_interieur();

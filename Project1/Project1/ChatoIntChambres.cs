@@ -55,6 +55,7 @@ namespace SAE101
         public int _limChambre_y2;
         public int _limChambre_Gauche;
         public int _limChambre_Droite;
+
         public ChatoIntChambres(Game1 game) : base(game) 
         {
             _myGame = game;
@@ -141,7 +142,7 @@ namespace SAE101
 
             //Choix 
 
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
+            if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.l == 72) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == false)
             {
                 _eventEtDial.Fin1();
                 _myGame._fin = 1;
@@ -177,17 +178,17 @@ namespace SAE101
             else
                 animationFren = "hi";
 
-            if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
+            if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.u == 70) && _myGame._cooldownVerif == false && _eventEtDial._dialTrue == true)
             {
                 _eventEtDial.FermeBoite();
             }
-            else if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
+            else if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.u == 70) && animationFren == "idle" && _myGame._cooldownVerif == false
                 && _myGame._positionPerso.X < _limChambre_Droite)
             {
                 _eventEtDial.Fren1();
                 _frenTrue = true;
             }        
-            else if (_keyboardState.IsKeyDown(Keys.W) && (EventEtDial.u == 70) && animationFren == "hi" && _myGame._cooldownVerif == false)
+            else if (_keyboardState.IsKeyDown(Keys.W) && (_eventEtDial.u == 70) && animationFren == "hi" && _myGame._cooldownVerif == false)
             {
                 _eventEtDial.Fren2();
                 _frenTrue = false;
@@ -195,16 +196,17 @@ namespace SAE101
             _fren.Play(animationFren);
             _fren.Update(deltaSeconds);
 
+
             //Coffres
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest[1] == "close" && _myGame._positionPerso.X > 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial.u == 71 && _animationChest[1] == "close" && _myGame._positionPerso.X > 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[1] = true;
                 _eventEtDial.Chest1();
                 _eventEtDial._numDial = 1;
             }
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest[0] == "close" && _myGame._positionPerso.X < 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && _eventEtDial.u == 71 && _animationChest[0] == "close" && _myGame._positionPerso.X < 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[0] = true;
                 _eventEtDial._numDial = 1;
@@ -269,7 +271,7 @@ namespace SAE101
             }
 
             //changement de map
-            if (_keyboardState.IsKeyDown(Keys.Down) && (EventEtDial.dd == 41))
+            if (_keyboardState.IsKeyDown(Keys.Down) && (_eventEtDial.dd == 41))
             {
                 _posX = (int)_myGame._positionPerso.X;
                 Game.LoadScreenchato_int_chambres_couloir();

@@ -23,10 +23,17 @@ namespace SAE101
 {
     public class ChatoCombat : GameScreen
     {
+        //Fond d'écran
+        private new Game1 Game => (Game1)base.Game;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Texture2D _chatoCombatDecor;
+
         // défini dans Game1
         private Game1 _myGame;
         private EventEtDial _eventEtDial;
         private ChatoCombatContenu _chatoCombatContenu;
+
 
         //Constantes position pour animation;
         private const int POS_ALLIEX0 = 145;
@@ -47,11 +54,6 @@ namespace SAE101
         private int[] _ordretour;
         private int[] _ordretour2;
 
-        //Fond d'écran
-        private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Texture2D _chatoCombatDecor;
 
         //Menu
         private Texture2D _combatBox;
@@ -96,8 +98,8 @@ namespace SAE101
         public int[] _vitAllie;
 
         //Attaque Personnages
-        public static int[,] _attaquePerso;
-        public static int _playerAttacking;
+        public int[,] _attaquePerso;
+        public int _playerAttacking;
 
         //Ennemies
         private AnimatedSprite[] _ennemy;      

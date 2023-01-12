@@ -40,7 +40,7 @@ namespace SAE101
 
         private AnimatedSprite[] _chest;
         private Vector2[] _positionChest;
-        private String _animationChest;
+        private String[] _animationChest;
 
         // camera
         public Vector2 _chambreCentre1 = new Vector2((float)4.6 * 16, 7 * 16);
@@ -86,6 +86,7 @@ namespace SAE101
 
             _chest = new AnimatedSprite[2];
 
+            _animationChest = new string[2];
             _positionChest = new Vector2[2];
             _positionChest[0] = new Vector2(2 * 16 + 8, 4 * 16 + 8);
             _positionChest[1] = new Vector2(38 * 16 + 8, 4 * 16 + 8);
@@ -196,14 +197,14 @@ namespace SAE101
 
             //Coffres
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X > 20 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest[1] == "close" && _myGame._positionPerso.X > 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[1] = true;
                 _eventEtDial.Chest1();
                 _eventEtDial._numDial = 1;
             }
 
-            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest == "close" && _myGame._positionPerso.X < 20 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
+            if (_keyboardState.IsKeyDown(Keys.W) && EventEtDial.u == 71 && _animationChest[0] == "close" && _myGame._positionPerso.X < 10 * 16 && _myGame._cooldownVerif == false && _eventEtDial._numDial == 2)
             {
                 _myGame._chestTrue[0] = true;
                 _eventEtDial._numDial = 1;
@@ -219,14 +220,14 @@ namespace SAE101
             {
 
                 if (_myGame._chestTrue[i] == false)
-                    _animationChest = "close";
+                    _animationChest[i] = "close";
                 else
-                    _animationChest = "open";
+                    _animationChest[i] = "open";
             }
 
             for (int i = 0; i < _chest.Length; i++)
             {
-                _chest[i].Play(_animationChest);
+                _chest[i].Play(_animationChest[i]);
                 _chest[i].Update(deltaSeconds);
             }
             

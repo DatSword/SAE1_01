@@ -94,6 +94,9 @@ namespace SAE101
         public float _cooldown;
         public bool _cooldownVerif;
         public float deltaSeconds;
+        //cooldown silencieux 0.2s
+        public float _cooldownS;
+        public bool _cooldownVerifS;
         //Combat cooldown 0.5s
         public float _cooldownC;
         public bool _cooldownVerifC;
@@ -408,54 +411,54 @@ namespace SAE101
 
             if(_numEcran == 0)
             {
-                if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.Up) && _cooldownVerifS == false)
                 {
-                    SetCoolDown();
+                    SetCoolDownS();
                     if (konamiCount < 2)
                         konamiCount++;
                     else
                         konamiCount = 0;
                 }
 
-                if (_keyboardState.IsKeyDown(Keys.Down) && _cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.Down) && _cooldownVerifS == false)
                 {
-                    SetCoolDown();
+                    SetCoolDownS();
                     if (konamiCount >= 2 && konamiCount < 4)
                         konamiCount++;
                     else
                         konamiCount = 0;
                 }
 
-                if (_keyboardState.IsKeyDown(Keys.Left) && _cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.Left) && _cooldownVerifS == false)
                 {
-                    SetCoolDown();
+                    SetCoolDownS();
                     if (konamiCount == 4 || konamiCount == 6)
                         konamiCount++;
                     else
                         konamiCount = 0;
                 }
 
-                if (_keyboardState.IsKeyDown(Keys.Right) && _cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.Right) && _cooldownVerifS == false)
                 {
-                    SetCoolDown();
+                    SetCoolDownS();
                     if (konamiCount == 5 || konamiCount == 7)
                         konamiCount++;
                     else
                         konamiCount = 0;
                 } 
 
-                if (_keyboardState.IsKeyDown(Keys.X) && _cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.X) && _cooldownVerifS == false)
                 {
-                    SetCoolDown();
+                    SetCoolDownS();
                     if (konamiCount == 8)
                         konamiCount++;
                     else
                         konamiCount = 0;
                 }  
 
-                if (_keyboardState.IsKeyDown(Keys.W) && _cooldownVerif == false)
+                if (_keyboardState.IsKeyDown(Keys.W) && _cooldownVerifS == false)
                 {
-                    SetCoolDown();
+                    SetCoolDownS();
                     if (konamiCount == 9)
                         konamiCount++;
                     else
@@ -564,16 +567,23 @@ namespace SAE101
             _menu.Play();
         }
 
-        public void SetCoolDownCombat()
+        public void SetCoolDownS()
+        {
+            _cooldownVerifS = true;
+            _cooldownS = 0.2f;
+
+        }
+
+        public void SetCoolDownC()
         {
             _cooldownVerifC = true;
             _cooldownC = 0.5f;
         }
 
-        public void SetCoolDownFive()
+        public void SetCoolDownF()
         {
             _cooldownVerifF = true;
-            _cooldownF = 5.0f;
+            _cooldownF = 4.0f;
         }
 
 

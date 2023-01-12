@@ -263,8 +263,8 @@ namespace SAE101
 
 
             // on charge l'écran de menu par défaut 
-            //LoadScreenecranDeTtitre();
-            LoadScreenChatoCouronne();
+            LoadScreenecranDeTtitre();
+            // LoadScreenChatoCouronne();
 
             base.LoadContent();
         }

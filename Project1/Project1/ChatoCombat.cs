@@ -25,7 +25,6 @@ namespace SAE101
     {
         //Fond d'écran
         private new Game1 Game => (Game1)base.Game;
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _chatoCombatDecor;
 
@@ -748,7 +747,7 @@ namespace SAE101
                     _chatoCombatContenu._animationP2 = false;
                     _chatoCombatContenu._animationOver = false;
                     _vieEnn[_attaqueEnnemy[i, 1]] = _vieEnn[_attaqueEnnemy[i, 1]] - (_attAllie[i] - _defEnn[_attaqueEnnemy[i, 1]]);
-                    Console.WriteLine(i);
+                    //Console.WriteLine(i);
                 }
                 else if (_attaquePerso[i, 0] == 1 && _attaquePerso[i, 2] == 0)
                 {
@@ -805,7 +804,7 @@ namespace SAE101
                 _chatoCombatContenu._animationP2 = false;
                 _chatoCombatContenu._animationOver = false;
                 _vieAllie[_attaqueEnnemy[i, 1]] = _vieAllie[_attaqueEnnemy[i, 1]] - (_attEnn[i]-_defAllie[_attaqueEnnemy[i, 1]]);
-                Console.WriteLine(i);
+                //Console.WriteLine(i);
             }
             else
             {

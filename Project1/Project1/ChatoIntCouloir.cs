@@ -21,7 +21,6 @@ namespace SAE101
         private JoueurSpawn _joueur;
         private ChatoIntChambres _chatoIntChambres;
         private ChatoCombat _chatoCombat;
-        private ChatoCombatContenu _chatoCombatContenu;
         private Camera _camera;
 
         //map

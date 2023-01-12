@@ -23,7 +23,6 @@ namespace SAE101
         public String _text;
 
         public bool _fin;
-        private bool _defilement;
 
         private String _credit;
         public Vector2 _posCr;
@@ -42,7 +41,6 @@ namespace SAE101
             _text = "";
 
             _fin = false;
-            _defilement = false;
 
             _credit = "----TANTOPIE STAFF----\n\n" +
                       "Scénario : Quentin BASTARD\n" +

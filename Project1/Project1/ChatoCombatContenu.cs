@@ -21,11 +21,11 @@ namespace SAE101
         public String _anim;
         public String[] _specialP;
         public String[] _descP;
-        public String[] _nomPersoJouable = new String[4] {"???","Hero","Jon","Ben"};
+        public String[] _nomPersoJouable = new String[4] { "???", "Hero", "Jon", "Ben" };
         public int _nbPersoJouable = 4;
         public String[] _nomEnnJouable = new String[3] { "Grand", "Mechant", "Pabo" };
-        public int _nbEnnJouable = 3;       
-        
+        public int _nbEnnJouable = 3;
+
         public int[] _stat; //PV, Attaque, Défense, Vitesse //PV : au pif, Attaque >= 50, Défense <= 50, Vitesse : entre 1 et 100
 
 
@@ -64,21 +64,18 @@ namespace SAE101
 
         //El famoso variable qui permet de dire qui joue dans quel ordre
         public int whosPlaying;
-
+        
         public void Combat()
         {
             _lastPosition = _myGame._positionPerso;
         }
 
-        //Personnages jouables
-        public void Hein()
-        {
-            _stat = new int[4] { 1, 1, 1, 1 };
-            _anim = "anim/char/base_model_m/character_movement.sf";
-            _special = "???";
-            _specialP = new String[] { "_", "_", "_", "_" };
-            _descP = new String[] { "_", "_", "_", "_" };
-        }
+        public static Personnage hein = new Personnage("Hein", 1, 1, 1, 1, "anim/char/base_model_m/character_movement.sf", "???",new string[] { "_", "_", "_", "_" }, new string[] { "_", "_", "_", "_" });
+        public static Personnage hero = new Personnage("Hero", 160, 60, 30, 70, "anim/char/ally/hero/character_movement.sf","Nommcoul", new string[] { "Zeuwerld", "Baïtzedeust", "_", "_" }, new string[] { "Arrête le temps du tour en cours, et \ndu suivant. Affecte les ennemis comme les alliés.\nIdéal pour souffler et pour gagner un peu de temps", "Remonte le temps jusqu'au dernier tour.\nUtile pour prévenir les actions ennemies.", "_", "_" });
+        public static Personnage jon = new Personnage("Jon", 200, 90, 20, 10, "anim/char/ally/Jon/character_movement.sf", "Magie", new string[] { "Boule de feu", "Sort d'intimidation", "_", "_" }, new string[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", "Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis", "_", "_" });
+        public static Personnage ben = new Personnage("Ben", 1000, 100, 50, 100, "anim/char/base_model_m/character_movement.sf","Cri",new string[] { "NON MAIS OH", "NOM DE DIOU", "Pas de 'blèmes", "_" }, new string[] { "Mais c'est trivial ça!", "_", "Que des solutions!", "_" });
+
+
 
         public void Hero()
         {
@@ -102,15 +99,6 @@ namespace SAE101
             _descP = new String[] { "Une Boule de feu puissante, ignore\nla défense ennemie.", /*"Un sort digne des plus grand\nmanupilateur. Baisse légèrement l'attaque\n de tous les ennemis"*/"_", "_", "_" };
             if (_myGame._boom == true)
                 _stat[1] = 200000000;
-        }
-
-        public void Ben()
-        {
-            _stat = new int[4] { 1000, 100, 50, 100 };
-            _anim = "anim/char/base_model_m/character_movement.sf";
-            _special = "Cri";
-            _specialP = new String[] { "NON MAIS OH", "NOM DE DIOU", "Pas de 'blèmes", "_" };
-            _descP = new String[] { "Mais c'est trivial ça!", "_", "Que des solutions!", "_" };         
         }
 
         //personnages non joueurs

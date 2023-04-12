@@ -307,7 +307,7 @@ namespace SAE101
 
             //Console.WriteLine(_cooldownVerif);
 
-            /*if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
+            if (_keyboardState.IsKeyDown(Keys.C) && _combatTest == false && _cooldownVerif == false)
             {
                 LoadScreenChatoCombat();
                 _combatTest = true;
@@ -318,7 +318,7 @@ namespace SAE101
                 LoadScreenchatoIntChambresNord();
                 _combatTest = false;
                 SetCoolDown();
-            }*/
+            }
 
             if (_cooldownVerif == true)
             {

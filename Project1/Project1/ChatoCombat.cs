@@ -238,23 +238,19 @@ namespace SAE101
             {
                 if (_ordreA[i] == 0)
                 {
-                    _chatoCombatContenu.Hein();
-                    GenerationAllie();
+                    GenerationAllie(ChatoCombatContenu.hein);
                 }
                 else if (_ordreA[i] == 1)
                 {
-                    _chatoCombatContenu.Hero();
-                    GenerationAllie();
+                    GenerationAllie(ChatoCombatContenu.hero);
                 }
                 else if (_ordreA[i] == 2)
                 {
-                    _chatoCombatContenu.Jon();
-                    GenerationAllie();
+                    GenerationAllie(ChatoCombatContenu.jon);
                 }
                 else if (_ordreA[i] == 3)
                 {
-                    _chatoCombatContenu.Ben();
-                    GenerationAllie();
+                    GenerationAllie(ChatoCombatContenu.ben);
                 }
                 _ordrefinal++;
             }
@@ -585,7 +581,7 @@ namespace SAE101
                 }
 
                 //Perso choisissant son action
-                if (_gameOver == false)
+                /*if (_gameOver == false)
                 {
                     if (_ordreA[_action] == 0)
                         _chatoCombatContenu.Hein();
@@ -595,7 +591,7 @@ namespace SAE101
                         _chatoCombatContenu.Jon();
                     else if (_ordreA[_action] == 3)
                         _chatoCombatContenu.Ben();
-                }
+                }*/
 
             }
         }
@@ -856,17 +852,16 @@ namespace SAE101
             }
         }
 
-        public void GenerationAllie()
+        public void GenerationAllie(Personnage perso)
         {
-            _fileA[_ordrefinal] = _chatoCombatContenu._anim;
+            _fileA[_ordrefinal] = perso.AnimPath;
             _sheetA[_ordrefinal] = Content.Load<SpriteSheet>(_fileA[_ordrefinal], new JsonContentLoader());
             _allie[_ordrefinal] = new AnimatedSprite(_sheetA[_ordrefinal]);
-
-            _vieAllie[_ordrefinal] = _chatoCombatContenu._stat[0];
-            _vieMax[_ordrefinal] = _chatoCombatContenu._stat[0];
-            _attAllie[_ordrefinal] = _chatoCombatContenu._stat[1];
-            _defAllie[_ordrefinal] = _chatoCombatContenu._stat[2];
-            _vitAllie[_ordrefinal] = _chatoCombatContenu._stat[3];
+            _vieAllie[_ordrefinal] = perso.VieBase;
+            _vieMax[_ordrefinal] = perso.VieBase;
+            _attAllie[_ordrefinal] = perso.AttBase;
+            _defAllie[_ordrefinal] = perso.DefBase;
+            _vitAllie[_ordrefinal] = perso.SpeBase;
         }
 
         public void GenerationEnnemi()
